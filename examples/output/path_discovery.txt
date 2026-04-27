@@ -13,9 +13,11 @@ Discovered routes:
 The N3 source defines a recursive :route relation over nepo:hasOutboundRouteTo facts. A route can use a direct edge when the current length is within the maximum, or extend through a non-visited intermediate airport and recurse with length+1. The final log:collectAllIn query collects the labels of each airport in every route from the source to the destination.
 source N3 airport labels : 7698
 source N3 outbound-route facts : 37505
-translated bounded-search airports : 178
-translated bounded-search outbound facts : 338
+translated full airport labels : 7698
+translated full outbound-route facts : 37505
+airport terms appearing in outbound facts : 3334
 frontier airports expanded : 9
+bounded search outbound facts touched : 338
 source outbound candidates : 1
 Liège outbound candidates : 7
 direct routes : 0
@@ -35,13 +37,13 @@ Second-hop candidates from Liège:
 
 === Check ===
 C1 OK - source and destination airport labels are known.
-C2 OK - Ostend-Bruges has one outbound route in the bounded proof slice, to Liège Airport.
+C2 OK - Ostend-Bruges has one outbound route in the full N3 graph, to Liège Airport.
 C3 OK - the discovered route set matches the N3 query answer.
 C4 OK - no direct or one-stop route exists under the same bound.
 C5 OK - every discovered route has at most two stopovers.
 C6 OK - every hop is backed by a nepo:hasOutboundRouteTo fact.
 C7 OK - no route revisits an airport.
-C8 OK - the search scanned the complete bounded slice of 338 outbound facts.
+C8 OK - the Go translation loaded every airport label and outbound-route fact from the N3 source.
 C9 OK - route output is sorted deterministically by airport labels.
 
 === Go audit details ===
@@ -52,8 +54,10 @@ source airport : Ostend-Bruges International Airport (res:AIRPORT_310)
 destination airport : Václav Havel Airport Prague (res:AIRPORT_1587)
 source graph airport labels : 7698
 source graph outbound facts : 37505
-translated bounded slice airports : 178
-translated bounded slice outbound facts : 338
+translated full airport labels : 7698
+translated full outbound-route facts : 37505
+airport terms appearing in outbound facts : 3334
+bounded search outbound facts touched : 338
 max stopovers : 2
 max hops : 3
 routes discovered : 3
