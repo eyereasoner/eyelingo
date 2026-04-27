@@ -1,6 +1,6 @@
 # eyelingo
 
-Small Go translations of selected EyeReasoner/Eyeling N3 examples.
+Small Go translations of selected EyeReasoner/Eyeling N3 examples. The suite includes route planning, privacy policy checks, ranked risk reasoning, combinatorial search, and an exact crisis-dispatch optimizer.
 
 ## Layout
 
@@ -24,7 +24,7 @@ Run the full regression test:
 ./test
 ```
 
-The test prints `OK` or `FAIL` for each example, per-example timing, and total time. It compares against `examples/output/*.out` while normalizing Go runtime/platform audit lines, since those vary by machine.
+The test prints `OK` or `FAIL` for each example, per-example timing, and total time. It compares against `examples/output/*.txt` while normalizing Go runtime/platform audit lines, since those vary by machine.
 
 Regenerate expected outputs after intentional changes:
 
