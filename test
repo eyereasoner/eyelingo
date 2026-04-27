@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+set -u
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+EXAMPLES_DIR="$ROOT/examples"
+OUTPUT_DIR="$EXAMPLES_DIR/output"
+UPDATE=0
+
+if [ "${1:-}" = "--update" ]; then
+  UPDATE=1
+elif [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
+  cat <<USAGE
+Usage: ./test [--update]
+
+Runs every Go example in examples/, compares stdout with examples/output/*.txt,
+and prints OK/FAIL with timing.
+
+Options:
+  --update   regenerate examples/output/*.txt from the current program output
+USAGE
+  exit 0
+elif [ "${1:-}" != "" ]; then
+  echo "Unknown option: $1" >&2
+  echo "Use ./test --help" >&2
+  exit 2
+fi
+
+# Color the status words when stdout is a terminal. Respect NO_COLOR and fall
+# back cleanly when tput is unavailable.
+if [ -t 1 ] && [ -z "${NO_COLOR:-}" ] && command -v tput >/dev/null 2>&1; then
+  GREEN=$(tput setaf 2 || true)
+  RED=$(tput setaf 1 || true)
+  RESET=$(tput sgr0 || true)
+else
+  GREEN=""
+  RED=""
+  RESET=""
+fi
+
+ok() { printf '%sOK%s' "$GREEN" "$RESET"; }
+fail() { printf '%sFAIL%s' "$RED" "$RESET"; }
+
+if ! command -v go >/dev/null 2>&1; then
+  printf '%s go toolchain not found\n' "$(fail)" >&2
+  exit 127
+fi
+
+mkdir -p "$OUTPUT_DIR"
+TMPDIR=$(mktemp -d "${TMPDIR:-/tmp}/eyelingo-test.XXXXXX")
+trap 'rm -rf "$TMPDIR"' EXIT
+
+# Return milliseconds since epoch. Nanosecond precision is used where available;
+# otherwise seconds are enough for a portable timing display.
+now_ms() {
+  local raw
+  raw=$(date +%s%N 2>/dev/null || true)
+  case "$raw" in
+    *[!0-9]*|"") echo $(( $(date +%s) * 1000 )) ;;
+    *) echo $(( raw / 1000000 )) ;;
+  esac
+}
+
+# Keep comparisons stable across different Go versions, operating systems,
+# and CPU architectures while leaving all example-specific output intact.
+normalize() {
+  sed -E \
+    -e 's/^go runtime : go[0-9][^[:space:]]*$/go runtime : <go-version>/' \
+    -e 's/^go os\/arch : .+$/go os\/arch : <os>\/<arch>/' \
+    -e 's/^platform : .+$/platform : <os>\/<arch>/' \
+    -e 's/^runtime : go[0-9][^[:space:]]* .+$/runtime : <go-version> <os>\/<arch>/'
+}
+
+run_example() {
+  local file=$1
+  local name=${file%.go}
+  local expected="$OUTPUT_DIR/$name.txt"
+  local actual="$TMPDIR/$name.txt"
+  local actual_norm="$TMPDIR/$name.actual.norm"
+  local expected_norm="$TMPDIR/$name.expected.norm"
+  local diff_file="$TMPDIR/$name.diff"
+  local args=()
+
+  # The N-Queens program is intentionally parameterized. The golden output uses
+  # the classic 8-Queens problem and prints the first solution only.
+  if [ "$name" = "queens" ]; then
+    args=(8 1)
+  fi
+
+  local start end elapsed_ms status
+  start=$(now_ms)
+  if go run "$EXAMPLES_DIR/$file" "${args[@]}" > "$actual" 2>&1; then
+    status=0
+  else
+    status=$?
+  fi
+  end=$(now_ms)
+  elapsed_ms=$(( end - start ))
+
+  if [ $UPDATE -eq 1 ] && [ $status -eq 0 ]; then
+    cp "$actual" "$expected"
+    printf '%s   %-28s %6sms updated\n' "$(ok)" "$name" "$elapsed_ms"
+    return 0
+  fi
+
+  if [ $status -ne 0 ]; then
+    printf '%s %-28s %6sms run failed\n' "$(fail)" "$name" "$elapsed_ms"
+    sed 's/^/  /' "$actual"
+    return 1
+  fi
+
+  if [ ! -f "$expected" ]; then
+    printf '%s %-28s %6sms missing %s\n' "$(fail)" "$name" "$elapsed_ms" "examples/output/$name.txt"
+    return 1
+  fi
+
+  normalize < "$actual" > "$actual_norm"
+  normalize < "$expected" > "$expected_norm"
+
+  if diff -u "$expected_norm" "$actual_norm" > "$diff_file"; then
+    printf '%s   %-28s %6sms\n' "$(ok)" "$name" "$elapsed_ms"
+    return 0
+  fi
+
+  printf '%s %-28s %6sms output differs\n' "$(fail)" "$name" "$elapsed_ms"
+  sed 's/^/  /' "$diff_file"
+  return 1
+}
+
+failures=0
+count=0
+
+while IFS= read -r file; do
+  count=$((count + 1))
+  if ! run_example "$file"; then
+    failures=$((failures + 1))
+  fi
+done < <(find "$EXAMPLES_DIR" -maxdepth 1 -type f -name '*.go' -print | sed 's#^.*/##' | sort)
+
+if [ "$count" -eq 0 ]; then
+  printf '%s no Go examples found in examples/\n' "$(fail)" >&2
+  exit 1
+fi
+
+if [ "$failures" -eq 0 ]; then
+  printf 'All %s example(s) %s.\n' "$count" "$(ok)"
+  exit 0
+fi
+
+echo "$failures of $count example(s) failed."
+exit 1

@@ -1,0 +1,31 @@
+Solving 8-Queens...
+Printing at most 1 solution(s).
+
+Solution 1:
+Q . . . . . . . 
+. . . . Q . . . 
+. . . . . . . Q 
+. . . . . Q . . 
+. . Q . . . . . 
+. . . . . . Q . 
+. Q . . . . . . 
+. . . Q . . . . 
+As column positions by row: [1, 5, 8, 6, 3, 7, 2, 4]
+
+Total solutions for 8-Queens: 92
+
+=== Go audit details ===
+go runtime : go1.18.1
+go os/arch : linux/amd64
+normalized board size : 8
+normalized max print : 1
+total solutions counted : 92
+solutions printed : 1
+recursive nodes visited : 2057
+candidate placements tried : 2056
+dead-end branches : 644
+max recursion depth : 8
+bit-mask columns used : 8
+search complete : yes
+has at least one solution : yes
+first solution columns : [1, 5, 8, 6, 3, 7, 2, 4]
