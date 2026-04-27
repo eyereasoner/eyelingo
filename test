@@ -60,6 +60,11 @@ now_ms() {
   esac
 }
 
+format_ms() {
+  local ms=$1
+  printf '%d.%03ds' $((ms / 1000)) $((ms % 1000))
+}
+
 # Keep comparisons stable across different Go versions, operating systems,
 # and CPU architectures while leaving all example-specific output intact.
 normalize() {
@@ -95,6 +100,7 @@ run_example() {
   fi
   end=$(now_ms)
   elapsed_ms=$(( end - start ))
+  total_ms=$(( total_ms + elapsed_ms ))
 
   if [ $UPDATE -eq 1 ] && [ $status -eq 0 ]; then
     cp "$actual" "$expected"
@@ -128,6 +134,7 @@ run_example() {
 
 failures=0
 count=0
+total_ms=0
 
 while IFS= read -r file; do
   count=$((count + 1))
@@ -141,10 +148,12 @@ if [ "$count" -eq 0 ]; then
   exit 1
 fi
 
+printf 'Total time: %s (%sms).\n' "$(format_ms "$total_ms")" "$total_ms"
+
 if [ "$failures" -eq 0 ]; then
   printf 'All %s example(s) %s.\n' "$count" "$(ok)"
   exit 0
 fi
 
-echo "$failures of $count example(s) failed."
+printf '%s of %s example(s) failed.\n' "$failures" "$count"
 exit 1
