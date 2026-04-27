@@ -1,6 +1,6 @@
 # eyelingo
 
-Small Go translations of selected EyeReasoner/Eyeling N3 examples. The suite includes route planning, privacy policy checks, ranked risk reasoning, combinatorial search, and an exact crisis-dispatch optimizer.
+Small Go translations of selected EyeReasoner/Eyeling N3 examples.
 
 ## Layout
 
