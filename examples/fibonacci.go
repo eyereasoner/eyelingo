@@ -20,6 +20,7 @@ import (
     "math/big"
     "os"
     "runtime"
+    "sort"   // needed for stable output ordering
 )
 
 // ---------- expected values ----------
@@ -59,6 +60,17 @@ func computeFibonacci(target int) []*big.Int {
         seq[n] = sum
     }
     return seq
+}
+
+// ---------- helper: sorted keys ----------
+
+func sortedKeys(m map[int]string) []int {
+    keys := make([]int, 0, len(m))
+    for k := range m {
+        keys = append(keys, k)
+    }
+    sort.Ints(keys)
+    return keys
 }
 
 // ---------- checks ----------
@@ -195,7 +207,8 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
     }
     if cks.AllTargetsMatch {
         fmt.Println("C3 OK - all requested Fibonacci numbers match expected values:")
-        for idx := range expected {
+        // Print in sorted order to guarantee stable output
+        for _, idx := range sortedKeys(expected) {
             fmt.Printf("    F(%d) = %s\n", idx, abbreviated(seq[idx]))
         }
     } else {
