@@ -95,18 +95,18 @@ run_example() {
 
   if [ $UPDATE -eq 1 ] && [ $status -eq 0 ]; then
     cp "$actual" "$expected"
-    printf '%s   %-28s %6sms updated\n' "$(ok)" "$name" "$elapsed_ms"
+    printf '%s   %-*s %6sms updated\n' "$(ok)" "$name_width" "$name" "$elapsed_ms"
     return 0
   fi
 
   if [ $status -ne 0 ]; then
-    printf '%s %-28s %6sms run failed\n' "$(fail)" "$name" "$elapsed_ms"
+    printf '%s %-*s %6sms run failed\n' "$(fail)" "$name_width" "$name" "$elapsed_ms"
     sed 's/^/  /' "$actual"
     return 1
   fi
 
   if [ ! -f "$expected" ]; then
-    printf '%s %-28s %6sms missing %s\n' "$(fail)" "$name" "$elapsed_ms" "examples/output/$name.txt"
+    printf '%s %-*s %6sms missing %s\n' "$(fail)" "$name_width" "$name" "$elapsed_ms" "examples/output/$name.txt"
     return 1
   fi
 
@@ -114,11 +114,11 @@ run_example() {
   normalize < "$expected" > "$expected_norm"
 
   if diff -u "$expected_norm" "$actual_norm" > "$diff_file"; then
-    printf '%s   %-28s %6sms\n' "$(ok)" "$name" "$elapsed_ms"
+    printf '%s   %-*s %6sms\n' "$(ok)" "$name_width" "$name" "$elapsed_ms"
     return 0
   fi
 
-  printf '%s %-28s %6sms output differs\n' "$(fail)" "$name" "$elapsed_ms"
+  printf '%s %-*s %6sms output differs\n' "$(fail)" "$name_width" "$name" "$elapsed_ms"
   sed 's/^/  /' "$diff_file"
   return 1
 }
@@ -126,13 +126,23 @@ run_example() {
 failures=0
 count=0
 total_ms=0
+name_width=28
 
-while IFS= read -r file; do
+mapfile -t example_files < <(find "$EXAMPLES_DIR" -maxdepth 1 -type f -name '*.go' -print | sed 's#^.*/##' | sort)
+
+for file in "${example_files[@]}"; do
+  name=${file%.go}
+  if [ ${#name} -gt "$name_width" ]; then
+    name_width=${#name}
+  fi
+done
+
+for file in "${example_files[@]}"; do
   count=$((count + 1))
   if ! run_example "$file"; then
     failures=$((failures + 1))
   fi
-done < <(find "$EXAMPLES_DIR" -maxdepth 1 -type f -name '*.go' -print | sed 's#^.*/##' | sort)
+done
 
 if [ "$count" -eq 0 ]; then
   printf '%s no Go examples found in examples/\n' "$(fail)" >&2
