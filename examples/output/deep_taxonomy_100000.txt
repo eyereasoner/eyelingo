@@ -40,8 +40,7 @@ C9 OK - exactly 100000 taxonomy-step rules, one terminal rule, and one success r
 C10 OK - a linear scan finds no skipped taxonomy level.
 
 === Go audit details ===
-go runtime : go1.26.2
-go os/arch : linux/amd64
+platform : go1.26.2 linux/amd64
 source file : deep-taxonomy-100000.n3
 question : Can one starting individual be classified through 100000 taxonomy levels and trigger A2?
 taxonomy depth : 100000

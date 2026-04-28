@@ -24,7 +24,7 @@ Run the full regression test:
 ./test
 ```
 
-The test prints `OK` or `FAIL` for each example, per-example timing, and total time. It compares against `examples/output/*.txt` while normalizing Go runtime/platform audit lines, since those vary by machine.
+The test prints `OK` or `FAIL` for each example, per-example timing, and total time. It compares against `examples/output/*.txt` while normalizing platform audit line, since those vary by machine.
 
 Regenerate expected outputs after intentional changes:
 

@@ -1,13 +1,11 @@
-Answer
-======
+=== Answer ===
 Superdense-coding facts that survive GF(2) parity cancellation:
   0 dqc:superdense-coding 0
   1 dqc:superdense-coding 1
   2 dqc:superdense-coding 2
   3 dqc:superdense-coding 3
 
-Reason Why
-==========
+=== Reason Why ===
 Alice and Bob start with |R) = |0,0) + |1,1).
 Alice chooses one relation for the first mobit; Bob applies one joint test.
 The N3 example keeps only answers with odd derivation count, so duplicate
@@ -31,8 +29,7 @@ Surviving explanations:
   2 -> 2 because count=1 is odd; all competing counts are even.
   3 -> 3 because count=1 is odd; all competing counts are even.
 
-Check
-=====
+=== Check ===
   OK shared entanglement:     |R) contains exactly |0,0) and |1,1)
   OK composition KG:          KG is obtained by composing G then K, exactly as in the N3 rule
   OK composition GK:          GK is obtained by composing K then G, exactly as in the N3 rule
@@ -41,10 +38,8 @@ Check
   OK decoded messages:        after odd-parity filtering, Bob recovers Alice's original two-bit message
   OK encoded supports distinct: the four Alice operations produce four different supports over the two mobits
 
-Go audit details
-================
-go runtime : go1.26.2
-go os/arch : linux/amd64
+=== Go audit details ===
+platform : go1.26.2 linux/amd64
 mobit values: 0, 1
 states      : R={(0,0), (1,1)} S={(0,1), (1,0)} U={(0,0), (1,0), (1,1)} V={(0,0), (0,1), (1,0)}
 relations   : id={(0,0), (1,1)} G={(0,1), (1,0)} K={(0,0), (1,0), (1,1)} KG={(0,0), (0,1), (1,0)} GK={(0,1), (1,0), (1,1)}

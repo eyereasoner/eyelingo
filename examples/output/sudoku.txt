@@ -43,8 +43,7 @@ C7 OK - the search statistics and the successful proof path are internally consi
 C8 OK - a second search found no alternative solution, so the solution is unique.
 
 === Go audit details ===
-go runtime : go1.26.2
-go os/arch : linux/amd64
+platform : go1.26.2 linux/amd64
 normalized puzzle : 100007090030020008009600500005300900010080002600004000300000010040000007007000300
 solution string : 162857493534129678789643521475312986913586742628794135356478219241935867897261354
 givens : 23

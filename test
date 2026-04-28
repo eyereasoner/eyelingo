@@ -69,10 +69,7 @@ format_ms() {
 # and CPU architectures while leaving all example-specific output intact.
 normalize() {
   sed -E \
-    -e 's/^go runtime : go[0-9][^[:space:]]*$/go runtime : <go-version>/' \
-    -e 's/^go os\/arch : .+$/go os\/arch : <os>\/<arch>/' \
-    -e 's/^platform : .+$/platform : <os>\/<arch>/' \
-    -e 's/^runtime : go[0-9][^[:space:]]* .+$/runtime : <go-version> <os>\/<arch>/'
+    -e 's/^platform : go[0-9][^[:space:]]* [^[:space:]]+\/[^[:space:]]+$/platform : <go-version> <os>\/<arch>/'
 }
 
 run_example() {

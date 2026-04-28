@@ -47,8 +47,7 @@ C8 OK - the Go translation loaded every airport label and outbound-route fact fr
 C9 OK - route output is sorted deterministically by airport labels.
 
 === Go audit details ===
-go runtime : go1.26.2
-go os/arch : linux/amd64
+platform : go1.26.2 linux/amd64
 question : Find routes from Ostend-Bruges International Airport to Václav Havel Airport Prague with at most 2 stopovers.
 source airport : Ostend-Bruges International Airport (res:AIRPORT_310)
 destination airport : Václav Havel Airport Prague (res:AIRPORT_1587)

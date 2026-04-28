@@ -44,8 +44,7 @@ C9 OK - delivered dose/value totals equal the selected shipments.
 C10 OK - reserve doses remain bound to the original ledger root.
 
 === Go audit details ===
-go runtime : go1.26.2
-go os/arch : linux/amd64
+platform : go1.26.2 linux/amd64
 case : cold-chain-release
 question : Which cold-chain lots can be released, and where should scarce doses ship first?
 product : Stable mRNA pediatric booster

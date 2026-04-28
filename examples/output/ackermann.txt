@@ -52,8 +52,7 @@ C7 OK - the pentation query A(5,0) lands on the same value as A(4,1).
 C8 OK - the evaluator reached the expected largest exact integer and memoized each distinct ternary fact once.
 
 === Go audit details ===
-go runtime : go1.26.2
-go os/arch : linux/amd64
+platform : go1.26.2 linux/amd64
 question : Evaluate the Ackermann facts queried by ackermann.n3.
 translated source : ackermann.n3
 binary definition : ackermann(x,y) = T(x,y+3,2)-3
