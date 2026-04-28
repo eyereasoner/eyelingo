@@ -30,7 +30,7 @@ duty timing consistent : yes
 marketing prohibited : yes
 
 === Go audit details ===
-runtime : go1.18.1 linux/amd64
+runtime : go1.26.2 linux/amd64
 case facts : case=delfour requestAction=odrl:use requestPurpose=shopping_assist
 catalog products : 4
 scanned product id : prod:BIS_001

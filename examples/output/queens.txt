@@ -15,7 +15,7 @@ As column positions by row: [1, 5, 8, 6, 3, 7, 2, 4]
 Total solutions for 8-Queens: 92
 
 === Go audit details ===
-go runtime : go1.18.1
+go runtime : go1.26.2
 go os/arch : linux/amd64
 normalized board size : 8
 normalized max print : 1

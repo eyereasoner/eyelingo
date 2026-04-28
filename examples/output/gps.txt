@@ -17,7 +17,7 @@ C4 OK - the recommended route is cheaper than the alternative.
 C5 OK - the recommended route has higher belief and comfort scores.
 
 Go audit details
-go runtime : go1.18.1
+go runtime : go1.26.2
 platform : linux/amd64
 question : Which route should we take from Gent to Oostende?
 traveller : i1

@@ -41,7 +41,7 @@ C7 OK - all six complex outputs are finite real/imaginary pairs.
 C8 OK - the translated rule count matches four exponentiation and two inverse-trig queries.
 
 === Go audit details ===
-go runtime : go1.23.2
+go runtime : go1.26.2
 go os/arch : linux/amd64
 question : Evaluate the complex-number facts queried by complex.n3.
 translated source : complex.n3

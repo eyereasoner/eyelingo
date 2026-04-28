@@ -49,7 +49,7 @@ C8 OK - no smaller panel satisfies both pair separation and positive-anchor cons
 C9 OK - reported margin and cost totals match the selected genes.
 
 === Go audit details ===
-go runtime : go1.23.2
+go runtime : go1.26.2
 go os/arch : linux/amd64
 question : Which compact marker panel separates the reference cell populations?
 cell populations : 8

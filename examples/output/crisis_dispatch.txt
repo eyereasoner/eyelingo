@@ -33,7 +33,7 @@ C7 OK - the dynamic program proves no higher-scoring disjoint plan exists.
 C8 OK - the reported score equals the priority sum of served incidents.
 
 === Go audit details ===
-go runtime : go1.23.2
+go runtime : go1.26.2
 go os/arch : linux/amd64
 question : Which responders should handle the storm incidents before their deadlines?
 locations : 8
