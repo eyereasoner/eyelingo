@@ -22,7 +22,8 @@ score=70 (risk:ModerateRisk, risk:ModerateSeverity) clause C4
  - mitigation for clause C4: Add a permission allowing data export (or remove the prohibition) to support portability.
 
 === Go audit details ===
-runtime : go1.26.2 linux/amd64
+go runtime : go1.26.2
+go os/arch : linux/amd64
 process context : Service operation under Agreement1 (:ProcessContext1 -> :Agreement1)
 consumer profile : :ConsumerExample needs=4
 agreement : :Agreement1 policy=:Policy1

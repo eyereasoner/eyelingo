@@ -85,12 +85,6 @@ run_example() {
   local diff_file="$TMPDIR/$name.diff"
   local args=()
 
-  # The N-Queens program is intentionally parameterized. The golden output uses
-  # the classic 8-Queens problem and prints the first solution only.
-  if [ "$name" = "queens" ]; then
-    args=(8 1)
-  fi
-
   local start end elapsed_ms status
   start=$(now_ms)
   if go run "$EXAMPLES_DIR/$file" "${args[@]}" > "$actual" 2>&1; then

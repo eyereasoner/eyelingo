@@ -7,13 +7,13 @@
 // search: each recursive level represents one board row, and three masks track
 // columns plus the two diagonal directions that are already under attack.
 //
-// Run with the default 14-Queens puzzle:
+// Run with the default 8-Queens puzzle:
 //
 //	go run queens.go
 //
 // Or choose the board size and number of example boards to print:
 //
-//	go run queens.go 8 2
+//	go run queens.go 14 1
 //
 // The final “Go audit details” section is intentionally diagnostic. It exposes
 // the normalized command-line settings and search counters so the translation is
@@ -218,7 +218,7 @@ func yesNo(value bool) string {
 }
 
 func main() {
-	n := 14
+	n := 8
 	maxPrint := 1
 
 	// Optional argument 1 selects N, the board width/height and queen count.

@@ -647,7 +647,8 @@ func renderAuditDetails(data Dataset, risks []Risk) {
 	minScore, maxScore := scoreRange(risks)
 
 	fmt.Println("\n=== Go audit details ===")
-	fmt.Printf("runtime : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("go runtime : %s\n", runtime.Version())
+	fmt.Printf("go os/arch : %s/%s\n", runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("process context : %s (%s -> %s)\n", data.Process.Title, data.Process.ID, data.Process.Source)
 	fmt.Printf("consumer profile : %s needs=%d\n", data.Consumer.ID, len(data.Consumer.Needs))
 	fmt.Printf("agreement : %s policy=%s\n", data.Agreement.ID, data.Agreement.Policy.ID)

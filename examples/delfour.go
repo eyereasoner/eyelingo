@@ -589,7 +589,8 @@ func renderGoAuditDetails(data Dataset, result InferenceResult) {
 	sugarDropTenths := result.Scanned.SugarTenths - result.SuggestedAlternative.SugarTenths
 
 	fmt.Println("\n=== Go audit details ===")
-	fmt.Printf("runtime : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("go runtime : %s\n", runtime.Version())
+	fmt.Printf("go os/arch : %s/%s\n", runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case facts : case=%s requestAction=%s requestPurpose=%s\n", data.Case.CaseName, data.Case.RequestAction, data.Case.RequestPurpose)
 	fmt.Printf("catalog products : %d\n", len(data.Products))
 	fmt.Printf("scanned product id : %s\n", data.Scan.ScannedProductID)
