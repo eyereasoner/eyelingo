@@ -15,12 +15,12 @@ indices as large as 10000.
 C1 OK - base cases F(0)=0 and F(1)=1 hold.
 C2 OK - recurrence holds for all computed steps.
 C3 OK - all requested Fibonacci numbers match expected values:
-    F(100) = 354224848179261915075
-    F(1000) = 434665576869374564356885276750 ... 516003704476137795166849228875
-    F(10000) = 336447648764317832666216120051 ... 171121233066073310059947366875
     F(0) = 0
     F(1) = 1
     F(10) = 55
+    F(100) = 354224848179261915075
+    F(1000) = 434665576869374564356885276750 ... 516003704476137795166849228875
+    F(10000) = 336447648764317832666216120051 ... 171121233066073310059947366875
 C4 OK - all Fibonacci numbers are non‑negative.
 C5 OK - the sequence is non‑decreasing from F(2) onward.
 
