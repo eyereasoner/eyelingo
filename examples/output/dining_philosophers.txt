@@ -83,7 +83,7 @@ C7 OK - the final ownership is F12,F23 with P2; F34 with P4; F45,F51 with P5
 C8 OK - each of the nine rounds used request, transfer, and meal goroutine batches
 
 === Go audit details ===
-platform : go1.23.2 linux/amd64
+platform : go1.26.2 linux/amd64
 source file : dining-philosophers.n3
 question : Can five philosophers complete a Chandy-Misra trace where each eats three times?
 philosophers : P1,P2,P3,P4,P5

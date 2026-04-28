@@ -45,7 +45,7 @@ C7 OK - no emitted chain needs more than the seven steps unrolled in the N3 sour
 C8 OK - all 9990 non-repdigit starts are emitted, including 6174 itself
 
 === Go audit details ===
-platform : go1.23.2 linux/amd64
+platform : go1.26.2 linux/amd64
 source file : kaprekar-6174.n3
 question : Which four-digit starts have a Kaprekar chain ending at 6174?
 starts enumerated : 10000
