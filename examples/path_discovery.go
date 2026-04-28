@@ -14,9 +14,9 @@
 // touches only the 338 outbound candidates reachable from Ostend-Bruges within
 // the two-stopover bound, but the full graph is loaded and checked.
 //
-// This is intentionally not a generic RDF/N3 reasoner. The concrete airport labels, flight facts, and
-// rules are represented as Go data plus ordinary functions so the route
-// derivation remains visible and directly runnable.
+// This is intentionally not a generic RDF/N3 reasoner. The concrete airport
+// labels, flight facts, and route rules are represented as Go data plus
+// ordinary functions so the derivation remains visible and directly runnable.
 //
 // Run:
 //

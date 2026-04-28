@@ -3,12 +3,13 @@
 // A self-contained Go translation of superdense-coding.n3 from the Eyeling
 // examples.
 //
-// The N3 example models superdense coding over modal bits ("mobits"). Alice
+// The N3 example models superdense coding with modal bits, or "mobits".
+// Think of a mobit as the small teaching-model analogue of a quantum bit. Alice
 // and Bob share the entangled state |R). Alice encodes one of four two-bit
-// messages by applying one of four single-mobit relations to her half. Bob then
-// applies a joint measurement relation to decode the message. Because modal
-// quantum states are over GF(2), duplicate derivations cancel: an answer is kept
-// only when it appears an odd number of times.
+// messages by applying one relation to her half. Bob then applies a joint test
+// to decode it. Because the model uses GF(2), meaning arithmetic modulo 2,
+// duplicate derivations cancel: an answer is kept only when it appears an odd
+// number of times.
 //
 // This Go version keeps that rule structure visible: relation composition,
 // superdense candidate generation, parity cancellation, and audit checks are all

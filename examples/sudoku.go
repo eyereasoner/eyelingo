@@ -11,7 +11,7 @@
 // Usage:
 //
 //    go run sudoku.go
-//    go run sudoku.go -puzzle "100007090030020008009600500005300900010080002600004000300000010040000007007000300"
+//    go run sudoku.go -puzzle "<81 cells using digits, 0, ., or _>"
 //
 // Puzzle input accepts digits 1-9 for givens and 0, '.', or '_' for blanks.
 // Whitespace and common board separators such as '|', '+', and '-' are ignored.

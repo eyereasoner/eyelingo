@@ -2,16 +2,15 @@
 //
 // A self-contained Go translation of ackermann.n3 from the Eyeling examples.
 //
-// The original N3 file defines a binary Ackermann-style predicate by reducing
-// it to a ternary hyperoperation predicate:
+// The original N3 file defines Ackermann answers by first calling a more
+// general three-argument helper:
 //
 //    ackermann(x,y) = ackermann3(x, y+3, 2) - 3
 //
-// The ternary predicate then exposes the first hyperoperation levels directly:
-// successor, addition, multiplication, exponentiation, and recursively higher
-// operations such as tetration and pentation. The test query asks for twelve
-// derived values, including exact integers with hundreds and tens of thousands
-// of decimal digits.
+// That helper covers a ladder of operations: successor, addition,
+// multiplication, exponentiation, and then larger repeated-power operations
+// such as tetration and pentation. The test query asks for twelve values,
+// including exact integers with hundreds and tens of thousands of digits.
 //
 // This Go version keeps the reduction and recursive rules explicit. It uses
 // math/big for exact arithmetic and reports large answers by decimal digit
@@ -31,7 +30,6 @@ import (
     "math/big"
     "os"
     "runtime"
-    "strings"
 )
 
 const (
@@ -409,9 +407,3 @@ func yesNo(ok bool) string {
     return "no"
 }
 
-func _keepStringsImportUseful() string {
-    // strings is intentionally kept in the import set for consistency with the
-    // other examples' audit helpers. This no-op prevents accidental drift if the
-    // file is edited by a formatter that groups imports aggressively.
-    return strings.TrimSpace(" ackermann ")
-}

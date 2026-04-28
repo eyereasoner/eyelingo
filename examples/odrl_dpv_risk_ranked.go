@@ -2,10 +2,10 @@
 //
 // A self-contained Go translation of `examples/odrl-dpv-risk-ranked.n3`.
 //
-// The original N3 example models a Terms-of-Service style agreement as an
-// ODRL policy graph, links ODRL permissions/prohibitions to human-readable
-// clauses, derives DPV/DPV-RISK risks from missing or weak safeguards, assigns
-// numeric scores, classifies severity/risk level, and emits a ranked report.
+// The original N3 example models a Terms-of-Service style agreement using
+// policy and privacy-risk vocabulary terms. It links machine-readable
+// permissions and prohibitions to human-readable clauses, derives risks from
+// missing or weak safeguards, scores those risks, and emits a ranked report.
 //
 // This program is intentionally not a generic RDF, ODRL, DPV, or N3 reasoner.
 // Instead, it translates the concrete facts and rules from the fixture into
