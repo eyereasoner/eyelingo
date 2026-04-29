@@ -1,0 +1,22 @@
+{
+  "CaseName": "ev_roundtrip_planner",
+  "Question": "Which bounded EV journey from Brussels to Cologne satisfies the reliability, cost, and duration thresholds?",
+  "Vehicle": { "ID": "car1", "At": "Brussels", "Battery": "high", "Pass": "none" },
+  "Goal": { "At": "Cologne", "Battery": "*", "Pass": "*" },
+  "FuelSteps": 8,
+  "Thresholds": { "MinBelief": 0.93, "MaxCost": 0.09, "MaxDuration": 260 },
+  "Actions": [
+    { "Name": "drive_bru_liege", "From": { "At": "Brussels", "Battery": "high", "Pass": "*" }, "To": { "At": "Liege", "Battery": "mid", "Pass": "*" }, "Duration": 85, "Cost": 0.018, "Belief": 0.985, "Comfort": 0.96 },
+    { "Name": "train_bru_liege", "From": { "At": "Brussels", "Battery": "*", "Pass": "*" }, "To": { "At": "Liege", "Battery": "*", "Pass": "*" }, "Duration": 95, "Cost": 0.02, "Belief": 0.999, "Comfort": 0.99 },
+    { "Name": "drive_liege_aachen", "From": { "At": "Liege", "Battery": "mid", "Pass": "*" }, "To": { "At": "Aachen", "Battery": "low", "Pass": "*" }, "Duration": 55, "Cost": 0.012, "Belief": 0.99, "Comfort": 0.95 },
+    { "Name": "drive_aachen_liege", "From": { "At": "Aachen", "Battery": "mid", "Pass": "*" }, "To": { "At": "Liege", "Battery": "low", "Pass": "*" }, "Duration": 60, "Cost": 0.013, "Belief": 0.97, "Comfort": 0.93 },
+    { "Name": "buy_pass_brussels", "From": { "At": "Brussels", "Battery": "*", "Pass": "none" }, "To": { "At": "Brussels", "Battery": "*", "Pass": "yes" }, "Duration": 10, "Cost": 0.004, "Belief": 0.999, "Comfort": 0.99 },
+    { "Name": "buy_pass_liege", "From": { "At": "Liege", "Battery": "*", "Pass": "none" }, "To": { "At": "Liege", "Battery": "*", "Pass": "yes" }, "Duration": 15, "Cost": 0.003, "Belief": 0.995, "Comfort": 0.98 },
+    { "Name": "quick_charge_liege", "From": { "At": "Liege", "Battery": "low", "Pass": "*" }, "To": { "At": "Liege", "Battery": "mid", "Pass": "*" }, "Duration": 35, "Cost": 0.01, "Belief": 0.999, "Comfort": 0.97 },
+    { "Name": "fast_charge_aachen_pass", "From": { "At": "Aachen", "Battery": "low", "Pass": "yes" }, "To": { "At": "Aachen", "Battery": "mid", "Pass": "yes" }, "Duration": 25, "Cost": 0.009, "Belief": 0.999, "Comfort": 0.98 },
+    { "Name": "fast_charge_aachen_payg", "From": { "At": "Aachen", "Battery": "low", "Pass": "none" }, "To": { "At": "Aachen", "Battery": "mid", "Pass": "none" }, "Duration": 30, "Cost": 0.016, "Belief": 0.99, "Comfort": 0.95 },
+    { "Name": "premium_corridor_aachen_cologne", "From": { "At": "Aachen", "Battery": "mid", "Pass": "yes" }, "To": { "At": "Cologne", "Battery": "low", "Pass": "yes" }, "Duration": 45, "Cost": 0.02, "Belief": 0.98, "Comfort": 0.995 },
+    { "Name": "public_road_aachen_cologne", "From": { "At": "Aachen", "Battery": "mid", "Pass": "*" }, "To": { "At": "Cologne", "Battery": "low", "Pass": "*" }, "Duration": 60, "Cost": 0.011, "Belief": 0.975, "Comfort": 0.96 },
+    { "Name": "shuttle_aachen_cologne", "From": { "At": "Aachen", "Battery": "low", "Pass": "*" }, "To": { "At": "Cologne", "Battery": "low", "Pass": "*" }, "Duration": 70, "Cost": 0.024, "Belief": 0.999, "Comfort": 0.985 }
+  ]
+}

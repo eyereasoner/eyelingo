@@ -1,0 +1,25 @@
+{
+  "CaseName": "high_trust_bloom_envelope",
+  "Question": "Can a high-trust RDF graph artifact use a Bloom prefilter while keeping correctness grounded in exact canonical graph checks?",
+  "Artifact": {
+    "ID": "artifact",
+    "CanonicalTripleCount": 1200,
+    "SPOIndexTripleCount": 1200,
+    "BloomBits": 16384,
+    "HashFunctions": 7,
+    "NegativeLookupsPerBatch": 50000,
+    "FPRateBudget": 0.002,
+    "ExtraExactLookupsBudget": 100,
+    "ExactTranscendentalSymbol": "exp(-k*n/m)",
+    "CertifiedLambda": 0.5126953125,
+    "ExpMinusLambdaLower": 0.5988792348,
+    "ExpMinusLambdaUpper": 0.5988792349
+  },
+  "Policies": {
+    "MaybePositivePolicy": "ConfirmAgainstCanonicalGraph",
+    "DefiniteNegativePolicy": "ReturnAbsent"
+  },
+  "Expected": {
+    "Decision": "AcceptForHighTrustUse"
+  }
+}
