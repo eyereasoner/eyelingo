@@ -224,7 +224,7 @@ func printAnswer(r Result) {
 	fmt.Println("# Superdense Coding")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Println("Superdense-coding facts that survive GF(2) parity cancellation:")
+	fmt.Println("- Superdense-coding facts that survive GF(2) parity cancellation:")
 	for msg := 0; msg < 4; msg++ {
 		fmt.Printf("  %d dqc:superdense-coding %d\n", msg, r.Survivors[msg])
 	}
@@ -238,12 +238,12 @@ func printReason(r Result) {
 	fmt.Println("The N3 example keeps only answers with odd derivation count, so duplicate")
 	fmt.Println("modal paths cancel just like addition over GF(2).")
 	fmt.Println()
-	fmt.Println("Alice operations:")
+	fmt.Println("- Alice operations:")
 	for msg := 0; msg < 4; msg++ {
 		fmt.Printf("  message %d -> %-2s -> encoded support %s\n", msg, strings.ToUpper(r.AliceOps[msg]), formatRelation(r.EncodedSupports[msg]))
 	}
 	fmt.Println()
-	fmt.Println("Raw candidate counts before parity filtering:")
+	fmt.Println("- Raw candidate counts before parity filtering:")
 	for msg := 0; msg < 4; msg++ {
 		pieces := make([]string, 0, 4)
 		for decoded := 0; decoded < 4; decoded++ {
@@ -252,7 +252,7 @@ func printReason(r Result) {
 		fmt.Printf("  encoded %d -> decoded counts {%s}\n", msg, strings.Join(pieces, ", "))
 	}
 	fmt.Println()
-	fmt.Println("Surviving explanations:")
+	fmt.Println("- Surviving explanations:")
 	for msg := 0; msg < 4; msg++ {
 		fmt.Printf("  %d -> %d because count=%d is odd; all competing counts are even.\n", msg, r.Survivors[msg], r.Counts[[2]int{msg, r.Survivors[msg]}])
 	}
@@ -273,12 +273,12 @@ func printChecks(checks []Check) {
 
 func printAudit(r Result) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("mobit values: %s, %s\n", bit(false), bit(true))
-	fmt.Printf("states      : R=%s S=%s U=%s V=%s\n", formatRelation(r.States["R"]), formatRelation(r.States["S"]), formatRelation(r.States["U"]), formatRelation(r.States["V"]))
-	fmt.Printf("relations   : id=%s G=%s K=%s KG=%s GK=%s\n", formatRelation(r.Primitive["id"]), formatRelation(r.Primitive["g"]), formatRelation(r.Primitive["k"]), formatRelation(r.Composed["kg"]), formatRelation(r.Composed["gk"]))
-	fmt.Printf("raw candidates before cancellation: %d\n", len(r.Candidates))
-	fmt.Printf("surviving facts after odd-parity filter: %d\n", len(r.Survivors))
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- mobit values: %s, %s\n", bit(false), bit(true))
+	fmt.Printf("- states      : R=%s S=%s U=%s V=%s\n", formatRelation(r.States["R"]), formatRelation(r.States["S"]), formatRelation(r.States["U"]), formatRelation(r.States["V"]))
+	fmt.Printf("- relations   : id=%s G=%s K=%s KG=%s GK=%s\n", formatRelation(r.Primitive["id"]), formatRelation(r.Primitive["g"]), formatRelation(r.Primitive["k"]), formatRelation(r.Composed["kg"]), formatRelation(r.Composed["gk"]))
+	fmt.Printf("- raw candidates before cancellation: %d\n", len(r.Candidates))
+	fmt.Printf("- surviving facts after odd-parity filter: %d\n", len(r.Survivors))
 }
 
 func relation(pairs ...Pair) Relation {

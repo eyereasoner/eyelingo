@@ -482,43 +482,43 @@ func printAnswer(ds Dataset, analysis Analysis) {
 	fmt.Println("# Flandor")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Println("Name: Flandor")
-	fmt.Printf("Region: %s\n", ds.Region.Name)
-	fmt.Printf("Metric: %s\n", ds.Insight.Metric)
-	fmt.Printf("Active need count: %d/%d\n", analysis.ActiveNeedCount, ds.Insight.ThresholdScore)
+	fmt.Println("- Name: Flandor")
+	fmt.Printf("- Region: %s\n", ds.Region.Name)
+	fmt.Printf("- Metric: %s\n", ds.Insight.Metric)
+	fmt.Printf("- Active need count: %d/%d\n", analysis.ActiveNeedCount, ds.Insight.ThresholdScore)
 	if analysis.RecommendationFound {
-		fmt.Printf("Recommended package: %s\n", analysis.RecommendedPackage.Name)
+		fmt.Printf("- Recommended package: %s\n", analysis.RecommendedPackage.Name)
 	} else {
-		fmt.Println("Recommended package: none")
+		fmt.Println("- Recommended package: none")
 	}
-	fmt.Printf("Budget cap: €%dM\n", ds.Budget.MaxMEUR)
+	fmt.Printf("- Budget cap: €%dM\n", ds.Budget.MaxMEUR)
 	if analysis.RecommendationFound {
-		fmt.Printf("Package cost: €%dM\n", analysis.RecommendedPackage.CostMEUR)
-		fmt.Printf("Worker coverage: %d\n", analysis.RecommendedPackage.WorkerCoverage)
-		fmt.Printf("Grid relief: %d MW\n", analysis.RecommendedPackage.GridReliefMW)
+		fmt.Printf("- Package cost: €%dM\n", analysis.RecommendedPackage.CostMEUR)
+		fmt.Printf("- Worker coverage: %d\n", analysis.RecommendedPackage.WorkerCoverage)
+		fmt.Printf("- Grid relief: %d MW\n", analysis.RecommendedPackage.GridReliefMW)
 	}
-	fmt.Printf("Payload SHA-256: %s\n", ds.Signature.DisplayPayloadSHA256)
-	fmt.Printf("Envelope HMAC-SHA-256: %s\n", ds.Signature.SignatureHMAC)
-	fmt.Printf("decision : %s\n", allowedText(analysis.AuthorizationAllowed))
+	fmt.Printf("- Payload SHA-256: %s\n", ds.Signature.DisplayPayloadSHA256)
+	fmt.Printf("- Envelope HMAC-SHA-256: %s\n", ds.Signature.SignatureHMAC)
+	fmt.Printf("- decision : %s\n", allowedText(analysis.AuthorizationAllowed))
 	fmt.Println()
 }
 
 func printReason(ds Dataset, analysis Analysis) {
 	fmt.Println("## Reason why")
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("aggregate : observedFirms=%d level=%s containsFirmNames=%s containsPayrollRows=%s\n", ds.Signals.ObservedFirms, ds.Signals.AggregationLevel, yesNo(ds.Signals.ContainsFirmNames), yesNo(ds.Signals.ContainsPayrollRows))
+	fmt.Printf("- question : %s\n", ds.Question)
+	fmt.Printf("- aggregate : observedFirms=%d level=%s containsFirmNames=%s containsPayrollRows=%s\n", ds.Signals.ObservedFirms, ds.Signals.AggregationLevel, yesNo(ds.Signals.ContainsFirmNames), yesNo(ds.Signals.ContainsPayrollRows))
 	fmt.Println()
 
 	for _, need := range analysis.Needs {
 		fmt.Printf("%s : %s - %s\n", need.Name, activeText(need.Active), need.Why)
 	}
-	fmt.Printf("export weak clusters : %s\n", clusterSummary(analysis.ExportWeakClusters))
-	fmt.Printf("technical vacancy rate : %.1f%% (threshold > 3.9%%)\n", ds.Labour.TechVacancyRate)
-	fmt.Printf("grid congestion : %d hours (threshold > 11)\n", ds.Grid.CongestionHours)
+	fmt.Printf("- export weak clusters : %s\n", clusterSummary(analysis.ExportWeakClusters))
+	fmt.Printf("- technical vacancy rate : %.1f%% (threshold > 3.9%%)\n", ds.Labour.TechVacancyRate)
+	fmt.Printf("- grid congestion : %d hours (threshold > 11)\n", ds.Grid.CongestionHours)
 	fmt.Println()
 
-	fmt.Printf("recommendation policy : %s\n", ds.Insight.SuggestionPolicy)
-	fmt.Println("candidate packages:")
+	fmt.Printf("- recommendation policy : %s\n", ds.Insight.SuggestionPolicy)
+	fmt.Println("- candidate packages:")
 	for _, candidate := range analysis.Candidates {
 		marker := "reject"
 		if candidate.Eligible {
@@ -536,7 +536,7 @@ func printReason(ds Dataset, analysis Analysis) {
 	}
 	fmt.Printf("Usage is permitted only for purpose \"%s\" and the envelope expires at %s.\n", ds.Policy.PermissionPurpose, ds.Insight.ExpiresAt)
 	fmt.Printf("Surveillance reuse is blocked by a prohibition on %s for purpose \"%s\".\n", ds.Policy.ProhibitionAction, ds.Policy.ProhibitionPurpose)
-	fmt.Printf("Deletion duty time : %s\n", ds.BoardDutyAt)
+	fmt.Printf("- Deletion duty time : %s\n", ds.BoardDutyAt)
 	fmt.Println()
 }
 
@@ -547,24 +547,24 @@ func printChecks(checks []Check) {
 		if check.OK {
 			status = "OK"
 		}
-		fmt.Printf("%s %s - %s\n", check.Label, status, check.Text)
+		fmt.Printf("- %s %s - %s\n", check.Label, status, check.Text)
 	}
 	fmt.Println()
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("source file : %s\n", sourceFile)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("policy profile : %s\n", ds.Policy.Profile)
-	fmt.Printf("packages : %d\n", len(ds.Packages))
-	fmt.Printf("active needs : %d/%d\n", analysis.ActiveNeedCount, ds.Insight.ThresholdScore)
-	fmt.Printf("recommended package id : %s\n", analysis.RecommendedPackage.PackageID)
-	fmt.Printf("files written : %d/%d\n", ds.FilesWritten, ds.ExpectedFilesWritten)
-	fmt.Printf("audit entries : %d\n", ds.AuditEntries)
-	fmt.Printf("checks passed : %d/%d\n", passedChecks(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- source file : %s\n", sourceFile)
+	fmt.Printf("- case : %s\n", ds.CaseName)
+	fmt.Printf("- policy profile : %s\n", ds.Policy.Profile)
+	fmt.Printf("- packages : %d\n", len(ds.Packages))
+	fmt.Printf("- active needs : %d/%d\n", analysis.ActiveNeedCount, ds.Insight.ThresholdScore)
+	fmt.Printf("- recommended package id : %s\n", analysis.RecommendedPackage.PackageID)
+	fmt.Printf("- files written : %d/%d\n", ds.FilesWritten, ds.ExpectedFilesWritten)
+	fmt.Printf("- audit entries : %d\n", ds.AuditEntries)
+	fmt.Printf("- checks passed : %d/%d\n", passedChecks(analysis.Checks), len(analysis.Checks))
+	fmt.Printf("- all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
 }
 
 func clusterSummary(clusters []IndustrialCluster) string {

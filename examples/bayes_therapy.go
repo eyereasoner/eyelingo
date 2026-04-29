@@ -413,13 +413,13 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 		result.BestTherapy,
 		therapyUtility(result.TherapyResults, result.BestTherapy))
 	fmt.Println()
-	fmt.Println("Full posterior distribution:")
+	fmt.Println("- Full posterior distribution:")
 	for _, r := range result.PosteriorDetail {
 		fmt.Printf("  %-20s  posterior = %.6f  (unnormalized = %.8f)\n",
 			r.Disease, r.Posterior, r.Unnormalized)
 	}
 	fmt.Println()
-	fmt.Println("Therapy utility scores:")
+	fmt.Println("- Therapy utility scores:")
 	for _, tr := range result.TherapyResults {
 		fmt.Printf("  %-20s  expectedSuccess = %.6f  adverse = %.2f  utility = %.6f\n",
 			tr.Therapy, tr.ExpectedSuccess, tr.ExpectedAdverse, tr.Utility)
@@ -428,14 +428,14 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 
 	// --- Reason Why ---
 	fmt.Println("## Reason why")
-	fmt.Printf("Evidence: %s.\n", formatEvidence(data.Evidence))
+	fmt.Printf("- Evidence: %s.\n", formatEvidence(data.Evidence))
 	fmt.Printf("Evidence total (normalizing constant) = %.8f.\n", result.EvidenceTotal)
 	fmt.Println()
-	fmt.Println("The posterior for each disease is computed as:")
+	fmt.Println("- The posterior for each disease is computed as:")
 	fmt.Println("  posterior(d) = prior(d) × ∏ P(symptom|d) / evidenceTotal")
 	fmt.Println("where for an absent symptom the factor is 1 − P(symptom|d).")
 	fmt.Println()
-	fmt.Println("For each therapy, expected success is:")
+	fmt.Println("- For each therapy, expected success is:")
 	fmt.Println("  expectedSuccess(t) = Σ_i posterior(i) × successByDisease(i)")
 	fmt.Println("and utility = benefitWeight × expectedSuccess − harmWeight × adverse.")
 	fmt.Println("The recommended therapy is the one with the highest utility.")
@@ -444,63 +444,63 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	// --- Check ---
 	fmt.Println("## Check")
 	if checks.PriorsInRange {
-		fmt.Println("C1 OK - all prior probabilities are in [0,1].")
+		fmt.Println("- C1 OK - all prior probabilities are in [0,1].")
 	} else {
-		fmt.Println("C1 FAIL - one or more prior probabilities are outside [0,1].")
+		fmt.Println("- C1 FAIL - one or more prior probabilities are outside [0,1].")
 	}
 	if checks.CondProbsInRange {
-		fmt.Println("C2 OK - all conditional probabilities are in [0,1].")
+		fmt.Println("- C2 OK - all conditional probabilities are in [0,1].")
 	} else {
-		fmt.Println("C2 FAIL - one or more conditional probabilities are outside [0,1].")
+		fmt.Println("- C2 FAIL - one or more conditional probabilities are outside [0,1].")
 	}
 	if checks.AdverseInRange {
-		fmt.Println("C3 OK - all adverse probabilities are in [0,1].")
+		fmt.Println("- C3 OK - all adverse probabilities are in [0,1].")
 	} else {
-		fmt.Println("C3 FAIL - one or more adverse probabilities are outside [0,1].")
+		fmt.Println("- C3 FAIL - one or more adverse probabilities are outside [0,1].")
 	}
 	if checks.SuccessInRange {
-		fmt.Println("C4 OK - all success probabilities are in [0,1].")
+		fmt.Println("- C4 OK - all success probabilities are in [0,1].")
 	} else {
-		fmt.Println("C4 FAIL - one or more success probabilities are outside [0,1].")
+		fmt.Println("- C4 FAIL - one or more success probabilities are outside [0,1].")
 	}
 	if checks.EvidenceTotalNonZero {
-		fmt.Println("C5 OK - evidence total is non‑zero.")
+		fmt.Println("- C5 OK - evidence total is non‑zero.")
 	} else {
-		fmt.Println("C5 FAIL - evidence total is zero.")
+		fmt.Println("- C5 FAIL - evidence total is zero.")
 	}
 	if checks.DiseaseCountMatch {
-		fmt.Println("C6 OK - number of diseases matches success list length.")
+		fmt.Println("- C6 OK - number of diseases matches success list length.")
 	} else {
-		fmt.Println("C6 FAIL - disease count mismatch.")
+		fmt.Println("- C6 FAIL - disease count mismatch.")
 	}
 	if checks.TherapyCountMatch {
-		fmt.Println("C7 OK - number of therapies is correct.")
+		fmt.Println("- C7 OK - number of therapies is correct.")
 	} else {
-		fmt.Println("C7 FAIL - therapy count mismatch.")
+		fmt.Println("- C7 FAIL - therapy count mismatch.")
 	}
 	fmt.Println()
 
 	// --- Go audit details ---
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("diseases : %d\n", len(data.Diseases))
-	fmt.Printf("symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))
-	fmt.Printf("therapies : %d\n", len(data.Therapies))
-	fmt.Printf("evidence items : %d\n", len(data.Evidence))
-	fmt.Printf("evidence total : %.8f\n", result.EvidenceTotal)
-	fmt.Println("posteriors :")
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- diseases : %d\n", len(data.Diseases))
+	fmt.Printf("- symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))
+	fmt.Printf("- therapies : %d\n", len(data.Therapies))
+	fmt.Printf("- evidence items : %d\n", len(data.Evidence))
+	fmt.Printf("- evidence total : %.8f\n", result.EvidenceTotal)
+	fmt.Println("- posteriors :")
 	for _, r := range result.PosteriorDetail {
 		fmt.Printf("  %-20s  unnormalized=%.8f  posterior=%.6f\n",
 			r.Disease, r.Unnormalized, r.Posterior)
 	}
-	fmt.Println("therapy scores :")
+	fmt.Println("- therapy scores :")
 	for _, tr := range result.TherapyResults {
 		fmt.Printf("  %-20s  expSucc=%.6f  adverse=%.2f  utility=%.6f\n",
 			tr.Therapy, tr.ExpectedSuccess, tr.ExpectedAdverse, tr.Utility)
 	}
-	fmt.Printf("best therapy : %s\n", result.BestTherapy)
-	fmt.Printf("checks passed : %d/7\n", checkCount(checks))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
+	fmt.Printf("- best therapy : %s\n", result.BestTherapy)
+	fmt.Printf("- checks passed : %d/7\n", checkCount(checks))
+	fmt.Printf("- recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
 }
 
 func therapyUtility(results []TherapyResult, name string) float64 {

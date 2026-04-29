@@ -1,7 +1,7 @@
 # Superdense Coding
 
 ## Answer
-Superdense-coding facts that survive GF(2) parity cancellation:
+- Superdense-coding facts that survive GF(2) parity cancellation:
   0 dqc:superdense-coding 0
   1 dqc:superdense-coding 1
   2 dqc:superdense-coding 2
@@ -13,19 +13,19 @@ Alice chooses one relation for the first mobit; Bob applies one joint test.
 The N3 example keeps only answers with odd derivation count, so duplicate
 modal paths cancel just like addition over GF(2).
 
-Alice operations:
+- Alice operations:
   message 0 -> ID -> encoded support {(0,0), (1,1)}
   message 1 -> G  -> encoded support {(0,1), (1,0)}
   message 2 -> K  -> encoded support {(0,0), (0,1), (1,1)}
   message 3 -> KG -> encoded support {(0,0), (0,1), (1,0)}
 
-Raw candidate counts before parity filtering:
+- Raw candidate counts before parity filtering:
   encoded 0 -> decoded counts {0:1, 1:2, 2:0, 3:2}
   encoded 1 -> decoded counts {0:2, 1:1, 2:2, 3:0}
   encoded 2 -> decoded counts {0:2, 1:2, 2:1, 3:2}
   encoded 3 -> decoded counts {0:2, 1:2, 2:2, 3:1}
 
-Surviving explanations:
+- Surviving explanations:
   0 -> 0 because count=1 is odd; all competing counts are even.
   1 -> 1 because count=1 is odd; all competing counts are even.
   2 -> 2 because count=1 is odd; all competing counts are even.
@@ -41,9 +41,9 @@ Surviving explanations:
   OK encoded supports distinct: the four Alice operations produce four different supports over the two mobits
 
 ## Go audit details
-platform : go1.26.2 linux/amd64
-mobit values: 0, 1
-states      : R={(0,0), (1,1)} S={(0,1), (1,0)} U={(0,0), (1,0), (1,1)} V={(0,0), (0,1), (1,0)}
-relations   : id={(0,0), (1,1)} G={(0,1), (1,0)} K={(0,0), (1,0), (1,1)} KG={(0,0), (0,1), (1,0)} GK={(0,1), (1,0), (1,1)}
-raw candidates before cancellation: 24
-surviving facts after odd-parity filter: 4
+- platform : go1.26.2 linux/amd64
+- mobit values: 0, 1
+- states      : R={(0,0), (1,1)} S={(0,1), (1,0)} U={(0,0), (1,0), (1,1)} V={(0,0), (0,1), (1,0)}
+- relations   : id={(0,0), (1,1)} G={(0,1), (1,0)} K={(0,0), (1,0), (1,1)} KG={(0,0), (0,1), (1,0)} GK={(0,1), (1,0), (1,1)}
+- raw candidates before cancellation: 24
+- surviving facts after odd-parity filter: 4

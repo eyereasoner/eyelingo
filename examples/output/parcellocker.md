@@ -2,11 +2,11 @@
 
 ## Answer
 May Noah use Maya's one-time pickup token to collect parcel123 from locker B17?
-decision : PERMIT
-release : Noah may collect parcel123 for Maya from locker B17 at Station West
-guardrail denials : 5/5
+- decision : PERMIT
+- release : Noah may collect parcel123 for Maya from locker B17 at Station West
+- guardrail denials : 5/5
 
-Request decisions:
+- Request decisions:
   pickup        : PERMIT (source request)
   billing       : DENY
   redirect      : DENY
@@ -15,9 +15,9 @@ Request decisions:
   reuse         : DENY
 
 ## Reason why
-token : delegate=noah parcel=parcel123 locker=lockerB17 action=CollectParcel purpose=PickupOnly state=Active reuse=SingleUse
-privacy : billingAccess=None redirectAllowed=No
-parcel : parcel123 status=ReadyForPickup
+- token : delegate=noah parcel=parcel123 locker=lockerB17 action=CollectParcel purpose=PickupOnly state=Active reuse=SingleUse
+- privacy : billingAccess=None redirectAllowed=No
+- parcel : parcel123 status=ReadyForPickup
 
 Noah collects the parcel
   request : requester=noah parcel=parcel123 locker=lockerB17 action=CollectParcel purpose=PickupOnly
@@ -57,19 +57,19 @@ Noah reuses the token
   passed conditions : 9/10
 
 ## Check
-C1 OK - the source pickup request satisfies all ten authorization conditions
-C2 OK - the same token is denied for billing, redirect, wrong person, wrong locker, and reuse
-C3 OK - every request matches its expected PERMIT or DENY result
-C4 OK - single-use state permits the first pickup but rejects reuse
-C5 OK - billing details stay hidden and parcel redirection remains blocked
+- C1 OK - the source pickup request satisfies all ten authorization conditions
+- C2 OK - the same token is denied for billing, redirect, wrong person, wrong locker, and reuse
+- C3 OK - every request matches its expected PERMIT or DENY result
+- C4 OK - single-use state permits the first pickup but rejects reuse
+- C5 OK - billing details stay hidden and parcel redirection remains blocked
 
 ## Go audit details
-platform : go1.26.2 linux/amd64
-source file : parcellocker.n3
-case : parcellocker
-people : Maya,Noah
-request count : 6
-guardrail denials : 5
-condition passes : 51/60
-checks passed : 5/5
-all checks pass : yes
+- platform : go1.26.2 linux/amd64
+- source file : parcellocker.n3
+- case : parcellocker
+- people : Maya,Noah
+- request count : 6
+- guardrail denials : 5
+- condition passes : 51/60
+- checks passed : 5/5
+- all checks pass : yes

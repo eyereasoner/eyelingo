@@ -2,64 +2,64 @@
 
 ## Answer
 The scanner is allowed to use a neutral shopping insight and recommends Low-Sugar Tea Biscuits instead of Classic Tea Biscuits.
-case : delfour
-decision : Allowed
-scanned product : Classic Tea Biscuits
-suggested alternative: Low-Sugar Tea Biscuits
+- case : delfour
+- decision : Allowed
+- scanned product : Classic Tea Biscuits
+- suggested alternative: Low-Sugar Tea Biscuits
 
 ## Reason why
 The phone desensitizes a diabetes-related household condition into a scoped low-sugar need, wraps it in an expiring Insight + Policy envelope, signs it, and the scanner consumes that envelope for shopping assistance.
-metric : sugar_g_per_serving
-threshold : 10.0
-scope : self-scanner @ pick_up_scanner
-retailer : Delfour
-signature alg : HMAC-SHA256
-banner headline : Track sugar per serving while you scan
-expires at : 2025-10-05T22:33:48.907185+00:00
-reason.txt : Household requires low-sugar guidance (diabetes in POD). A neutral Insight is scoped to device 'self-scanner', event 'pick_up_scanner', retailer 'Delfour', and expires soon; the policy confines use to shopping assistance.
-audit entries : 1
-bus files written : 6
+- metric : sugar_g_per_serving
+- threshold : 10.0
+- scope : self-scanner @ pick_up_scanner
+- retailer : Delfour
+- signature alg : HMAC-SHA256
+- banner headline : Track sugar per serving while you scan
+- expires at : 2025-10-05T22:33:48.907185+00:00
+- reason.txt : Household requires low-sugar guidance (diabetes in POD). A neutral Insight is scoped to device 'self-scanner', event 'pick_up_scanner', retailer 'Delfour', and expires soon; the policy confines use to shopping assistance.
+- audit entries : 1
+- bus files written : 6
 
 ## Check
-signature verifies : yes
-payload hash matches : yes
-minimization strips sensitive terms: yes
-scope complete : yes
-authorization allowed : yes
-high-sugar banner : yes
-alternative lowers sugar : yes
-duty timing consistent : yes
-marketing prohibited : yes
+- signature verifies : yes
+- payload hash matches : yes
+- minimization strips sensitive terms: yes
+- scope complete : yes
+- authorization allowed : yes
+- high-sugar banner : yes
+- alternative lowers sugar : yes
+- duty timing consistent : yes
+- marketing prohibited : yes
 
 ## Go audit details
-platform : go1.26.2 linux/amd64
-case facts : case=delfour requestAction=odrl:use requestPurpose=shopping_assist
-catalog products : 4
-scanned product id : prod:BIS_001
-scanned sugar : 12.0g per serving (120 tenths)
-threshold sugar : 10.0g per serving (100 tenths)
-lower-sugar candidates : 2
+- platform : go1.26.2 linux/amd64
+- case facts : case=delfour requestAction=odrl:use requestPurpose=shopping_assist
+- catalog products : 4
+- scanned product id : prod:BIS_001
+- scanned sugar : 12.0g per serving (120 tenths)
+- threshold sugar : 10.0g per serving (100 tenths)
+- lower-sugar candidates : 2
  - Low-Sugar Tea Biscuits sugar=3.0g (30 tenths)
  - 85% Dark Chocolate sugar=6.0g (60 tenths)
-selected alternative : Low-Sugar Tea Biscuits
-sugar reduction : 9.0g per serving (90 tenths)
-needs low sugar : yes
-derived need : low_sugar
-authorization window : 2025-10-05T20:35:48.907163+00:00 <= 2025-10-05T22:33:48.907185+00:00 -> yes
-duty deadline check : 2025-10-05T20:37:48.907163+00:00 <= 2025-10-05T22:33:48.907185+00:00 -> yes
-decision target : https://example.org/insight/delfour
-policy profile : Delfour-Insight-Policy
-permission rule : action=odrl:use target=https://example.org/insight/delfour purpose=shopping_assist
-prohibition rule : action=odrl:distribute target=https://example.org/insight/delfour purpose=marketing
-delete duty : action=odrl:delete due=2025-10-05T22:33:48.907185+00:00
-signature mode : trusted-precomputed-input
-signature key id : demo-shared-secret
-signature hmac : b21d0072d90112a9f820aced0286889f4b6ef92b145e6fdef1011f3bfa4608c2
-canonical json bytes : 933
-escaped payload bytes : 1051
-payload sha256 : 34ad35638dfd7c67d031eeca8abb235ec24280740f863f3f31cd9d7b6517f098
-expected sha256 : 34ad35638dfd7c67d031eeca8abb235ec24280740f863f3f31cd9d7b6517f098
-checks passed : 10/10
-all checks pass : yes
-audit entries : 1
-files written : 6/6
+- selected alternative : Low-Sugar Tea Biscuits
+- sugar reduction : 9.0g per serving (90 tenths)
+- needs low sugar : yes
+- derived need : low_sugar
+- authorization window : 2025-10-05T20:35:48.907163+00:00 <= 2025-10-05T22:33:48.907185+00:00 -> yes
+- duty deadline check : 2025-10-05T20:37:48.907163+00:00 <= 2025-10-05T22:33:48.907185+00:00 -> yes
+- decision target : https://example.org/insight/delfour
+- policy profile : Delfour-Insight-Policy
+- permission rule : action=odrl:use target=https://example.org/insight/delfour purpose=shopping_assist
+- prohibition rule : action=odrl:distribute target=https://example.org/insight/delfour purpose=marketing
+- delete duty : action=odrl:delete due=2025-10-05T22:33:48.907185+00:00
+- signature mode : trusted-precomputed-input
+- signature key id : demo-shared-secret
+- signature hmac : b21d0072d90112a9f820aced0286889f4b6ef92b145e6fdef1011f3bfa4608c2
+- canonical json bytes : 933
+- escaped payload bytes : 1051
+- payload sha256 : 34ad35638dfd7c67d031eeca8abb235ec24280740f863f3f31cd9d7b6517f098
+- expected sha256 : 34ad35638dfd7c67d031eeca8abb235ec24280740f863f3f31cd9d7b6517f098
+- checks passed : 10/10
+- all checks pass : yes
+- audit entries : 1
+- files written : 6/6

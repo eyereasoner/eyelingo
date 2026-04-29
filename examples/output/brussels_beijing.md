@@ -1,7 +1,7 @@
 # Brussels Beijing
 
 ## Answer
-Cheapest route from Brussels to Beijing (avoiding Turkish Airlines) costs €670:
+- Cheapest route from Brussels to Beijing (avoiding Turkish Airlines) costs €670:
 Brussels → Frankfurt (Lufthansa, €150), Frankfurt → Beijing (Lufthansa, €520)
 
 ## Reason why
@@ -11,19 +11,19 @@ choice goes through Frankfurt on Lufthansa, which is both cheaper and
 includes a desired stopover – a symbolic way of returning to China.
 
 ## Check
-C1 OK - a path exists between Brussels and Beijing.
-C2 OK - the total cost matches the computed optimal cost.
-C3 OK - the chosen path is cheaper than the direct flight (€800).
-C4 OK - the route does not use Turkish Airlines.
-C5 OK - the route passes through Frankfurt, the intended stop.
+- C1 OK - a path exists between Brussels and Beijing.
+- C2 OK - the total cost matches the computed optimal cost.
+- C3 OK - the chosen path is cheaper than the direct flight (€800).
+- C4 OK - the route does not use Turkish Airlines.
+- C5 OK - the route passes through Frankfurt, the intended stop.
 
 ## Go audit details
-platform : go1.26.2 linux/amd64
-start city : Brussels
-end city   : Beijing
-total flights in network : 9
+- platform : go1.26.2 linux/amd64
+- start city : Brussels
+- end city   : Beijing
+- total flights in network : 9
 
-flight network:
+- flight network:
   Brussels  → Beijing   (Turkish)     €800
   Brussels  → Frankfurt (Lufthansa)   €150
   Frankfurt → Beijing   (Lufthansa)   €520
@@ -34,7 +34,7 @@ flight network:
   Frankfurt → Dubai     (Emirates)    €380
   Dubai     → Beijing   (Emirates)    €420
 
-optimal cost : €670
-path length : 2 segment(s)
-checks passed : 5/5
-recommendation consistent : yes
+- optimal cost : €670
+- path length : 2 segment(s)
+- checks passed : 5/5
+- recommendation consistent : yes

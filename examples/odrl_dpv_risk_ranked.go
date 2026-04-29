@@ -626,8 +626,8 @@ func renderRankedReport(data Dataset, risks []Risk) {
 	fmt.Println("# Ranked DPV Risk Report")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Printf("Agreement: %s\n", data.Agreement.Title)
-	fmt.Printf("Profile: %s\n\n", data.Consumer.Title)
+	fmt.Printf("- Agreement: %s\n", data.Agreement.Title)
+	fmt.Printf("- Profile: %s\n\n", data.Consumer.Title)
 
 	for _, risk := range risks {
 		fmt.Printf(
@@ -658,11 +658,11 @@ func renderChecks(data Dataset, risks []Risk) {
 	minScore, maxScore := scoreRange(risks)
 	fmt.Println()
 	fmt.Println("## Check")
-	fmt.Printf("C1 %s - %d risk rows were derived.\n", checkStatus(len(risks) == 4), len(risks))
-	fmt.Printf("C2 %s - ranked output is in descending score order.\n", checkStatus(rankedDescending(risks)))
-	fmt.Printf("C3 %s - score range is %d to %d.\n", checkStatus(minScore == 70 && maxScore == 100), minScore, maxScore)
-	fmt.Printf("C4 %s - high=%d moderate=%d low=%d risk levels were derived.\n", checkStatus(levelCounts["risk:HighRisk"] == 3 && levelCounts["risk:ModerateRisk"] == 1), levelCounts["risk:HighRisk"], levelCounts["risk:ModerateRisk"], levelCounts["risk:LowRisk"])
-	fmt.Printf("C5 %s - %d mitigation measures were generated.\n", checkStatus(countMitigations(risks) == 5), countMitigations(risks))
+	fmt.Printf("- C1 %s - %d risk rows were derived.\n", checkStatus(len(risks) == 4), len(risks))
+	fmt.Printf("- C2 %s - ranked output is in descending score order.\n", checkStatus(rankedDescending(risks)))
+	fmt.Printf("- C3 %s - score range is %d to %d.\n", checkStatus(minScore == 70 && maxScore == 100), minScore, maxScore)
+	fmt.Printf("- C4 %s - high=%d moderate=%d low=%d risk levels were derived.\n", checkStatus(levelCounts["risk:HighRisk"] == 3 && levelCounts["risk:ModerateRisk"] == 1), levelCounts["risk:HighRisk"], levelCounts["risk:ModerateRisk"], levelCounts["risk:LowRisk"])
+	fmt.Printf("- C5 %s - %d mitigation measures were generated.\n", checkStatus(countMitigations(risks) == 5), countMitigations(risks))
 }
 
 func checkStatus(ok bool) string {
@@ -680,28 +680,28 @@ func renderAuditDetails(data Dataset, risks []Risk) {
 
 	fmt.Println()
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("process context : %s (%s -> %s)\n", data.Process.Title, data.Process.ID, data.Process.Source)
-	fmt.Printf("consumer profile : %s needs=%d\n", data.Consumer.ID, len(data.Consumer.Needs))
-	fmt.Printf("agreement : %s policy=%s\n", data.Agreement.ID, data.Agreement.Policy.ID)
-	fmt.Printf("policy graph size : permissions=%d prohibitions=%d clauses=%d duties=%d constraints=%d\n",
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- process context : %s (%s -> %s)\n", data.Process.Title, data.Process.ID, data.Process.Source)
+	fmt.Printf("- consumer profile : %s needs=%d\n", data.Consumer.ID, len(data.Consumer.Needs))
+	fmt.Printf("- agreement : %s policy=%s\n", data.Agreement.ID, data.Agreement.Policy.ID)
+	fmt.Printf("- policy graph size : permissions=%d prohibitions=%d clauses=%d duties=%d constraints=%d\n",
 		len(data.Agreement.Policy.Permissions),
 		len(data.Agreement.Policy.Prohibitions),
 		len(data.Agreement.Clauses),
 		countDuties(data),
 		countConstraints(data),
 	)
-	fmt.Printf("risks derived : %d\n", len(risks))
-	fmt.Printf("risk levels : high=%d moderate=%d low=%d\n", levelCounts["risk:HighRisk"], levelCounts["risk:ModerateRisk"], levelCounts["risk:LowRisk"])
-	fmt.Printf("score range : min=%d max=%d\n", minScore, maxScore)
-	fmt.Printf("ranked descending : %s\n", yesNo(rankedDescending(risks)))
-	fmt.Printf("mitigation measures : %d\n", countMitigations(risks))
-	fmt.Printf("R1 account removal without safeguards : %s\n", yesNo(ruleTriggered(risks, ":PermDeleteAccount")))
-	fmt.Printf("R2 change terms notice too short : %s\n", yesNo(ruleTriggered(risks, ":PermChangeTerms")))
-	fmt.Printf("R3 share data without consent : %s\n", yesNo(ruleTriggered(risks, ":PermShareData")))
-	fmt.Printf("R4 export data prohibited : %s\n", yesNo(ruleTriggered(risks, ":ProhibitExportData")))
+	fmt.Printf("- risks derived : %d\n", len(risks))
+	fmt.Printf("- risk levels : high=%d moderate=%d low=%d\n", levelCounts["risk:HighRisk"], levelCounts["risk:ModerateRisk"], levelCounts["risk:LowRisk"])
+	fmt.Printf("- score range : min=%d max=%d\n", minScore, maxScore)
+	fmt.Printf("- ranked descending : %s\n", yesNo(rankedDescending(risks)))
+	fmt.Printf("- mitigation measures : %d\n", countMitigations(risks))
+	fmt.Printf("- R1 account removal without safeguards : %s\n", yesNo(ruleTriggered(risks, ":PermDeleteAccount")))
+	fmt.Printf("- R2 change terms notice too short : %s\n", yesNo(ruleTriggered(risks, ":PermChangeTerms")))
+	fmt.Printf("- R3 share data without consent : %s\n", yesNo(ruleTriggered(risks, ":PermShareData")))
+	fmt.Printf("- R4 export data prohibited : %s\n", yesNo(ruleTriggered(risks, ":ProhibitExportData")))
 
-	fmt.Println("need weights:")
+	fmt.Println("- need weights:")
 	for _, need := range sortedNeeds(data.Consumer.Needs) {
 		if need.MinNoticeDays > 0 {
 			fmt.Printf(" - %s importance=%d minNoticeDays=%d\n", need.ID, need.Importance, need.MinNoticeDays)
@@ -710,12 +710,12 @@ func renderAuditDetails(data Dataset, risks []Risk) {
 		}
 	}
 
-	fmt.Println("policy actions:")
+	fmt.Println("- policy actions:")
 	for _, line := range policyActionLines(data) {
 		fmt.Printf(" - %s\n", line)
 	}
 
-	fmt.Println("derived risk rows:")
+	fmt.Println("- derived risk rows:")
 	for rank, risk := range risks {
 		fmt.Printf(
 			" #%d %s clause=%s raw=%d normalized=%d level=%s severity=%s violates=%s source=%s mitigations=%d\n",

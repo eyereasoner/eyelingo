@@ -2,13 +2,13 @@
 
 ## Answer
 The Chandy-Misra dining-philosophers trace completes without conflict.
-philosophers : 5
-forks : 5
-rounds : 9
-meals : 15
-everyone ate 3 times : yes
+- philosophers : 5
+- forks : 5
+- rounds : 9
+- meals : 15
+- everyone ate 3 times : yes
 
-Meal trace:
+- Meal trace:
   round 1 cycle 1 : P1#1 uses F51,F12; P3#1 uses F23,F34
   round 2 cycle 1 : P2#1 uses F12,F23; P4#1 uses F34,F45
   round 3 cycle 1 : P5#1 uses F45,F51
@@ -27,7 +27,7 @@ forks are marked Dirty for the next round.
 The Go code uses goroutines inside each phase, then applies state changes
 between phases so the output remains deterministic.
 
-Round derivation:
+- Round derivation:
   round 1 hungry : P1,P3
     requests : P3 asks P2 for F23
     transfers : P2 sends F23 to P3
@@ -85,18 +85,18 @@ C7 OK - the final ownership is F12,F23 with P2; F34 with P4; F45,F51 with P5
 C8 OK - each of the nine rounds used request, transfer, and meal goroutine batches
 
 ## Go audit details
-platform : go1.26.2 linux/amd64
-source file : dining-philosophers.n3
-question : Can five philosophers complete a Chandy-Misra trace where each eats three times?
-philosophers : P1,P2,P3,P4,P5
-forks : F12,F23,F34,F45,F51
-rounds run : 9
-requests derived : 26
-transfers sent : 26
-keep fork facts : 19
-meals derived : 15
-goroutine phase batches : 27
-meal counts : P1:3, P2:3, P3:3, P4:3, P5:3
-final state : F12=P2/Dirty, F23=P2/Dirty, F34=P4/Dirty, F45=P5/Dirty, F51=P5/Dirty
-checks passed : 8/8
-all checks pass : yes
+- platform : go1.26.2 linux/amd64
+- source file : dining-philosophers.n3
+- question : Can five philosophers complete a Chandy-Misra trace where each eats three times?
+- philosophers : P1,P2,P3,P4,P5
+- forks : F12,F23,F34,F45,F51
+- rounds run : 9
+- requests derived : 26
+- transfers sent : 26
+- keep fork facts : 19
+- meals derived : 15
+- goroutine phase batches : 27
+- meal counts : P1:3, P2:3, P3:3, P4:3, P5:3
+- final state : F12=P2/Dirty, F23=P2/Dirty, F34=P4/Dirty, F45=P5/Dirty, F51=P5/Dirty
+- checks passed : 8/8
+- all checks pass : yes

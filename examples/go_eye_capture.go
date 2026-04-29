@@ -319,12 +319,12 @@ func renderArcOutput(initial Board, move Move, result MoveResult, cks Checks) {
 	fmt.Printf("The Black group had only a single eye and no outside liberties.\n")
 	fmt.Printf("White plays inside the eye at (%d,%d) and captures the entire group.\n",
 		move.Row, move.Col)
-	fmt.Println("Initial board:")
+	fmt.Println("- Initial board:")
 	fmt.Print(boardStringFormat(initial))
-	fmt.Printf("Move: %s at (%d,%d)\n", move.Player.GoString(), move.Row, move.Col)
-	fmt.Println("Board after the move:")
+	fmt.Printf("- Move: %s at (%d,%d)\n", move.Player.GoString(), move.Row, move.Col)
+	fmt.Println("- Board after the move:")
 	fmt.Print(boardStringFormat(result.BoardAfter))
-	fmt.Printf("Number of captured Black stones: %d\n", len(result.Captured))
+	fmt.Printf("- Number of captured Black stones: %d\n", len(result.Captured))
 	fmt.Println()
 
 	// --- Reason Why ---
@@ -345,42 +345,42 @@ func renderArcOutput(initial Board, move Move, result MoveResult, cks Checks) {
 	// --- Check ---
 	fmt.Println("## Check")
 	if cks.InitialSingleLiberty {
-		fmt.Println("C1 OK - Before the move, the Black group had exactly 1 liberty (the eye).")
+		fmt.Println("- C1 OK - Before the move, the Black group had exactly 1 liberty (the eye).")
 	} else {
-		fmt.Println("C1 FAIL - Black group did not have exactly 1 liberty.")
+		fmt.Println("- C1 FAIL - Black group did not have exactly 1 liberty.")
 	}
-	fmt.Printf("C2 OK - Initial Black group size is %d (8 expected).\n", cks.BlackGroupSize)
+	fmt.Printf("- C2 OK - Initial Black group size is %d (8 expected).\n", cks.BlackGroupSize)
 	if cks.CaptureLegal {
-		fmt.Println("C3 OK - The killing move was legal.")
+		fmt.Println("- C3 OK - The killing move was legal.")
 	} else {
-		fmt.Println("C3 FAIL - The move was illegal.")
+		fmt.Println("- C3 FAIL - The move was illegal.")
 	}
 	if cks.AllBlackStonesCaptured {
-		fmt.Println("C4 OK - All Black stones were captured.")
+		fmt.Println("- C4 OK - All Black stones were captured.")
 	} else {
-		fmt.Println("C4 FAIL - Not all Black stones were captured.")
+		fmt.Println("- C4 FAIL - Not all Black stones were captured.")
 	}
 	if cks.WhiteStoneHasLiberties {
-		fmt.Println("C5 OK - After capture, the White move is not a suicide (it has liberties).")
+		fmt.Println("- C5 OK - After capture, the White move is not a suicide (it has liberties).")
 	} else {
-		fmt.Println("C5 FAIL - White stone has no liberties.")
+		fmt.Println("- C5 FAIL - White stone has no liberties.")
 	}
 	fmt.Println()
 
 	// --- Go audit details ---
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("board size : %dx%d\n", initial.Size, initial.Size)
-	fmt.Println("initial board:")
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- board size : %dx%d\n", initial.Size, initial.Size)
+	fmt.Println("- initial board:")
 	fmt.Print(boardStringFormat(initial))
-	fmt.Printf("killing move : %s (%d,%d)\n", move.Player.GoString(), move.Row, move.Col)
-	fmt.Printf("result : %s\n", result.Description)
-	fmt.Printf("captured stones : %d\n", len(result.Captured))
+	fmt.Printf("- killing move : %s (%d,%d)\n", move.Player.GoString(), move.Row, move.Col)
+	fmt.Printf("- result : %s\n", result.Description)
+	fmt.Printf("- captured stones : %d\n", len(result.Captured))
 	if len(result.CapturedPos) > 0 {
-		fmt.Printf("captured positions : %s\n", strings.Join(result.CapturedPos, ", "))
+		fmt.Printf("- captured positions : %s\n", strings.Join(result.CapturedPos, ", "))
 	}
-	fmt.Printf("checks passed : %d/5\n", checkCount(cks))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
+	fmt.Printf("- checks passed : %d/5\n", checkCount(cks))
+	fmt.Printf("- recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
 }
 
 func boardStringFormat(b Board) string {

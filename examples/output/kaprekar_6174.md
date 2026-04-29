@@ -1,12 +1,12 @@
 # Kaprekar 6174
 
 ## Answer
-Kaprekar chains that end at 6174 are emitted as :kaprekar facts.
-total emitted : 9990
-omitted 0000 basin : 10
-maximum steps to 6174 : 7
+- Kaprekar chains that end at 6174 are emitted as :kaprekar facts.
+- total emitted : 9990
+- omitted 0000 basin : 10
+- maximum steps to 6174 : 7
 
-Selected facts, shown with four-digit padding for readability:
+- Selected facts, shown with four-digit padding for readability:
   0001 :kaprekar (0999 8991 8082 8532 6174)
   3524 :kaprekar (3087 8352 6174)
   6174 :kaprekar (6174)
@@ -17,10 +17,10 @@ Selected facts, shown with four-digit padding for readability:
 Each start is read as four digits, so 1 is treated as 0001.
 The digits are sorted once, then the optimized identity computes the
 same result as descending-number minus ascending-number.
-The search is bounded to seven steps, matching the N3 source: any
+- The search is bounded to seven steps, matching the N3 source: any
 four-digit start that reaches 6174 does so within that bound.
 
-Step-count distribution for emitted starts:
+- Step-count distribution for emitted starts:
   0 step(s) : 1 start(s)
   1 step(s) : 383 start(s)
   2 step(s) : 576 start(s)
@@ -30,7 +30,7 @@ Step-count distribution for emitted starts:
   6 step(s) : 1656 start(s)
   7 step(s) : 2184 start(s)
 
-Examples omitted because they fall to 0000:
+- Examples omitted because they fall to 0000:
   0000 -> (0000)
   1111 -> (0000)
   2222 -> (0000)
@@ -47,16 +47,16 @@ C7 OK - no emitted chain needs more than the seven steps unrolled in the N3 sour
 C8 OK - all 9990 non-repdigit starts are emitted, including 6174 itself
 
 ## Go audit details
-platform : go1.26.2 linux/amd64
-source file : kaprekar-6174.n3
-question : Which four-digit starts have a Kaprekar chain ending at 6174?
-starts enumerated : 10000
-optimized step checks : 10000
-direct step mismatches : 0
-bounded step applications : 46647
-emitted kaprekar facts : 9990
-omitted zero-basin starts : 10
-max steps to target : 7
-histogram : 0:1, 1:383, 2:576, 3:2400, 4:1272, 5:1518, 6:1656, 7:2184
-checks passed : 8/8
-all checks pass : yes
+- platform : go1.26.2 linux/amd64
+- source file : kaprekar-6174.n3
+- question : Which four-digit starts have a Kaprekar chain ending at 6174?
+- starts enumerated : 10000
+- optimized step checks : 10000
+- direct step mismatches : 0
+- bounded step applications : 46647
+- emitted kaprekar facts : 9990
+- omitted zero-basin starts : 10
+- max steps to target : 7
+- histogram : 0:1, 1:383, 2:576, 3:2400, 4:1272, 5:1518, 6:1656, 7:2184
+- checks passed : 8/8
+- all checks pass : yes

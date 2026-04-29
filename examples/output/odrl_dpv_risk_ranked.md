@@ -1,8 +1,8 @@
 # Ranked DPV Risk Report
 
 ## Answer
-Agreement: Example Agreement
-Profile: Example consumer profile
+- Agreement: Example Agreement
+- Profile: Example consumer profile
 
 score=100 (risk:HighRisk, risk:HighSeverity) clause C1
  Risk: account/data removal is permitted without notice safeguards (no notice constraint and no duty to inform). Clause C1: Provider may remove the user account (and associated data) at its discretion.
@@ -28,38 +28,38 @@ Each triggered rule derives a risk row with a normalized score, a source clause,
 Rows are sorted by descending score so the highest-risk clauses are reviewed first.
 
 ## Check
-C1 OK - 4 risk rows were derived.
-C2 OK - ranked output is in descending score order.
-C3 OK - score range is 70 to 100.
-C4 OK - high=3 moderate=1 low=0 risk levels were derived.
-C5 OK - 5 mitigation measures were generated.
+- C1 OK - 4 risk rows were derived.
+- C2 OK - ranked output is in descending score order.
+- C3 OK - score range is 70 to 100.
+- C4 OK - high=3 moderate=1 low=0 risk levels were derived.
+- C5 OK - 5 mitigation measures were generated.
 
 ## Go audit details
-platform : go1.26.2 linux/amd64
-process context : Service operation under Agreement1 (:ProcessContext1 -> :Agreement1)
-consumer profile : :ConsumerExample needs=4
-agreement : :Agreement1 policy=:Policy1
-policy graph size : permissions=3 prohibitions=1 clauses=4 duties=1 constraints=1
-risks derived : 4
-risk levels : high=3 moderate=1 low=0
-score range : min=70 max=100
-ranked descending : yes
-mitigation measures : 5
-R1 account removal without safeguards : yes
-R2 change terms notice too short : yes
-R3 share data without consent : yes
-R4 export data prohibited : yes
-need weights:
+- platform : go1.26.2 linux/amd64
+- process context : Service operation under Agreement1 (:ProcessContext1 -> :Agreement1)
+- consumer profile : :ConsumerExample needs=4
+- agreement : :Agreement1 policy=:Policy1
+- policy graph size : permissions=3 prohibitions=1 clauses=4 duties=1 constraints=1
+- risks derived : 4
+- risk levels : high=3 moderate=1 low=0
+- score range : min=70 max=100
+- ranked descending : yes
+- mitigation measures : 5
+- R1 account removal without safeguards : yes
+- R2 change terms notice too short : yes
+- R3 share data without consent : yes
+- R4 export data prohibited : yes
+- need weights:
  - :Need_ChangeOnlyWithPriorNotice importance=15 minNoticeDays=14
  - :Need_DataCannotBeRemoved importance=20
  - :Need_DataPortability importance=10
  - :Need_NoSharingWithoutConsent importance=12
-policy actions:
+- policy actions:
  - permission :PermChangeTerms action=tosl:changeTerms target=:AgreementText clause=:ClauseC2 duties=1 constraints=0
  - permission :PermDeleteAccount action=tosl:removeAccount target=:UserAccount clause=:ClauseC1 duties=0 constraints=0
  - permission :PermShareData action=tosl:shareData target=:UserData clause=:ClauseC3 duties=0 constraints=0
  - prohibition :ProhibitExportData action=tosl:exportData target=:UserData clause=:ClauseC4
-derived risk rows:
+- derived risk rows:
  #1 _:risk1 clause=C1 raw=110 normalized=100 level=risk:HighRisk severity=risk:HighSeverity violates=:Need_DataCannotBeRemoved source=:PermDeleteAccount mitigations=2
  #2 _:risk3 clause=C3 raw=97 normalized=97 level=risk:HighRisk severity=risk:HighSeverity violates=:Need_NoSharingWithoutConsent source=:PermShareData mitigations=1
  #3 _:risk2 clause=C2 raw=85 normalized=85 level=risk:HighRisk severity=risk:HighSeverity violates=:Need_ChangeOnlyWithPriorNotice source=:PermChangeTerms mitigations=1

@@ -366,11 +366,11 @@ func printAnswer(ds Dataset, analysis Analysis) {
 
 	fmt.Println("## Answer")
 	fmt.Println(ds.Question)
-	fmt.Printf("decision : %s\n", primary.Decision)
-	fmt.Printf("release : %s may collect %s for %s from locker %s at %s\n", delegate, parcel.ID, owner, lockerLabel(locker.ID), locker.Site)
-	fmt.Printf("guardrail denials : %d/%d\n", analysis.GuardrailDeny, len(ds.Requests)-1)
+	fmt.Printf("- decision : %s\n", primary.Decision)
+	fmt.Printf("- release : %s may collect %s for %s from locker %s at %s\n", delegate, parcel.ID, owner, lockerLabel(locker.ID), locker.Site)
+	fmt.Printf("- guardrail denials : %d/%d\n", analysis.GuardrailDeny, len(ds.Requests)-1)
 	fmt.Println()
-	fmt.Println("Request decisions:")
+	fmt.Println("- Request decisions:")
 	for _, result := range analysis.Results {
 		marker := ""
 		if result.Request.Key == "pickup" {
@@ -384,9 +384,9 @@ func printAnswer(ds Dataset, analysis Analysis) {
 func printReason(ds Dataset, analysis Analysis) {
 	fmt.Println("## Reason why")
 	token := ds.Authorization
-	fmt.Printf("token : delegate=%s parcel=%s locker=%s action=%s purpose=%s state=%s reuse=%s\n", token.Delegate, token.Parcel, token.Locker, token.Action, token.Purpose, token.State, token.Reuse)
-	fmt.Printf("privacy : billingAccess=%s redirectAllowed=%s\n", token.BillingAccess, token.RedirectAllowed)
-	fmt.Printf("parcel : %s status=%s\n", ds.Parcel.ID, ds.Parcel.Status)
+	fmt.Printf("- token : delegate=%s parcel=%s locker=%s action=%s purpose=%s state=%s reuse=%s\n", token.Delegate, token.Parcel, token.Locker, token.Action, token.Purpose, token.State, token.Reuse)
+	fmt.Printf("- privacy : billingAccess=%s redirectAllowed=%s\n", token.BillingAccess, token.RedirectAllowed)
+	fmt.Printf("- parcel : %s status=%s\n", ds.Parcel.ID, ds.Parcel.Status)
 	fmt.Println()
 
 	for _, result := range analysis.Results {
@@ -410,22 +410,22 @@ func printChecks(checks []Check) {
 		if check.OK {
 			status = "OK"
 		}
-		fmt.Printf("%s %s - %s\n", check.Label, status, check.Text)
+		fmt.Printf("- %s %s - %s\n", check.Label, status, check.Text)
 	}
 	fmt.Println()
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("source file : %s\n", sourceFile)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("people : %s\n", personNames(ds.People))
-	fmt.Printf("request count : %d\n", len(ds.Requests))
-	fmt.Printf("guardrail denials : %d\n", analysis.GuardrailDeny)
-	fmt.Printf("condition passes : %d/%d\n", analysis.ConditionsPass, len(ds.Requests)*10)
-	fmt.Printf("checks passed : %d/%d\n", passedChecks(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- source file : %s\n", sourceFile)
+	fmt.Printf("- case : %s\n", ds.CaseName)
+	fmt.Printf("- people : %s\n", personNames(ds.People))
+	fmt.Printf("- request count : %d\n", len(ds.Requests))
+	fmt.Printf("- guardrail denials : %d\n", analysis.GuardrailDeny)
+	fmt.Printf("- condition passes : %d/%d\n", analysis.ConditionsPass, len(ds.Requests)*10)
+	fmt.Printf("- checks passed : %d/%d\n", passedChecks(analysis.Checks), len(analysis.Checks))
+	fmt.Printf("- all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
 }
 
 func lockerLabel(id string) string {

@@ -708,17 +708,17 @@ func printAnswer(ds Dataset, a Analysis) {
 	fmt.Println("# Cold Chain Release")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Printf("Release decision : %d of %d candidate lots can ship.\n", len(a.ReleaseLots), len(a.LotReports))
-	fmt.Printf("Safe release lots : %s\n", reportIDs(a.ReleaseLots))
-	fmt.Printf("Quarantined lots : %s\n", reportIDs(a.QuarantineLots))
-	fmt.Printf("Best allocation value : %d priority-dose points\n", a.Plan.Score)
-	fmt.Printf("Doses delivered : %d\n", a.Plan.Doses)
-	fmt.Println("Priority allocation:")
+	fmt.Printf("- Release decision : %d of %d candidate lots can ship.\n", len(a.ReleaseLots), len(a.LotReports))
+	fmt.Printf("- Safe release lots : %s\n", reportIDs(a.ReleaseLots))
+	fmt.Printf("- Quarantined lots : %s\n", reportIDs(a.QuarantineLots))
+	fmt.Printf("- Best allocation value : %d priority-dose points\n", a.Plan.Score)
+	fmt.Printf("- Doses delivered : %d\n", a.Plan.Doses)
+	fmt.Println("- Priority allocation:")
 	for _, assignment := range a.Plan.Assignments {
 		lot := a.LotByID[assignment.LotID]
 		fmt.Printf(" - %s -> %s : %d/%d doses, transit=%dm, value=%d\n", assignment.LotID, assignment.ClinicLabel, assignment.Delivered, lot.Doses, assignment.Transit, assignment.Value)
 	}
-	fmt.Println("Reserved/unmet:")
+	fmt.Println("- Reserved/unmet:")
 	for _, assignment := range a.Plan.Assignments {
 		if assignment.Reserve > 0 {
 			fmt.Printf(" - %s remainder held under ledger root %s: %d doses\n", assignment.LotID, shortHash(a.ReleaseByLot[assignment.LotID].Ledger.Root), assignment.Reserve)
@@ -734,22 +734,22 @@ func printAnswer(ds Dataset, a Analysis) {
 
 func printReason(ds Dataset, a Analysis) {
 	fmt.Println("## Reason why")
-	fmt.Println("The dataset is treated as linked facts: parent/child lot relationships create a lineage closure; recalled ancestors contaminate descendants; custody rows are verified as a SHA-256 hash chain; temperature segments are checked against the 2-8 °C policy; only releasable lots enter an exact memoized allocation search.")
-	fmt.Printf("lineage parent facts : %d\n", a.ParentFacts)
-	fmt.Printf("lineage closure facts : %d ancestor links\n", a.ClosureFacts)
-	fmt.Printf("custody event facts : %d\n", a.EventFacts)
-	fmt.Printf("temperature observations : %d\n", a.TempFacts)
-	fmt.Printf("release candidates : %d\n", len(a.LotReports))
-	fmt.Printf("recalled ancestors : %s\n", strings.Join(ds.RecalledSources, ", "))
-	fmt.Printf("releasable lots : %d\n", len(a.ReleaseLots))
-	fmt.Println("quarantine reasons:")
+	fmt.Println("- The dataset is treated as linked facts: parent/child lot relationships create a lineage closure; recalled ancestors contaminate descendants; custody rows are verified as a SHA-256 hash chain; temperature segments are checked against the 2-8 °C policy; only releasable lots enter an exact memoized allocation search.")
+	fmt.Printf("- lineage parent facts : %d\n", a.ParentFacts)
+	fmt.Printf("- lineage closure facts : %d ancestor links\n", a.ClosureFacts)
+	fmt.Printf("- custody event facts : %d\n", a.EventFacts)
+	fmt.Printf("- temperature observations : %d\n", a.TempFacts)
+	fmt.Printf("- release candidates : %d\n", len(a.LotReports))
+	fmt.Printf("- recalled ancestors : %s\n", strings.Join(ds.RecalledSources, ", "))
+	fmt.Printf("- releasable lots : %d\n", len(a.ReleaseLots))
+	fmt.Println("- quarantine reasons:")
 	for _, report := range a.QuarantineLots {
 		fmt.Printf(" - %s : %s\n", report.Lot.ID, report.RejectReason)
 	}
-	fmt.Printf("allocation candidates : %d feasible lot→clinic assignments + %d hold options\n", len(a.Feasible), len(a.ReleaseLots))
-	fmt.Printf("optimizer states : %d\n", a.Stats.States)
-	fmt.Printf("optimizer transitions : %d\n", a.Stats.Transitions)
-	fmt.Printf("memo hits : %d\n", a.Stats.MemoHits)
+	fmt.Printf("- allocation candidates : %d feasible lot→clinic assignments + %d hold options\n", len(a.Feasible), len(a.ReleaseLots))
+	fmt.Printf("- optimizer states : %d\n", a.Stats.States)
+	fmt.Printf("- optimizer transitions : %d\n", a.Stats.Transitions)
+	fmt.Printf("- memo hits : %d\n", a.Stats.MemoHits)
 	fmt.Println()
 }
 
@@ -760,29 +760,29 @@ func printChecks(a Analysis) {
 		if check.OK {
 			status = "OK"
 		}
-		fmt.Printf("%s %s - %s\n", check.Label, status, check.Text)
+		fmt.Printf("- %s %s - %s\n", check.Label, status, check.Text)
 	}
 	fmt.Println()
 }
 
 func printAudit(ds Dataset, a Analysis) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("product : %s\n", ds.Product)
-	fmt.Printf("lots total : %d\n", len(ds.Lots))
-	fmt.Printf("release candidate lots : %d\n", len(a.LotReports))
-	fmt.Printf("lineage parent facts : %d\n", a.ParentFacts)
-	fmt.Printf("lineage ancestor closure facts : %d\n", a.ClosureFacts)
-	fmt.Printf("recalled source lots : %s\n", strings.Join(ds.RecalledSources, ", "))
-	fmt.Printf("custody event facts : %d\n", a.EventFacts)
-	fmt.Printf("temperature observations : %d\n", a.TempFacts)
-	fmt.Printf("ledger-valid release candidates : %d/%d\n", a.LedgerValid, len(a.LotReports))
-	fmt.Printf("temperature-valid release candidates : %d/%d\n", a.TemperatureOK, len(a.LotReports))
-	fmt.Printf("releasable candidates : %d/%d\n", len(a.ReleaseLots), len(a.LotReports))
-	fmt.Printf("quarantined candidates : %d/%d\n", len(a.QuarantineLots), len(a.LotReports))
-	fmt.Println("ledger roots:")
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- case : %s\n", ds.CaseName)
+	fmt.Printf("- question : %s\n", ds.Question)
+	fmt.Printf("- product : %s\n", ds.Product)
+	fmt.Printf("- lots total : %d\n", len(ds.Lots))
+	fmt.Printf("- release candidate lots : %d\n", len(a.LotReports))
+	fmt.Printf("- lineage parent facts : %d\n", a.ParentFacts)
+	fmt.Printf("- lineage ancestor closure facts : %d\n", a.ClosureFacts)
+	fmt.Printf("- recalled source lots : %s\n", strings.Join(ds.RecalledSources, ", "))
+	fmt.Printf("- custody event facts : %d\n", a.EventFacts)
+	fmt.Printf("- temperature observations : %d\n", a.TempFacts)
+	fmt.Printf("- ledger-valid release candidates : %d/%d\n", a.LedgerValid, len(a.LotReports))
+	fmt.Printf("- temperature-valid release candidates : %d/%d\n", a.TemperatureOK, len(a.LotReports))
+	fmt.Printf("- releasable candidates : %d/%d\n", len(a.ReleaseLots), len(a.LotReports))
+	fmt.Printf("- quarantined candidates : %d/%d\n", len(a.QuarantineLots), len(a.LotReports))
+	fmt.Println("- ledger roots:")
 	for _, report := range a.LotReports {
 		status := "valid"
 		if !report.Ledger.OK {
@@ -790,7 +790,7 @@ func printAudit(ds Dataset, a Analysis) {
 		}
 		fmt.Printf(" - %s root=%s status=%s\n", report.Lot.ID, shortHash(report.Ledger.Root), status)
 	}
-	fmt.Println("release decisions:")
+	fmt.Println("- release decisions:")
 	for _, report := range a.LotReports {
 		if report.Release {
 			fmt.Printf(" - %s release doses=%d facility=%s tempExcursion=%dm maxSegment=%dm ancestors=%s\n", report.Lot.ID, report.Lot.Doses, report.Lot.Facility, report.Temperature.TotalExcursion, report.Temperature.MaxSegment, strings.Join(report.Ancestors, ", "))
@@ -798,28 +798,28 @@ func printAudit(ds Dataset, a Analysis) {
 			fmt.Printf(" - %s quarantine reason=%s\n", report.Lot.ID, report.RejectReason)
 		}
 	}
-	fmt.Println("clinics:")
+	fmt.Println("- clinics:")
 	for _, clinic := range ds.Clinics {
 		fmt.Printf(" - %s demand=%d priority=%d maxTransit=%dm need=%s\n", clinic.Label, clinic.Demand, clinic.Priority, clinic.MaxTransit, clinic.Need)
 	}
-	fmt.Println("transit candidates:")
+	fmt.Println("- transit candidates:")
 	for _, candidate := range a.Feasible {
 		fmt.Printf(" - %s -> %s %dm value=%d\n", candidate.LotID, candidate.ClinicLabel, candidate.Transit, candidate.Value)
 	}
-	fmt.Println("selected allocation:")
+	fmt.Println("- selected allocation:")
 	for _, assignment := range a.Plan.Assignments {
 		fmt.Printf(" - %s -> %s delivered=%d reserve=%d transit=%dm value=%d\n", assignment.LotID, assignment.ClinicLabel, assignment.Delivered, assignment.Reserve, assignment.Transit, assignment.Value)
 	}
-	fmt.Printf("delivered doses : %d\n", a.Plan.Doses)
-	fmt.Printf("reserved doses : %d\n", a.ReserveDoses)
-	fmt.Printf("unmet demand : %d (%s)\n", totalUnmet(ds.Clinics, a.UnmetByClinic), unmetSummary(ds.Clinics, a.UnmetByClinic))
-	fmt.Printf("best value : %d\n", a.Plan.Score)
-	fmt.Printf("total selected transit : %dm\n", a.Plan.Transit)
-	fmt.Printf("optimizer states explored : %d\n", a.Stats.States)
-	fmt.Printf("optimizer memo hits : %d\n", a.Stats.MemoHits)
-	fmt.Printf("optimizer transitions : %d\n", a.Stats.Transitions)
-	fmt.Printf("checks passed : %d/%d\n", checksPassed(a.Checks), len(a.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(a.Checks)))
+	fmt.Printf("- delivered doses : %d\n", a.Plan.Doses)
+	fmt.Printf("- reserved doses : %d\n", a.ReserveDoses)
+	fmt.Printf("- unmet demand : %d (%s)\n", totalUnmet(ds.Clinics, a.UnmetByClinic), unmetSummary(ds.Clinics, a.UnmetByClinic))
+	fmt.Printf("- best value : %d\n", a.Plan.Score)
+	fmt.Printf("- total selected transit : %dm\n", a.Plan.Transit)
+	fmt.Printf("- optimizer states explored : %d\n", a.Stats.States)
+	fmt.Printf("- optimizer memo hits : %d\n", a.Stats.MemoHits)
+	fmt.Printf("- optimizer transitions : %d\n", a.Stats.Transitions)
+	fmt.Printf("- checks passed : %d/%d\n", checksPassed(a.Checks), len(a.Checks))
+	fmt.Printf("- all checks pass : %s\n", yesNo(allChecksOK(a.Checks)))
 }
 
 func lineageComplete(lots []Lot, ancestors map[string][]string) bool {

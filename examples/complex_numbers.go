@@ -360,14 +360,14 @@ func printAnswer(a Analysis) {
 	fmt.Println()
 	fmt.Println("## Answer")
 	fmt.Println("The complex.n3 test query derives 6 complex-number facts.")
-	fmt.Println("Computed values:")
+	fmt.Println("- Computed values:")
 	for _, c := range a.ExponentCases {
 		fmt.Printf(" - %s %s = %s\n", c.ID, shortName(c.ID), formatComplex(c.Result))
 	}
 	for _, c := range a.InverseCases {
 		fmt.Printf(" - %s %s = %s\n", c.ID, shortName(c.ID), formatComplex(c.Result))
 	}
-	fmt.Println("Key equivalences:")
+	fmt.Println("- Key equivalences:")
 	fmt.Printf(" - i^i = e^(-pi/2) = %s\n", formatFloat(a.ExponentCases[2].Result.Re))
 	fmt.Printf(" - asin(2) + acos(2) = %s\n", formatComplex(add(a.InverseCases[0].Result, a.InverseCases[1].Result)))
 	fmt.Println()
@@ -376,18 +376,18 @@ func printAnswer(a Analysis) {
 func printReason(a Analysis) {
 	fmt.Println("## Reason why")
 	fmt.Println("The N3 source first converts each complex base (x,y) to polar form using r=sqrt(x^2+y^2) and quadrant-sensitive dial rules. It then applies (a+bi)^(c+di)=r^c*e^(-d*theta)*(cos(d*ln(r)+c*theta), sin(d*ln(r)+c*theta)). The asin/acos rules use the same pair of distances from 1+a and 1-a, then recover the imaginary part with ln(F+sqrt(F^2-1)).")
-	fmt.Printf("primitive test facts : %d\n", a.PrimitiveFacts)
-	fmt.Printf("polar derivations : %d\n", a.PolarDerivations)
-	fmt.Printf("rule applications : %d\n", a.RuleApplications)
-	fmt.Println("polar bases:")
+	fmt.Printf("- primitive test facts : %d\n", a.PrimitiveFacts)
+	fmt.Printf("- polar derivations : %d\n", a.PolarDerivations)
+	fmt.Printf("- rule applications : %d\n", a.RuleApplications)
+	fmt.Println("- polar bases:")
 	for _, c := range a.ExponentCases {
 		fmt.Printf(" - %s base=%s r=%s theta=%s quadrant=%s\n", c.ID, formatComplex(c.Base), formatFloat(c.Polar.R), formatFloat(c.Polar.Theta), c.Polar.Quadrant)
 	}
-	fmt.Println("exponentiation traces:")
+	fmt.Println("- exponentiation traces:")
 	for _, c := range a.ExponentCases {
 		fmt.Printf(" - %s scale=%s angleMix=%s result=%s; %s\n", c.ID, formatFloat(c.MagnitudeScale), formatFloat(c.AngleMix), formatComplex(c.Result), c.Reason)
 	}
-	fmt.Println("inverse-trig traces:")
+	fmt.Println("- inverse-trig traces:")
 	for _, c := range a.InverseCases {
 		fmt.Printf(" - %s %s: E=%s F=%s lnTerm=%s result=%s; %s\n", c.ID, c.Operation, formatFloat(c.E), formatFloat(c.F), formatFloat(c.LogTerm), formatComplex(c.Result), c.Reason)
 	}
@@ -401,50 +401,50 @@ func printChecks(a Analysis) {
 		if check.OK {
 			status = "OK"
 		}
-		fmt.Printf("%s %s - %s\n", check.Label, status, check.Text)
+		fmt.Printf("- %s %s - %s\n", check.Label, status, check.Text)
 	}
 	fmt.Println()
 }
 
 func printAudit(a Analysis) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", a.Question)
-	fmt.Println("translated source : complex.n3")
-	fmt.Printf("primitive test facts : %d\n", a.PrimitiveFacts)
-	fmt.Printf("polar derivations : %d\n", a.PolarDerivations)
-	fmt.Printf("rule applications : %d\n", a.RuleApplications)
-	fmt.Println("N3 expressions:")
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- question : %s\n", a.Question)
+	fmt.Println("- translated source : complex.n3")
+	fmt.Printf("- primitive test facts : %d\n", a.PrimitiveFacts)
+	fmt.Printf("- polar derivations : %d\n", a.PolarDerivations)
+	fmt.Printf("- rule applications : %d\n", a.RuleApplications)
+	fmt.Println("- N3 expressions:")
 	for _, c := range a.ExponentCases {
 		fmt.Printf(" - %s %s\n", c.ID, c.Expression)
 	}
 	for _, c := range a.InverseCases {
 		fmt.Printf(" - %s %s\n", c.ID, c.Expression)
 	}
-	fmt.Println("dial details:")
+	fmt.Println("- dial details:")
 	for _, c := range a.ExponentCases {
 		fmt.Printf(" - %s base=%s absAngle=%s theta=%s rule=%s\n", c.ID, formatComplex(c.Base), formatFloat(c.Polar.BaseAngle), formatFloat(c.Polar.Theta), c.Polar.DialRule)
 	}
-	fmt.Println("derived exponentiation facts:")
+	fmt.Println("- derived exponentiation facts:")
 	for _, c := range a.ExponentCases {
 		fmt.Printf(" - %s base=%s power=%s result=%s expected=%s\n", c.ID, formatComplex(c.Base), formatComplex(c.Power), formatComplex(c.Result), formatComplex(c.Expected))
 	}
-	fmt.Println("derived inverse-trig facts:")
+	fmt.Println("- derived inverse-trig facts:")
 	for _, c := range a.InverseCases {
 		fmt.Printf(" - %s input=%s result=%s expected=%s leftRadius=%s rightRadius=%s\n", c.ID, formatComplex(c.Input), formatComplex(c.Result), formatComplex(c.Expected), formatFloat(c.LeftRadius), formatFloat(c.RightRadius))
 	}
-	fmt.Printf("finite output components : %d/12\n", a.FiniteValues)
+	fmt.Printf("- finite output components : %d/12\n", a.FiniteValues)
 	passed := 0
 	for _, check := range a.Checks {
 		if check.OK {
 			passed++
 		}
 	}
-	fmt.Printf("checks passed : %d/%d\n", passed, len(a.Checks))
+	fmt.Printf("- checks passed : %d/%d\n", passed, len(a.Checks))
 	if passed == len(a.Checks) {
-		fmt.Println("all checks pass : yes")
+		fmt.Println("- all checks pass : yes")
 	} else {
-		fmt.Println("all checks pass : no")
+		fmt.Println("- all checks pass : no")
 	}
 }
 

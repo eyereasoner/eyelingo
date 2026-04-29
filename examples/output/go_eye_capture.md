@@ -3,20 +3,20 @@
 ## Answer
 The Black group had only a single eye and no outside liberties.
 White plays inside the eye at (2,2) and captures the entire group.
-Initial board:
+- Initial board:
 W W W W W 
 W B B B W 
 W B . B W 
 W B B B W 
 W W W W W 
-Move: W at (2,2)
-Board after the move:
+- Move: W at (2,2)
+- Board after the move:
 W W W W W 
 W . . . W 
 W . W . W 
 W . . . W 
 W W W W W 
-Number of captured Black stones: 8
+- Number of captured Black stones: 8
 
 ## Reason why
 In Go, a group lives only if it has at least two eyes, or can make them
@@ -32,24 +32,24 @@ White’s move inside the eye is not suicide because the Black stones are
 immediately captured, freeing the space around the newly placed White stone.
 
 ## Check
-C1 OK - Before the move, the Black group had exactly 1 liberty (the eye).
-C2 OK - Initial Black group size is 8 (8 expected).
-C3 OK - The killing move was legal.
-C4 OK - All Black stones were captured.
-C5 OK - After capture, the White move is not a suicide (it has liberties).
+- C1 OK - Before the move, the Black group had exactly 1 liberty (the eye).
+- C2 OK - Initial Black group size is 8 (8 expected).
+- C3 OK - The killing move was legal.
+- C4 OK - All Black stones were captured.
+- C5 OK - After capture, the White move is not a suicide (it has liberties).
 
 ## Go audit details
-platform : go1.26.2 linux/amd64
-board size : 5x5
-initial board:
+- platform : go1.26.2 linux/amd64
+- board size : 5x5
+- initial board:
 W W W W W 
 W B B B W 
 W B . B W 
 W B B B W 
 W W W W W 
-killing move : W (2,2)
-result : legal move: captures 8 opponent stone(s)
-captured stones : 8
-captured positions : (1,1), (2,1), (1,2), (3,1), (1,3), (3,2), (2,3), (3,3)
-checks passed : 5/5
-recommendation consistent : yes
+- killing move : W (2,2)
+- result : legal move: captures 8 opponent stone(s)
+- captured stones : 8
+- captured positions : (1,1), (2,1), (1,2), (3,1), (1,3), (3,2), (2,3), (3,3)
+- checks passed : 5/5
+- recommendation consistent : yes

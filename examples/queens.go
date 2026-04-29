@@ -105,7 +105,7 @@ func search(
 		}
 
 		if *count <= uint64(maxPrint) {
-			fmt.Printf("Solution %d:\n", *count)
+			fmt.Printf("- Solution %d:\n", *count)
 			printBoard(board)
 			fmt.Println()
 			stats.SolutionsPrinted++
@@ -183,14 +183,14 @@ func renderReason(n int) {
 func renderChecks(n int, count uint64, stats SolveStats) {
 	fmt.Println()
 	fmt.Println("## Check")
-	fmt.Printf("C1 %s - search reached depth %d.\n", statusWord(stats.MaxDepth == n || n == 0), stats.MaxDepth)
-	fmt.Printf("C2 %s - first solution places one queen in each row.\n", statusWord(len(stats.FirstSolution) == n || count == 0))
-	fmt.Printf("C3 %s - first solution columns are unique.\n", statusWord(columnsUnique(stats.FirstSolution)))
-	fmt.Printf("C4 %s - no pair of queens in the first solution shares a diagonal.\n", statusWord(diagonalsSafe(stats.FirstSolution)))
+	fmt.Printf("- C1 %s - search reached depth %d.\n", statusWord(stats.MaxDepth == n || n == 0), stats.MaxDepth)
+	fmt.Printf("- C2 %s - first solution places one queen in each row.\n", statusWord(len(stats.FirstSolution) == n || count == 0))
+	fmt.Printf("- C3 %s - first solution columns are unique.\n", statusWord(columnsUnique(stats.FirstSolution)))
+	fmt.Printf("- C4 %s - no pair of queens in the first solution shares a diagonal.\n", statusWord(diagonalsSafe(stats.FirstSolution)))
 	if n == 8 {
-		fmt.Printf("C5 %s - counted %d solutions for the normalized 8-Queens input.\n", statusWord(count == 92), count)
+		fmt.Printf("- C5 %s - counted %d solutions for the normalized 8-Queens input.\n", statusWord(count == 92), count)
 	} else {
-		fmt.Printf("C5 %s - counted %d solutions for the normalized N-Queens input.\n", statusWord(count > 0 || n == 0), count)
+		fmt.Printf("- C5 %s - counted %d solutions for the normalized N-Queens input.\n", statusWord(count > 0 || n == 0), count)
 	}
 }
 
@@ -237,23 +237,23 @@ func statusWord(ok bool) string {
 func renderGoAuditDetails(n int, maxPrint int, count uint64, stats SolveStats) {
 	fmt.Println()
 	fmt.Println("## Go audit details")
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("normalized board size : %d\n", n)
-	fmt.Printf("normalized max print : %d\n", maxPrint)
-	fmt.Printf("total solutions counted : %d\n", count)
-	fmt.Printf("solutions printed : %d\n", stats.SolutionsPrinted)
-	fmt.Printf("recursive nodes visited : %d\n", stats.Nodes)
-	fmt.Printf("candidate placements tried : %d\n", stats.CandidatePlacements)
-	fmt.Printf("dead-end branches : %d\n", stats.DeadEnds)
-	fmt.Printf("max recursion depth : %d\n", stats.MaxDepth)
-	fmt.Printf("bit-mask columns used : %d\n", n)
-	fmt.Printf("search complete : %s\n", yesNo(stats.MaxDepth == n || n == 0))
-	fmt.Printf("has at least one solution : %s\n", yesNo(count > 0))
+	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("- normalized board size : %d\n", n)
+	fmt.Printf("- normalized max print : %d\n", maxPrint)
+	fmt.Printf("- total solutions counted : %d\n", count)
+	fmt.Printf("- solutions printed : %d\n", stats.SolutionsPrinted)
+	fmt.Printf("- recursive nodes visited : %d\n", stats.Nodes)
+	fmt.Printf("- candidate placements tried : %d\n", stats.CandidatePlacements)
+	fmt.Printf("- dead-end branches : %d\n", stats.DeadEnds)
+	fmt.Printf("- max recursion depth : %d\n", stats.MaxDepth)
+	fmt.Printf("- bit-mask columns used : %d\n", n)
+	fmt.Printf("- search complete : %s\n", yesNo(stats.MaxDepth == n || n == 0))
+	fmt.Printf("- has at least one solution : %s\n", yesNo(count > 0))
 
 	if len(stats.FirstSolution) > 0 {
-		fmt.Printf("first solution columns : %s\n", formatOneBasedColumns(stats.FirstSolution))
+		fmt.Printf("- first solution columns : %s\n", formatOneBasedColumns(stats.FirstSolution))
 	} else {
-		fmt.Println("first solution columns : none")
+		fmt.Println("- first solution columns : none")
 	}
 }
 
@@ -317,7 +317,7 @@ func main() {
 
 	count, stats := solveNQueens(n, maxPrint)
 
-	fmt.Printf("Total solutions for %d-Queens: %d\n", n, count)
+	fmt.Printf("- Total solutions for %d-Queens: %d\n", n, count)
 	renderReason(n)
 	renderChecks(n, count, stats)
 	renderGoAuditDetails(n, maxPrint, count, stats)
