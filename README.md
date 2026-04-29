@@ -5,7 +5,7 @@ Small Go translations of selected EyeReasoner/Eyeling N3 examples.
 ## Layout
 
 ```text
-go.mod                         local module so examples can share input loading
+go.mod                          local module so examples can share input loading
 internal/exampleinput/          shared JSON input loader
 examples/                       Go examples
 examples/input/                 example-specific JSON data and parameters
