@@ -1,0 +1,35 @@
+{
+  "CaseName": "drone_corridor_planner",
+  "Question": "Which bounded Gent-to-Oostende drone corridor plan survives the belief and cost thresholds?",
+  "Start": {
+    "Location": "Gent",
+    "Battery": "full",
+    "Permit": "none"
+  },
+  "GoalLocation": "Oostende",
+  "Fuel": 7,
+  "Thresholds": {
+    "MinBelief": 0.94,
+    "MaxCost": 0.03
+  },
+  "Actions": [
+    {"Name": "fly_gent_brugge", "From": {"Location": "Gent", "Battery": "full", "Permit": "*"}, "To": {"Location": "Brugge", "Battery": "mid", "Permit": "*"}, "DurationSec": 1500, "Cost": 0.006, "Belief": 0.99, "Comfort": 0.99},
+    {"Name": "train_gent_brugge", "From": {"Location": "Gent", "Battery": "*", "Permit": "*"}, "To": {"Location": "Brugge", "Battery": "*", "Permit": "*"}, "DurationSec": 1700, "Cost": 0.012, "Belief": 0.999, "Comfort": 0.995},
+    {"Name": "fly_gent_kortrijk", "From": {"Location": "Gent", "Battery": "full", "Permit": "*"}, "To": {"Location": "Kortrijk", "Battery": "mid", "Permit": "*"}, "DurationSec": 1600, "Cost": 0.007, "Belief": 0.99, "Comfort": 0.99},
+    {"Name": "fly_kortrijk_brugge", "From": {"Location": "Kortrijk", "Battery": "mid", "Permit": "*"}, "To": {"Location": "Brugge", "Battery": "low", "Permit": "*"}, "DurationSec": 1600, "Cost": 0.007, "Belief": 0.99, "Comfort": 0.99},
+    {"Name": "fly_brugge_kortrijk", "From": {"Location": "Brugge", "Battery": "mid", "Permit": "*"}, "To": {"Location": "Kortrijk", "Battery": "low", "Permit": "*"}, "DurationSec": 1600, "Cost": 0.007, "Belief": 0.985, "Comfort": 0.98},
+    {"Name": "get_zone_permit_kortrijk", "From": {"Location": "Kortrijk", "Battery": "*", "Permit": "none"}, "To": {"Location": "Kortrijk", "Battery": "*", "Permit": "yes"}, "DurationSec": 300, "Cost": 0.001, "Belief": 0.999, "Comfort": 1.0},
+    {"Name": "buy_permit_brugge", "From": {"Location": "Brugge", "Battery": "*", "Permit": "none"}, "To": {"Location": "Brugge", "Battery": "*", "Permit": "yes"}, "DurationSec": 450, "Cost": 0.002, "Belief": 0.98, "Comfort": 1.0},
+    {"Name": "quick_charge_brugge", "From": {"Location": "Brugge", "Battery": "low", "Permit": "*"}, "To": {"Location": "Brugge", "Battery": "full", "Permit": "*"}, "DurationSec": 600, "Cost": 0.004, "Belief": 0.999, "Comfort": 0.97},
+    {"Name": "topup_brugge", "From": {"Location": "Brugge", "Battery": "mid", "Permit": "*"}, "To": {"Location": "Brugge", "Battery": "full", "Permit": "*"}, "DurationSec": 400, "Cost": 0.003, "Belief": 0.999, "Comfort": 0.98},
+    {"Name": "emergency_charge_kortrijk", "From": {"Location": "Kortrijk", "Battery": "mid", "Permit": "*"}, "To": {"Location": "Kortrijk", "Battery": "full", "Permit": "*"}, "DurationSec": 500, "Cost": 0.003, "Belief": 0.999, "Comfort": 0.95},
+    {"Name": "cross_corridor_brugge_oostende", "From": {"Location": "Brugge", "Battery": "full", "Permit": "yes"}, "To": {"Location": "Oostende", "Battery": "mid", "Permit": "yes"}, "DurationSec": 900, "Cost": 0.004, "Belief": 0.98, "Comfort": 1.0},
+    {"Name": "public_coastline_brugge_oostende", "From": {"Location": "Brugge", "Battery": "mid", "Permit": "*"}, "To": {"Location": "Oostende", "Battery": "low", "Permit": "*"}, "DurationSec": 1300, "Cost": 0.006, "Belief": 0.97, "Comfort": 0.96},
+    {"Name": "public_coastline_brugge_oostende_full", "From": {"Location": "Brugge", "Battery": "full", "Permit": "*"}, "To": {"Location": "Oostende", "Battery": "mid", "Permit": "*"}, "DurationSec": 1200, "Cost": 0.006, "Belief": 0.975, "Comfort": 0.96},
+    {"Name": "direct_corridor_kortrijk_oostende", "From": {"Location": "Kortrijk", "Battery": "full", "Permit": "yes"}, "To": {"Location": "Oostende", "Battery": "mid", "Permit": "yes"}, "DurationSec": 1100, "Cost": 0.009, "Belief": 0.955, "Comfort": 0.92}
+  ],
+  "Expected": {
+    "SelectedFirstAction": "fly_gent_brugge",
+    "SurvivingPlans": 17
+  }
+}

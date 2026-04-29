@@ -1,0 +1,17 @@
+{
+  "CaseName": "alarm_bit_interoperability",
+  "Question": "Can the harbor alarm bit be copied between unlike classical media, and what exactly cannot be done for a superinformation-like token?",
+  "ClassicalMedia": [
+    {"Name": "opticalBeacon", "Variable": "AlarmBit", "ZeroState": "BlueLamp", "OneState": "RedLamp"},
+    {"Name": "relayRegister", "Variable": "AlarmBit", "ZeroState": "LowVoltage", "OneState": "HighVoltage"}
+  ],
+  "Superinformation": {
+    "Name": "quantumToken",
+    "Variable": "PolarizationVariable",
+    "States": ["Horizontal", "Vertical", "Diagonal", "AntiDiagonal"]
+  },
+  "ExpectedCopyTasks": 2,
+  "ExpectedImpossible": ["UniversalClone", "UnrestrictedStateFanOut"],
+  "ExpectedCanDecision": "YES",
+  "ExpectedCantDecision": "NO"
+}
