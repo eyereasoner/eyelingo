@@ -1,0 +1,10 @@
+{
+  "caseName": "gray_code_counter",
+  "question": "Does a 4-bit Gray counter visit all states while flipping exactly one bit at each step?",
+  "bits": 4,
+  "steps": 16,
+  "expected": {
+    "uniqueStates": 16,
+    "wrapHammingDistance": 1
+  }
+}

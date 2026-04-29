@@ -1,0 +1,40 @@
+{
+  "caseName": "isolation_breach_token",
+  "question": "Can an isolation-breach token be prepared, copied, measured, and audited while a specimen seal blocks unrestricted fan-out?",
+  "variable": "BreachBit",
+  "media": [
+    {
+      "name": "doorBeacon",
+      "zero": "SafeGreen",
+      "one": "BreachRed"
+    },
+    {
+      "name": "containmentPLC",
+      "zero": "VoltageLow",
+      "one": "VoltageHigh"
+    },
+    {
+      "name": "nursePager",
+      "zero": "CodeNormal",
+      "one": "CodeBreach"
+    },
+    {
+      "name": "incidentBoard",
+      "zero": "BoardNormal",
+      "one": "BoardBreach"
+    }
+  ],
+  "superinformationMedium": {
+    "name": "specimenSeal",
+    "variable": "SealVariable",
+    "states": [
+      "SealAlpha",
+      "SealBeta",
+      "SealGamma"
+    ]
+  },
+  "expected": {
+    "preparedState": "CodeBreach",
+    "serial": "doorBeacon->containmentPLC->incidentBoard"
+  }
+}

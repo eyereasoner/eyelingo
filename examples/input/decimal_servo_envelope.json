@@ -1,0 +1,15 @@
+{
+  "caseName": "decimal_servo_envelope",
+  "question": "When is a sampled servo guaranteed inside the error tolerance using a decimal pole certificate?",
+  "samplePeriod": 0.02,
+  "timeConstant": 0.06,
+  "exactPoleSymbol": "exp(-1/3)",
+  "poleLower": 0.7165313105,
+  "poleUpper": 0.7165313106,
+  "initialAbsError": 12.5,
+  "tolerance": 0.5,
+  "maxStep": 12,
+  "expected": {
+    "firstSettledStep": 10
+  }
+}

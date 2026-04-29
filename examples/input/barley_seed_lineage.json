@@ -1,0 +1,64 @@
+{
+  "caseName": "barley_seed_lineage",
+  "question": "Which barley seed lineage is evolvable, and which contrast lineages fail required CAN conditions?",
+  "world": {
+    "noDesignLaws": true,
+    "greenhouse": [
+      "warmth",
+      "moisture",
+      "light"
+    ],
+    "selectionFavours": "salt_tolerant"
+  },
+  "lineages": [
+    {
+      "name": "mainLine",
+      "digitalHeredity": true,
+      "repair": true,
+      "dormancyProtection": true,
+      "heritableVariation": true,
+      "variant": "salt_tolerant"
+    },
+    {
+      "name": "analogLine",
+      "digitalHeredity": false,
+      "repair": true,
+      "dormancyProtection": true,
+      "heritableVariation": true,
+      "variant": "salt_tolerant"
+    },
+    {
+      "name": "fragileLine",
+      "digitalHeredity": true,
+      "repair": false,
+      "dormancyProtection": true,
+      "heritableVariation": true,
+      "variant": "salt_tolerant"
+    },
+    {
+      "name": "coatlessLine",
+      "digitalHeredity": true,
+      "repair": true,
+      "dormancyProtection": false,
+      "heritableVariation": true,
+      "variant": "salt_tolerant"
+    },
+    {
+      "name": "staticLine",
+      "digitalHeredity": true,
+      "repair": true,
+      "dormancyProtection": true,
+      "heritableVariation": false,
+      "variant": "salt_tolerant"
+    }
+  ],
+  "expected": {
+    "evolvable": "mainLine",
+    "blocked": [
+      "analogLine",
+      "fragileLine",
+      "coatlessLine",
+      "staticLine"
+    ]
+  }
+}

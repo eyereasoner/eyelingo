@@ -1,0 +1,10 @@
+{
+  "caseName": "euler_identity_certificate",
+  "question": "Does a finite complex calculation certify the Euler identity residual within tolerance?",
+  "angle": 3.141592653589793,
+  "tolerance": 1e-12,
+  "terms": 28,
+  "expected": {
+    "residualBelowTolerance": true
+  }
+}

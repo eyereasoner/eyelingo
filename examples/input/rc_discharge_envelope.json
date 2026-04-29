@@ -1,0 +1,15 @@
+{
+  "caseName": "rc_discharge_envelope",
+  "question": "When is a sampled RC capacitor guaranteed below the voltage tolerance using a double decay certificate?",
+  "samplePeriod": 0.025,
+  "timeConstant": 0.1,
+  "exactDecaySymbol": "exp(-1/4)",
+  "decayLower": 0.778800783,
+  "decayUpper": 0.7788007831,
+  "initialVoltage": 24.0,
+  "tolerance": 1.0,
+  "maxStep": 18,
+  "expected": {
+    "firstSettledStep": 13
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "caseName": "dijkstra_risk_path",
+  "question": "Which clinic-to-hub route has the lowest risk-adjusted score?",
+  "start": "ClinicA",
+  "goal": "HubZ",
+  "riskWeight": 2.0,
+  "edges": [
+    {
+      "from": "ClinicA",
+      "to": "DepotB",
+      "cost": 4.0,
+      "risk": 0.2
+    },
+    {
+      "from": "ClinicA",
+      "to": "DepotC",
+      "cost": 3.0,
+      "risk": 0.65
+    },
+    {
+      "from": "DepotB",
+      "to": "LabD",
+      "cost": 2.0,
+      "risk": 0.15
+    },
+    {
+      "from": "DepotC",
+      "to": "LabD",
+      "cost": 1.0,
+      "risk": 0.75
+    },
+    {
+      "from": "DepotB",
+      "to": "RelayE",
+      "cost": 3.0,
+      "risk": 0.1
+    },
+    {
+      "from": "RelayE",
+      "to": "HubZ",
+      "cost": 4.2,
+      "risk": 0.15
+    },
+    {
+      "from": "LabD",
+      "to": "HubZ",
+      "cost": 4.0,
+      "risk": 0.2
+    },
+    {
+      "from": "DepotC",
+      "to": "HubZ",
+      "cost": 7.0,
+      "risk": 0.15
+    }
+  ],
+  "expected": {
+    "path": [
+      "ClinicA",
+      "DepotB",
+      "LabD",
+      "HubZ"
+    ],
+    "score": 11.1
+  }
+}

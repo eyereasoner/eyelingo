@@ -1,0 +1,35 @@
+{
+  "caseName": "docking_abort_token",
+  "question": "Can a docking-abort token be propagated across unlike classical media while the quantum seal stays non-clonable?",
+  "variable": "AbortBit",
+  "media": [
+    {
+      "name": "abortLamp",
+      "zero": "Green",
+      "one": "Red"
+    },
+    {
+      "name": "flightPLC",
+      "zero": "LowVoltage",
+      "one": "HighVoltage"
+    },
+    {
+      "name": "radioFrame",
+      "zero": "Frame0",
+      "one": "Frame1"
+    },
+    {
+      "name": "auditDisplay",
+      "zero": "DisplayOK",
+      "one": "DisplayABORT"
+    }
+  ],
+  "superinformationMedium": {
+    "name": "quantumSeal",
+    "variable": "SealVariable"
+  },
+  "expected": {
+    "serial": "abortLamp->flightPLC->auditDisplay",
+    "parallelSource": "flightPLC"
+  }
+}
