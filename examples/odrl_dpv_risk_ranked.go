@@ -623,9 +623,9 @@ func noticeDaysFromInformDuty(duties []Duty) (int, bool) {
 
 // renderRankedReport mirrors the N3 `log:outputString` formatting.
 func renderRankedReport(data Dataset, risks []Risk) {
-	fmt.Println("=== Ranked DPV Risk Report ===")
+	fmt.Println("# Ranked DPV Risk Report")
 	fmt.Println()
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("Agreement: %s\n", data.Agreement.Title)
 	fmt.Printf("Profile: %s\n\n", data.Consumer.Title)
 
@@ -647,7 +647,7 @@ func renderRankedReport(data Dataset, risks []Risk) {
 
 func renderReason(data Dataset, risks []Risk) {
 	fmt.Println()
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The agreement policy is scanned for permissions and prohibitions that conflict with the consumer profile needs.")
 	fmt.Println("Each triggered rule derives a risk row with a normalized score, a source clause, and one or more mitigation measures.")
 	fmt.Println("Rows are sorted by descending score so the highest-risk clauses are reviewed first.")
@@ -657,7 +657,7 @@ func renderChecks(data Dataset, risks []Risk) {
 	levelCounts := riskLevelCounts(risks)
 	minScore, maxScore := scoreRange(risks)
 	fmt.Println()
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	fmt.Printf("C1 %s - %d risk rows were derived.\n", checkStatus(len(risks) == 4), len(risks))
 	fmt.Printf("C2 %s - ranked output is in descending score order.\n", checkStatus(rankedDescending(risks)))
 	fmt.Printf("C3 %s - score range is %d to %d.\n", checkStatus(minScore == 70 && maxScore == 100), minScore, maxScore)
@@ -679,7 +679,7 @@ func renderAuditDetails(data Dataset, risks []Risk) {
 	minScore, maxScore := scoreRange(risks)
 
 	fmt.Println()
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("process context : %s (%s -> %s)\n", data.Process.Title, data.Process.ID, data.Process.Source)
 	fmt.Printf("consumer profile : %s needs=%d\n", data.Consumer.ID, len(data.Consumer.Needs))

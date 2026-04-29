@@ -154,9 +154,9 @@ func countChecksOK(checks []Check) int {
 }
 
 func printAnswer(ds Dataset, analysis Analysis) {
-	fmt.Println("=== High Trust RDF Bloom Envelope ===")
+	fmt.Println("# High Trust RDF Bloom Envelope")
 	fmt.Println()
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("Deployment decision : %s for %s.\n", analysis.Decision, ds.Artifact.ID)
 	fmt.Printf("lambda : %.10f\n", analysis.Lambda)
 	fmt.Printf("false-positive envelope : %.9f .. %.9f\n", analysis.FPRateLower, analysis.FPRateUpper)
@@ -167,7 +167,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The canonical graph and the SPO index have the same triple count, so exact membership remains grounded in the graph snapshot.")
 	fmt.Printf("The Bloom prefilter has n=%d triples, m=%d bits, and k=%d hash functions, giving lambda %.10f.\n", ds.Artifact.CanonicalTripleCount, ds.Artifact.BloomBits, ds.Artifact.HashFunctions, analysis.Lambda)
 	fmt.Printf("Instead of asking the engine to know %s exactly, the input carries a decimal interval certificate for exp(-lambda).\n", ds.Artifact.ExactTranscendentalSymbol)
@@ -177,7 +177,7 @@ func printReason(ds Dataset, analysis Analysis) {
 }
 
 func printChecks(analysis Analysis) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range analysis.Checks {
 		status := "FAIL"
 		if check.OK {
@@ -189,7 +189,7 @@ func printChecks(analysis Analysis) {
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

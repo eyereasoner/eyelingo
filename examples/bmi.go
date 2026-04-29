@@ -333,11 +333,11 @@ func renderArcOutput(data Input, result InferenceResult) {
 	d := result.Decision
 	chk := result.Checks
 
-	fmt.Println("=== BMI — ARC-style Body Mass Index example ===")
+	fmt.Println("# BMI — ARC-style Body Mass Index example")
 	fmt.Println()
 
 	// --- Answer ---
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("BMI = %.1f\n", c.BmiRounded)
 	fmt.Printf("Category = %s\n", d.Category)
 	fmt.Printf("At height %.0f cm, a healthy-weight range is about %.1f–%.1f kg (BMI 18.5–24.9).\n",
@@ -345,14 +345,14 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println(result.Reason.Formula)
 	fmt.Println(result.Reason.Calculation)
 	fmt.Printf("The input was %s, so %s\n", data.UnitSystem, result.Reason.Units)
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	fmt.Printf("C1 %s\n", chk.C1InputPositiveSI)
 	fmt.Printf("C2 %s\n", chk.C2HeightSquared)
 	fmt.Printf("C3 %s\n", chk.C3BMIMatchesFormula)
@@ -365,7 +365,7 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Println()
 
 	// --- Go audit details ---
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("unit system : %s\n", data.UnitSystem)
 	fmt.Printf("input weight : %.1f\n", data.Weight)

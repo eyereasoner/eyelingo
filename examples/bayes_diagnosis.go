@@ -249,11 +249,11 @@ func formatEvidence(ev []EvidenceItem) string {
 
 // renderArcOutput prints the answer / reason / check / audit style.
 func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
-	fmt.Println("=== Bayes Diagnosis ===")
+	fmt.Println("# Bayes Diagnosis")
 	fmt.Println()
 
 	// --- Answer ---
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	var best PosteriorResult
 	for _, r := range result.Results {
 		if r.Posterior > best.Posterior {
@@ -270,7 +270,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Printf("Evidence: %s.\n", formatEvidence(data.Evidence))
 	fmt.Printf("Evidence total (normalizing constant) = %.8f.\n", result.Total)
 	fmt.Println("The posterior for each disease is computed as:")
@@ -279,7 +279,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	if checks.PriorsInRange {
 		fmt.Println("C1 OK - all prior probabilities are in [0,1].")
 	} else {
@@ -293,7 +293,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Go audit details ---
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("diseases : %d\n", len(data.Diseases))
 	fmt.Printf("symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))

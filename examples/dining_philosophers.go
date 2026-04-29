@@ -398,7 +398,9 @@ func buildChecks(a Analysis) []Check {
 }
 
 func printAnswer(a Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Dining Philosophers")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Println("The Chandy-Misra dining-philosophers trace completes without conflict.")
 	fmt.Printf("philosophers : %d\n", len(philosophers))
 	fmt.Printf("forks : %d\n", len(forks))
@@ -414,7 +416,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("Each round has three phases. Hungry philosophers first request adjacent")
 	fmt.Println("forks they do not hold. A holder sends a requested fork only when it is")
 	fmt.Println("Dirty, and the receiver gets that fork Clean. After the meal phase, all")
@@ -434,7 +436,7 @@ func printReason(a Analysis) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for i, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -446,7 +448,7 @@ func printChecks(checks []Check) {
 }
 
 func printAudit(a Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("source file : %s\n", sourceFile)
 	fmt.Printf("question : %s\n", a.Question)

@@ -351,9 +351,9 @@ func countChecksOK(checks []Check) int {
 }
 
 func printAnswer(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Digital Product Passport ===")
+	fmt.Println("# Digital Product Passport")
 	fmt.Println()
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("Passport decision : %s for %s %s.\n", analysis.Decision, ds.Product.Model, ds.Product.SerialNumber)
 	fmt.Printf("recycled content : %d%%\n", analysis.RecycledPct)
 	fmt.Printf("lifecycle footprint : %d gCO2e\n", analysis.LifecycleGCO2e)
@@ -365,7 +365,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The passport folds the explicit component list to derive total mass and recycled mass, then computes an integer recycled-content percentage.")
 	fmt.Println("Lifecycle footprint is derived by summing manufacturing, transport, and use-phase emissions.")
 	fmt.Println("The product is repair-friendly because the battery is replaceable and the public passport section exposes both repair and spare-parts documentation.")
@@ -390,7 +390,7 @@ func printReason(ds Dataset, analysis Analysis) {
 }
 
 func printChecks(analysis Analysis) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range analysis.Checks {
 		status := "FAIL"
 		if check.OK {
@@ -402,7 +402,7 @@ func printChecks(analysis Analysis) {
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

@@ -1,0 +1,47 @@
+# Control System — ARC-style control-system example
+
+## Answer
+actuator1 control1 = 39.273462
+actuator2 control1 = 26.080000
+input1 measurement10 = 2.236068 (lessThan branch)
+disturbance2 measurement10 = 45.000000 (notLessThan branch)
+
+## Reason why
+The backward measurement10 rules first normalize measurement1 pairs into scalar measurement10 values.
+For input1, 6 < 11, so sqrt(11 - 6) = 2.236068.
+The first forward rule computes feedforward control from input1 measurement10, the input2 boolean guard, and disturbance1 compensation.
+The second forward rule computes PND feedback control from target/measurement error and the state/output differential error.
+
+## Check
+C1 OK - input1 measurement10 follows the lessThan backward rule.
+C2 OK - disturbance2 measurement10 follows the notLessThan backward rule.
+C3 OK - input2 boolean guard is true for the feedforward rule.
+C4 OK - feedforward control equals product minus log10 compensation.
+C5 OK - feedback error is target minus measurement.
+C6 OK - differential error is state observation minus output measurement.
+C7 OK - nonlinear differential part equals (7.3 / error) times differential error.
+C8 OK - actuator2 control is proportional part plus nonlinear differential part.
+
+## Go audit details
+platform : go1.26.2 linux/amd64
+source example : eyeling examples/control-system.n3
+rules source : eye reasoning/control-system/rules-001.n3
+input1 measurement1 : (6.000000 11.000000)
+input2 measurement2 : true
+input3 measurement3 : 56967.000000
+disturbance1 measurement3 : 35766.000000
+disturbance2 measurement1 : (45.000000 39.000000)
+state1 observation1 : 80.000000
+state2 observation2 : false
+state3 observation3 : 22.000000
+output2 measurement4 : 24.000000
+output2 target2 : 29.000000
+feedforward product part : 43.826932
+feedforward compensation part : 4.553470
+feedback error : 5.000000
+feedback differential error : -2.000000
+feedback proportional part : 29.000000
+feedback nonlinear factor : 1.460000
+feedback nonlinear part : -2.920000
+checks passed : 8/8
+control rules consistent : yes

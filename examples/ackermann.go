@@ -301,7 +301,9 @@ func equals(a, b *big.Int) bool {
 }
 
 func printAnswer(a Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Ackermann")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Printf("The ackermann.n3 test query derives %d Ackermann facts.\n", len(a.Facts))
 	fmt.Println("Computed values:")
 	for _, fact := range a.Facts {
@@ -317,7 +319,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The N3 source defines binary ackermann(x,y) by computing T(x,y+3,2) and subtracting 3. The ternary predicate T uses direct rules for successor, addition, multiplication, and exponentiation, then uses the recursive hyperoperation rule T(x,y,z)=T(x-1,T(x,y-1,z),z) when x>3 and y is non-zero.")
 	fmt.Printf("primitive test queries : %d\n", a.PrimitiveQueries)
 	fmt.Printf("binary reductions : %d\n", a.BinaryReductions)
@@ -335,7 +337,7 @@ func printReason(a Analysis) {
 }
 
 func printChecks(a Analysis) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range a.Checks {
 		status := "FAIL"
 		if check.OK {
@@ -347,7 +349,7 @@ func printChecks(a Analysis) {
 }
 
 func printAudit(a Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", a.Question)
 	fmt.Println("translated source : ackermann.n3")

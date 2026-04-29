@@ -540,7 +540,9 @@ func evaluateChecks(data Dataset, plan Plan, dist [][]int, optimal Plan) Checks 
 }
 
 func renderAnswer(data Dataset, plan Plan) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Crisis Dispatch")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Printf("The exact dispatch plan serves all %d storm incidents with triage score %d.\n", plan.Served, plan.Score)
 	fmt.Printf("case : %s\n", data.CaseName)
 	fmt.Printf("finish minute : %d\n", plan.FinishMinute)
@@ -559,7 +561,7 @@ func renderAnswer(data Dataset, plan Plan) {
 
 func renderReason(data Dataset, plan Plan, routeStats []RouteSearchStats, planStats PlanSearchStats) {
 	fmt.Println()
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("Road facts are first closed into all-pairs shortest travel times. Each responder then enumerates only routes that satisfy capability, privacy, shift, travel-budget, service-time, and deadline constraints. A bit-mask dynamic program combines the nondominated per-responder routes so incidents are never assigned twice.")
 	fmt.Printf("route states enumerated : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.StatesEnumerated }))
 	fmt.Printf("nondominated route masks : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.BestRoutes }))
@@ -577,7 +579,7 @@ func renderReason(data Dataset, plan Plan, routeStats []RouteSearchStats, planSt
 
 func renderChecks(checks Checks) {
 	fmt.Println()
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	rows := []struct {
 		Label string
 		OK    bool
@@ -603,7 +605,7 @@ func renderChecks(checks Checks) {
 
 func renderGoAuditDetails(data Dataset, dist [][]int, routes [][]Route, routeStats []RouteSearchStats, plan Plan, planStats PlanSearchStats, checks Checks) {
 	fmt.Println()
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", data.Question)
 	fmt.Printf("locations : %d\n", len(data.Locations))

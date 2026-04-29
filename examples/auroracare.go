@@ -519,7 +519,9 @@ func buildChecks(ds Dataset, analysis Analysis) []Check {
 }
 
 func printAnswer(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# AuroraCare")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Println(ds.Question)
 	fmt.Printf("permit count : %d\n", analysis.PermitCount)
 	fmt.Printf("deny count : %d\n", analysis.DenyCount)
@@ -536,7 +538,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(analysis Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	for _, result := range analysis.Results {
 		fmt.Printf("%s – %s\n", result.Scenario.Key, result.Scenario.Label)
 		fmt.Printf("  request : role=%s purpose=%s environment=%s categories=%s\n", result.Scenario.Role, result.Scenario.Purpose, result.Scenario.Environment, joinStrings(result.Scenario.Categories, ","))
@@ -557,7 +559,7 @@ func printReason(analysis Analysis) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for i, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -571,7 +573,7 @@ func printChecks(checks []Check) {
 func printAudit(ds Dataset, analysis Analysis) {
 	passed := countPassed(analysis.Checks)
 
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("source file : %s\n", sourceFile)
 	fmt.Printf("case : %s\n", ds.CaseName)

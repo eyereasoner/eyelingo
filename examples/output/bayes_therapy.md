@@ -1,0 +1,61 @@
+# Bayes Therapy Decision Support
+
+## Answer
+The recommended therapy is Paxlovid (utility = 3.585174).
+
+Full posterior distribution:
+  COVID19               posterior = 0.483883  (unnormalized = 0.00928200)
+  Influenza             posterior = 0.427894  (unnormalized = 0.00820800)
+  AllergicRhinitis      posterior = 0.006686  (unnormalized = 0.00012825)
+  BacterialPneumonia    posterior = 0.081538  (unnormalized = 0.00156408)
+
+Therapy utility scores:
+  Paxlovid              expectedSuccess = 0.388517  adverse = 0.10  utility = 3.585174
+  Oseltamivir           expectedSuccess = 0.285141  adverse = 0.08  utility = 2.611410
+  Antihistamine         expectedSuccess = 0.100269  adverse = 0.03  utility = 0.912689
+  Antibiotic            expectedSuccess = 0.110953  adverse = 0.07  utility = 0.899526
+  SupportiveCare        expectedSuccess = 0.291512  adverse = 0.01  utility = 2.885120
+
+## Reason why
+Evidence: Fever=present, DryCough=present, LossOfSmell=absent, Sneezing=absent, ShortBreath=absent.
+Evidence total (normalizing constant) = 0.01918233.
+
+The posterior for each disease is computed as:
+  posterior(d) = prior(d) × ∏ P(symptom|d) / evidenceTotal
+where for an absent symptom the factor is 1 − P(symptom|d).
+
+For each therapy, expected success is:
+  expectedSuccess(t) = Σ_i posterior(i) × successByDisease(i)
+and utility = benefitWeight × expectedSuccess − harmWeight × adverse.
+The recommended therapy is the one with the highest utility.
+
+## Check
+C1 OK - all prior probabilities are in [0,1].
+C2 OK - all conditional probabilities are in [0,1].
+C3 OK - all adverse probabilities are in [0,1].
+C4 OK - all success probabilities are in [0,1].
+C5 OK - evidence total is non‑zero.
+C6 OK - number of diseases matches success list length.
+C7 OK - number of therapies is correct.
+
+## Go audit details
+platform : go1.26.2 linux/amd64
+diseases : 4
+symptoms : 5
+therapies : 5
+evidence items : 5
+evidence total : 0.01918233
+posteriors :
+  COVID19               unnormalized=0.00928200  posterior=0.483883
+  Influenza             unnormalized=0.00820800  posterior=0.427894
+  AllergicRhinitis      unnormalized=0.00012825  posterior=0.006686
+  BacterialPneumonia    unnormalized=0.00156408  posterior=0.081538
+therapy scores :
+  Paxlovid              expSucc=0.388517  adverse=0.10  utility=3.585174
+  Oseltamivir           expSucc=0.285141  adverse=0.08  utility=2.611410
+  Antihistamine         expSucc=0.100269  adverse=0.03  utility=0.912689
+  Antibiotic            expSucc=0.110953  adverse=0.07  utility=0.899526
+  SupportiveCare        expSucc=0.291512  adverse=0.01  utility=2.885120
+best therapy : Paxlovid
+checks passed : 7/7
+recommendation consistent : yes

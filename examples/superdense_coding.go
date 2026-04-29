@@ -221,7 +221,9 @@ func lookup(name string, primitive, composed map[string]Relation) Relation {
 }
 
 func printAnswer(r Result) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Superdense Coding")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Println("Superdense-coding facts that survive GF(2) parity cancellation:")
 	for msg := 0; msg < 4; msg++ {
 		fmt.Printf("  %d dqc:superdense-coding %d\n", msg, r.Survivors[msg])
@@ -230,7 +232,7 @@ func printAnswer(r Result) {
 }
 
 func printReason(r Result) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("Alice and Bob start with |R) = |0,0) + |1,1).")
 	fmt.Println("Alice chooses one relation for the first mobit; Bob applies one joint test.")
 	fmt.Println("The N3 example keeps only answers with odd derivation count, so duplicate")
@@ -258,7 +260,7 @@ func printReason(r Result) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -270,7 +272,7 @@ func printChecks(checks []Check) {
 }
 
 func printAudit(r Result) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("mobit values: %s, %s\n", bit(false), bit(true))
 	fmt.Printf("states      : R=%s S=%s U=%s V=%s\n", formatRelation(r.States["R"]), formatRelation(r.States["S"]), formatRelation(r.States["U"]), formatRelation(r.States["V"]))

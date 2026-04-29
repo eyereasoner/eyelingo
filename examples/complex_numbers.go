@@ -356,7 +356,9 @@ func buildChecks(a Analysis) []Check {
 }
 
 func printAnswer(a Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Complex Numbers")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Println("The complex.n3 test query derives 6 complex-number facts.")
 	fmt.Println("Computed values:")
 	for _, c := range a.ExponentCases {
@@ -372,7 +374,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The N3 source first converts each complex base (x,y) to polar form using r=sqrt(x^2+y^2) and quadrant-sensitive dial rules. It then applies (a+bi)^(c+di)=r^c*e^(-d*theta)*(cos(d*ln(r)+c*theta), sin(d*ln(r)+c*theta)). The asin/acos rules use the same pair of distances from 1+a and 1-a, then recover the imaginary part with ln(F+sqrt(F^2-1)).")
 	fmt.Printf("primitive test facts : %d\n", a.PrimitiveFacts)
 	fmt.Printf("polar derivations : %d\n", a.PolarDerivations)
@@ -393,7 +395,7 @@ func printReason(a Analysis) {
 }
 
 func printChecks(a Analysis) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range a.Checks {
 		status := "FAIL"
 		if check.OK {
@@ -405,7 +407,7 @@ func printChecks(a Analysis) {
 }
 
 func printAudit(a Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", a.Question)
 	fmt.Println("translated source : complex.n3")

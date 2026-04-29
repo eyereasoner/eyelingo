@@ -258,9 +258,9 @@ func allChecksOK(checks []Check) bool {
 }
 
 func printAnswer(ds Dataset, analysis Analysis) {
-	fmt.Println("=== HarborSMR Insight Dispatch ===")
+	fmt.Println("# HarborSMR Insight Dispatch")
 	fmt.Println()
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("%s - %s may use %s to run %s at %d MW from %s to %s.\n",
 		analysis.Decision,
 		ds.Hub.Name,
@@ -274,7 +274,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Printf("The SMR operator exposes a bounded %d MW flexible-export insight for %s, not raw reactor telemetry.\n",
 		ds.Insight.ExportMW,
 		ds.Insight.ScopeEvent,
@@ -292,7 +292,7 @@ func printReason(ds Dataset, analysis Analysis) {
 }
 
 func printChecks(analysis Analysis) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range analysis.Checks {
 		status := "FAIL"
 		if check.OK {
@@ -304,7 +304,7 @@ func printChecks(analysis Analysis) {
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

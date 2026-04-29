@@ -178,17 +178,17 @@ func abbreviated(num *big.Int) string {
 }
 
 func renderArcOutput(target int, seq []*big.Int, cks Checks) {
-	fmt.Println("=== Fibonacci Example (Big) ===")
+	fmt.Println("# Fibonacci Example (Big)")
 	fmt.Println()
 
 	// --- Answer ---
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("The Fibonacci number for index %d is:\n", target)
 	fmt.Println(seq[target].String())
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The Fibonacci sequence is defined by F(0)=0, F(1)=1,")
 	fmt.Println("and F(n)=F(n-1)+F(n-2) for n>=2.")
 	fmt.Println("Arbitrary‑precision arithmetic (math/big) is used to")
@@ -197,7 +197,7 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	if cks.BaseCasesCorrect {
 		fmt.Println("C1 OK - base cases F(0)=0 and F(1)=1 hold.")
 	} else {
@@ -230,7 +230,7 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
 	fmt.Println()
 
 	// --- Go audit details ---
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("max computed index : %d\n", target)
 	fmt.Printf("computed F(%d) length : %d digits\n", target, len(seq[target].String()))

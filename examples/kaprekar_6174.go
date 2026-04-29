@@ -243,7 +243,9 @@ func buildChecks(a Analysis) []Check {
 }
 
 func printAnswer(a Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Kaprekar 6174")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Println("Kaprekar chains that end at 6174 are emitted as :kaprekar facts.")
 	fmt.Printf("total emitted : %d\n", a.Stats.ChainsEmitted)
 	fmt.Printf("omitted 0000 basin : %d\n", a.Stats.ZeroBasinStarts)
@@ -259,7 +261,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("Each start is read as four digits, so 1 is treated as 0001.")
 	fmt.Println("The digits are sorted once, then the optimized identity computes the")
 	fmt.Println("same result as descending-number minus ascending-number.")
@@ -279,7 +281,7 @@ func printReason(a Analysis) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for index, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -291,7 +293,7 @@ func printChecks(checks []Check) {
 }
 
 func printAudit(a Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Println("source file : kaprekar-6174.n3")
 	fmt.Printf("question : %s\n", a.Question)

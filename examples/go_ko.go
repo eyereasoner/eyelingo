@@ -327,11 +327,11 @@ func renderArcOutput(
 	resRecapture MoveResult,
 	cks Checks,
 ) {
-	fmt.Println("=== Go Ko Rule Scenario (Weiqi) ===")
+	fmt.Println("# Go Ko Rule Scenario (Weiqi)")
 	fmt.Println()
 
 	// --- Answer ---
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	// Describe the capture move
 	fmt.Printf("Move 1: %s at (%d,%d) is %s.\n",
 		moveCapture.Player.GoString(), moveCapture.Row, moveCapture.Col,
@@ -353,7 +353,7 @@ func renderArcOutput(
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("In Go, a ko occurs when:")
 	fmt.Println("1. A player captures exactly one stone.")
 	fmt.Println("2. After the capture, the capturing stone is left with exactly one liberty.")
@@ -371,7 +371,7 @@ func renderArcOutput(
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	fmt.Printf("C1 OK - Black stone had exactly 1 liberty before capture (count=%d).\n",
 		cks.BlackStoneLibertyBefore)
 	if cks.WhiteCaptureLegal {
@@ -394,7 +394,7 @@ func renderArcOutput(
 	fmt.Println()
 
 	// --- Go audit details ---
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Println("initial board:")
 	fmt.Print(boardBefore.boardStringFormat())

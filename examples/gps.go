@@ -419,14 +419,14 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	directLabel := data.Routes[routeDirectID].Label
 	alternativeLabel := data.Routes[routeViaKortrijkID].Label
 
-	fmt.Println("=== GPS — Goal driven route planning ===")
+	fmt.Println("# GPS — Goal driven route planning")
 	fmt.Println()
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Println(result.Decision.Outcome)
 	fmt.Printf("Recommended route: %s\n", directLabel)
 
 	fmt.Println()
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("From Gent to Oostende, the planner found two routes in this small map.")
 	fmt.Printf(
 		"The direct route (%s) takes %s seconds at cost %s, with belief %s and comfort %s. ",
@@ -447,7 +447,7 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	fmt.Println("So the direct route is faster, cheaper, more reliable, and slightly more comfortable.")
 
 	fmt.Println()
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	fmt.Println("C1 OK - the direct Gent → Brugge → Oostende route was derived.")
 	fmt.Println("C2 OK - the alternative Gent → Kortrijk → Brugge → Oostende route was derived.")
 	fmt.Println("C3 OK - the recommended route is faster than the alternative.")
@@ -458,7 +458,7 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	// concrete graph search, route comparisons, and runtime context that led to
 	// the recommendation.
 	fmt.Println()
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", data.Question)
 	fmt.Printf("traveller : %s\n", data.Traveller.ID)

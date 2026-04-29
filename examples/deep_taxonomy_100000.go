@@ -222,7 +222,9 @@ func firstMissingN(n bitset, depth int) int {
 }
 
 func renderAnswer(result Result) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Deep Taxonomy 100000")
+	fmt.Println()
+	fmt.Println("## Answer")
 	if result.Facts.Test {
 		fmt.Println("The deep taxonomy test succeeds.")
 		fmt.Printf("Starting fact : :ind a :N0\n")
@@ -243,7 +245,7 @@ func renderAnswer(result Result) {
 }
 
 func renderReason(result Result) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The N3 source is a very deep rule chain. Each taxonomy-step rule consumes the same individual in class Ni and derives the next class N(i+1), plus two side labels I(i+1) and J(i+1). Once N100000 is present, the terminal rule derives A2; once A2 is present, the success rule derives :test :is true.")
 	fmt.Printf("source N3 starting fact assertions : %d\n", sourceFactAssertions)
 	fmt.Printf("source N3 taxonomy-step rules : %d\n", sourceStepRules)
@@ -261,7 +263,7 @@ func renderReason(result Result) {
 }
 
 func renderChecks(checks Checks) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	lines := []struct {
 		ok   bool
 		text string
@@ -288,7 +290,7 @@ func renderChecks(checks Checks) {
 }
 
 func renderAudit(result Result) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Println("source file : deep-taxonomy-100000.n3")
 	fmt.Println("question : Can one starting individual be classified through 100000 taxonomy levels and trigger A2?")

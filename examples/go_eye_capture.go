@@ -311,11 +311,11 @@ func checkCount(c Checks) int {
 // ---------- ARC rendering ----------
 
 func renderArcOutput(initial Board, move Move, result MoveResult, cks Checks) {
-	fmt.Println("=== Go Eye Capture Scenario (Weiqi) ===")
+	fmt.Println("# Go Eye Capture Scenario (Weiqi)")
 	fmt.Println()
 
 	// --- Answer ---
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("The Black group had only a single eye and no outside liberties.\n")
 	fmt.Printf("White plays inside the eye at (%d,%d) and captures the entire group.\n",
 		move.Row, move.Col)
@@ -328,7 +328,7 @@ func renderArcOutput(initial Board, move Move, result MoveResult, cks Checks) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("In Go, a group lives only if it has at least two eyes, or can make them")
 	fmt.Println("eventually. A group with only one eye and no other liberties is dead")
 	fmt.Println("because the opponent can safely play inside that eye.")
@@ -343,7 +343,7 @@ func renderArcOutput(initial Board, move Move, result MoveResult, cks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	if cks.InitialSingleLiberty {
 		fmt.Println("C1 OK - Before the move, the Black group had exactly 1 liberty (the eye).")
 	} else {
@@ -368,7 +368,7 @@ func renderArcOutput(initial Board, move Move, result MoveResult, cks Checks) {
 	fmt.Println()
 
 	// --- Go audit details ---
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("board size : %dx%d\n", initial.Size, initial.Size)
 	fmt.Println("initial board:")

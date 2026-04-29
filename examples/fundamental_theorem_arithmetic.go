@@ -298,7 +298,9 @@ func buildChecks(a Analysis) []Check {
 }
 
 func printAnswer(a Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Fundamental Theorem Arithmetic")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Printf("Primary N3 case: n = %d has prime factors %s.\n", a.Primary.N, a.Primary.FlatString)
 	fmt.Printf("primary prime-power form : %s\n", a.Primary.PrimePowerString)
 	fmt.Printf("sample count : %d\n", len(a.Cases))
@@ -314,7 +316,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("Existence comes from repeated smallest-divisor decomposition.")
 	fmt.Println("At each step, the first divisor found is prime because no smaller")
 	fmt.Println("positive divisor can divide the current number.")
@@ -338,7 +340,7 @@ func printReason(a Analysis) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for i, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -352,7 +354,7 @@ func printChecks(checks []Check) {
 func printAudit(a Analysis) {
 	passed := countPassed(a.Checks)
 
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("source file : %s\n", sourceFile)
 	fmt.Printf("question : %s\n", a.Question)

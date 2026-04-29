@@ -13,10 +13,10 @@ elif [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
 Usage: ./test [--update]
 
 Runs every Go example in examples/, reading examples/input/*.json where used,
-compares stdout with examples/output/*.txt, and prints OK/FAIL with timing.
+compares stdout with examples/output/*.md, and prints OK/FAIL with timing.
 
 Options:
-  --update   regenerate examples/output/*.txt from the current program output
+  --update   regenerate examples/output/*.md from the current program output
 USAGE
   exit 0
 elif [ "${1:-}" != "" ]; then
@@ -75,8 +75,8 @@ normalize() {
 run_example() {
   local file=$1
   local name=${file%.go}
-  local expected="$OUTPUT_DIR/$name.txt"
-  local actual="$TMPDIR/$name.txt"
+  local expected="$OUTPUT_DIR/$name.md"
+  local actual="$TMPDIR/$name.md"
   local actual_norm="$TMPDIR/$name.actual.norm"
   local expected_norm="$TMPDIR/$name.expected.norm"
   local diff_file="$TMPDIR/$name.diff"
@@ -105,7 +105,7 @@ run_example() {
   fi
 
   if [ ! -f "$expected" ]; then
-    printf '%s %-*s %6sms missing %s\n' "$(fail)" "$name_width" "$name" "$elapsed_ms" "examples/output/$name.txt"
+    printf '%s %-*s %6sms missing %s\n' "$(fail)" "$name_width" "$name" "$elapsed_ms" "examples/output/$name.md"
     return 1
   fi
 

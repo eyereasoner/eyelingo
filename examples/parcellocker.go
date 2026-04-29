@@ -360,7 +360,11 @@ func printAnswer(ds Dataset, analysis Analysis) {
 	owner := ds.People[parcel.Owner].Name
 	delegate := ds.People[ds.Authorization.Delegate].Name
 
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Parcel Locker")
+
+	fmt.Println()
+
+	fmt.Println("## Answer")
 	fmt.Println(ds.Question)
 	fmt.Printf("decision : %s\n", primary.Decision)
 	fmt.Printf("release : %s may collect %s for %s from locker %s at %s\n", delegate, parcel.ID, owner, lockerLabel(locker.ID), locker.Site)
@@ -378,7 +382,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	token := ds.Authorization
 	fmt.Printf("token : delegate=%s parcel=%s locker=%s action=%s purpose=%s state=%s reuse=%s\n", token.Delegate, token.Parcel, token.Locker, token.Action, token.Purpose, token.State, token.Reuse)
 	fmt.Printf("privacy : billingAccess=%s redirectAllowed=%s\n", token.BillingAccess, token.RedirectAllowed)
@@ -400,7 +404,7 @@ func printReason(ds Dataset, analysis Analysis) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -412,7 +416,7 @@ func printChecks(checks []Check) {
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("source file : %s\n", sourceFile)
 	fmt.Printf("case : %s\n", ds.CaseName)

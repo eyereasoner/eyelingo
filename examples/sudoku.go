@@ -585,7 +585,9 @@ func yesNo(ok bool) string {
 func printReport(report Report, puzzleName string) {
 	switch report.Status {
 	case "ok":
-		fmt.Println("=== Answer ===")
+		fmt.Println("# Sudoku")
+		fmt.Println()
+		fmt.Println("## Answer")
 		if report.Unique {
 			fmt.Println("The puzzle is solved, and the completed grid is the unique valid Sudoku solution.")
 		} else {
@@ -600,7 +602,7 @@ func printReport(report Report, puzzleName string) {
 		fmt.Print(report.SolutionText)
 		fmt.Println()
 
-		fmt.Println("=== Reason Why ===")
+		fmt.Println("## Reason why")
 		if report.Unique {
 			fmt.Printf("The solver starts from %d clues and fills the remaining %d cells by combining constraint propagation with depth-first search. At each step it chooses the empty cell with the fewest legal digits, places forced singles immediately, and only guesses when more than one candidate remains. Across the search it made %d forced placements and tried %d guesses, visited %d search nodes overall, and backtracked %d times before reaching the completed grid. The solver also confirmed that the solution is unique. Early steps: %s\n\n",
 				report.Givens, report.Blanks, report.ForcedMoves, report.GuessedMoves, report.RecursiveNodes, report.Backtracks, report.MoveSummary)
@@ -609,7 +611,7 @@ func printReport(report Report, puzzleName string) {
 				report.Givens, report.Blanks, report.ForcedMoves, report.GuessedMoves, report.RecursiveNodes, report.Backtracks, report.MoveSummary)
 		}
 
-		fmt.Println("=== Check ===")
+		fmt.Println("## Check")
 		fmt.Printf("C1 %s - every given clue is preserved in the final grid.\n", statusText(report.GivensPreserved))
 		fmt.Printf("C2 %s - the final grid contains only digits 1 through 9, with no blanks left.\n", statusText(report.NoBlanks))
 		fmt.Printf("C3 %s - each row contains every digit exactly once.\n", statusText(report.RowsComplete))
@@ -627,7 +629,7 @@ func printReport(report Report, puzzleName string) {
 		// answer/check sections; this Go audit block exposes concrete runtime facts
 		// that are useful when testing or comparing translations.
 		fmt.Println()
-		fmt.Println("=== Go audit details ===")
+		fmt.Println("## Go audit details")
 		fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 		fmt.Printf("normalized puzzle : %s\n", report.Normalized)
 		fmt.Printf("solution string : %s\n", report.Solution)
@@ -643,41 +645,47 @@ func printReport(report Report, puzzleName string) {
 		fmt.Printf("story consistent : %s\n", yesNo(report.StoryConsistent))
 
 	case "invalid-input":
-		fmt.Println("=== Answer ===")
+		fmt.Println("# Sudoku")
+		fmt.Println()
+		fmt.Println("## Answer")
 		fmt.Println("The supplied puzzle is not well formed and cannot be parsed as a 9×9 Sudoku.")
 		fmt.Println("case : sudoku")
 		fmt.Println()
-		fmt.Println("=== Reason Why ===")
+		fmt.Println("## Reason why")
 		fmt.Println(report.Error)
 		fmt.Println()
-		fmt.Println("=== Check ===")
+		fmt.Println("## Check")
 		fmt.Println("C1 failed - the supplied text does not normalize to exactly 81 legal Sudoku cells.")
 
 	case "illegal-clues":
-		fmt.Println("=== Answer ===")
+		fmt.Println("# Sudoku")
+		fmt.Println()
+		fmt.Println("## Answer")
 		fmt.Println("The puzzle is invalid and cannot be solved as a standard Sudoku.")
 		fmt.Println("case : sudoku")
 		fmt.Println()
 		fmt.Println("Puzzle")
 		fmt.Print(report.PuzzleText)
 		fmt.Println()
-		fmt.Println("=== Reason Why ===")
+		fmt.Println("## Reason why")
 		fmt.Println(report.Error)
 		fmt.Println()
-		fmt.Println("=== Check ===")
+		fmt.Println("## Check")
 		fmt.Println("C1 failed - the given clues already violate Sudoku rules.")
 
 	case "unsatisfiable":
-		fmt.Println("=== Answer ===")
+		fmt.Println("# Sudoku")
+		fmt.Println()
+		fmt.Println("## Answer")
 		fmt.Println("No valid Sudoku solution exists for the supplied puzzle.")
 		fmt.Println("case : sudoku")
 		fmt.Printf("default puzzle : %s\n\n", puzzleName)
 		fmt.Println("Puzzle")
 		fmt.Print(report.PuzzleText)
 		fmt.Println()
-		fmt.Println("=== Reason Why ===")
+		fmt.Println("## Reason why")
 		fmt.Printf("The solver explored %d search nodes with minimum-remaining-values branching and backtracked %d times, but every branch eventually contradicted the row, column, or box constraints.\n\n", report.RecursiveNodes, report.Backtracks)
-		fmt.Println("=== Check ===")
+		fmt.Println("## Check")
 		fmt.Println("C1 OK - the given clues are internally consistent.")
 		fmt.Println("C2 OK - every explored assignment respected row, column, and box legality.")
 		fmt.Println("C3 failed - exhaustive search found no complete legal grid.")

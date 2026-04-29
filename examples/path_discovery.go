@@ -414,7 +414,11 @@ func main() {
 	result := infer(data)
 	checksPassed, checksTotal := countChecks(result.Checks)
 
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Path Discovery")
+
+	fmt.Println()
+
+	fmt.Println("## Answer")
 	fmt.Printf("The path discovery query finds %d air routes with at most %d stopovers.\n", len(result.Routes), maxStopovers)
 	fmt.Printf("from : %s\n", data.label(data.SourceID))
 	fmt.Printf("to : %s\n", data.label(data.DestinationID))
@@ -426,7 +430,7 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The N3 source defines a recursive :route relation over nepo:hasOutboundRouteTo facts. A route can use a direct edge when the current length is within the maximum, or extend through a non-visited intermediate airport and recurse with length+1. The final log:collectAllIn query collects the labels of each airport in every route from the source to the destination.")
 	fmt.Printf("source N3 airport labels : %d\n", sourceGraphAirportLabels)
 	fmt.Printf("source N3 outbound-route facts : %d\n", sourceGraphOutboundFacts)
@@ -449,7 +453,7 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	fmt.Printf("C1 %s - source and destination airport labels are known.\n", status(result.Checks.SourceAndDestinationKnown))
 	fmt.Printf("C2 %s - Ostend-Bruges has one outbound route in the full N3 graph, to Liège Airport.\n", status(result.Checks.FirstHopMatchesN3Facts))
 	fmt.Printf("C3 %s - the discovered route set matches the N3 query answer.\n", status(result.Checks.RouteSetMatchesN3Query))
@@ -461,7 +465,7 @@ func main() {
 	fmt.Printf("C9 %s - route output is sorted deterministically by airport labels.\n", status(result.Checks.RoutesSortedDeterministic))
 
 	fmt.Println()
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", data.Question)
 	fmt.Printf("source airport : %s (%s)\n", data.label(data.SourceID), data.SourceID)

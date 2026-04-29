@@ -549,7 +549,9 @@ func sha256Hex(text string) string {
 // renderArcOutput renders the same answer/check style as the N3 log:outputString
 // section, with a final Go-specific audit detail block.
 func renderArcOutput(data Dataset, result InferenceResult) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Delfour")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Printf("The scanner is allowed to use a neutral shopping insight and recommends %s instead of %s.\n", result.SuggestedAlternative.Name, result.Scanned.Name)
 	fmt.Printf("case : %s\n", data.Case.CaseName)
 	fmt.Printf("decision : %s\n", result.Decision.Outcome)
@@ -557,7 +559,7 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	fmt.Printf("suggested alternative: %s\n", result.SuggestedAlternative.Name)
 
 	fmt.Println()
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The phone desensitizes a diabetes-related household condition into a scoped low-sugar need, wraps it in an expiring Insight + Policy envelope, signs it, and the scanner consumes that envelope for shopping assistance.")
 	fmt.Printf("metric : %s\n", data.Insight.Metric)
 	fmt.Printf("threshold : %s\n", data.Insight.ThresholdDisplay)
@@ -571,7 +573,7 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	fmt.Printf("bus files written : %d\n", data.Case.FilesWritten)
 
 	fmt.Println()
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	fmt.Printf("signature verifies : %s\n", yesNo(result.Checks.SignatureVerifies))
 	fmt.Printf("payload hash matches : %s\n", yesNo(result.Checks.PayloadHashMatches))
 	fmt.Printf("minimization strips sensitive terms: %s\n", yesNo(result.Checks.MinimizationStripsSensitiveTerms))
@@ -594,7 +596,7 @@ func renderGoAuditDetails(data Dataset, result InferenceResult) {
 	sugarDropTenths := result.Scanned.SugarTenths - result.SuggestedAlternative.SugarTenths
 
 	fmt.Println()
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case facts : case=%s requestAction=%s requestPurpose=%s\n", data.Case.CaseName, data.Case.RequestAction, data.Case.RequestPurpose)
 	fmt.Printf("catalog products : %d\n", len(data.Products))

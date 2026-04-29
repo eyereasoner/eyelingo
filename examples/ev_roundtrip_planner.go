@@ -251,9 +251,9 @@ func countChecksOK(checks []Check) int {
 
 func printAnswer(ds Dataset, analysis Analysis) {
 	best := analysis.BestPlan
-	fmt.Println("=== EV Roadtrip Planner ===")
+	fmt.Println("# EV Roadtrip Planner")
 	fmt.Println()
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("Select plan : %s.\n", strings.Join(best.Actions, " -> "))
 	fmt.Printf("route result : %s battery=%s pass=%s\n", best.FinalState.At, best.FinalState.Battery, best.FinalState.Pass)
 	fmt.Printf("duration : %.1f minutes\n", best.Duration)
@@ -267,7 +267,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 
 func printReason(ds Dataset, analysis Analysis) {
 	best := analysis.BestPlan
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Printf("The planner starts with %s at %s, battery=%s, pass=%s, then composes action descriptions until the goal city %s is reached.\n", ds.Vehicle.ID, analysis.Start.At, analysis.Start.Battery, analysis.Start.Pass, ds.Goal.At)
 	fmt.Printf("Duration and cost are summed across each candidate; belief and comfort are multiplied, matching the N3 planner pattern.\n")
 	fmt.Printf("The selected plan is the fastest acceptable candidate under belief > %.2f, cost < %.3f, and duration < %.1f.\n", ds.Thresholds.MinBelief, ds.Thresholds.MaxCost, ds.Thresholds.MaxDuration)
@@ -294,7 +294,7 @@ func printReason(ds Dataset, analysis Analysis) {
 }
 
 func printChecks(analysis Analysis) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range analysis.Checks {
 		status := "FAIL"
 		if check.OK {
@@ -307,7 +307,7 @@ func printChecks(analysis Analysis) {
 
 func printAudit(ds Dataset, analysis Analysis) {
 	best := analysis.BestPlan
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

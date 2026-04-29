@@ -705,7 +705,9 @@ func (a Analysis) report(id string) LotReport {
 }
 
 func printAnswer(ds Dataset, a Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Cold Chain Release")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Printf("Release decision : %d of %d candidate lots can ship.\n", len(a.ReleaseLots), len(a.LotReports))
 	fmt.Printf("Safe release lots : %s\n", reportIDs(a.ReleaseLots))
 	fmt.Printf("Quarantined lots : %s\n", reportIDs(a.QuarantineLots))
@@ -731,7 +733,7 @@ func printAnswer(ds Dataset, a Analysis) {
 }
 
 func printReason(ds Dataset, a Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The dataset is treated as linked facts: parent/child lot relationships create a lineage closure; recalled ancestors contaminate descendants; custody rows are verified as a SHA-256 hash chain; temperature segments are checked against the 2-8 °C policy; only releasable lots enter an exact memoized allocation search.")
 	fmt.Printf("lineage parent facts : %d\n", a.ParentFacts)
 	fmt.Printf("lineage closure facts : %d ancestor links\n", a.ClosureFacts)
@@ -752,7 +754,7 @@ func printReason(ds Dataset, a Analysis) {
 }
 
 func printChecks(a Analysis) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range a.Checks {
 		status := "FAIL"
 		if check.OK {
@@ -764,7 +766,7 @@ func printChecks(a Analysis) {
 }
 
 func printAudit(ds Dataset, a Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

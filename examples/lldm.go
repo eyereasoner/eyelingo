@@ -244,11 +244,11 @@ func checkCount(c Checks) int {
 // ---------- rendering ----------
 
 func renderArcOutput(res InferenceResult, checks Checks) {
-	fmt.Println("=== LLD — Leg Length Discrepancy Measurement ===")
+	fmt.Println("# LLD — Leg Length Discrepancy Measurement")
 	fmt.Println()
 
 	// --- Answer ---
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	if res.Alarm {
 		fmt.Printf("LLD Alarm = TRUE  (discrepancy dCm = %.6f, threshold ±1.25)\n", res.D.D)
 	} else {
@@ -265,7 +265,7 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The measurement points p1-p4 define two parallel lines L1 and L3/L4.")
 	fmt.Println("L1 is defined by p1 and p2; L3 passes through p3; L4 passes through p4.")
 	fmt.Println("L3 and L4 are perpendicular to L1.  Intersection points p5 (L1∩L3)")
@@ -276,7 +276,7 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	if checks.Perpendicular {
 		fmt.Println("C1 OK - L1 is perpendicular to L3 and L4 (slopes product ≈ -1).")
 	} else {
@@ -305,7 +305,7 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Go audit details ---
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("input points : p1(%.1f, %.1f) p2(%.1f, %.1f) p3(%.1f, %.1f) p4(%.1f, %.1f)\n",
 		res.Input.P1x, res.Input.P1y,

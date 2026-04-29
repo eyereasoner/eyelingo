@@ -479,7 +479,9 @@ func isLowestEligible(recommended PolicyPackage, candidates []Candidate) bool {
 }
 
 func printAnswer(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Flandor")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Println("Name: Flandor")
 	fmt.Printf("Region: %s\n", ds.Region.Name)
 	fmt.Printf("Metric: %s\n", ds.Insight.Metric)
@@ -502,7 +504,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Printf("question : %s\n", ds.Question)
 	fmt.Printf("aggregate : observedFirms=%d level=%s containsFirmNames=%s containsPayrollRows=%s\n", ds.Signals.ObservedFirms, ds.Signals.AggregationLevel, yesNo(ds.Signals.ContainsFirmNames), yesNo(ds.Signals.ContainsPayrollRows))
 	fmt.Println()
@@ -539,7 +541,7 @@ func printReason(ds Dataset, analysis Analysis) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -551,7 +553,7 @@ func printChecks(checks []Check) {
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("source file : %s\n", sourceFile)
 	fmt.Printf("case : %s\n", ds.CaseName)

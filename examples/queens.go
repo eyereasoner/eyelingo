@@ -174,7 +174,7 @@ func printBoard(board []int) {
 
 func renderReason(n int) {
 	fmt.Println()
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Printf("The solver places one queen per row on a %dx%d board.\n", n, n)
 	fmt.Println("At each row it uses bit masks for occupied columns and both diagonal directions to enumerate only safe candidate columns.")
 	fmt.Println("Counting continues after the printed solution limit, so the total solution count remains complete.")
@@ -182,7 +182,7 @@ func renderReason(n int) {
 
 func renderChecks(n int, count uint64, stats SolveStats) {
 	fmt.Println()
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	fmt.Printf("C1 %s - search reached depth %d.\n", statusWord(stats.MaxDepth == n || n == 0), stats.MaxDepth)
 	fmt.Printf("C2 %s - first solution places one queen in each row.\n", statusWord(len(stats.FirstSolution) == n || count == 0))
 	fmt.Printf("C3 %s - first solution columns are unique.\n", statusWord(columnsUnique(stats.FirstSolution)))
@@ -236,7 +236,7 @@ func statusWord(ok bool) string {
 // than part of the mathematical N-Queens answer.
 func renderGoAuditDetails(n int, maxPrint int, count uint64, stats SolveStats) {
 	fmt.Println()
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("normalized board size : %d\n", n)
 	fmt.Printf("normalized max print : %d\n", maxPrint)
@@ -308,9 +308,9 @@ func main() {
 		maxPrint = parsed
 	}
 
-	fmt.Println("=== 8-Queens ===")
+	fmt.Println("# 8-Queens")
 	fmt.Println()
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("Solving %d-Queens...\n", n)
 	fmt.Printf("Printing at most %d solution(s).\n", maxPrint)
 	fmt.Println()

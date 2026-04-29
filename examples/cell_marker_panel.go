@@ -537,7 +537,9 @@ func recomputeAnchorMargin(data Dataset, markers []Marker, panel Panel) int {
 }
 
 func renderAnswer(data Dataset, markers []Marker, panel Panel, pairs []Pair) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Cell Marker Panel")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Printf("The exact marker panel uses %d genes and separates all %d cell-type pairs.\n", len(panel.MarkerIndexes), len(pairs))
 	fmt.Printf("case : %s\n", data.CaseName)
 	fmt.Printf("positive anchors : %d/%d cell populations\n", bits.OnesCount16(panel.AnchorMask), len(data.CellTypes))
@@ -557,7 +559,7 @@ func renderAnswer(data Dataset, markers []Marker, panel Panel, pairs []Pair) {
 
 func renderReason(data Dataset, markers []Marker, dominated []DominatedMarker, panel Panel, pairs []Pair, stats SearchStats, minimalSubsets int) {
 	fmt.Println()
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("Candidate genes are first filtered by assay policy: housekeeping, ribosomal, mitochondrial-stress, and ambient-RNA features cannot be used as lineage markers. Each remaining gene then derives two facts: which cell-type pairs it separates by the expression-gap threshold, and which cell type, if any, it positively anchors with low off-target signal. Dominated backup markers are removed before an exact branch-and-bound search solves the paired set-cover goal.")
 	fmt.Printf("cell populations : %d\n", len(data.CellTypes))
 	fmt.Printf("cell-type pairs : %d\n", len(pairs))
@@ -588,7 +590,7 @@ func renderReason(data Dataset, markers []Marker, dominated []DominatedMarker, p
 
 func renderChecks(checks Checks) {
 	fmt.Println()
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	items := []struct {
 		OK   bool
 		Text string
@@ -614,7 +616,7 @@ func renderChecks(checks Checks) {
 
 func renderAudit(data Dataset, markers []Marker, dominated []DominatedMarker, panel Panel, pairs []Pair, stats SearchStats, checks Checks) {
 	fmt.Println()
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", data.Question)
 	fmt.Printf("cell populations : %d\n", len(data.CellTypes))

@@ -445,7 +445,9 @@ func isLowestEligible(recommended SupportPackage, candidates []Candidate) bool {
 }
 
 func printAnswer(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Calidor")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Println("Name: Calidor")
 	fmt.Printf("Municipality: %s\n", ds.Insight.Municipality)
 	fmt.Printf("Metric: %s\n", ds.Insight.Metric)
@@ -464,7 +466,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Printf("question : %s\n", ds.Question)
 	fmt.Println("The gateway desensitizes local heat, vulnerability, and prepaid-energy stress into an expiring municipal support insight.")
 	fmt.Printf("metric : %s\n", ds.Insight.Metric)
@@ -505,7 +507,7 @@ func printReason(ds Dataset, analysis Analysis) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	for _, check := range checks {
 		fmt.Printf("%s %s - %s\n", check.Label, okText(check.OK), check.Text)
 	}
@@ -513,7 +515,7 @@ func printChecks(checks []Check) {
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("source file : %s\n", sourceFile)
 	fmt.Printf("case : %s\n", ds.CaseName)

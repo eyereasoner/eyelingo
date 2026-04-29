@@ -260,13 +260,15 @@ func renderArcOutput(d Dataset, path []Flight, cost float64, checks Checks) {
 	route := formatRoute(path, d.Labels)
 
 	// ========== Answer ==========
-	fmt.Println("=== Answer ===")
+	fmt.Println("# Brussels Beijing")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Printf("Cheapest route from %s to %s (avoiding Turkish Airlines) costs €%.0f:\n%s\n",
 		d.Labels[d.StartCity], d.Labels[d.EndCity], cost, route)
 	fmt.Println()
 
 	// ========== Reason Why ==========
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("Dijkstra’s algorithm finds the minimum‑cost path in the flight network.")
 	fmt.Println("The direct flight operated by Turkish Airlines is avoided, so the optimal")
 	fmt.Println("choice goes through Frankfurt on Lufthansa, which is both cheaper and")
@@ -274,7 +276,7 @@ func renderArcOutput(d Dataset, path []Flight, cost float64, checks Checks) {
 	fmt.Println()
 
 	// ========== Check ==========
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	if checks.C1PathExists {
 		fmt.Println("C1 OK - a path exists between Brussels and Beijing.")
 	} else {
@@ -303,7 +305,7 @@ func renderArcOutput(d Dataset, path []Flight, cost float64, checks Checks) {
 	fmt.Println()
 
 	// ========== Go audit details ==========
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("start city : %s\n", d.Labels[d.StartCity])
 	fmt.Printf("end city   : %s\n", d.Labels[d.EndCity])

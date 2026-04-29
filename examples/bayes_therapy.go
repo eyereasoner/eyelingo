@@ -404,11 +404,11 @@ func checkCount(c Checks) int {
 // ---------- rendering ----------
 
 func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
-	fmt.Println("=== Bayes Therapy Decision Support ===")
+	fmt.Println("# Bayes Therapy Decision Support")
 	fmt.Println()
 
 	// --- Answer ---
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	fmt.Printf("The recommended therapy is %s (utility = %.6f).\n",
 		result.BestTherapy,
 		therapyUtility(result.TherapyResults, result.BestTherapy))
@@ -427,7 +427,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Printf("Evidence: %s.\n", formatEvidence(data.Evidence))
 	fmt.Printf("Evidence total (normalizing constant) = %.8f.\n", result.EvidenceTotal)
 	fmt.Println()
@@ -442,7 +442,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	if checks.PriorsInRange {
 		fmt.Println("C1 OK - all prior probabilities are in [0,1].")
 	} else {
@@ -481,7 +481,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Go audit details ---
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("diseases : %d\n", len(data.Diseases))
 	fmt.Printf("symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))

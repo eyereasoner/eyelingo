@@ -325,11 +325,11 @@ func checkCount(cks Checks) int {
 
 func renderArcOutput(scenario Scenario, result ResultAfterMove, cks Checks) {
 	move := scenario.Move
-	fmt.Println("=== Go Capture Scenario (Weiqi) ===")
+	fmt.Println("# Go Capture Scenario (Weiqi)")
 	fmt.Println()
 
 	// --- Answer ---
-	fmt.Println("=== Answer ===")
+	fmt.Println("## Answer")
 	if result.Legal {
 		fmt.Printf("The move %s at (%d,%d) is legal and captures %d opponent stone(s).\n",
 			move.Player.GoString(), move.Row, move.Col, len(result.Captured))
@@ -346,7 +346,7 @@ func renderArcOutput(scenario Scenario, result ResultAfterMove, cks Checks) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("In Go, a stone lives if it belongs to a group with at least one liberty (empty adjacent intersection).")
 	fmt.Println("When a player places a stone, any opponent group that loses its last liberty is immediately captured and removed.")
 	fmt.Printf("Before the move, the Black stone at (1,1) had only one liberty at (1,0) – the other three were occupied by White.\n")
@@ -355,7 +355,7 @@ func renderArcOutput(scenario Scenario, result ResultAfterMove, cks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	fmt.Printf("C1 OK - Black stone had exactly 1 liberty before the move (count=%d).\n", cks.LibertyBeforeMove)
 	if cks.LibertyAfterMove == 0 {
 		fmt.Println("C2 OK - After capture, the Black stone is gone (0 liberties).")
@@ -380,7 +380,7 @@ func renderArcOutput(scenario Scenario, result ResultAfterMove, cks Checks) {
 	fmt.Println()
 
 	// --- Go audit details ---
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("board size : %dx%d\n", scenario.Initial.Size, scenario.Initial.Size)
 	fmt.Printf("move : %s (%d,%d)\n", move.Player.GoString(), move.Row, move.Col)

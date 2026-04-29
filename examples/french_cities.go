@@ -197,18 +197,20 @@ func renderArcOutput(data Dataset, canReach map[string]bool, checks Checks) {
 	}
 
 	// === Answer ===
-	fmt.Println("=== Answer ===")
+	fmt.Println("# French Cities")
+	fmt.Println()
+	fmt.Println("## Answer")
 	fmt.Printf("Four cities in this small network can reach Nantes: %s.\n",
 		strings.Join(reachableNames, ", "))
 	fmt.Println()
 
 	// === Reason Why ===
-	fmt.Println("=== Reason Why ===")
+	fmt.Println("## Reason why")
 	fmt.Println("The original example says that every :oneway link is also a :path, and that :path is transitive. So once Angers can reach Nantes directly, longer routes can be built by chaining earlier links. Angers reaches Nantes directly. Le Mans reaches Nantes through Angers. Chartres reaches Nantes through Le Mans and Angers. Paris reaches Nantes through Chartres, Le Mans, and Angers.")
 	fmt.Println()
 
 	// === Check ===
-	fmt.Println("=== Check ===")
+	fmt.Println("## Check")
 	if checks.C1AngersDirect {
 		fmt.Println("C1 OK - Angers has a direct one-way connection to Nantes.")
 	} else {
@@ -237,7 +239,7 @@ func renderArcOutput(data Dataset, canReach map[string]bool, checks Checks) {
 	fmt.Println()
 
 	// === Go audit details ===
-	fmt.Println("=== Go audit details ===")
+	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("total edges (one-way roads) : %d\n", len(data.Edges))
 	fmt.Println("one-way connections:")
