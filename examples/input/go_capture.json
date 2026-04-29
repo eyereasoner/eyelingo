@@ -1,0 +1,48 @@
+{
+  "Initial": {
+    "Size": 5,
+    "Grid": [
+      [
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "Move": {
+    "Player": 2,
+    "Row": 1,
+    "Col": 0
+  },
+  "Expected": "White captures the Black stone at (1,1) by placing at its last liberty (1,0)."
+}

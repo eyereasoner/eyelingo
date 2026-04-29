@@ -1,0 +1,103 @@
+{
+  "Question": "Evaluate the complex-number facts queried by complex.n3.",
+  "Exponents": [
+    {
+      "ID": "C1",
+      "Expression": "((-1 0) (0.5 0)) complex:exponentiation ?C1",
+      "Base": {
+        "Re": -1,
+        "Im": 0
+      },
+      "Power": {
+        "Re": 0.5,
+        "Im": 0
+      },
+      "Expected": {
+        "Re": 0,
+        "Im": 1
+      },
+      "Reason": "the polar angle of -1+0i is pi, so the half power rotates to pi/2"
+    },
+    {
+      "ID": "C2",
+      "Expression": "((e 0) (0 pi)) complex:exponentiation ?C2",
+      "Base": {
+        "Re": 2.718281828459045,
+        "Im": 0
+      },
+      "Power": {
+        "Re": 0,
+        "Im": 3.141592653589793
+      },
+      "Expected": {
+        "Re": -1,
+        "Im": 0
+      },
+      "Reason": "Euler's identity falls out of the exponent rule because ln(e)=1"
+    },
+    {
+      "ID": "C3",
+      "Expression": "((0 1) (0 1)) complex:exponentiation ?C3",
+      "Base": {
+        "Re": 0,
+        "Im": 1
+      },
+      "Power": {
+        "Re": 0,
+        "Im": 1
+      },
+      "Expected": {
+        "Re": 0.20787957635076193,
+        "Im": 0
+      },
+      "Reason": "i has polar angle pi/2, so i^i becomes exp(-pi/2)"
+    },
+    {
+      "ID": "C4",
+      "Expression": "((e 0) (-pi/2 0)) complex:exponentiation ?C4",
+      "Base": {
+        "Re": 2.718281828459045,
+        "Im": 0
+      },
+      "Power": {
+        "Re": -1.5707963267948966,
+        "Im": 0
+      },
+      "Expected": {
+        "Re": 0.20787957635076193,
+        "Im": 0
+      },
+      "Reason": "a real exponent of e gives the same exp(-pi/2) value as i^i"
+    }
+  ],
+  "Inverses": [
+    {
+      "ID": "C5",
+      "Operation": "asin",
+      "Expression": "(2 0) complex:asin ?C5",
+      "Input": {
+        "Re": 2,
+        "Im": 0
+      },
+      "Expected": {
+        "Re": 1.5707963267948966,
+        "Im": 1.3169578969248166
+      },
+      "Reason": "the real input is outside [-1,1], so the inverse sine has a positive imaginary part"
+    },
+    {
+      "ID": "C6",
+      "Operation": "acos",
+      "Expression": "(2 0) complex:acos ?C6",
+      "Input": {
+        "Re": 2,
+        "Im": 0
+      },
+      "Expected": {
+        "Re": 0,
+        "Im": -1.3169578969248166
+      },
+      "Reason": "the companion inverse cosine carries the opposite imaginary part"
+    }
+  ]
+}

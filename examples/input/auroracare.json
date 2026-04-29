@@ -1,0 +1,248 @@
+{
+  "CaseName": "auroracare",
+  "Question": "For each AuroraCare scenario, should the PDP permit or deny the requested use of health data, and why?",
+  "Policies": [
+    {
+      "ID": "policy_primary",
+      "UID": "urn:policy:primary-care-001",
+      "Name": "primary care",
+      "Kind": "permission",
+      "AllowedPurposes": [
+        "PrimaryCareManagement",
+        "PatientRemoteMonitoring"
+      ],
+      "ProhibitedPurposes": null,
+      "RequiredRole": "clinician",
+      "RequiredEnvironment": "",
+      "RequiredTOM": "",
+      "AllowAnyCategories": [
+        "PATIENT_SUMMARY",
+        "LAB_RESULTS"
+      ],
+      "RequireAllCategories": null,
+      "Duties": null
+    },
+    {
+      "ID": "policy_qi",
+      "UID": "urn:policy:qi-2025-aurora",
+      "Name": "quality improvement",
+      "Kind": "permission",
+      "AllowedPurposes": [
+        "EnsureQualitySafetyHealthcare"
+      ],
+      "ProhibitedPurposes": null,
+      "RequiredRole": "",
+      "RequiredEnvironment": "secure_env",
+      "RequiredTOM": "",
+      "AllowAnyCategories": null,
+      "RequireAllCategories": [
+        "LAB_RESULTS",
+        "PATIENT_SUMMARY"
+      ],
+      "Duties": [
+        "requireConsent",
+        "noExfiltration"
+      ]
+    },
+    {
+      "ID": "policy_research",
+      "UID": "urn:policy:research-aurora-diabetes",
+      "Name": "diabetes research",
+      "Kind": "permission",
+      "AllowedPurposes": [
+        "HealthcareScientificResearch"
+      ],
+      "ProhibitedPurposes": null,
+      "RequiredRole": "",
+      "RequiredEnvironment": "secure_env",
+      "RequiredTOM": "Anonymisation",
+      "AllowAnyCategories": [
+        "LAB_RESULTS",
+        "PATIENT_SUMMARY",
+        "IMAGING_REPORT"
+      ],
+      "RequireAllCategories": null,
+      "Duties": [
+        "annualOutcomeReport",
+        "noReidentification",
+        "noExfiltration"
+      ]
+    },
+    {
+      "ID": "policy_deny_insurance",
+      "UID": "urn:policy:deny-insurance",
+      "Name": "insurance prohibition",
+      "Kind": "prohibition",
+      "AllowedPurposes": null,
+      "ProhibitedPurposes": [
+        "InsuranceManagement"
+      ],
+      "RequiredRole": "",
+      "RequiredEnvironment": "",
+      "RequiredTOM": "",
+      "AllowAnyCategories": null,
+      "RequireAllCategories": null,
+      "Duties": null
+    }
+  ],
+  "Subjects": {
+    "ruben": {
+      "ID": "ruben",
+      "Label": "Ruben",
+      "ConsentAllow": [
+        "HealthcareScientificResearch"
+      ],
+      "ConsentDeny": [
+        "TrainTestAndEvaluateAISystemsAlgorithms"
+      ]
+    }
+  },
+  "Requesters": {
+    "clinician_alba": {
+      "ID": "clinician_alba",
+      "Label": "Clinician Alba",
+      "LinkedTo": "ruben",
+      "DefaultRole": "clinician"
+    },
+    "gp_ruben": {
+      "ID": "gp_ruben",
+      "Label": "Ruben's GP",
+      "LinkedTo": "ruben",
+      "DefaultRole": "clinician"
+    },
+    "insurer_bot": {
+      "ID": "insurer_bot",
+      "Label": "Insurance bot",
+      "LinkedTo": "",
+      "DefaultRole": "data_user"
+    },
+    "ml_ops": {
+      "ID": "ml_ops",
+      "Label": "ML operations",
+      "LinkedTo": "",
+      "DefaultRole": "data_user"
+    },
+    "qi_analyst": {
+      "ID": "qi_analyst",
+      "Label": "QI analyst",
+      "LinkedTo": "",
+      "DefaultRole": "data_user"
+    },
+    "researcher_aurora": {
+      "ID": "researcher_aurora",
+      "Label": "AuroraCare researcher",
+      "LinkedTo": "",
+      "DefaultRole": "data_user"
+    }
+  },
+  "Scenarios": [
+    {
+      "Key": "A",
+      "Label": "Primary care visit",
+      "Description": "Clinician in the patient's care team accessing the patient summary for primary care management.",
+      "RequesterID": "clinician_alba",
+      "Role": "clinician",
+      "SubjectID": "ruben",
+      "Purpose": "PrimaryCareManagement",
+      "Environment": "api_gateway",
+      "TOM": "",
+      "Categories": [
+        "PATIENT_SUMMARY"
+      ],
+      "Expected": "PERMIT"
+    },
+    {
+      "Key": "B",
+      "Label": "Quality improvement (in scope)",
+      "Description": "QI analyst using lab results + summary in a secure environment.",
+      "RequesterID": "qi_analyst",
+      "Role": "data_user",
+      "SubjectID": "ruben",
+      "Purpose": "EnsureQualitySafetyHealthcare",
+      "Environment": "secure_env",
+      "TOM": "",
+      "Categories": [
+        "LAB_RESULTS",
+        "PATIENT_SUMMARY"
+      ],
+      "Expected": "PERMIT"
+    },
+    {
+      "Key": "C",
+      "Label": "Quality improvement (out of scope)",
+      "Description": "QI analyst with only lab results; policy expects labs + summary.",
+      "RequesterID": "qi_analyst",
+      "Role": "data_user",
+      "SubjectID": "ruben",
+      "Purpose": "EnsureQualitySafetyHealthcare",
+      "Environment": "secure_env",
+      "TOM": "",
+      "Categories": [
+        "LAB_RESULTS"
+      ],
+      "Expected": "DENY"
+    },
+    {
+      "Key": "D",
+      "Label": "Insurance management",
+      "Description": "Insurance bot attempting to use health data for insurance management.",
+      "RequesterID": "insurer_bot",
+      "Role": "data_user",
+      "SubjectID": "ruben",
+      "Purpose": "InsuranceManagement",
+      "Environment": "secure_env",
+      "TOM": "",
+      "Categories": [
+        "PATIENT_SUMMARY"
+      ],
+      "Expected": "DENY"
+    },
+    {
+      "Key": "E",
+      "Label": "GP checks labs",
+      "Description": "GP for the same patient checking lab results via the API gateway.",
+      "RequesterID": "gp_ruben",
+      "Role": "clinician",
+      "SubjectID": "ruben",
+      "Purpose": "PrimaryCareManagement",
+      "Environment": "api_gateway",
+      "TOM": "",
+      "Categories": [
+        "LAB_RESULTS"
+      ],
+      "Expected": "PERMIT"
+    },
+    {
+      "Key": "F",
+      "Label": "Research on anonymised dataset",
+      "Description": "Researcher using anonymised labs + summary in a secure environment, with opt-in.",
+      "RequesterID": "researcher_aurora",
+      "Role": "data_user",
+      "SubjectID": "ruben",
+      "Purpose": "HealthcareScientificResearch",
+      "Environment": "secure_env",
+      "TOM": "Anonymisation",
+      "Categories": [
+        "PATIENT_SUMMARY",
+        "LAB_RESULTS"
+      ],
+      "Expected": "PERMIT"
+    },
+    {
+      "Key": "G",
+      "Label": "AI training (opt-out)",
+      "Description": "Data user wants to train AI, but the subject opted out of AI training.",
+      "RequesterID": "ml_ops",
+      "Role": "data_user",
+      "SubjectID": "ruben",
+      "Purpose": "TrainTestAndEvaluateAISystemsAlgorithms",
+      "Environment": "secure_env",
+      "TOM": "",
+      "Categories": [
+        "PATIENT_SUMMARY",
+        "LAB_RESULTS"
+      ],
+      "Expected": "DENY"
+    }
+  ]
+}

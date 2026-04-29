@@ -1,0 +1,126 @@
+{
+  "Diseases": [
+    {
+      "Name": "COVID19",
+      "Prior": 0.05
+    },
+    {
+      "Name": "Influenza",
+      "Prior": 0.03
+    },
+    {
+      "Name": "AllergicRhinitis",
+      "Prior": 0.1
+    },
+    {
+      "Name": "BacterialPneumonia",
+      "Prior": 0.01
+    }
+  ],
+  "Therapies": [
+    {
+      "Name": "Paxlovid",
+      "SuccessByDisease": [
+        0.75,
+        0.05,
+        0.02,
+        0.05
+      ],
+      "Adverse": 0.1
+    },
+    {
+      "Name": "Oseltamivir",
+      "SuccessByDisease": [
+        0.05,
+        0.6,
+        0.02,
+        0.05
+      ],
+      "Adverse": 0.08
+    },
+    {
+      "Name": "Antihistamine",
+      "SuccessByDisease": [
+        0.1,
+        0.1,
+        0.75,
+        0.05
+      ],
+      "Adverse": 0.03
+    },
+    {
+      "Name": "Antibiotic",
+      "SuccessByDisease": [
+        0.05,
+        0.05,
+        0.02,
+        0.8
+      ],
+      "Adverse": 0.07
+    },
+    {
+      "Name": "SupportiveCare",
+      "SuccessByDisease": [
+        0.3,
+        0.3,
+        0.25,
+        0.2
+      ],
+      "Adverse": 0.01
+    }
+  ],
+  "ProbGiven": {
+    "AllergicRhinitis": {
+      "DryCough": 0.15,
+      "Fever": 0.05,
+      "LossOfSmell": 0.1,
+      "ShortBreath": 0.05,
+      "Sneezing": 0.8
+    },
+    "BacterialPneumonia": {
+      "DryCough": 0.6,
+      "Fever": 0.7,
+      "LossOfSmell": 0.02,
+      "ShortBreath": 0.6,
+      "Sneezing": 0.05
+    },
+    "COVID19": {
+      "DryCough": 0.65,
+      "Fever": 0.7,
+      "LossOfSmell": 0.4,
+      "ShortBreath": 0.2,
+      "Sneezing": 0.15
+    },
+    "Influenza": {
+      "DryCough": 0.5,
+      "Fever": 0.8,
+      "LossOfSmell": 0.05,
+      "ShortBreath": 0.1,
+      "Sneezing": 0.2
+    }
+  },
+  "Evidence": [
+    {
+      "Symptom": "Fever",
+      "Present": true
+    },
+    {
+      "Symptom": "DryCough",
+      "Present": true
+    },
+    {
+      "Symptom": "LossOfSmell",
+      "Present": false
+    },
+    {
+      "Symptom": "Sneezing",
+      "Present": false
+    },
+    {
+      "Symptom": "ShortBreath",
+      "Present": false
+    }
+  ],
+  "BenefitWeight": 10,
+  "HarmWeight": 3
+}

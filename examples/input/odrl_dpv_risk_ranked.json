@@ -1,0 +1,119 @@
+{
+  "Consumer": {
+    "ID": ":ConsumerExample",
+    "Title": "Example consumer profile",
+    "Needs": {
+      ":Need_ChangeOnlyWithPriorNotice": {
+        "ID": ":Need_ChangeOnlyWithPriorNotice",
+        "Importance": 15,
+        "MinNoticeDays": 14,
+        "Description": "Agreement may change only with prior notice (>= 14 days)."
+      },
+      ":Need_DataCannotBeRemoved": {
+        "ID": ":Need_DataCannotBeRemoved",
+        "Importance": 20,
+        "MinNoticeDays": 0,
+        "Description": "Provider must not remove the consumer account/data."
+      },
+      ":Need_DataPortability": {
+        "ID": ":Need_DataPortability",
+        "Importance": 10,
+        "MinNoticeDays": 0,
+        "Description": "Consumer must be able to export their data."
+      },
+      ":Need_NoSharingWithoutConsent": {
+        "ID": ":Need_NoSharingWithoutConsent",
+        "Importance": 12,
+        "MinNoticeDays": 0,
+        "Description": "No data sharing without explicit consent."
+      }
+    }
+  },
+  "Agreement": {
+    "ID": ":Agreement1",
+    "Title": "Example Agreement",
+    "Policy": {
+      "ID": ":Policy1",
+      "Permissions": {
+        ":PermChangeTerms": {
+          "ID": ":PermChangeTerms",
+          "Assigner": ":Provider",
+          "Assignee": ":ConsumerExample",
+          "Action": "tosl:changeTerms",
+          "Target": ":AgreementText",
+          "ClauseID": ":ClauseC2",
+          "Duties": [
+            {
+              "Action": "odrl:inform",
+              "Constraints": [
+                {
+                  "LeftOperand": "tosl:noticeDays",
+                  "Operator": "odrl:gteq",
+                  "RightOperand": {
+                    "Int": 3,
+                    "Bool": false,
+                    "Kind": "int"
+                  }
+                }
+              ]
+            }
+          ],
+          "Constraints": null
+        },
+        ":PermDeleteAccount": {
+          "ID": ":PermDeleteAccount",
+          "Assigner": ":Provider",
+          "Assignee": ":ConsumerExample",
+          "Action": "tosl:removeAccount",
+          "Target": ":UserAccount",
+          "ClauseID": ":ClauseC1",
+          "Duties": null,
+          "Constraints": null
+        },
+        ":PermShareData": {
+          "ID": ":PermShareData",
+          "Assigner": ":Provider",
+          "Assignee": ":ConsumerExample",
+          "Action": "tosl:shareData",
+          "Target": ":UserData",
+          "ClauseID": ":ClauseC3",
+          "Duties": null,
+          "Constraints": null
+        }
+      },
+      "Prohibitions": {
+        ":ProhibitExportData": {
+          "ID": ":ProhibitExportData",
+          "Assigner": ":Provider",
+          "Assignee": ":ConsumerExample",
+          "Action": "tosl:exportData",
+          "Target": ":UserData",
+          "ClauseID": ":ClauseC4"
+        }
+      }
+    },
+    "Clauses": {
+      ":ClauseC1": {
+        "ID": "C1",
+        "Text": "Provider may remove the user account (and associated data) at its discretion."
+      },
+      ":ClauseC2": {
+        "ID": "C2",
+        "Text": "Provider may change terms by informing users at least 3 days in advance."
+      },
+      ":ClauseC3": {
+        "ID": "C3",
+        "Text": "Provider may share user data with partners for business purposes."
+      },
+      ":ClauseC4": {
+        "ID": "C4",
+        "Text": "Users are not permitted to export their data."
+      }
+    }
+  },
+  "Process": {
+    "ID": ":ProcessContext1",
+    "Title": "Service operation under Agreement1",
+    "Source": ":Agreement1"
+  }
+}

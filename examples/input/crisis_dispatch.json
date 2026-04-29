@@ -1,0 +1,176 @@
+{
+  "CaseName": "storm-response",
+  "Question": "Which responders should handle the storm incidents before their deadlines?",
+  "Locations": [
+    "Depot",
+    "TownHall",
+    "Clinic",
+    "School",
+    "Market",
+    "Station",
+    "Harbour",
+    "Canal"
+  ],
+  "Roads": [
+    {
+      "From": "Depot",
+      "To": "TownHall",
+      "Minutes": 6
+    },
+    {
+      "From": "TownHall",
+      "To": "Clinic",
+      "Minutes": 5
+    },
+    {
+      "From": "Clinic",
+      "To": "School",
+      "Minutes": 8
+    },
+    {
+      "From": "School",
+      "To": "Market",
+      "Minutes": 6
+    },
+    {
+      "From": "Market",
+      "To": "Station",
+      "Minutes": 5
+    },
+    {
+      "From": "Station",
+      "To": "Harbour",
+      "Minutes": 9
+    },
+    {
+      "From": "Harbour",
+      "To": "Canal",
+      "Minutes": 7
+    },
+    {
+      "From": "Canal",
+      "To": "TownHall",
+      "Minutes": 10
+    },
+    {
+      "From": "Depot",
+      "To": "Station",
+      "Minutes": 7
+    },
+    {
+      "From": "Depot",
+      "To": "Harbour",
+      "Minutes": 13
+    },
+    {
+      "From": "TownHall",
+      "To": "Market",
+      "Minutes": 4
+    },
+    {
+      "From": "School",
+      "To": "Canal",
+      "Minutes": 11
+    }
+  ],
+  "Responders": [
+    {
+      "ID": ":MedDrone1",
+      "Label": "MedDrone-1",
+      "Start": "Clinic",
+      "Capabilities": 3,
+      "SecureEnvelope": true,
+      "DataMode": "sensor-only",
+      "ShiftEnd": 58,
+      "TravelBudget": 64
+    },
+    {
+      "ID": ":CargoBike7",
+      "Label": "CargoBike-7",
+      "Start": "Depot",
+      "Capabilities": 5,
+      "SecureEnvelope": true,
+      "DataMode": "none",
+      "ShiftEnd": 65,
+      "TravelBudget": 70
+    },
+    {
+      "ID": ":FootTeam3",
+      "Label": "FootTeam-3",
+      "Start": "TownHall",
+      "Capabilities": 10,
+      "SecureEnvelope": false,
+      "DataMode": "aggregate",
+      "ShiftEnd": 55,
+      "TravelBudget": 42
+    }
+  ],
+  "Incidents": [
+    {
+      "ID": ":I1",
+      "Label": "Harbour insulin cooler",
+      "Location": "Harbour",
+      "Need": 1,
+      "ServiceMinutes": 6,
+      "Deadline": 37,
+      "Priority": 100,
+      "Sensitive": true,
+      "AggregateOnly": false
+    },
+    {
+      "ID": ":I2",
+      "Label": "School AED verification",
+      "Location": "School",
+      "Need": 1,
+      "ServiceMinutes": 4,
+      "Deadline": 28,
+      "Priority": 85,
+      "Sensitive": true,
+      "AggregateOnly": false
+    },
+    {
+      "ID": ":I3",
+      "Label": "Canal flood sensor",
+      "Location": "Canal",
+      "Need": 2,
+      "ServiceMinutes": 7,
+      "Deadline": 40,
+      "Priority": 75,
+      "Sensitive": false,
+      "AggregateOnly": false
+    },
+    {
+      "ID": ":I4",
+      "Label": "Station oxygen canister",
+      "Location": "Station",
+      "Need": 4,
+      "ServiceMinutes": 8,
+      "Deadline": 48,
+      "Priority": 95,
+      "Sensitive": false,
+      "AggregateOnly": false
+    },
+    {
+      "ID": ":I5",
+      "Label": "Town Hall evacuation leaflet",
+      "Location": "TownHall",
+      "Need": 8,
+      "ServiceMinutes": 5,
+      "Deadline": 32,
+      "Priority": 65,
+      "Sensitive": false,
+      "AggregateOnly": false
+    },
+    {
+      "ID": ":I6",
+      "Label": "Market crowd counter",
+      "Location": "Market",
+      "Need": 2,
+      "ServiceMinutes": 6,
+      "Deadline": 45,
+      "Priority": 55,
+      "Sensitive": false,
+      "AggregateOnly": true
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "BoardBefore": {
+    "Size": 3,
+    "Grid": [
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        1,
+        0,
+        2
+      ],
+      [
+        0,
+        2,
+        0
+      ]
+    ]
+  },
+  "MoveCapture": {
+    "Player": 2,
+    "Row": 1,
+    "Col": 1
+  },
+  "MoveRecapture": {
+    "Player": 1,
+    "Row": 1,
+    "Col": 0
+  }
+}

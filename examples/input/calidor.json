@@ -1,0 +1,104 @@
+{
+  "CaseName": "calidor",
+  "Question": "Is the Calidor heat-response system allowed to use a narrow household support insight for heatwave response, and if so which support package should it recommend?",
+  "RequestPurpose": "heatwave_response",
+  "RequestAction": "odrl:use",
+  "GatewayCreatedAt": "2026-07-18T09:00:00+00:00",
+  "GatewayExpiresAt": "2026-07-18T21:00:00+00:00",
+  "CityAuthAt": "2026-07-18T09:05:00+00:00",
+  "CityDutyAt": "2026-07-18T20:30:00+00:00",
+  "CurrentAlertLevel": 4,
+  "AlertLevelAtLeast": 3,
+  "CurrentIndoorTempC": 31.4,
+  "IndoorTempCAtLeast": 30,
+  "HoursAtOrAboveThreshold": 9,
+  "HoursAtOrAboveThresholdAtLeast": 6,
+  "RemainingPrepaidCreditEur": 3.2,
+  "EnergyCreditEurAtMost": 5,
+  "MinimumActiveNeedCount": 3,
+  "MaxPackageCostEur": 20,
+  "DispatchesLogged": 1,
+  "VulnerabilityFlags": [
+    "heat_sensitive_condition",
+    "mobility_limitation"
+  ],
+  "Packages": [
+    {
+      "ID": "pkg_CHECK",
+      "PackageID": "pkg:CHECK",
+      "Name": "Cooling Check Call",
+      "CostEur": 8,
+      "Capabilities": [
+        "welfare_check"
+      ]
+    },
+    {
+      "ID": "pkg_VOUCHER",
+      "PackageID": "pkg:VOUCHER",
+      "Name": "Cooling Center Transport Voucher",
+      "CostEur": 12,
+      "Capabilities": [
+        "transport",
+        "welfare_check"
+      ]
+    },
+    {
+      "ID": "pkg_BUNDLE",
+      "PackageID": "pkg:BUNDLE",
+      "Name": "Calidor Priority Cooling Bundle",
+      "CostEur": 18,
+      "Capabilities": [
+        "bill_credit",
+        "cooling_kit",
+        "transport",
+        "welfare_check"
+      ]
+    },
+    {
+      "ID": "pkg_DELUXE",
+      "PackageID": "pkg:DELUXE",
+      "Name": "Extended Resilience Package",
+      "CostEur": 28,
+      "Capabilities": [
+        "bill_credit",
+        "cooling_kit",
+        "transport",
+        "welfare_check",
+        "followup_visit"
+      ]
+    }
+  ],
+  "Insight": {
+    "ID": "https://example.org/insight/calidor",
+    "Metric": "active_need_count",
+    "ThresholdCount": 3,
+    "ThresholdDisplay": "3.0",
+    "SupportPolicy": "lowest_cost_covering_package",
+    "ScopeDevice": "household-gateway",
+    "ScopeEvent": "heat-alert-window",
+    "Municipality": "Calidor",
+    "CreatedAt": "2026-07-18T09:00:00+00:00",
+    "ExpiresAt": "2026-07-18T21:00:00+00:00",
+    "SerializedLowercase": "{\"createdat\":\"2026-07-18t09:00:00+00:00\",\"expiresat\":\"2026-07-18t21:00:00+00:00\",\"id\":\"https://example.org/insight/calidor\",\"metric\":\"active_need_count\",\"municipality\":\"calidor\",\"scopedevice\":\"household-gateway\",\"scopeevent\":\"heat-alert-window\",\"supportpolicy\":\"lowest_cost_covering_package\",\"threshold\":3,\"type\":\"ins:insight\"}"
+  },
+  "Policy": {
+    "Profile": "Calidor-Heatwave-Policy",
+    "PermissionAction": "odrl:use",
+    "PermissionTarget": "https://example.org/insight/calidor",
+    "PermissionPurpose": "heatwave_response",
+    "ProhibitionAction": "odrl:distribute",
+    "ProhibitionTarget": "https://example.org/insight/calidor",
+    "ProhibitionPurpose": "tenant_screening",
+    "DutyAction": "odrl:delete",
+    "DutyAt": "2026-07-18T21:00:00+00:00"
+  },
+  "Signature": {
+    "Algorithm": "HMAC-SHA256",
+    "KeyID": "calidor-demo-shared-secret",
+    "Created": "2026-07-18T09:00:00+00:00",
+    "PayloadHashSHA256": "3780df1071b0f2eec8a881ffd48425c3a1a60738d11cc2ba7debdf1cea992d63",
+    "SignatureHMAC": "e635c7c1991742a5c36992fc0da32a7abc80b32aa5777a1142adaab55183681c",
+    "HMACVerificationMode": "trustedPrecomputedInput"
+  },
+  "ReasonText": "The gateway keeps raw indoor heat, vulnerability, and prepaid-energy data local, derives a priority-support signal, and shares only a scoped heatwave-response envelope with expiry."
+}

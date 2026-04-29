@@ -20,12 +20,15 @@
 package main
 
 import (
+	"eyelingo/internal/exampleinput"
 	"fmt"
 	"math"
 	"os"
 	"runtime"
 	"strings"
 )
+
+const eyelingoExampleName = "bayes_diagnosis"
 
 // ---------- types ----------
 
@@ -66,7 +69,7 @@ type InferenceResult struct {
 // checks mirrors the proof obligations at the bottom of bayes-diagnosis.n3.
 // In the N3 source, guards fire if any probability is outside [0,1].
 type Checks struct {
-	PriorsInRange   bool
+	PriorsInRange    bool
 	CondProbsInRange bool
 }
 
@@ -315,7 +318,7 @@ func yesNo(value bool) string {
 // ---------- main ----------
 
 func main() {
-	data := dataset()
+	data := exampleinput.Load(eyelingoExampleName, dataset())
 
 	// Run inference (guards are checked inside infer).
 	result := infer(data)

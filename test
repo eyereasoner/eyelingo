@@ -12,8 +12,8 @@ elif [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
   cat <<USAGE
 Usage: ./test [--update]
 
-Runs every Go example in examples/, compares stdout with examples/output/*.txt,
-and prints OK/FAIL with timing.
+Runs every Go example in examples/, reading examples/input/*.json where used,
+compares stdout with examples/output/*.txt, and prints OK/FAIL with timing.
 
 Options:
   --update   regenerate examples/output/*.txt from the current program output
@@ -80,11 +80,10 @@ run_example() {
   local actual_norm="$TMPDIR/$name.actual.norm"
   local expected_norm="$TMPDIR/$name.expected.norm"
   local diff_file="$TMPDIR/$name.diff"
-  local args=()
 
   local start end elapsed_ms status
   start=$(now_ms)
-  if go run "$EXAMPLES_DIR/$file" "${args[@]}" > "$actual" 2>&1; then
+  if (cd "$ROOT" && go run "./examples/$file") > "$actual" 2>&1; then
     status=0
   else
     status=$?

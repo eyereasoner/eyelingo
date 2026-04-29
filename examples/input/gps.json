@@ -1,0 +1,55 @@
+{
+  "Traveller": {
+    "ID": "i1",
+    "Location": "Gent"
+  },
+  "Question": "Which route should we take from Gent to Oostende?",
+  "Routes": {
+    "routeDirect": {
+      "ID": "routeDirect",
+      "Label": "Gent → Brugge → Oostende"
+    },
+    "routeViaKortrijk": {
+      "ID": "routeViaKortrijk",
+      "Label": "Gent → Kortrijk → Brugge → Oostende"
+    }
+  },
+  "Edges": [
+    {
+      "From": "Gent",
+      "To": "Brugge",
+      "Action": "drive_gent_brugge",
+      "Duration": 1500,
+      "Cost": 0.006,
+      "Belief": 0.96,
+      "Comfort": 0.99
+    },
+    {
+      "From": "Gent",
+      "To": "Kortrijk",
+      "Action": "drive_gent_kortrijk",
+      "Duration": 1600,
+      "Cost": 0.007,
+      "Belief": 0.96,
+      "Comfort": 0.99
+    },
+    {
+      "From": "Kortrijk",
+      "To": "Brugge",
+      "Action": "drive_kortrijk_brugge",
+      "Duration": 1600,
+      "Cost": 0.007,
+      "Belief": 0.96,
+      "Comfort": 0.99
+    },
+    {
+      "From": "Brugge",
+      "To": "Oostende",
+      "Action": "drive_brugge_oostende",
+      "Duration": 900,
+      "Cost": 0.004,
+      "Belief": 0.98,
+      "Comfort": 1
+    }
+  ]
+}

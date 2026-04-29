@@ -1,0 +1,104 @@
+{
+  "CaseName": "parcellocker",
+  "Question": "May Noah use Maya's one-time pickup token to collect parcel123 from locker B17?",
+  "People": {
+    "maya": {
+      "ID": "maya",
+      "Name": "Maya"
+    },
+    "noah": {
+      "ID": "noah",
+      "Name": "Noah"
+    }
+  },
+  "Parcel": {
+    "ID": "parcel123",
+    "Owner": "maya",
+    "Status": "ReadyForPickup"
+  },
+  "Locker": {
+    "ID": "lockerB17",
+    "Site": "Station West"
+  },
+  "Authorization": {
+    "ID": "pickupToken",
+    "IssuedBy": "maya",
+    "Delegate": "noah",
+    "Parcel": "parcel123",
+    "Locker": "lockerB17",
+    "Action": "CollectParcel",
+    "Purpose": "PickupOnly",
+    "State": "Active",
+    "Reuse": "SingleUse",
+    "BillingAccess": "None",
+    "RedirectAllowed": "No"
+  },
+  "Requests": [
+    {
+      "Key": "pickup",
+      "Label": "Noah collects the parcel",
+      "Requester": "noah",
+      "Parcel": "parcel123",
+      "Locker": "lockerB17",
+      "Action": "CollectParcel",
+      "Purpose": "PickupOnly",
+      "UsedOnce": false,
+      "Expected": "PERMIT"
+    },
+    {
+      "Key": "billing",
+      "Label": "Noah views billing details",
+      "Requester": "noah",
+      "Parcel": "parcel123",
+      "Locker": "lockerB17",
+      "Action": "ViewBillingDetails",
+      "Purpose": "BillingAccess",
+      "UsedOnce": false,
+      "Expected": "DENY"
+    },
+    {
+      "Key": "redirect",
+      "Label": "Noah redirects the parcel",
+      "Requester": "noah",
+      "Parcel": "parcel123",
+      "Locker": "lockerB17",
+      "Action": "RedirectParcel",
+      "Purpose": "RedirectDelivery",
+      "UsedOnce": false,
+      "Expected": "DENY"
+    },
+    {
+      "Key": "wrong-person",
+      "Label": "Maya uses Noah's pickup token",
+      "Requester": "maya",
+      "Parcel": "parcel123",
+      "Locker": "lockerB17",
+      "Action": "CollectParcel",
+      "Purpose": "PickupOnly",
+      "UsedOnce": false,
+      "Expected": "DENY"
+    },
+    {
+      "Key": "wrong-locker",
+      "Label": "Noah tries another locker",
+      "Requester": "noah",
+      "Parcel": "parcel123",
+      "Locker": "lockerA04",
+      "Action": "CollectParcel",
+      "Purpose": "PickupOnly",
+      "UsedOnce": false,
+      "Expected": "DENY"
+    },
+    {
+      "Key": "reuse",
+      "Label": "Noah reuses the token",
+      "Requester": "noah",
+      "Parcel": "parcel123",
+      "Locker": "lockerB17",
+      "Action": "CollectParcel",
+      "Purpose": "PickupOnly",
+      "UsedOnce": true,
+      "Expected": "DENY"
+    }
+  ]
+}

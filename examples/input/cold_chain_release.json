@@ -1,0 +1,410 @@
+{
+  "CaseName": "cold-chain-release",
+  "Question": "Which cold-chain lots can be released, and where should scarce doses ship first?",
+  "Product": "Stable mRNA pediatric booster",
+  "Lots": [
+    {
+      "ID": "Seed-Alpha",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "Plant-7",
+      "Doses": 0,
+      "Parents": null,
+      "ReleaseCandidate": false
+    },
+    {
+      "ID": "Seed-Beta",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "Plant-7",
+      "Doses": 0,
+      "Parents": null,
+      "ReleaseCandidate": false
+    },
+    {
+      "ID": "Seed-Gamma",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "Plant-9",
+      "Doses": 0,
+      "Parents": null,
+      "ReleaseCandidate": false
+    },
+    {
+      "ID": "Bulk-A",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "Plant-7",
+      "Doses": 0,
+      "Parents": [
+        "Seed-Alpha"
+      ],
+      "ReleaseCandidate": false
+    },
+    {
+      "ID": "Bulk-B",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "Plant-7",
+      "Doses": 0,
+      "Parents": [
+        "Seed-Beta"
+      ],
+      "ReleaseCandidate": false
+    },
+    {
+      "ID": "BIO-17A",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "CityHub",
+      "Doses": 420,
+      "Parents": [
+        "Bulk-A"
+      ],
+      "ReleaseCandidate": true
+    },
+    {
+      "ID": "BIO-17B",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "CityHub",
+      "Doses": 360,
+      "Parents": [
+        "Bulk-A"
+      ],
+      "ReleaseCandidate": true
+    },
+    {
+      "ID": "BIO-18A",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "CityHub",
+      "Doses": 500,
+      "Parents": [
+        "Bulk-B"
+      ],
+      "ReleaseCandidate": true
+    },
+    {
+      "ID": "BIO-19A",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "AirportHub",
+      "Doses": 260,
+      "Parents": [
+        "Seed-Gamma"
+      ],
+      "ReleaseCandidate": true
+    },
+    {
+      "ID": "BIO-20A",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "NorthDepot",
+      "Doses": 300,
+      "Parents": [
+        "Bulk-A"
+      ],
+      "ReleaseCandidate": true
+    },
+    {
+      "ID": "BIO-21A",
+      "Product": "Stable mRNA pediatric booster",
+      "Facility": "AirportHub",
+      "Doses": 180,
+      "Parents": [
+        "Seed-Gamma"
+      ],
+      "ReleaseCandidate": true
+    }
+  ],
+  "RecalledSources": [
+    "Seed-Beta"
+  ],
+  "Events": [
+    {
+      "LotID": "BIO-17A",
+      "Ordinal": 1,
+      "Step": "fill-finish",
+      "Facility": "Plant-7",
+      "Actor": "qa:ana",
+      "TempTenths": 41,
+      "Minutes": 90,
+      "PrevHash": "sha256:genesis",
+      "Hash": "sha256:5687b2c2f2979c38d81e100f12aa28d2a0c299b04a1b9176400ba7d158f8526e"
+    },
+    {
+      "LotID": "BIO-17A",
+      "Ordinal": 2,
+      "Step": "refrigerated pack",
+      "Facility": "Plant-7",
+      "Actor": "ops:li",
+      "TempTenths": 78,
+      "Minutes": 45,
+      "PrevHash": "sha256:5687b2c2f2979c38d81e100f12aa28d2a0c299b04a1b9176400ba7d158f8526e",
+      "Hash": "sha256:5f42d781df01fbf3e62461ff382d0c28ecdc47e4903cfb17ba7c4990ab465ae3"
+    },
+    {
+      "LotID": "BIO-17A",
+      "Ordinal": 3,
+      "Step": "carrier handoff",
+      "Facility": "CityHub",
+      "Actor": "driver:milo",
+      "TempTenths": 87,
+      "Minutes": 6,
+      "PrevHash": "sha256:5f42d781df01fbf3e62461ff382d0c28ecdc47e4903cfb17ba7c4990ab465ae3",
+      "Hash": "sha256:e57b3009e0aa42a99f50ede937c59c2e42ca0fe6fcf63d3c187ab7b7fde1169e"
+    },
+    {
+      "LotID": "BIO-17B",
+      "Ordinal": 1,
+      "Step": "fill-finish",
+      "Facility": "Plant-7",
+      "Actor": "qa:ana",
+      "TempTenths": 40,
+      "Minutes": 120,
+      "PrevHash": "sha256:genesis",
+      "Hash": "sha256:9338184b69836a6b2a11bc09247753935abf5010c3ecf910c9ea7e21a72ffec7"
+    },
+    {
+      "LotID": "BIO-17B",
+      "Ordinal": 2,
+      "Step": "refrigerated pack",
+      "Facility": "Plant-7",
+      "Actor": "ops:li",
+      "TempTenths": 105,
+      "Minutes": 21,
+      "PrevHash": "sha256:9338184b69836a6b2a11bc09247753935abf5010c3ecf910c9ea7e21a72ffec7",
+      "Hash": "sha256:f4a3fee5d9feaad0b3a03e2905a5741bfef41e5b84b93964cc9a5ad8785ab303"
+    },
+    {
+      "LotID": "BIO-17B",
+      "Ordinal": 3,
+      "Step": "carrier handoff",
+      "Facility": "CityHub",
+      "Actor": "driver:milo",
+      "TempTenths": 63,
+      "Minutes": 40,
+      "PrevHash": "sha256:f4a3fee5d9feaad0b3a03e2905a5741bfef41e5b84b93964cc9a5ad8785ab303",
+      "Hash": "sha256:73dea83c53094fcb774aa97b0ebff5ff4c0aa63840028cb7bbb62200e33a78d2"
+    },
+    {
+      "LotID": "BIO-18A",
+      "Ordinal": 1,
+      "Step": "fill-finish",
+      "Facility": "Plant-7",
+      "Actor": "qa:ana",
+      "TempTenths": 39,
+      "Minutes": 80,
+      "PrevHash": "sha256:genesis",
+      "Hash": "sha256:ccbcf14128e2cfe8fbcd451c8e3326f38d3d7eaa92276f7b52ce116521797bdc"
+    },
+    {
+      "LotID": "BIO-18A",
+      "Ordinal": 2,
+      "Step": "refrigerated pack",
+      "Facility": "Plant-7",
+      "Actor": "ops:li",
+      "TempTenths": 73,
+      "Minutes": 60,
+      "PrevHash": "sha256:ccbcf14128e2cfe8fbcd451c8e3326f38d3d7eaa92276f7b52ce116521797bdc",
+      "Hash": "sha256:a5595b8e5dcbdad72714f1f7a84d8c03d934d27f49a823bf51336618ed7d7bcc"
+    },
+    {
+      "LotID": "BIO-18A",
+      "Ordinal": 3,
+      "Step": "carrier handoff",
+      "Facility": "CityHub",
+      "Actor": "driver:noor",
+      "TempTenths": 81,
+      "Minutes": 10,
+      "PrevHash": "sha256:a5595b8e5dcbdad72714f1f7a84d8c03d934d27f49a823bf51336618ed7d7bcc",
+      "Hash": "sha256:c4fdb3d693abb849efb1c13dd5e58454cc2c9643ee9eb5a09e59d062962e9771"
+    },
+    {
+      "LotID": "BIO-19A",
+      "Ordinal": 1,
+      "Step": "fill-finish",
+      "Facility": "Plant-9",
+      "Actor": "qa:rui",
+      "TempTenths": 52,
+      "Minutes": 100,
+      "PrevHash": "sha256:genesis",
+      "Hash": "sha256:9b21f229badf004332a25f6ec567f5fb4ca41a8f7054d87388b8744a518585b6"
+    },
+    {
+      "LotID": "BIO-19A",
+      "Ordinal": 2,
+      "Step": "refrigerated pack",
+      "Facility": "Plant-9",
+      "Actor": "ops:mina",
+      "TempTenths": 65,
+      "Minutes": 60,
+      "PrevHash": "sha256:9b21f229badf004332a25f6ec567f5fb4ca41a8f7054d87388b8744a518585b6",
+      "Hash": "sha256:60c4879ecc7b7e788b8fbf6c1a8ad86bbd3bfc0e4c00bd2b58f67795c18c460b"
+    },
+    {
+      "LotID": "BIO-19A",
+      "Ordinal": 3,
+      "Step": "carrier handoff",
+      "Facility": "AirportHub",
+      "Actor": "driver:sol",
+      "TempTenths": 72,
+      "Minutes": 40,
+      "PrevHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "Hash": "sha256:5a0ab02c71efbb911eab7eab8cd80b5cce035c27b5fc70222acbd223a6b1bbb2"
+    },
+    {
+      "LotID": "BIO-20A",
+      "Ordinal": 1,
+      "Step": "fill-finish",
+      "Facility": "Plant-7",
+      "Actor": "qa:ana",
+      "TempTenths": 36,
+      "Minutes": 120,
+      "PrevHash": "sha256:genesis",
+      "Hash": "sha256:2eb639c1907f8f0a27492bb7e9d3e93100edfe22436138a3c807aa0974924741"
+    },
+    {
+      "LotID": "BIO-20A",
+      "Ordinal": 2,
+      "Step": "refrigerated pack",
+      "Facility": "NorthDepot",
+      "Actor": "ops:li",
+      "TempTenths": 54,
+      "Minutes": 60,
+      "PrevHash": "sha256:2eb639c1907f8f0a27492bb7e9d3e93100edfe22436138a3c807aa0974924741",
+      "Hash": "sha256:594ba35562274ba8e1b8e500b866357d6a547e396e8fd6aded022e52fb2ff12c"
+    },
+    {
+      "LotID": "BIO-20A",
+      "Ordinal": 3,
+      "Step": "carrier handoff",
+      "Facility": "NorthDepot",
+      "Actor": "driver:ivy",
+      "TempTenths": 92,
+      "Minutes": 12,
+      "PrevHash": "sha256:594ba35562274ba8e1b8e500b866357d6a547e396e8fd6aded022e52fb2ff12c",
+      "Hash": "sha256:1ffb664e71e3c68a733fefda29bff0baef0cebb64895b6bea390949c960e4102"
+    },
+    {
+      "LotID": "BIO-21A",
+      "Ordinal": 1,
+      "Step": "fill-finish",
+      "Facility": "Plant-9",
+      "Actor": "qa:rui",
+      "TempTenths": 24,
+      "Minutes": 90,
+      "PrevHash": "sha256:genesis",
+      "Hash": "sha256:69cd4c513f5a51d2cabd9a7707cb5b073f5263c82977ca7a45c63c0c73ae151c"
+    },
+    {
+      "LotID": "BIO-21A",
+      "Ordinal": 2,
+      "Step": "refrigerated pack",
+      "Facility": "AirportHub",
+      "Actor": "ops:mina",
+      "TempTenths": 84,
+      "Minutes": 9,
+      "PrevHash": "sha256:69cd4c513f5a51d2cabd9a7707cb5b073f5263c82977ca7a45c63c0c73ae151c",
+      "Hash": "sha256:794661ead3ab45d86036a50714caad4193c1305adac19b536cd134bfc026cd41"
+    },
+    {
+      "LotID": "BIO-21A",
+      "Ordinal": 3,
+      "Step": "carrier handoff",
+      "Facility": "AirportHub",
+      "Actor": "driver:sol",
+      "TempTenths": 70,
+      "Minutes": 40,
+      "PrevHash": "sha256:794661ead3ab45d86036a50714caad4193c1305adac19b536cd134bfc026cd41",
+      "Hash": "sha256:67bdcbb64f4012e6b61aa92b0776d51c453ce130d7704f405493e1c5dce09f5c"
+    }
+  ],
+  "Clinics": [
+    {
+      "ID": "DialysisUnit",
+      "Label": "Dialysis Unit",
+      "Demand": 300,
+      "Priority": 10,
+      "MaxTransit": 100,
+      "Need": "immunocompromised pediatric list"
+    },
+    {
+      "ID": "NorthClinic",
+      "Label": "North Clinic",
+      "Demand": 380,
+      "Priority": 9,
+      "MaxTransit": 130,
+      "Need": "school outbreak ring"
+    },
+    {
+      "ID": "FieldStation",
+      "Label": "Field Station",
+      "Demand": 250,
+      "Priority": 8,
+      "MaxTransit": 90,
+      "Need": "temporary shelter"
+    },
+    {
+      "ID": "RuralMobile",
+      "Label": "Rural Mobile Unit",
+      "Demand": 180,
+      "Priority": 6,
+      "MaxTransit": 140,
+      "Need": "mobile catch-up route"
+    }
+  ],
+  "Transit": [
+    {
+      "From": "CityHub",
+      "ClinicID": "DialysisUnit",
+      "Minutes": 70
+    },
+    {
+      "From": "CityHub",
+      "ClinicID": "NorthClinic",
+      "Minutes": 110
+    },
+    {
+      "From": "CityHub",
+      "ClinicID": "FieldStation",
+      "Minutes": 150
+    },
+    {
+      "From": "CityHub",
+      "ClinicID": "RuralMobile",
+      "Minutes": 210
+    },
+    {
+      "From": "NorthDepot",
+      "ClinicID": "DialysisUnit",
+      "Minutes": 90
+    },
+    {
+      "From": "NorthDepot",
+      "ClinicID": "NorthClinic",
+      "Minutes": 40
+    },
+    {
+      "From": "NorthDepot",
+      "ClinicID": "FieldStation",
+      "Minutes": 110
+    },
+    {
+      "From": "NorthDepot",
+      "ClinicID": "RuralMobile",
+      "Minutes": 160
+    },
+    {
+      "From": "AirportHub",
+      "ClinicID": "DialysisUnit",
+      "Minutes": 120
+    },
+    {
+      "From": "AirportHub",
+      "ClinicID": "NorthClinic",
+      "Minutes": 130
+    },
+    {
+      "From": "AirportHub",
+      "ClinicID": "FieldStation",
+      "Minutes": 70
+    },
+    {
+      "From": "AirportHub",
+      "ClinicID": "RuralMobile",
+      "Minutes": 90
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "Diseases": [
+    {
+      "Name": "COVID19",
+      "Prior": 0.05
+    },
+    {
+      "Name": "Influenza",
+      "Prior": 0.03
+    },
+    {
+      "Name": "AllergicRhinitis",
+      "Prior": 0.1
+    },
+    {
+      "Name": "BacterialPneumonia",
+      "Prior": 0.01
+    }
+  ],
+  "ProbGiven": {
+    "AllergicRhinitis": {
+      "DryCough": 0.15,
+      "Fever": 0.05,
+      "LossOfSmell": 0.1,
+      "ShortBreath": 0.05,
+      "Sneezing": 0.8
+    },
+    "BacterialPneumonia": {
+      "DryCough": 0.6,
+      "Fever": 0.7,
+      "LossOfSmell": 0.02,
+      "ShortBreath": 0.6,
+      "Sneezing": 0.05
+    },
+    "COVID19": {
+      "DryCough": 0.65,
+      "Fever": 0.7,
+      "LossOfSmell": 0.4,
+      "ShortBreath": 0.2,
+      "Sneezing": 0.15
+    },
+    "Influenza": {
+      "DryCough": 0.5,
+      "Fever": 0.8,
+      "LossOfSmell": 0.05,
+      "ShortBreath": 0.1,
+      "Sneezing": 0.2
+    }
+  },
+  "Evidence": [
+    {
+      "Symptom": "Fever",
+      "Present": true
+    },
+    {
+      "Symptom": "DryCough",
+      "Present": true
+    },
+    {
+      "Symptom": "LossOfSmell",
+      "Present": true
+    },
+    {
+      "Symptom": "Sneezing",
+      "Present": false
+    },
+    {
+      "Symptom": "ShortBreath",
+      "Present": true
+    }
+  ]
+}

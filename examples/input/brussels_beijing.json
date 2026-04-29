@@ -1,0 +1,68 @@
+{
+  "Flights": [
+    {
+      "From": "BRU",
+      "To": "PEK",
+      "Airline": "Turkish",
+      "Cost": 800
+    },
+    {
+      "From": "BRU",
+      "To": "FRA",
+      "Airline": "Lufthansa",
+      "Cost": 150
+    },
+    {
+      "From": "FRA",
+      "To": "PEK",
+      "Airline": "Lufthansa",
+      "Cost": 520
+    },
+    {
+      "From": "BRU",
+      "To": "AMS",
+      "Airline": "KLM",
+      "Cost": 120
+    },
+    {
+      "From": "AMS",
+      "To": "IST",
+      "Airline": "Turkish",
+      "Cost": 250
+    },
+    {
+      "From": "IST",
+      "To": "PEK",
+      "Airline": "Turkish",
+      "Cost": 450
+    },
+    {
+      "From": "AMS",
+      "To": "FRA",
+      "Airline": "KLM",
+      "Cost": 90
+    },
+    {
+      "From": "FRA",
+      "To": "DXB",
+      "Airline": "Emirates",
+      "Cost": 380
+    },
+    {
+      "From": "DXB",
+      "To": "PEK",
+      "Airline": "Emirates",
+      "Cost": 420
+    }
+  ],
+  "Labels": {
+    "AMS": "Amsterdam",
+    "BRU": "Brussels",
+    "DXB": "Dubai",
+    "FRA": "Frankfurt",
+    "IST": "Istanbul",
+    "PEK": "Beijing"
+  },
+  "StartCity": "BRU",
+  "EndCity": "PEK"
+}

@@ -1,0 +1,71 @@
+[
+  {
+    "Number": 1,
+    "Cycle": 1,
+    "Hungry": [
+      "P1",
+      "P3"
+    ]
+  },
+  {
+    "Number": 2,
+    "Cycle": 1,
+    "Hungry": [
+      "P2",
+      "P4"
+    ]
+  },
+  {
+    "Number": 3,
+    "Cycle": 1,
+    "Hungry": [
+      "P5"
+    ]
+  },
+  {
+    "Number": 4,
+    "Cycle": 2,
+    "Hungry": [
+      "P1",
+      "P3"
+    ]
+  },
+  {
+    "Number": 5,
+    "Cycle": 2,
+    "Hungry": [
+      "P2",
+      "P4"
+    ]
+  },
+  {
+    "Number": 6,
+    "Cycle": 2,
+    "Hungry": [
+      "P5"
+    ]
+  },
+  {
+    "Number": 7,
+    "Cycle": 3,
+    "Hungry": [
+      "P1",
+      "P3"
+    ]
+  },
+  {
+    "Number": 8,
+    "Cycle": 3,
+    "Hungry": [
+      "P2",
+      "P4"
+    ]
+  },
+  {
+    "Number": 9,
+    "Cycle": 3,
+    "Hungry": [
+      "P5"
+    ]
+  }
+]

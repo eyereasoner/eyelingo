@@ -1,0 +1,6 @@
+{
+  "StartCount": 10000,
+  "TargetConstant": 6174,
+  "ZeroBasin": 0,
+  "MaxKaprekarSteps": 7
+}
