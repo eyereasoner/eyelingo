@@ -1,0 +1,200 @@
+{
+  "CaseName": "digital_product_passport",
+  "Question": "Can the public Digital Product Passport for a smartphone expose useful circularity and footprint indicators while keeping restricted conformity and substance declarations scoped to auditors?",
+  "Organization": {
+    "ID": "AcmeElectronics",
+    "LegalName": "Acme Electronics NV",
+    "VATID": "BE0123456789",
+    "Country": "BE"
+  },
+  "Site": {
+    "ID": "FactoryBE01",
+    "Name": "Acme Assembly Plant BE-01",
+    "Country": "BE"
+  },
+  "Repairer": {
+    "ID": "RepairShop1",
+    "LegalName": "FixFast Repairs",
+    "VATID": "",
+    "Country": "BE"
+  },
+  "Passport": {
+    "ID": "Passport-ACME-X1000-SN123",
+    "Version": "1.0",
+    "IssuedAt": "2026-02-10",
+    "PublicEndpoint": "https://example.org/dpp/ACME-X1000-SN123",
+    "RestrictedScope": "authorities, auditors, service partners"
+  },
+  "AccessPolicy": {
+    "PublicSection": "public",
+    "PublicAudience": "everyone",
+    "RestrictedSection": "restricted",
+    "RestrictedAudience": "authorities, auditors, service partners",
+    "RestrictedDocTypes": [
+      "DeclarationOfConformity",
+      "SubstanceDeclaration"
+    ],
+    "PublicDocTypes": [
+      "UserManual",
+      "RepairGuide",
+      "SparePartsCatalog"
+    ],
+    "RequiredPublicClaim": "BatteryReplacementSupported"
+  },
+  "Product": {
+    "ID": "ACME-X1000-SN123",
+    "Model": "ACME X1000",
+    "SerialNumber": "SN123",
+    "BatchID": "BATCH-2026-01",
+    "MadeBy": "AcmeElectronics",
+    "MadeAtSite": "FactoryBE01",
+    "ManufactureDate": "2026-01-15",
+    "Category": "Smartphone",
+    "DigitalLink": "https://example.org/dpp/ACME-X1000-SN123"
+  },
+  "Components": [
+    {
+      "ID": "BatteryPack-01",
+      "Type": "Battery",
+      "MassG": 48,
+      "RecycledMassG": 0,
+      "Replaceable": true,
+      "ContainsMaterial": [
+        "Lithium",
+        "Cobalt",
+        "Nickel"
+      ]
+    },
+    {
+      "ID": "Chassis-01",
+      "Type": "Housing",
+      "MassG": 32,
+      "RecycledMassG": 12,
+      "Replaceable": false,
+      "ContainsMaterial": [
+        "Aluminium"
+      ]
+    },
+    {
+      "ID": "Mainboard-01",
+      "Type": "Electronics",
+      "MassG": 25,
+      "RecycledMassG": 2,
+      "Replaceable": false,
+      "ContainsMaterial": [
+        "Copper",
+        "GoldTrace"
+      ]
+    }
+  ],
+  "Materials": [
+    {
+      "ID": "Lithium",
+      "CriticalRawMaterial": true
+    },
+    {
+      "ID": "Cobalt",
+      "CriticalRawMaterial": true
+    },
+    {
+      "ID": "Nickel",
+      "CriticalRawMaterial": false
+    },
+    {
+      "ID": "Aluminium",
+      "CriticalRawMaterial": false
+    },
+    {
+      "ID": "Copper",
+      "CriticalRawMaterial": false
+    },
+    {
+      "ID": "GoldTrace",
+      "CriticalRawMaterial": false
+    }
+  ],
+  "Documents": [
+    {
+      "ID": "Doc-UserManual",
+      "DocType": "UserManual",
+      "URL": "https://example.org/manuals/acme-x1000",
+      "Section": "public",
+      "Declares": []
+    },
+    {
+      "ID": "Doc-RepairGuide",
+      "DocType": "RepairGuide",
+      "URL": "https://example.org/repair/acme-x1000",
+      "Section": "public",
+      "Declares": [
+        "BatteryReplacementSupported"
+      ]
+    },
+    {
+      "ID": "Doc-SpareParts",
+      "DocType": "SparePartsCatalog",
+      "URL": "https://example.org/spares/acme-x1000",
+      "Section": "public",
+      "Declares": []
+    },
+    {
+      "ID": "Doc-DoC-CE",
+      "DocType": "DeclarationOfConformity",
+      "URL": "https://example.org/restricted/doc/acme-x1000-ce",
+      "Section": "restricted",
+      "Declares": []
+    },
+    {
+      "ID": "Doc-SubstanceDeclaration",
+      "DocType": "SubstanceDeclaration",
+      "URL": "https://example.org/restricted/doc/acme-x1000-substances",
+      "Section": "restricted",
+      "Declares": []
+    }
+  ],
+  "Lifecycle": [
+    {
+      "ID": "Event-Mfg-01",
+      "Type": "ManufacturingEvent",
+      "ForProduct": "ACME-X1000-SN123",
+      "PerformedBy": "AcmeElectronics",
+      "AtSite": "FactoryBE01",
+      "OnDate": "2026-01-15",
+      "ReplacedComponent": "",
+      "Section": "restricted"
+    },
+    {
+      "ID": "Event-Sale-01",
+      "Type": "SaleEvent",
+      "ForProduct": "ACME-X1000-SN123",
+      "PerformedBy": "",
+      "AtSite": "",
+      "OnDate": "2026-01-25",
+      "ReplacedComponent": "",
+      "Section": "public"
+    },
+    {
+      "ID": "Event-Repair-01",
+      "Type": "RepairEvent",
+      "ForProduct": "ACME-X1000-SN123",
+      "PerformedBy": "RepairShop1",
+      "AtSite": "",
+      "OnDate": "2026-02-05",
+      "ReplacedComponent": "BatteryPack-01",
+      "Section": "restricted"
+    }
+  ],
+  "Footprint": {
+    "ManufacturingGCO2e": 32000,
+    "TransportGCO2e": 2500,
+    "UsePhaseGCO2e": 18000
+  },
+  "Expected": {
+    "TotalMassG": 105,
+    "RecycledMassG": 14,
+    "RecycledContentPct": 13,
+    "LifecycleGCO2e": 52500,
+    "CircularityHint": "repairFriendly",
+    "CriticalRawMaterial": true
+  }
+}

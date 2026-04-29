@@ -172,6 +172,65 @@ func printBoard(board []int) {
 	fmt.Println("]")
 }
 
+func renderReason(n int) {
+	fmt.Println()
+	fmt.Println("=== Reason Why ===")
+	fmt.Printf("The solver places one queen per row on a %dx%d board.\n", n, n)
+	fmt.Println("At each row it uses bit masks for occupied columns and both diagonal directions to enumerate only safe candidate columns.")
+	fmt.Println("Counting continues after the printed solution limit, so the total solution count remains complete.")
+}
+
+func renderChecks(n int, count uint64, stats SolveStats) {
+	fmt.Println()
+	fmt.Println("=== Check ===")
+	fmt.Printf("C1 %s - search reached depth %d.\n", statusWord(stats.MaxDepth == n || n == 0), stats.MaxDepth)
+	fmt.Printf("C2 %s - first solution places one queen in each row.\n", statusWord(len(stats.FirstSolution) == n || count == 0))
+	fmt.Printf("C3 %s - first solution columns are unique.\n", statusWord(columnsUnique(stats.FirstSolution)))
+	fmt.Printf("C4 %s - no pair of queens in the first solution shares a diagonal.\n", statusWord(diagonalsSafe(stats.FirstSolution)))
+	if n == 8 {
+		fmt.Printf("C5 %s - counted %d solutions for the normalized 8-Queens input.\n", statusWord(count == 92), count)
+	} else {
+		fmt.Printf("C5 %s - counted %d solutions for the normalized N-Queens input.\n", statusWord(count > 0 || n == 0), count)
+	}
+}
+
+func columnsUnique(board []int) bool {
+	seen := map[int]bool{}
+	for _, col := range board {
+		if seen[col] {
+			return false
+		}
+		seen[col] = true
+	}
+	return true
+}
+
+func diagonalsSafe(board []int) bool {
+	for r1, c1 := range board {
+		for r2 := r1 + 1; r2 < len(board); r2++ {
+			c2 := board[r2]
+			if abs(r1-r2) == abs(c1-c2) {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+func abs(value int) int {
+	if value < 0 {
+		return -value
+	}
+	return value
+}
+
+func statusWord(ok bool) string {
+	if ok {
+		return "OK"
+	}
+	return "FAIL"
+}
+
 // renderGoAuditDetails prints implementation-specific details that help verify
 // what was solved and how the search behaved. These lines are diagnostic rather
 // than part of the mathematical N-Queens answer.
@@ -249,6 +308,9 @@ func main() {
 		maxPrint = parsed
 	}
 
+	fmt.Println("=== 8-Queens ===")
+	fmt.Println()
+	fmt.Println("=== Answer ===")
 	fmt.Printf("Solving %d-Queens...\n", n)
 	fmt.Printf("Printing at most %d solution(s).\n", maxPrint)
 	fmt.Println()
@@ -256,5 +318,7 @@ func main() {
 	count, stats := solveNQueens(n, maxPrint)
 
 	fmt.Printf("Total solutions for %d-Queens: %d\n", n, count)
+	renderReason(n)
+	renderChecks(n, count, stats)
 	renderGoAuditDetails(n, maxPrint, count, stats)
 }

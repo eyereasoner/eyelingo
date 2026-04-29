@@ -623,8 +623,9 @@ func noticeDaysFromInformDuty(duties []Duty) (int, bool) {
 
 // renderRankedReport mirrors the N3 `log:outputString` formatting.
 func renderRankedReport(data Dataset, risks []Risk) {
-	fmt.Println()
 	fmt.Println("=== Ranked DPV Risk Report ===")
+	fmt.Println()
+	fmt.Println("=== Answer ===")
 	fmt.Printf("Agreement: %s\n", data.Agreement.Title)
 	fmt.Printf("Profile: %s\n\n", data.Consumer.Title)
 
@@ -642,6 +643,33 @@ func renderRankedReport(data Dataset, risks []Risk) {
 			fmt.Printf(" - mitigation for clause %s: %s\n", risk.Clause.ID, mitigation.Description)
 		}
 	}
+}
+
+func renderReason(data Dataset, risks []Risk) {
+	fmt.Println()
+	fmt.Println("=== Reason Why ===")
+	fmt.Println("The agreement policy is scanned for permissions and prohibitions that conflict with the consumer profile needs.")
+	fmt.Println("Each triggered rule derives a risk row with a normalized score, a source clause, and one or more mitigation measures.")
+	fmt.Println("Rows are sorted by descending score so the highest-risk clauses are reviewed first.")
+}
+
+func renderChecks(data Dataset, risks []Risk) {
+	levelCounts := riskLevelCounts(risks)
+	minScore, maxScore := scoreRange(risks)
+	fmt.Println()
+	fmt.Println("=== Check ===")
+	fmt.Printf("C1 %s - %d risk rows were derived.\n", checkStatus(len(risks) == 4), len(risks))
+	fmt.Printf("C2 %s - ranked output is in descending score order.\n", checkStatus(rankedDescending(risks)))
+	fmt.Printf("C3 %s - score range is %d to %d.\n", checkStatus(minScore == 70 && maxScore == 100), minScore, maxScore)
+	fmt.Printf("C4 %s - high=%d moderate=%d low=%d risk levels were derived.\n", checkStatus(levelCounts["risk:HighRisk"] == 3 && levelCounts["risk:ModerateRisk"] == 1), levelCounts["risk:HighRisk"], levelCounts["risk:ModerateRisk"], levelCounts["risk:LowRisk"])
+	fmt.Printf("C5 %s - %d mitigation measures were generated.\n", checkStatus(countMitigations(risks) == 5), countMitigations(risks))
+}
+
+func checkStatus(ok bool) string {
+	if ok {
+		return "OK"
+	}
+	return "FAIL"
 }
 
 // renderAuditDetails is extra Go-side output that makes the translation easier
@@ -849,6 +877,8 @@ func main() {
 	}
 
 	renderRankedReport(data, risks)
+	renderReason(data, risks)
+	renderChecks(data, risks)
 	renderAuditDetails(data, risks)
 
 	// Keep boolValue referenced because the fixture uses boolean operands in the
