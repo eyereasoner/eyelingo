@@ -333,83 +333,83 @@ func renderArcOutput(
 	// --- Answer ---
 	fmt.Println("## Answer")
 	// Describe the capture move
-	fmt.Printf("- Move 1: %s at (%d,%d) is %s.\n",
+	fmt.Printf("Move 1: %s at (%d,%d) is %s.\n",
 		moveCapture.Player.GoString(), moveCapture.Row, moveCapture.Col,
 		resCapture.Description)
-	fmt.Println("- Board after White's capture:")
+	fmt.Println("Board after White's capture:")
 	fmt.Println(resCapture.BoardAfter.boardStringFormat())
 
 	// Describe the attempted recapture
 	if resRecapture.KoIllegal {
-		fmt.Printf("- Move 2: %s at (%d,%d) is ILLEGAL (ko).\n",
+		fmt.Printf("Move 2: %s at (%d,%d) is ILLEGAL (ko).\n",
 			moveRecapture.Player.GoString(), moveRecapture.Row, moveRecapture.Col)
 		fmt.Println("The board remains as after Move 1.")
 	} else {
-		fmt.Printf("- Move 2: %s at (%d,%d) is legal.\n",
+		fmt.Printf("Move 2: %s at (%d,%d) is legal.\n",
 			moveRecapture.Player.GoString(), moveRecapture.Row, moveRecapture.Col)
-		fmt.Println("- Board after recapture (should not happen here):")
+		fmt.Println("Board after recapture (should not happen here):")
 		fmt.Println(resRecapture.BoardAfter.boardStringFormat())
 	}
 	fmt.Println()
 
 	// --- Reason Why ---
 	fmt.Println("## Reason why")
-	fmt.Println("- In Go, a ko occurs when:")
+	fmt.Println("In Go, a ko occurs when:")
 	fmt.Println("1. A player captures exactly one stone.")
 	fmt.Println("2. After the capture, the capturing stone is left with exactly one liberty.")
 	fmt.Println("3. If the opponent immediately recaptures, the board would return to its")
 	fmt.Println("   exact state before the first capture.")
 	fmt.Println("The ko rule forbids such an immediate recapture to prevent infinite loops.")
 	fmt.Println()
-	fmt.Println("- In this scenario:")
-	fmt.Println("- The Black stone at (1,0) had only one liberty (1,1).")
-	fmt.Println("- White captured it by playing at (1,1), removing the Black stone.")
-	fmt.Println("- The White stone at (1,1) now had only one liberty (1,0).")
-	fmt.Println("- If Black were allowed to play at (1,0), it would capture the White stone")
+	fmt.Println("In this scenario:")
+	fmt.Println("The Black stone at (1,0) had only one liberty (1,1).")
+	fmt.Println("White captured it by playing at (1,1), removing the Black stone.")
+	fmt.Println("The White stone at (1,1) now had only one liberty (1,0).")
+	fmt.Println("If Black were allowed to play at (1,0), it would capture the White stone")
 	fmt.Println("  and the board would look identical to how it was before White's capture.")
-	fmt.Println("- Therefore, Black's immediate recapture is illegal under the ko rule.")
+	fmt.Println("Therefore, Black's immediate recapture is illegal under the ko rule.")
 	fmt.Println()
 
 	// --- Check ---
 	fmt.Println("## Check")
-	fmt.Printf("- C1 OK - Black stone had exactly 1 liberty before capture (count=%d).\n",
+	fmt.Printf("C1 OK - Black stone had exactly 1 liberty before capture (count=%d).\n",
 		cks.BlackStoneLibertyBefore)
 	if cks.WhiteCaptureLegal {
-		fmt.Println("- C2 OK - White's capture move was legal.")
+		fmt.Println("C2 OK - White's capture move was legal.")
 	} else {
-		fmt.Println("- C2 FAIL - White's capture move not legal.")
+		fmt.Println("C2 FAIL - White's capture move not legal.")
 	}
 	if cks.CaptureOccurred {
-		fmt.Println("- C3 OK - At least one stone was captured.")
+		fmt.Println("C3 OK - At least one stone was captured.")
 	} else {
-		fmt.Println("- C3 FAIL - No capture occurred.")
+		fmt.Println("C3 FAIL - No capture occurred.")
 	}
-	fmt.Printf("- C4 OK - After capture, White stone at (1,1) has exactly 1 liberty (count=%d).\n",
+	fmt.Printf("C4 OK - After capture, White stone at (1,1) has exactly 1 liberty (count=%d).\n",
 		cks.WhiteStoneLibertyAfter)
 	if cks.KoIllegalDetected {
-		fmt.Println("- C5 OK - Black's immediate recapture was correctly flagged as ko‑illegal.")
+		fmt.Println("C5 OK - Black's immediate recapture was correctly flagged as ko‑illegal.")
 	} else {
-		fmt.Println("- C5 FAIL - Ko detection did not work.")
+		fmt.Println("C5 FAIL - Ko detection did not work.")
 	}
 	fmt.Println()
 
 	// --- Go audit details ---
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Println("- initial board:")
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Println("initial board:")
 	fmt.Print(boardBefore.boardStringFormat())
-	fmt.Printf("- move 1 : %s (%d,%d) -> %s\n",
+	fmt.Printf("move 1 : %s (%d,%d) -> %s\n",
 		moveCapture.Player.GoString(), moveCapture.Row, moveCapture.Col,
 		resCapture.Description)
 	if len(resCapture.CapturedPos) > 0 {
 		fmt.Printf("  captured at: %s\n", strings.Join(resCapture.CapturedPos, ", "))
 	}
-	fmt.Printf("- move 2 attempt: %s (%d,%d) -> %s\n",
+	fmt.Printf("move 2 attempt: %s (%d,%d) -> %s\n",
 		moveRecapture.Player.GoString(), moveRecapture.Row, moveRecapture.Col,
 		resRecapture.IllegalReason)
-	fmt.Printf("- ko detection : %v\n", resRecapture.KoIllegal)
-	fmt.Printf("- checks passed : %d/5\n", checkCount(cks))
-	fmt.Printf("- recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
+	fmt.Printf("ko detection : %v\n", resRecapture.KoIllegal)
+	fmt.Printf("checks passed : %d/5\n", checkCount(cks))
+	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
 }
 
 // boardStringFormat returns a formatted board representation.

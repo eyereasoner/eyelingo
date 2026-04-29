@@ -523,10 +523,10 @@ func printAnswer(ds Dataset, analysis Analysis) {
 	fmt.Println()
 	fmt.Println("## Answer")
 	fmt.Println(ds.Question)
-	fmt.Printf("- permit count : %d\n", analysis.PermitCount)
-	fmt.Printf("- deny count : %d\n", analysis.DenyCount)
+	fmt.Printf("permit count : %d\n", analysis.PermitCount)
+	fmt.Printf("deny count : %d\n", analysis.DenyCount)
 	fmt.Println()
-	fmt.Println("- Scenario decisions:")
+	fmt.Println("Scenario decisions:")
 	for _, result := range analysis.Results {
 		policy := "no policy matched"
 		if result.MatchedPolicyUID != "" {
@@ -574,16 +574,16 @@ func printAudit(ds Dataset, analysis Analysis) {
 	passed := countPassed(analysis.Checks)
 
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- source file : %s\n", sourceFile)
-	fmt.Printf("- case : %s\n", ds.CaseName)
-	fmt.Printf("- scenario count : %d\n", len(analysis.Results))
-	fmt.Printf("- policy count : %d\n", len(ds.Policies))
-	fmt.Printf("- policy uids : %s\n", joinStrings(analysis.PolicyUIDs, ","))
-	fmt.Printf("- permit count : %d\n", analysis.PermitCount)
-	fmt.Printf("- deny count : %d\n", analysis.DenyCount)
-	fmt.Printf("- checks passed : %d/%d\n", passed, len(analysis.Checks))
-	fmt.Printf("- all checks pass : %s\n", yesNo(passed == len(analysis.Checks)))
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("source file : %s\n", sourceFile)
+	fmt.Printf("case : %s\n", ds.CaseName)
+	fmt.Printf("scenario count : %d\n", len(analysis.Results))
+	fmt.Printf("policy count : %d\n", len(ds.Policies))
+	fmt.Printf("policy uids : %s\n", joinStrings(analysis.PolicyUIDs, ","))
+	fmt.Printf("permit count : %d\n", analysis.PermitCount)
+	fmt.Printf("deny count : %d\n", analysis.DenyCount)
+	fmt.Printf("checks passed : %d/%d\n", passed, len(analysis.Checks))
+	fmt.Printf("all checks pass : %s\n", yesNo(passed == len(analysis.Checks)))
 }
 
 func resultsByKey(results []ScenarioResult) map[string]ScenarioResult {

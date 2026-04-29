@@ -541,11 +541,11 @@ func renderAnswer(data Dataset, markers []Marker, panel Panel, pairs []Pair) {
 	fmt.Println()
 	fmt.Println("## Answer")
 	fmt.Printf("The exact marker panel uses %d genes and separates all %d cell-type pairs.\n", len(panel.MarkerIndexes), len(pairs))
-	fmt.Printf("- case : %s\n", data.CaseName)
-	fmt.Printf("- positive anchors : %d/%d cell populations\n", bits.OnesCount16(panel.AnchorMask), len(data.CellTypes))
-	fmt.Printf("- assay cost : %d\n\n", panel.Cost)
+	fmt.Printf("case : %s\n", data.CaseName)
+	fmt.Printf("positive anchors : %d/%d cell populations\n", bits.OnesCount16(panel.AnchorMask), len(data.CellTypes))
+	fmt.Printf("assay cost : %d\n\n", panel.Cost)
 
-	fmt.Println("- Selected panel:")
+	fmt.Println("Selected panel:")
 	for _, markerIndex := range sortedPanelMarkerIndexes(data, markers, panel) {
 		marker := markers[markerIndex]
 		gene := data.Genes[marker.GeneIndex]
@@ -553,27 +553,27 @@ func renderAnswer(data Dataset, markers []Marker, panel Panel, pairs []Pair) {
 		if anchors == "" {
 			anchors = "none"
 		}
-		fmt.Printf(" - %s (%s) anchors=%s pairSeparations=%d\n", gene.ID, gene.Label, anchors, bits.OnesCount64(marker.PairMask))
+		fmt.Printf("%s (%s) anchors=%s pairSeparations=%d\n", gene.ID, gene.Label, anchors, bits.OnesCount64(marker.PairMask))
 	}
 }
 
 func renderReason(data Dataset, markers []Marker, dominated []DominatedMarker, panel Panel, pairs []Pair, stats SearchStats, minimalSubsets int) {
 	fmt.Println()
 	fmt.Println("## Reason why")
-	fmt.Println("- Candidate genes are first filtered by assay policy: housekeeping, ribosomal, mitochondrial-stress, and ambient-RNA features cannot be used as lineage markers. Each remaining gene then derives two facts: which cell-type pairs it separates by the expression-gap threshold, and which cell type, if any, it positively anchors with low off-target signal. Dominated backup markers are removed before an exact branch-and-bound search solves the paired set-cover goal.")
-	fmt.Printf("- cell populations : %d\n", len(data.CellTypes))
-	fmt.Printf("- cell-type pairs : %d\n", len(pairs))
-	fmt.Printf("- candidate genes : %d\n", len(data.Genes))
-	fmt.Printf("- usable after QC : %d\n", countUsable(data.Genes))
-	fmt.Printf("- dominated markers pruned : %d\n", len(dominated))
-	fmt.Printf("- retained markers searched : %d\n", stats.RetainedMarkers)
-	fmt.Printf("- search states visited : %d\n", stats.StatesVisited)
-	fmt.Printf("- branch-and-bound prunes : impossible=%d size=%d lowerBound=%d\n", stats.ImpossiblePrunes, stats.SizePrunes, stats.LowerBoundPrunes)
-	fmt.Printf("- minimality subsets checked : %d\n", minimalSubsets)
-	fmt.Printf("- panel pair margin sum : %d\n", panel.PairMarginSum)
-	fmt.Printf("- panel anchor margin sum : %d\n", panel.AnchorMarginSum)
+	fmt.Println("Candidate genes are first filtered by assay policy: housekeeping, ribosomal, mitochondrial-stress, and ambient-RNA features cannot be used as lineage markers. Each remaining gene then derives two facts: which cell-type pairs it separates by the expression-gap threshold, and which cell type, if any, it positively anchors with low off-target signal. Dominated backup markers are removed before an exact branch-and-bound search solves the paired set-cover goal.")
+	fmt.Printf("cell populations : %d\n", len(data.CellTypes))
+	fmt.Printf("cell-type pairs : %d\n", len(pairs))
+	fmt.Printf("candidate genes : %d\n", len(data.Genes))
+	fmt.Printf("usable after QC : %d\n", countUsable(data.Genes))
+	fmt.Printf("dominated markers pruned : %d\n", len(dominated))
+	fmt.Printf("retained markers searched : %d\n", stats.RetainedMarkers)
+	fmt.Printf("search states visited : %d\n", stats.StatesVisited)
+	fmt.Printf("branch-and-bound prunes : impossible=%d size=%d lowerBound=%d\n", stats.ImpossiblePrunes, stats.SizePrunes, stats.LowerBoundPrunes)
+	fmt.Printf("minimality subsets checked : %d\n", minimalSubsets)
+	fmt.Printf("panel pair margin sum : %d\n", panel.PairMarginSum)
+	fmt.Printf("panel anchor margin sum : %d\n", panel.AnchorMarginSum)
 
-	fmt.Println("- Derived positive anchors:")
+	fmt.Println("Derived positive anchors:")
 	for _, markerIndex := range sortedPanelMarkerIndexes(data, markers, panel) {
 		marker := markers[markerIndex]
 		gene := data.Genes[marker.GeneIndex]
@@ -582,7 +582,7 @@ func renderReason(data Dataset, markers []Marker, dominated []DominatedMarker, p
 		}
 		for ci := range data.CellTypes {
 			if marker.AnchorMask&(1<<ci) != 0 {
-				fmt.Printf(" - %s anchors %s: on=%d maxOff=%d margin=%d\n", gene.ID, data.CellTypes[ci].ID, gene.Expression[ci], maxOffTarget(gene, ci), anchorMargin(gene, ci))
+				fmt.Printf("%s anchors %s: on=%d maxOff=%d margin=%d\n", gene.ID, data.CellTypes[ci].ID, gene.Expression[ci], maxOffTarget(gene, ci), anchorMargin(gene, ci))
 			}
 		}
 	}
@@ -617,56 +617,56 @@ func renderChecks(checks Checks) {
 func renderAudit(data Dataset, markers []Marker, dominated []DominatedMarker, panel Panel, pairs []Pair, stats SearchStats, checks Checks) {
 	fmt.Println()
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- question : %s\n", data.Question)
-	fmt.Printf("- cell populations : %d\n", len(data.CellTypes))
-	fmt.Printf("- pairwise separation obligations : %d\n", len(pairs))
-	fmt.Printf("- separation threshold : %d\n", separationThreshold)
-	fmt.Printf("- anchor rule : on >= %d and every off-target <= %d\n", anchorHigh, anchorMaxOffTarget)
-	fmt.Printf("- genes in fixture : %d\n", len(data.Genes))
-	fmt.Printf("- usable genes : %d\n", countUsable(data.Genes))
-	fmt.Printf("- excluded genes : %d\n", len(data.Genes)-countUsable(data.Genes))
-	fmt.Printf("- dominated genes pruned : %d\n", len(dominated))
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("question : %s\n", data.Question)
+	fmt.Printf("cell populations : %d\n", len(data.CellTypes))
+	fmt.Printf("pairwise separation obligations : %d\n", len(pairs))
+	fmt.Printf("separation threshold : %d\n", separationThreshold)
+	fmt.Printf("anchor rule : on >= %d and every off-target <= %d\n", anchorHigh, anchorMaxOffTarget)
+	fmt.Printf("genes in fixture : %d\n", len(data.Genes))
+	fmt.Printf("usable genes : %d\n", countUsable(data.Genes))
+	fmt.Printf("excluded genes : %d\n", len(data.Genes)-countUsable(data.Genes))
+	fmt.Printf("dominated genes pruned : %d\n", len(dominated))
 	for _, dom := range dominated {
-		fmt.Printf(" - %s dominated by %s pairSeparations=%d anchors=%d\n", data.Genes[dom.GeneIndex].ID, data.Genes[dom.DominatedBy].ID, dom.PairCoverage, dom.AnchorCoverage)
+		fmt.Printf("%s dominated by %s pairSeparations=%d anchors=%d\n", data.Genes[dom.GeneIndex].ID, data.Genes[dom.DominatedBy].ID, dom.PairCoverage, dom.AnchorCoverage)
 	}
-	fmt.Printf("- retained search genes : %d\n", stats.RetainedMarkers)
-	fmt.Printf("- selected genes : %s\n", panelGeneList(data, markers, panel))
-	fmt.Printf("- selected gene count : %d\n", len(panel.MarkerIndexes))
-	fmt.Printf("- selected assay cost : %d\n", panel.Cost)
-	fmt.Printf("- covered pair mask : %0*b\n", len(pairs), panel.PairMask)
-	fmt.Printf("- covered anchor mask : %0*b\n", len(data.CellTypes), panel.AnchorMask)
-	fmt.Printf("- pair margin sum : %d\n", panel.PairMarginSum)
-	fmt.Printf("- anchor margin sum : %d\n", panel.AnchorMarginSum)
-	fmt.Println("- cell signatures:")
+	fmt.Printf("retained search genes : %d\n", stats.RetainedMarkers)
+	fmt.Printf("selected genes : %s\n", panelGeneList(data, markers, panel))
+	fmt.Printf("selected gene count : %d\n", len(panel.MarkerIndexes))
+	fmt.Printf("selected assay cost : %d\n", panel.Cost)
+	fmt.Printf("covered pair mask : %0*b\n", len(pairs), panel.PairMask)
+	fmt.Printf("covered anchor mask : %0*b\n", len(data.CellTypes), panel.AnchorMask)
+	fmt.Printf("pair margin sum : %d\n", panel.PairMarginSum)
+	fmt.Printf("anchor margin sum : %d\n", panel.AnchorMarginSum)
+	fmt.Println("cell signatures:")
 	for ci, cell := range data.CellTypes {
-		fmt.Printf(" - %s %-16s %s\n", cell.ID, cell.Label, expressionSignature(data, markers, panel, ci))
+		fmt.Printf("%s %-16s %s\n", cell.ID, cell.Label, expressionSignature(data, markers, panel, ci))
 	}
-	fmt.Println("- retained gene coverage:")
+	fmt.Println("retained gene coverage:")
 	for _, marker := range sortedMarkersByFixtureOrder(data, markers) {
 		gene := data.Genes[marker.GeneIndex]
-		fmt.Printf(" - %s pairSeparations=%d anchors=%s cost=%d\n", gene.ID, bits.OnesCount64(marker.PairMask), anchorLabels(data, marker.AnchorMask), gene.AssayCost)
+		fmt.Printf("%s pairSeparations=%d anchors=%s cost=%d\n", gene.ID, bits.OnesCount64(marker.PairMask), anchorLabels(data, marker.AnchorMask), gene.AssayCost)
 	}
-	fmt.Println("- excluded gene reasons:")
+	fmt.Println("excluded gene reasons:")
 	for _, gene := range data.Genes {
 		if gene.ExcludedReason != "" || !gene.Stable || !gene.Assayable {
 			reason := gene.ExcludedReason
 			if reason == "" {
 				reason = "failed stability or assayability rule"
 			}
-			fmt.Printf(" - %s : %s\n", gene.ID, reason)
+			fmt.Printf("%s : %s\n", gene.ID, reason)
 		}
 	}
-	fmt.Printf("- search states visited : %d\n", stats.StatesVisited)
-	fmt.Printf("- leaf states reached : %d\n", stats.LeafStates)
-	fmt.Printf("- include branches : %d\n", stats.IncludeBranches)
-	fmt.Printf("- exclude branches : %d\n", stats.ExcludeBranches)
-	fmt.Printf("- impossible prunes : %d\n", stats.ImpossiblePrunes)
-	fmt.Printf("- size prunes : %d\n", stats.SizePrunes)
-	fmt.Printf("- lower-bound prunes : %d\n", stats.LowerBoundPrunes)
-	fmt.Printf("- complete solutions found : %d\n", stats.SolutionsFound)
-	fmt.Printf("- checks passed : %d/9\n", countChecks(checks))
-	fmt.Printf("- all checks pass : %s\n", yesNo(countChecks(checks) == 9))
+	fmt.Printf("search states visited : %d\n", stats.StatesVisited)
+	fmt.Printf("leaf states reached : %d\n", stats.LeafStates)
+	fmt.Printf("include branches : %d\n", stats.IncludeBranches)
+	fmt.Printf("exclude branches : %d\n", stats.ExcludeBranches)
+	fmt.Printf("impossible prunes : %d\n", stats.ImpossiblePrunes)
+	fmt.Printf("size prunes : %d\n", stats.SizePrunes)
+	fmt.Printf("lower-bound prunes : %d\n", stats.LowerBoundPrunes)
+	fmt.Printf("complete solutions found : %d\n", stats.SolutionsFound)
+	fmt.Printf("checks passed : %d/9\n", countChecks(checks))
+	fmt.Printf("all checks pass : %s\n", yesNo(countChecks(checks) == 9))
 }
 
 func sortedPanelMarkerIndexes(data Dataset, markers []Marker, panel Panel) []int {

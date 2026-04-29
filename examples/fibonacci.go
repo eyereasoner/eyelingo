@@ -183,7 +183,7 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
 
 	// --- Answer ---
 	fmt.Println("## Answer")
-	fmt.Printf("- The Fibonacci number for index %d is:\n", target)
+	fmt.Printf("The Fibonacci number for index %d is:\n", target)
 	fmt.Println(seq[target].String())
 	fmt.Println()
 
@@ -199,43 +199,43 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
 	// --- Check ---
 	fmt.Println("## Check")
 	if cks.BaseCasesCorrect {
-		fmt.Println("- C1 OK - base cases F(0)=0 and F(1)=1 hold.")
+		fmt.Println("C1 OK - base cases F(0)=0 and F(1)=1 hold.")
 	} else {
-		fmt.Println("- C1 FAIL - base cases incorrect.")
+		fmt.Println("C1 FAIL - base cases incorrect.")
 	}
 	if cks.RecurrenceHolds {
-		fmt.Println("- C2 OK - recurrence holds for all computed steps.")
+		fmt.Println("C2 OK - recurrence holds for all computed steps.")
 	} else {
-		fmt.Println("- C2 FAIL - recurrence violated.")
+		fmt.Println("C2 FAIL - recurrence violated.")
 	}
 	if cks.AllTargetsMatch {
-		fmt.Println("- C3 OK - all requested Fibonacci numbers match expected values:")
+		fmt.Println("C3 OK - all requested Fibonacci numbers match expected values:")
 		// Print in sorted order to guarantee stable output
 		for _, idx := range sortedKeys(expected) {
 			fmt.Printf("    F(%d) = %s\n", idx, abbreviated(seq[idx]))
 		}
 	} else {
-		fmt.Println("- C3 FAIL - at least one target value does not match.")
+		fmt.Println("C3 FAIL - at least one target value does not match.")
 	}
 	if cks.NonNegative {
-		fmt.Println("- C4 OK - all Fibonacci numbers are non‑negative.")
+		fmt.Println("C4 OK - all Fibonacci numbers are non‑negative.")
 	} else {
-		fmt.Println("- C4 FAIL - negative value encountered.")
+		fmt.Println("C4 FAIL - negative value encountered.")
 	}
 	if cks.MonotonicFromStart {
-		fmt.Println("- C5 OK - the sequence is non‑decreasing from F(2) onward.")
+		fmt.Println("C5 OK - the sequence is non‑decreasing from F(2) onward.")
 	} else {
-		fmt.Println("- C5 FAIL - monotonic property violated.")
+		fmt.Println("C5 FAIL - monotonic property violated.")
 	}
 	fmt.Println()
 
 	// --- Go audit details ---
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- max computed index : %d\n", target)
-	fmt.Printf("- computed F(%d) length : %d digits\n", target, len(seq[target].String()))
-	fmt.Printf("- checks passed : %d/5\n", checkCount(cks))
-	fmt.Printf("- recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("max computed index : %d\n", target)
+	fmt.Printf("computed F(%d) length : %d digits\n", target, len(seq[target].String()))
+	fmt.Printf("checks passed : %d/5\n", checkCount(cks))
+	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
 }
 
 func yesNo(value bool) string {

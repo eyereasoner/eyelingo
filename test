@@ -66,12 +66,25 @@ format_ms() {
 }
 
 # Keep comparisons stable across different Go versions, operating systems,
-# and CPU architectures while leaving all example-specific output intact.
+# CPU architectures, and Markdown hard-break spacing while leaving all
+# example-specific content intact.
 normalize() {
   sed -E \
+    -e 's/[[:space:]]+$//' \
+    -e 's/^[[:space:]]*-[[:space:]]+//' \
     -e 's/^platform : go[0-9][^[:space:]]* [^[:space:]]+\/[^[:space:]]+$/platform : <go-version> <os>\/<arch>/'
 }
 
+# Markdown collapses ordinary line breaks inside paragraphs. Snapshot files use
+# two trailing spaces on every non-empty line so rendered .md output keeps the
+# same readable line structure as the example stdout.
+markdown_hardbreaks() {
+  awk '{
+    sub(/[ \t]+$/, "")
+    sub(/^[ \t]*-[ \t]+/, "")
+    if ($0 == "") print ""; else print $0 "  "
+  }'
+}
 run_example() {
   local file=$1
   local name=${file%.go}
@@ -93,7 +106,7 @@ run_example() {
   total_ms=$(( total_ms + elapsed_ms ))
 
   if [ $UPDATE -eq 1 ] && [ $status -eq 0 ]; then
-    cp "$actual" "$expected"
+    markdown_hardbreaks < "$actual" > "$expected"
     printf '%s   %-*s %6sms updated\n' "$(ok)" "$name_width" "$name" "$elapsed_ms"
     return 0
   fi

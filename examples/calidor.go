@@ -448,42 +448,42 @@ func printAnswer(ds Dataset, analysis Analysis) {
 	fmt.Println("# Calidor")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Println("- Name: Calidor")
-	fmt.Printf("- Municipality: %s\n", ds.Insight.Municipality)
-	fmt.Printf("- Metric: %s\n", ds.Insight.Metric)
-	fmt.Printf("- Active need count: %d/%d\n", analysis.ActiveNeedCount, ds.MinimumActiveNeedCount)
+	fmt.Println("Name: Calidor")
+	fmt.Printf("Municipality: %s\n", ds.Insight.Municipality)
+	fmt.Printf("Metric: %s\n", ds.Insight.Metric)
+	fmt.Printf("Active need count: %d/%d\n", analysis.ActiveNeedCount, ds.MinimumActiveNeedCount)
 	if analysis.RecommendationFound {
-		fmt.Printf("- Recommended package: %s\n", analysis.RecommendedPackage.Name)
-		fmt.Printf("- Package cost: €%d\n", analysis.RecommendedPackage.CostEur)
+		fmt.Printf("Recommended package: %s\n", analysis.RecommendedPackage.Name)
+		fmt.Printf("Package cost: €%d\n", analysis.RecommendedPackage.CostEur)
 	} else {
-		fmt.Println("- Recommended package: none")
+		fmt.Println("Recommended package: none")
 	}
-	fmt.Printf("- Budget cap: €%d\n", ds.MaxPackageCostEur)
-	fmt.Printf("- Payload SHA-256: %s\n", ds.Signature.PayloadHashSHA256)
-	fmt.Printf("- Envelope HMAC-SHA-256: %s\n", ds.Signature.SignatureHMAC)
-	fmt.Printf("- decision : %s\n", allowedText(analysis.AuthorizationAllowed))
+	fmt.Printf("Budget cap: €%d\n", ds.MaxPackageCostEur)
+	fmt.Printf("Payload SHA-256: %s\n", ds.Signature.PayloadHashSHA256)
+	fmt.Printf("Envelope HMAC-SHA-256: %s\n", ds.Signature.SignatureHMAC)
+	fmt.Printf("decision : %s\n", allowedText(analysis.AuthorizationAllowed))
 	fmt.Println()
 }
 
 func printReason(ds Dataset, analysis Analysis) {
 	fmt.Println("## Reason why")
-	fmt.Printf("- question : %s\n", ds.Question)
+	fmt.Printf("question : %s\n", ds.Question)
 	fmt.Println("The gateway desensitizes local heat, vulnerability, and prepaid-energy stress into an expiring municipal support insight.")
-	fmt.Printf("- metric : %s\n", ds.Insight.Metric)
-	fmt.Printf("- threshold : %s\n", ds.Insight.ThresholdDisplay)
-	fmt.Printf("- scope : %s @ %s\n", ds.Insight.ScopeDevice, ds.Insight.ScopeEvent)
-	fmt.Printf("- required capabilities: %s\n", strings.Join(analysis.RequiredCapabilities, ", "))
+	fmt.Printf("metric : %s\n", ds.Insight.Metric)
+	fmt.Printf("threshold : %s\n", ds.Insight.ThresholdDisplay)
+	fmt.Printf("scope : %s @ %s\n", ds.Insight.ScopeDevice, ds.Insight.ScopeEvent)
+	fmt.Printf("required capabilities: %s\n", strings.Join(analysis.RequiredCapabilities, ", "))
 	fmt.Println()
 
 	for _, need := range analysis.Needs {
 		fmt.Printf("%s : %s - %s\n", need.Name, activeText(need.Active), need.Why)
 	}
-	fmt.Printf("- vulnerability flags kept local : %d\n", len(ds.VulnerabilityFlags))
-	fmt.Printf("- expires at : %s\n", ds.Insight.ExpiresAt)
+	fmt.Printf("vulnerability flags kept local : %d\n", len(ds.VulnerabilityFlags))
+	fmt.Printf("expires at : %s\n", ds.Insight.ExpiresAt)
 	fmt.Println()
 
-	fmt.Printf("- support policy : %s\n", ds.Insight.SupportPolicy)
-	fmt.Println("- candidate packages:")
+	fmt.Printf("support policy : %s\n", ds.Insight.SupportPolicy)
+	fmt.Println("candidate packages:")
 	for _, candidate := range analysis.Candidates {
 		marker := "reject"
 		if candidate.Eligible {
@@ -501,36 +501,36 @@ func printReason(ds Dataset, analysis Analysis) {
 	}
 	fmt.Printf("Usage is permitted only for purpose %q and the envelope expires at %s.\n", ds.Policy.PermissionPurpose, ds.Insight.ExpiresAt)
 	fmt.Printf("Tenant-screening reuse is blocked by a prohibition on %s for purpose %q.\n", ds.Policy.ProhibitionAction, ds.Policy.ProhibitionPurpose)
-	fmt.Printf("- reason.txt : %s\n", ds.ReasonText)
-	fmt.Printf("- dispatches logged : %d\n", ds.DispatchesLogged)
+	fmt.Printf("reason.txt : %s\n", ds.ReasonText)
+	fmt.Printf("dispatches logged : %d\n", ds.DispatchesLogged)
 	fmt.Println()
 }
 
 func printChecks(checks []Check) {
 	fmt.Println("## Check")
 	for _, check := range checks {
-		fmt.Printf("- %s %s - %s\n", check.Label, okText(check.OK), check.Text)
+		fmt.Printf("%s %s - %s\n", check.Label, okText(check.OK), check.Text)
 	}
 	fmt.Println()
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- source file : %s\n", sourceFile)
-	fmt.Printf("- case : %s\n", ds.CaseName)
-	fmt.Printf("- policy profile : %s\n", ds.Policy.Profile)
-	fmt.Printf("- packages : %d\n", len(ds.Packages))
-	fmt.Printf("- required capabilities : %d\n", len(analysis.RequiredCapabilities))
-	fmt.Printf("- active needs : %d/%d\n", analysis.ActiveNeedCount, ds.MinimumActiveNeedCount)
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("source file : %s\n", sourceFile)
+	fmt.Printf("case : %s\n", ds.CaseName)
+	fmt.Printf("policy profile : %s\n", ds.Policy.Profile)
+	fmt.Printf("packages : %d\n", len(ds.Packages))
+	fmt.Printf("required capabilities : %d\n", len(analysis.RequiredCapabilities))
+	fmt.Printf("active needs : %d/%d\n", analysis.ActiveNeedCount, ds.MinimumActiveNeedCount)
 	if analysis.RecommendationFound {
-		fmt.Printf("- recommended package id : %s\n", analysis.RecommendedPackage.PackageID)
+		fmt.Printf("recommended package id : %s\n", analysis.RecommendedPackage.PackageID)
 	} else {
-		fmt.Println("- recommended package id : none")
+		fmt.Println("recommended package id : none")
 	}
-	fmt.Printf("- dispatches logged : %d\n", ds.DispatchesLogged)
-	fmt.Printf("- checks passed : %d/%d\n", passedCount(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("- all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
+	fmt.Printf("dispatches logged : %d\n", ds.DispatchesLogged)
+	fmt.Printf("checks passed : %d/%d\n", passedCount(analysis.Checks), len(analysis.Checks))
+	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
 }
 
 func activeText(active bool) string {

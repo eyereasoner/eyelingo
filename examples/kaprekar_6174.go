@@ -246,12 +246,12 @@ func printAnswer(a Analysis) {
 	fmt.Println("# Kaprekar 6174")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Println("- Kaprekar chains that end at 6174 are emitted as :kaprekar facts.")
-	fmt.Printf("- total emitted : %d\n", a.Stats.ChainsEmitted)
-	fmt.Printf("- omitted 0000 basin : %d\n", a.Stats.ZeroBasinStarts)
-	fmt.Printf("- maximum steps to 6174 : %d\n", a.Stats.MaxStepsToTarget)
+	fmt.Println("Kaprekar chains that end at 6174 are emitted as :kaprekar facts.")
+	fmt.Printf("total emitted : %d\n", a.Stats.ChainsEmitted)
+	fmt.Printf("omitted 0000 basin : %d\n", a.Stats.ZeroBasinStarts)
+	fmt.Printf("maximum steps to 6174 : %d\n", a.Stats.MaxStepsToTarget)
 	fmt.Println()
-	fmt.Println("- Selected facts, shown with four-digit padding for readability:")
+	fmt.Println("Selected facts, shown with four-digit padding for readability:")
 	for _, start := range []int{1, 3524, 6174, 9831, 9998} {
 		if chain, ok := a.ByStart[start]; ok {
 			fmt.Printf("  %s :kaprekar (%s)\n", fourDigits(chain.Start), formatPath(chain.Path))
@@ -265,15 +265,15 @@ func printReason(a Analysis) {
 	fmt.Println("Each start is read as four digits, so 1 is treated as 0001.")
 	fmt.Println("The digits are sorted once, then the optimized identity computes the")
 	fmt.Println("same result as descending-number minus ascending-number.")
-	fmt.Println("- The search is bounded to seven steps, matching the N3 source: any")
+	fmt.Println("The search is bounded to seven steps, matching the N3 source: any")
 	fmt.Println("four-digit start that reaches 6174 does so within that bound.")
 	fmt.Println()
-	fmt.Println("- Step-count distribution for emitted starts:")
+	fmt.Println("Step-count distribution for emitted starts:")
 	for steps := 0; steps <= maxKaprekarSteps; steps++ {
 		fmt.Printf("  %d step(s) : %d start(s)\n", steps, a.Stats.HistogramByStepCount[steps])
 	}
 	fmt.Println()
-	fmt.Println("- Examples omitted because they fall to 0000:")
+	fmt.Println("Examples omitted because they fall to 0000:")
 	for _, start := range []int{0, 1111, 2222, 9999} {
 		fmt.Printf("  %s -> (%s)\n", fourDigits(start), formatPath(a.Omitted[start]))
 	}
@@ -294,19 +294,19 @@ func printChecks(checks []Check) {
 
 func printAudit(a Analysis) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Println("- source file : kaprekar-6174.n3")
-	fmt.Printf("- question : %s\n", a.Question)
-	fmt.Printf("- starts enumerated : %d\n", a.Stats.StartsEnumerated)
-	fmt.Printf("- optimized step checks : %d\n", a.Stats.IdentityChecks)
-	fmt.Printf("- direct step mismatches : %d\n", a.Stats.DirectStepMismatches)
-	fmt.Printf("- bounded step applications : %d\n", a.Stats.StepFactsComputed)
-	fmt.Printf("- emitted kaprekar facts : %d\n", a.Stats.ChainsEmitted)
-	fmt.Printf("- omitted zero-basin starts : %d\n", a.Stats.ZeroBasinStarts)
-	fmt.Printf("- max steps to target : %d\n", a.Stats.MaxStepsToTarget)
-	fmt.Printf("- histogram : %s\n", formatHistogram(a.Stats.HistogramByStepCount))
-	fmt.Printf("- checks passed : %d/%d\n", countChecks(a.Checks), len(a.Checks))
-	fmt.Printf("- all checks pass : %s\n", yesNo(allChecksOK(a.Checks)))
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Println("source file : kaprekar-6174.n3")
+	fmt.Printf("question : %s\n", a.Question)
+	fmt.Printf("starts enumerated : %d\n", a.Stats.StartsEnumerated)
+	fmt.Printf("optimized step checks : %d\n", a.Stats.IdentityChecks)
+	fmt.Printf("direct step mismatches : %d\n", a.Stats.DirectStepMismatches)
+	fmt.Printf("bounded step applications : %d\n", a.Stats.StepFactsComputed)
+	fmt.Printf("emitted kaprekar facts : %d\n", a.Stats.ChainsEmitted)
+	fmt.Printf("omitted zero-basin starts : %d\n", a.Stats.ZeroBasinStarts)
+	fmt.Printf("max steps to target : %d\n", a.Stats.MaxStepsToTarget)
+	fmt.Printf("histogram : %s\n", formatHistogram(a.Stats.HistogramByStepCount))
+	fmt.Printf("checks passed : %d/%d\n", countChecks(a.Checks), len(a.Checks))
+	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(a.Checks)))
 }
 
 func formatPath(path []int) string {

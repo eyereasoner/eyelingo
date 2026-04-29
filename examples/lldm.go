@@ -255,7 +255,7 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 		fmt.Printf("LLD Alarm = FALSE (discrepancy dCm = %.6f, threshold ±1.25)\n", res.D.D)
 	}
 	fmt.Println()
-	fmt.Println("- Key computed values:")
+	fmt.Println("Key computed values:")
 	fmt.Printf("  SL1 = %.6f  SL3 = SL4 = %.6f\n", res.D.CL1, res.D.CL3)
 	fmt.Printf("  p5  = (%.4f, %.4f)\n", res.D.P5x, res.D.P5y)
 	fmt.Printf("  p6  = (%.4f, %.4f)\n", res.D.P6x, res.D.P6y)
@@ -278,52 +278,52 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 	// --- Check ---
 	fmt.Println("## Check")
 	if checks.Perpendicular {
-		fmt.Println("- C1 OK - L1 is perpendicular to L3 and L4 (slopes product ≈ -1).")
+		fmt.Println("C1 OK - L1 is perpendicular to L3 and L4 (slopes product ≈ -1).")
 	} else {
-		fmt.Println("- C1 FAIL - L1 not perpendicular to L3/L4.")
+		fmt.Println("C1 FAIL - L1 not perpendicular to L3/L4.")
 	}
 	if checks.P5Intersection {
-		fmt.Println("- C2 OK - p5 lies on both L1 and L3.")
+		fmt.Println("C2 OK - p5 lies on both L1 and L3.")
 	} else {
-		fmt.Println("- C2 FAIL - p5 not incident on L1∩L3.")
+		fmt.Println("C2 FAIL - p5 not incident on L1∩L3.")
 	}
 	if checks.P6Intersection {
-		fmt.Println("- C3 OK - p6 lies on both L1 and L4.")
+		fmt.Println("C3 OK - p6 lies on both L1 and L4.")
 	} else {
-		fmt.Println("- C3 FAIL - p6 not incident on L1∩L4.")
+		fmt.Println("C3 FAIL - p6 not incident on L1∩L4.")
 	}
 	if checks.DistancesNonNegative {
-		fmt.Println("- C4 OK - squared distances are non‑negative.")
+		fmt.Println("C4 OK - squared distances are non‑negative.")
 	} else {
-		fmt.Println("- C4 FAIL - negative squared distance.")
+		fmt.Println("C4 FAIL - negative squared distance.")
 	}
 	if checks.DcmInRange {
-		fmt.Println("- C5 OK - dCm is a finite number.")
+		fmt.Println("C5 OK - dCm is a finite number.")
 	} else {
-		fmt.Println("- C5 FAIL - dCm is NaN or Inf.")
+		fmt.Println("C5 FAIL - dCm is NaN or Inf.")
 	}
 	fmt.Println()
 
 	// --- Go audit details ---
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- input points : p1(%.1f, %.1f) p2(%.1f, %.1f) p3(%.1f, %.1f) p4(%.1f, %.1f)\n",
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("input points : p1(%.1f, %.1f) p2(%.1f, %.1f) p3(%.1f, %.1f) p4(%.1f, %.1f)\n",
 		res.Input.P1x, res.Input.P1y,
 		res.Input.P2x, res.Input.P2y,
 		res.Input.P3x, res.Input.P3y,
 		res.Input.P4x, res.Input.P4y,
 	)
-	fmt.Printf("- cL1 (slope L1)          : %.8f\n", res.D.CL1)
-	fmt.Printf("- cL3 (slope L3, L4)      : %.8f\n", res.D.CL3)
-	fmt.Printf("- p5 (x, y)               : %.8f, %.8f\n", res.D.P5x, res.D.P5y)
-	fmt.Printf("- p6 (x, y)               : %.8f, %.8f\n", res.D.P6x, res.D.P6y)
-	fmt.Printf("- d53                     : %.8f cm\n", res.D.D53)
-	fmt.Printf("- d64                     : %.8f cm\n", res.D.D64)
-	fmt.Printf("- dCm (LL discrepancy)    : %.8f cm\n", res.D.D)
-	fmt.Printf("- alarm threshold         : ±1.25 cm\n")
-	fmt.Printf("- LLD alarm               : %v\n", res.Alarm)
-	fmt.Printf("- checks passed           : %d/5\n", checkCount(checks))
-	fmt.Printf("- recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
+	fmt.Printf("cL1 (slope L1)          : %.8f\n", res.D.CL1)
+	fmt.Printf("cL3 (slope L3, L4)      : %.8f\n", res.D.CL3)
+	fmt.Printf("p5 (x, y)               : %.8f, %.8f\n", res.D.P5x, res.D.P5y)
+	fmt.Printf("p6 (x, y)               : %.8f, %.8f\n", res.D.P6x, res.D.P6y)
+	fmt.Printf("d53                     : %.8f cm\n", res.D.D53)
+	fmt.Printf("d64                     : %.8f cm\n", res.D.D64)
+	fmt.Printf("dCm (LL discrepancy)    : %.8f cm\n", res.D.D)
+	fmt.Printf("alarm threshold         : ±1.25 cm\n")
+	fmt.Printf("LLD alarm               : %v\n", res.Alarm)
+	fmt.Printf("checks passed           : %d/5\n", checkCount(checks))
+	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
 }
 
 func yesNo(value bool) string {

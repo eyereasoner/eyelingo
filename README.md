@@ -27,6 +27,8 @@ The Go file contains the example logic and prints the original ARC-style report 
 
 The output is Markdown, with structured sections such as:
 
+Snapshot files use plain lines rather than Markdown list markers, and add two trailing spaces to every non-empty line so rendered Markdown keeps the same line breaks as stdout.
+
 ```md
 # Example Title
 

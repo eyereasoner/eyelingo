@@ -263,7 +263,7 @@ func renderArcOutput(d Dataset, path []Flight, cost float64, checks Checks) {
 	fmt.Println("# Brussels Beijing")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Printf("- Cheapest route from %s to %s (avoiding Turkish Airlines) costs €%.0f:\n%s\n",
+	fmt.Printf("Cheapest route from %s to %s (avoiding Turkish Airlines) costs €%.0f:\n%s\n",
 		d.Labels[d.StartCity], d.Labels[d.EndCity], cost, route)
 	fmt.Println()
 
@@ -278,46 +278,46 @@ func renderArcOutput(d Dataset, path []Flight, cost float64, checks Checks) {
 	// ========== Check ==========
 	fmt.Println("## Check")
 	if checks.C1PathExists {
-		fmt.Println("- C1 OK - a path exists between Brussels and Beijing.")
+		fmt.Println("C1 OK - a path exists between Brussels and Beijing.")
 	} else {
-		fmt.Println("- C1 FAIL - no path found.")
+		fmt.Println("C1 FAIL - no path found.")
 	}
 	if checks.C2CostMatches {
-		fmt.Println("- C2 OK - the total cost matches the computed optimal cost.")
+		fmt.Println("C2 OK - the total cost matches the computed optimal cost.")
 	} else {
-		fmt.Println("- C2 FAIL - cost mismatch.")
+		fmt.Println("C2 FAIL - cost mismatch.")
 	}
 	if checks.C3CheaperThanDirect {
-		fmt.Println("- C3 OK - the chosen path is cheaper than the direct flight (€800).")
+		fmt.Println("C3 OK - the chosen path is cheaper than the direct flight (€800).")
 	} else {
-		fmt.Println("- C3 FAIL - not cheaper than direct.")
+		fmt.Println("C3 FAIL - not cheaper than direct.")
 	}
 	if checks.C4AvoidsAirline {
-		fmt.Println("- C4 OK - the route does not use Turkish Airlines.")
+		fmt.Println("C4 OK - the route does not use Turkish Airlines.")
 	} else {
-		fmt.Println("- C4 FAIL - the route uses a banned airline.")
+		fmt.Println("C4 FAIL - the route uses a banned airline.")
 	}
 	if checks.C5IncludesStop {
-		fmt.Println("- C5 OK - the route passes through Frankfurt, the intended stop.")
+		fmt.Println("C5 OK - the route passes through Frankfurt, the intended stop.")
 	} else {
-		fmt.Println("- C5 FAIL - the route does not include the desired stop.")
+		fmt.Println("C5 FAIL - the route does not include the desired stop.")
 	}
 	fmt.Println()
 
 	// ========== Go audit details ==========
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- start city : %s\n", d.Labels[d.StartCity])
-	fmt.Printf("- end city   : %s\n", d.Labels[d.EndCity])
-	fmt.Printf("- total flights in network : %d\n", len(d.Flights))
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("start city : %s\n", d.Labels[d.StartCity])
+	fmt.Printf("end city   : %s\n", d.Labels[d.EndCity])
+	fmt.Printf("total flights in network : %d\n", len(d.Flights))
 	fmt.Println()
-	fmt.Println("- flight network:")
+	fmt.Println("flight network:")
 	formatFlightTable(d.Flights, d.Labels)
 	fmt.Println()
-	fmt.Printf("- optimal cost : €%.0f\n", cost)
-	fmt.Printf("- path length : %d segment(s)\n", len(path))
-	fmt.Printf("- checks passed : %d/5\n", checkCount(checks))
-	fmt.Printf("- recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
+	fmt.Printf("optimal cost : €%.0f\n", cost)
+	fmt.Printf("path length : %d segment(s)\n", len(path))
+	fmt.Printf("checks passed : %d/5\n", checkCount(checks))
+	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
 }
 
 func yesNo(b bool) string {

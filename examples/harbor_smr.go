@@ -298,50 +298,50 @@ func printChecks(analysis Analysis) {
 		if check.OK {
 			status = "OK"
 		}
-		fmt.Printf("- %s %s - %s\n", check.ID, status, check.Text)
+		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
 	}
 	fmt.Println()
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- case : %s\n", ds.CaseName)
-	fmt.Printf("- question : %s\n", ds.Question)
-	fmt.Printf("- hub : %s (%s, %s)\n", ds.Hub.ID, ds.Hub.Name, ds.Hub.Country)
-	fmt.Printf("- aggregate : available=%dMW reserve=%dMW cooling=%d%% outage=%v\n",
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("case : %s\n", ds.CaseName)
+	fmt.Printf("question : %s\n", ds.Question)
+	fmt.Printf("hub : %s (%s, %s)\n", ds.Hub.ID, ds.Hub.Name, ds.Hub.Country)
+	fmt.Printf("aggregate : available=%dMW reserve=%dMW cooling=%d%% outage=%v\n",
 		ds.Aggregate.AvailableFlexibleExportMW,
 		ds.Aggregate.ReserveMarginMW,
 		ds.Aggregate.CoolingMarginPct,
 		ds.Aggregate.PlannedOutage,
 	)
-	fmt.Printf("- insight : id=%s metric=%s export=%dMW target=%s\n",
+	fmt.Printf("insight : id=%s metric=%s export=%dMW target=%s\n",
 		ds.Insight.ID,
 		ds.Insight.Metric,
 		ds.Insight.ExportMW,
 		ds.Insight.TargetLoad,
 	)
-	fmt.Printf("- scope : device=%s event=%s start=%s expires=%s\n",
+	fmt.Printf("scope : device=%s event=%s start=%s expires=%s\n",
 		ds.Insight.ScopeDevice,
 		ds.Insight.ScopeEvent,
 		ds.Insight.WindowStart,
 		ds.Insight.ExpiresAt,
 	)
-	fmt.Printf("- request : action=%s purpose=%s requested=%dMW target=%s authAt=%s\n",
+	fmt.Printf("request : action=%s purpose=%s requested=%dMW target=%s authAt=%s\n",
 		ds.RequestAction,
 		ds.RequestPurpose,
 		ds.Request.RequestedMW,
 		ds.Request.TargetLoad,
 		ds.HubAuthAt,
 	)
-	fmt.Printf("- dispatch : %dMW %s to %s load=%s energy=%dMWh\n",
+	fmt.Printf("dispatch : %dMW %s to %s load=%s energy=%dMWh\n",
 		ds.Dispatch.DispatchMW,
 		ds.Dispatch.WindowStart,
 		ds.Dispatch.WindowEnd,
 		ds.Dispatch.ForLoad,
 		analysis.EnergyMWh,
 	)
-	fmt.Printf("- policy : profile=%s permission=(%s target=%s purpose=%s) prohibition=(%s target=%s purpose=%s)\n",
+	fmt.Printf("policy : profile=%s permission=(%s target=%s purpose=%s) prohibition=(%s target=%s purpose=%s)\n",
 		ds.Policy.Profile,
 		ds.Policy.Permission.Action,
 		ds.Policy.Permission.Target,
@@ -350,19 +350,19 @@ func printAudit(ds Dataset, analysis Analysis) {
 		ds.Policy.Prohibition.Target,
 		ds.Policy.Prohibition.Purpose,
 	)
-	fmt.Printf("- privacy flags : coreTemperature=%v rodPosition=%v neutronFlux=%v operatorBadgeIDs=%v\n",
+	fmt.Printf("privacy flags : coreTemperature=%v rodPosition=%v neutronFlux=%v operatorBadgeIDs=%v\n",
 		ds.Aggregate.ContainsCoreTemperature,
 		ds.Aggregate.ContainsRodPosition,
 		ds.Aggregate.ContainsNeutronFlux,
 		ds.Aggregate.ContainsOperatorBadgeIDs,
 	)
 	if len(analysis.SensitiveTerms) == 0 {
-		fmt.Println("- serialized sensitive term hits : none")
+		fmt.Println("serialized sensitive term hits : none")
 	} else {
-		fmt.Printf("- serialized sensitive term hits : %s\n", strings.Join(analysis.SensitiveTerms, ", "))
+		fmt.Printf("serialized sensitive term hits : %s\n", strings.Join(analysis.SensitiveTerms, ", "))
 	}
-	fmt.Printf("- checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("- decision : %s\n", analysis.Decision)
+	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
+	fmt.Printf("decision : %s\n", analysis.Decision)
 }
 
 func countChecksOK(checks []Check) int {

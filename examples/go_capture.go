@@ -334,12 +334,12 @@ func renderArcOutput(scenario Scenario, result ResultAfterMove, cks Checks) {
 		fmt.Printf("The move %s at (%d,%d) is legal and captures %d opponent stone(s).\n",
 			move.Player.GoString(), move.Row, move.Col, len(result.Captured))
 		if len(result.CapturedPos) > 0 {
-			fmt.Printf("- Captured stones at: %s\n", strings.Join(result.CapturedPos, ", "))
+			fmt.Printf("Captured stones at: %s\n", strings.Join(result.CapturedPos, ", "))
 		}
-		fmt.Println("- Board after the move:")
+		fmt.Println("Board after the move:")
 	} else {
-		fmt.Printf("- The move is illegal: %s\n", result.Description)
-		fmt.Println("- Board remains unchanged:")
+		fmt.Printf("The move is illegal: %s\n", result.Description)
+		fmt.Println("Board remains unchanged:")
 	}
 	fmt.Println()
 	fmt.Println(result.BoardAfter.string())
@@ -356,41 +356,41 @@ func renderArcOutput(scenario Scenario, result ResultAfterMove, cks Checks) {
 
 	// --- Check ---
 	fmt.Println("## Check")
-	fmt.Printf("- C1 OK - Black stone had exactly 1 liberty before the move (count=%d).\n", cks.LibertyBeforeMove)
+	fmt.Printf("C1 OK - Black stone had exactly 1 liberty before the move (count=%d).\n", cks.LibertyBeforeMove)
 	if cks.LibertyAfterMove == 0 {
-		fmt.Println("- C2 OK - After capture, the Black stone is gone (0 liberties).")
+		fmt.Println("C2 OK - After capture, the Black stone is gone (0 liberties).")
 	} else {
-		fmt.Println("- C2 FAIL - Black stone not properly removed.")
+		fmt.Println("C2 FAIL - Black stone not properly removed.")
 	}
 	if cks.NoSuicide {
-		fmt.Println("- C3 OK - The White move is not suicide (it has remaining liberties).")
+		fmt.Println("C3 OK - The White move is not suicide (it has remaining liberties).")
 	} else {
-		fmt.Println("- C3 FAIL - Suicide move detected.")
+		fmt.Println("C3 FAIL - Suicide move detected.")
 	}
 	if cks.CaptureOccurred {
-		fmt.Println("- C4 OK - At least one stone was captured.")
+		fmt.Println("C4 OK - At least one stone was captured.")
 	} else {
-		fmt.Println("- C4 FAIL - Expected capture did not occur.")
+		fmt.Println("C4 FAIL - Expected capture did not occur.")
 	}
 	if cks.BoardSizeOk {
-		fmt.Println("- C5 OK - Board size is 5x5.")
+		fmt.Println("C5 OK - Board size is 5x5.")
 	} else {
-		fmt.Println("- C5 FAIL - Board size wrong.")
+		fmt.Println("C5 FAIL - Board size wrong.")
 	}
 	fmt.Println()
 
 	// --- Go audit details ---
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- board size : %dx%d\n", scenario.Initial.Size, scenario.Initial.Size)
-	fmt.Printf("- move : %s (%d,%d)\n", move.Player.GoString(), move.Row, move.Col)
-	fmt.Println("- initial board:")
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("board size : %dx%d\n", scenario.Initial.Size, scenario.Initial.Size)
+	fmt.Printf("move : %s (%d,%d)\n", move.Player.GoString(), move.Row, move.Col)
+	fmt.Println("initial board:")
 	fmt.Print(scenario.Initial.string())
 	fmt.Println()
-	fmt.Printf("- result : %s\n", result.Description)
-	fmt.Printf("- captured stones : %d\n", len(result.Captured))
-	fmt.Printf("- checks passed : %d/5\n", checkCount(cks))
-	fmt.Printf("- recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
+	fmt.Printf("result : %s\n", result.Description)
+	fmt.Printf("captured stones : %d\n", len(result.Captured))
+	fmt.Printf("checks passed : %d/5\n", checkCount(cks))
+	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
 }
 
 func yesNo(value bool) string {

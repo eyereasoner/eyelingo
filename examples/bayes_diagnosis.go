@@ -262,7 +262,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	}
 	fmt.Printf("The most likely disease is %s (posterior = %.6f).\n", best.Disease, best.Posterior)
 	fmt.Println()
-	fmt.Println("- Full posterior distribution:")
+	fmt.Println("Full posterior distribution:")
 	for _, r := range result.Results {
 		fmt.Printf("  %-20s  posterior = %.6f  (unnormalized = %.8f)\n",
 			r.Disease, r.Posterior, r.Unnormalized)
@@ -271,9 +271,9 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 
 	// --- Reason Why ---
 	fmt.Println("## Reason why")
-	fmt.Printf("- Evidence: %s.\n", formatEvidence(data.Evidence))
+	fmt.Printf("Evidence: %s.\n", formatEvidence(data.Evidence))
 	fmt.Printf("Evidence total (normalizing constant) = %.8f.\n", result.Total)
-	fmt.Println("- The posterior for each disease is computed as:")
+	fmt.Println("The posterior for each disease is computed as:")
 	fmt.Println("  posterior(d) = prior(d) × ∏ P(symptom|d) / evidenceTotal")
 	fmt.Println("where for an absent symptom the factor is 1 − P(symptom|d).")
 	fmt.Println()
@@ -281,31 +281,31 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	// --- Check ---
 	fmt.Println("## Check")
 	if checks.PriorsInRange {
-		fmt.Println("- C1 OK - all prior probabilities are in [0,1].")
+		fmt.Println("C1 OK - all prior probabilities are in [0,1].")
 	} else {
-		fmt.Println("- C1 FAIL - one or more prior probabilities are outside [0,1].")
+		fmt.Println("C1 FAIL - one or more prior probabilities are outside [0,1].")
 	}
 	if checks.CondProbsInRange {
-		fmt.Println("- C2 OK - all conditional probabilities are in [0,1].")
+		fmt.Println("C2 OK - all conditional probabilities are in [0,1].")
 	} else {
-		fmt.Println("- C2 FAIL - one or more conditional probabilities are outside [0,1].")
+		fmt.Println("C2 FAIL - one or more conditional probabilities are outside [0,1].")
 	}
 	fmt.Println()
 
 	// --- Go audit details ---
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- diseases : %d\n", len(data.Diseases))
-	fmt.Printf("- symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))
-	fmt.Printf("- evidence items : %d\n", len(data.Evidence))
-	fmt.Printf("- evidence total : %.8f\n", result.Total)
-	fmt.Println("- posteriors :")
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("diseases : %d\n", len(data.Diseases))
+	fmt.Printf("symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))
+	fmt.Printf("evidence items : %d\n", len(data.Evidence))
+	fmt.Printf("evidence total : %.8f\n", result.Total)
+	fmt.Println("posteriors :")
 	for _, r := range result.Results {
 		fmt.Printf("  %-20s  unnormalized=%.8f  posterior=%.6f\n",
 			r.Disease, r.Unnormalized, r.Posterior)
 	}
-	fmt.Printf("- checks passed : %d/2\n", checkCount(checks))
-	fmt.Printf("- recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
+	fmt.Printf("checks passed : %d/2\n", checkCount(checks))
+	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
 }
 
 func yesNo(value bool) string {

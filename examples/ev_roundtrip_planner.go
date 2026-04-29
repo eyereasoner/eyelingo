@@ -254,14 +254,14 @@ func printAnswer(ds Dataset, analysis Analysis) {
 	fmt.Println("# EV Roadtrip Planner")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Printf("- Select plan : %s.\n", strings.Join(best.Actions, " -> "))
-	fmt.Printf("- route result : %s battery=%s pass=%s\n", best.FinalState.At, best.FinalState.Battery, best.FinalState.Pass)
-	fmt.Printf("- duration : %.1f minutes\n", best.Duration)
-	fmt.Printf("- cost : %.3f\n", best.Cost)
-	fmt.Printf("- belief : %.6f\n", best.Belief)
-	fmt.Printf("- comfort : %.6f\n", best.Comfort)
-	fmt.Printf("- acceptable plans : %d\n", len(analysis.AcceptablePlans))
-	fmt.Printf("- fuel remaining : %d of %d\n", best.FuelRemaining, ds.FuelSteps)
+	fmt.Printf("Select plan : %s.\n", strings.Join(best.Actions, " -> "))
+	fmt.Printf("route result : %s battery=%s pass=%s\n", best.FinalState.At, best.FinalState.Battery, best.FinalState.Pass)
+	fmt.Printf("duration : %.1f minutes\n", best.Duration)
+	fmt.Printf("cost : %.3f\n", best.Cost)
+	fmt.Printf("belief : %.6f\n", best.Belief)
+	fmt.Printf("comfort : %.6f\n", best.Comfort)
+	fmt.Printf("acceptable plans : %d\n", len(analysis.AcceptablePlans))
+	fmt.Printf("fuel remaining : %d of %d\n", best.FuelRemaining, ds.FuelSteps)
 	fmt.Println()
 }
 
@@ -273,12 +273,12 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Printf("The selected plan is the fastest acceptable candidate under belief > %.2f, cost < %.3f, and duration < %.1f.\n", ds.Thresholds.MinBelief, ds.Thresholds.MaxCost, ds.Thresholds.MaxDuration)
 	fmt.Printf("It uses the shuttle from Aachen to Cologne, avoiding an extra charge stop while keeping belief at %.6f.\n", best.Belief)
 	fmt.Println()
-	fmt.Println("- Top acceptable plans:")
+	fmt.Println("Top acceptable plans:")
 	for i, plan := range analysis.AcceptablePlans {
 		if i >= 5 {
 			break
 		}
-		fmt.Printf(" - %d. %s | duration=%.1f cost=%.3f belief=%.6f comfort=%.6f final=%s/%s/%s\n",
+		fmt.Printf("%d. %s | duration=%.1f cost=%.3f belief=%.6f comfort=%.6f final=%s/%s/%s\n",
 			i+1,
 			strings.Join(plan.Actions, " -> "),
 			plan.Duration,
@@ -300,7 +300,7 @@ func printChecks(analysis Analysis) {
 		if check.OK {
 			status = "OK"
 		}
-		fmt.Printf("- %s %s - %s\n", check.ID, status, check.Text)
+		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
 	}
 	fmt.Println()
 }
@@ -308,21 +308,21 @@ func printChecks(analysis Analysis) {
 func printAudit(ds Dataset, analysis Analysis) {
 	best := analysis.BestPlan
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- case : %s\n", ds.CaseName)
-	fmt.Printf("- question : %s\n", ds.Question)
-	fmt.Printf("- vehicle : %s start=%s battery=%s pass=%s\n", ds.Vehicle.ID, ds.Vehicle.At, ds.Vehicle.Battery, ds.Vehicle.Pass)
-	fmt.Printf("- goal : at=%s battery=%s pass=%s\n", ds.Goal.At, ds.Goal.Battery, ds.Goal.Pass)
-	fmt.Printf("- thresholds : minBelief=%.2f maxCost=%.3f maxDuration=%.1f fuel=%d\n", ds.Thresholds.MinBelief, ds.Thresholds.MaxCost, ds.Thresholds.MaxDuration, ds.FuelSteps)
-	fmt.Printf("- actions : %d\n", len(ds.Actions))
-	fmt.Printf("- acceptable plans : %d\n", len(analysis.AcceptablePlans))
-	fmt.Printf("- selected final state : %s battery=%s pass=%s\n", best.FinalState.At, best.FinalState.Battery, best.FinalState.Pass)
-	fmt.Printf("- selected actions : %s\n", strings.Join(best.Actions, " -> "))
-	fmt.Printf("- selected metrics : duration=%.1f cost=%.3f belief=%.6f comfort=%.6f fuelRemaining=%d\n", best.Duration, best.Cost, best.Belief, best.Comfort, best.FuelRemaining)
-	fmt.Printf("- search recursive calls : %d\n", analysis.Stats.RecursiveCalls)
-	fmt.Printf("- search action tests : %d\n", analysis.Stats.ActionTests)
-	fmt.Printf("- search actions taken : %d\n", analysis.Stats.ActionsTaken)
-	fmt.Printf("- search state prunes : %d\n", analysis.Stats.StatePrunes)
-	fmt.Printf("- search max depth : %d\n", analysis.Stats.MaxDepth)
-	fmt.Printf("- checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("case : %s\n", ds.CaseName)
+	fmt.Printf("question : %s\n", ds.Question)
+	fmt.Printf("vehicle : %s start=%s battery=%s pass=%s\n", ds.Vehicle.ID, ds.Vehicle.At, ds.Vehicle.Battery, ds.Vehicle.Pass)
+	fmt.Printf("goal : at=%s battery=%s pass=%s\n", ds.Goal.At, ds.Goal.Battery, ds.Goal.Pass)
+	fmt.Printf("thresholds : minBelief=%.2f maxCost=%.3f maxDuration=%.1f fuel=%d\n", ds.Thresholds.MinBelief, ds.Thresholds.MaxCost, ds.Thresholds.MaxDuration, ds.FuelSteps)
+	fmt.Printf("actions : %d\n", len(ds.Actions))
+	fmt.Printf("acceptable plans : %d\n", len(analysis.AcceptablePlans))
+	fmt.Printf("selected final state : %s battery=%s pass=%s\n", best.FinalState.At, best.FinalState.Battery, best.FinalState.Pass)
+	fmt.Printf("selected actions : %s\n", strings.Join(best.Actions, " -> "))
+	fmt.Printf("selected metrics : duration=%.1f cost=%.3f belief=%.6f comfort=%.6f fuelRemaining=%d\n", best.Duration, best.Cost, best.Belief, best.Comfort, best.FuelRemaining)
+	fmt.Printf("search recursive calls : %d\n", analysis.Stats.RecursiveCalls)
+	fmt.Printf("search action tests : %d\n", analysis.Stats.ActionTests)
+	fmt.Printf("search actions taken : %d\n", analysis.Stats.ActionsTaken)
+	fmt.Printf("search state prunes : %d\n", analysis.Stats.StatePrunes)
+	fmt.Printf("search max depth : %d\n", analysis.Stats.MaxDepth)
+	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
 }

@@ -157,12 +157,12 @@ func printAnswer(ds Dataset, analysis Analysis) {
 	fmt.Println("# High Trust RDF Bloom Envelope")
 	fmt.Println()
 	fmt.Println("## Answer")
-	fmt.Printf("- Deployment decision : %s for %s.\n", analysis.Decision, ds.Artifact.ID)
-	fmt.Printf("- lambda : %.10f\n", analysis.Lambda)
-	fmt.Printf("- false-positive envelope : %.9f .. %.9f\n", analysis.FPRateLower, analysis.FPRateUpper)
-	fmt.Printf("- expected extra exact lookups upper : %.3f per %d negative lookups\n", analysis.ExpectedExtraLookupUpper, ds.Artifact.NegativeLookupsPerBatch)
-	fmt.Printf("- maybe-positive policy : %s\n", ds.Policies.MaybePositivePolicy)
-	fmt.Printf("- definite-negative policy : %s\n", ds.Policies.DefiniteNegativePolicy)
+	fmt.Printf("Deployment decision : %s for %s.\n", analysis.Decision, ds.Artifact.ID)
+	fmt.Printf("lambda : %.10f\n", analysis.Lambda)
+	fmt.Printf("false-positive envelope : %.9f .. %.9f\n", analysis.FPRateLower, analysis.FPRateUpper)
+	fmt.Printf("expected extra exact lookups upper : %.3f per %d negative lookups\n", analysis.ExpectedExtraLookupUpper, ds.Artifact.NegativeLookupsPerBatch)
+	fmt.Printf("maybe-positive policy : %s\n", ds.Policies.MaybePositivePolicy)
+	fmt.Printf("definite-negative policy : %s\n", ds.Policies.DefiniteNegativePolicy)
 	fmt.Println()
 }
 
@@ -172,7 +172,7 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Printf("The Bloom prefilter has n=%d triples, m=%d bits, and k=%d hash functions, giving lambda %.10f.\n", ds.Artifact.CanonicalTripleCount, ds.Artifact.BloomBits, ds.Artifact.HashFunctions, analysis.Lambda)
 	fmt.Printf("Instead of asking the engine to know %s exactly, the input carries a decimal interval certificate for exp(-lambda).\n", ds.Artifact.ExactTranscendentalSymbol)
 	fmt.Printf("That certificate bounds (1-exp(-lambda))^k below the %.3f false-positive budget and keeps extra exact confirmations below %.1f.\n", ds.Artifact.FPRateBudget, ds.Artifact.ExtraExactLookupsBudget)
-	fmt.Println("- Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.")
+	fmt.Println("Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.")
 	fmt.Println()
 }
 
@@ -183,23 +183,23 @@ func printChecks(analysis Analysis) {
 		if check.OK {
 			status = "OK"
 		}
-		fmt.Printf("- %s %s - %s\n", check.ID, status, check.Text)
+		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
 	}
 	fmt.Println()
 }
 
 func printAudit(ds Dataset, analysis Analysis) {
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- case : %s\n", ds.CaseName)
-	fmt.Printf("- question : %s\n", ds.Question)
-	fmt.Printf("- artifact : %s\n", ds.Artifact.ID)
-	fmt.Printf("- triple counts : canonical=%d spoIndex=%d agreement=%v\n", ds.Artifact.CanonicalTripleCount, ds.Artifact.SPOIndexTripleCount, analysis.IndexAgreement)
-	fmt.Printf("- bloom parameters : bits=%d hashFunctions=%d lambda=%.10f\n", ds.Artifact.BloomBits, ds.Artifact.HashFunctions, analysis.Lambda)
-	fmt.Printf("- certificate : symbol=%s certifiedLambda=%.10f expLower=%.10f expUpper=%.10f certified=%v\n", ds.Artifact.ExactTranscendentalSymbol, ds.Artifact.CertifiedLambda, ds.Artifact.ExpMinusLambdaLower, ds.Artifact.ExpMinusLambdaUpper, analysis.IntervalCertified)
-	fmt.Printf("- fp envelope : lower=%.9f upper=%.9f budget=%.3f within=%v\n", analysis.FPRateLower, analysis.FPRateUpper, ds.Artifact.FPRateBudget, analysis.WithinFPRateBudget)
-	fmt.Printf("- lookup budget : negativeLookups=%d extraUpper=%.3f budget=%.1f within=%v\n", ds.Artifact.NegativeLookupsPerBatch, analysis.ExpectedExtraLookupUpper, ds.Artifact.ExtraExactLookupsBudget, analysis.WithinExactLookupBudget)
-	fmt.Printf("- policies : maybePositive=%s definiteNegative=%s\n", ds.Policies.MaybePositivePolicy, ds.Policies.DefiniteNegativePolicy)
-	fmt.Printf("- checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("- decision : %s\n", analysis.Decision)
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("case : %s\n", ds.CaseName)
+	fmt.Printf("question : %s\n", ds.Question)
+	fmt.Printf("artifact : %s\n", ds.Artifact.ID)
+	fmt.Printf("triple counts : canonical=%d spoIndex=%d agreement=%v\n", ds.Artifact.CanonicalTripleCount, ds.Artifact.SPOIndexTripleCount, analysis.IndexAgreement)
+	fmt.Printf("bloom parameters : bits=%d hashFunctions=%d lambda=%.10f\n", ds.Artifact.BloomBits, ds.Artifact.HashFunctions, analysis.Lambda)
+	fmt.Printf("certificate : symbol=%s certifiedLambda=%.10f expLower=%.10f expUpper=%.10f certified=%v\n", ds.Artifact.ExactTranscendentalSymbol, ds.Artifact.CertifiedLambda, ds.Artifact.ExpMinusLambdaLower, ds.Artifact.ExpMinusLambdaUpper, analysis.IntervalCertified)
+	fmt.Printf("fp envelope : lower=%.9f upper=%.9f budget=%.3f within=%v\n", analysis.FPRateLower, analysis.FPRateUpper, ds.Artifact.FPRateBudget, analysis.WithinFPRateBudget)
+	fmt.Printf("lookup budget : negativeLookups=%d extraUpper=%.3f budget=%.1f within=%v\n", ds.Artifact.NegativeLookupsPerBatch, analysis.ExpectedExtraLookupUpper, ds.Artifact.ExtraExactLookupsBudget, analysis.WithinExactLookupBudget)
+	fmt.Printf("policies : maybePositive=%s definiteNegative=%s\n", ds.Policies.MaybePositivePolicy, ds.Policies.DefiniteNegativePolicy)
+	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
+	fmt.Printf("decision : %s\n", analysis.Decision)
 }

@@ -544,9 +544,9 @@ func renderAnswer(data Dataset, plan Plan) {
 	fmt.Println()
 	fmt.Println("## Answer")
 	fmt.Printf("The exact dispatch plan serves all %d storm incidents with triage score %d.\n", plan.Served, plan.Score)
-	fmt.Printf("- case : %s\n", data.CaseName)
-	fmt.Printf("- finish minute : %d\n", plan.FinishMinute)
-	fmt.Printf("- total travel minutes : %d\n", plan.TravelMinutes)
+	fmt.Printf("case : %s\n", data.CaseName)
+	fmt.Printf("finish minute : %d\n", plan.FinishMinute)
+	fmt.Printf("total travel minutes : %d\n", plan.TravelMinutes)
 	fmt.Println()
 
 	for _, route := range plan.Routes {
@@ -563,16 +563,16 @@ func renderReason(data Dataset, plan Plan, routeStats []RouteSearchStats, planSt
 	fmt.Println()
 	fmt.Println("## Reason why")
 	fmt.Println("Road facts are first closed into all-pairs shortest travel times. Each responder then enumerates only routes that satisfy capability, privacy, shift, travel-budget, service-time, and deadline constraints. A bit-mask dynamic program combines the nondominated per-responder routes so incidents are never assigned twice.")
-	fmt.Printf("- route states enumerated : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.StatesEnumerated }))
-	fmt.Printf("- nondominated route masks : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.BestRoutes }))
-	fmt.Printf("- global DP transitions : %d\n", planStats.TransitionsConsidered)
-	fmt.Printf("- DP states by layer : %s\n", intList(planStats.StatesByLayer))
-	fmt.Println("- Chosen route details:")
+	fmt.Printf("route states enumerated : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.StatesEnumerated }))
+	fmt.Printf("nondominated route masks : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.BestRoutes }))
+	fmt.Printf("global DP transitions : %d\n", planStats.TransitionsConsidered)
+	fmt.Printf("DP states by layer : %s\n", intList(planStats.StatesByLayer))
+	fmt.Println("Chosen route details:")
 	for _, route := range plan.Routes {
 		responder := data.Responders[route.ResponderIndex]
 		for _, step := range route.Trace {
 			incident := data.Incidents[step.IncidentIndex]
-			fmt.Printf(" - %s -> %s: travel=%d arrive=%d service=%d finish=%d deadline=%d\n", responder.Label, incident.ID, step.Travel, step.Arrive, incident.ServiceMinutes, step.Finish, incident.Deadline)
+			fmt.Printf("%s -> %s: travel=%d arrive=%d service=%d finish=%d deadline=%d\n", responder.Label, incident.ID, step.Travel, step.Arrive, incident.ServiceMinutes, step.Finish, incident.Deadline)
 		}
 	}
 }
@@ -606,44 +606,44 @@ func renderChecks(checks Checks) {
 func renderGoAuditDetails(data Dataset, dist [][]int, routes [][]Route, routeStats []RouteSearchStats, plan Plan, planStats PlanSearchStats, checks Checks) {
 	fmt.Println()
 	fmt.Println("## Go audit details")
-	fmt.Printf("- platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("- question : %s\n", data.Question)
-	fmt.Printf("- locations : %d\n", len(data.Locations))
-	fmt.Printf("- road facts : %d\n", len(data.Roads))
-	fmt.Printf("- all-pairs distances : %d\n", len(dist)*len(dist))
-	fmt.Printf("- responders : %d\n", len(data.Responders))
-	fmt.Printf("- incidents : %d\n", len(data.Incidents))
-	fmt.Printf("- total possible priority : %d\n", totalPriority(data.Incidents))
-	fmt.Printf("- served mask : %06b\n", plan.Mask)
-	fmt.Printf("- served incidents : %s\n", incidentMaskList(plan.Mask, data.Incidents))
-	fmt.Printf("- best score : %d\n", plan.Score)
-	fmt.Printf("- best travel minutes : %d\n", plan.TravelMinutes)
-	fmt.Printf("- best finish minute : %d\n", plan.FinishMinute)
-	fmt.Println("- responders:")
+	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("question : %s\n", data.Question)
+	fmt.Printf("locations : %d\n", len(data.Locations))
+	fmt.Printf("road facts : %d\n", len(data.Roads))
+	fmt.Printf("all-pairs distances : %d\n", len(dist)*len(dist))
+	fmt.Printf("responders : %d\n", len(data.Responders))
+	fmt.Printf("incidents : %d\n", len(data.Incidents))
+	fmt.Printf("total possible priority : %d\n", totalPriority(data.Incidents))
+	fmt.Printf("served mask : %06b\n", plan.Mask)
+	fmt.Printf("served incidents : %s\n", incidentMaskList(plan.Mask, data.Incidents))
+	fmt.Printf("best score : %d\n", plan.Score)
+	fmt.Printf("best travel minutes : %d\n", plan.TravelMinutes)
+	fmt.Printf("best finish minute : %d\n", plan.FinishMinute)
+	fmt.Println("responders:")
 	for _, responder := range data.Responders {
-		fmt.Printf(" - %s start=%s caps=%s secure=%s dataMode=%s shiftEnd=%d travelBudget=%d\n", responder.Label, responder.Start, capabilityList(responder.Capabilities), yesNo(responder.SecureEnvelope), responder.DataMode, responder.ShiftEnd, responder.TravelBudget)
+		fmt.Printf("%s start=%s caps=%s secure=%s dataMode=%s shiftEnd=%d travelBudget=%d\n", responder.Label, responder.Start, capabilityList(responder.Capabilities), yesNo(responder.SecureEnvelope), responder.DataMode, responder.ShiftEnd, responder.TravelBudget)
 	}
-	fmt.Println("- incidents:")
+	fmt.Println("incidents:")
 	for _, incident := range data.Incidents {
-		fmt.Printf(" - %s %s loc=%s need=%s priority=%d service=%d deadline=%d sensitive=%s aggregateOnly=%s\n", incident.ID, incident.Label, incident.Location, capabilityList(incident.Need), incident.Priority, incident.ServiceMinutes, incident.Deadline, yesNo(incident.Sensitive), yesNo(incident.AggregateOnly))
+		fmt.Printf("%s %s loc=%s need=%s priority=%d service=%d deadline=%d sensitive=%s aggregateOnly=%s\n", incident.ID, incident.Label, incident.Location, capabilityList(incident.Need), incident.Priority, incident.ServiceMinutes, incident.Deadline, yesNo(incident.Sensitive), yesNo(incident.AggregateOnly))
 	}
-	fmt.Println("- route search stats:")
+	fmt.Println("route search stats:")
 	for i, stat := range routeStats {
-		fmt.Printf(" - %s states=%d bestRoutes=%d tests=%d accepted=%d capabilityPrunes=%d policyPrunes=%d timingPrunes=%d\n", data.Responders[i].Label, stat.StatesEnumerated, stat.BestRoutes, stat.ExtensionTests, stat.AcceptedEdges, stat.CapabilityPrunes, stat.PolicyPrunes, stat.TimingPrunes)
+		fmt.Printf("%s states=%d bestRoutes=%d tests=%d accepted=%d capabilityPrunes=%d policyPrunes=%d timingPrunes=%d\n", data.Responders[i].Label, stat.StatesEnumerated, stat.BestRoutes, stat.ExtensionTests, stat.AcceptedEdges, stat.CapabilityPrunes, stat.PolicyPrunes, stat.TimingPrunes)
 	}
-	fmt.Printf("- route states enumerated : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.StatesEnumerated }))
-	fmt.Printf("- extension tests : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.ExtensionTests }))
-	fmt.Printf("- accepted route extensions : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.AcceptedEdges }))
-	fmt.Printf("- capability prunes : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.CapabilityPrunes }))
-	fmt.Printf("- policy prunes : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.PolicyPrunes }))
-	fmt.Printf("- timing/budget prunes : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.TimingPrunes }))
-	fmt.Printf("- nondominated route masks : %d\n", countRoutes(routes))
-	fmt.Printf("- dominated routes pruned : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.StatesEnumerated })-countRoutes(routes))
-	fmt.Printf("- DP transitions considered : %d\n", planStats.TransitionsConsidered)
-	fmt.Printf("- DP conflicting routes skipped : %d\n", planStats.ConflictingRoutes)
-	fmt.Printf("- DP states by layer : %s\n", intList(planStats.StatesByLayer))
-	fmt.Printf("- checks passed : %d/8\n", checksPassed(checks))
-	fmt.Printf("- all checks pass : %s\n", yesNo(checksPassed(checks) == 8))
+	fmt.Printf("route states enumerated : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.StatesEnumerated }))
+	fmt.Printf("extension tests : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.ExtensionTests }))
+	fmt.Printf("accepted route extensions : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.AcceptedEdges }))
+	fmt.Printf("capability prunes : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.CapabilityPrunes }))
+	fmt.Printf("policy prunes : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.PolicyPrunes }))
+	fmt.Printf("timing/budget prunes : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.TimingPrunes }))
+	fmt.Printf("nondominated route masks : %d\n", countRoutes(routes))
+	fmt.Printf("dominated routes pruned : %d\n", sumRouteStats(routeStats, func(s RouteSearchStats) int { return s.StatesEnumerated })-countRoutes(routes))
+	fmt.Printf("DP transitions considered : %d\n", planStats.TransitionsConsidered)
+	fmt.Printf("DP conflicting routes skipped : %d\n", planStats.ConflictingRoutes)
+	fmt.Printf("DP states by layer : %s\n", intList(planStats.StatesByLayer))
+	fmt.Printf("checks passed : %d/8\n", checksPassed(checks))
+	fmt.Printf("all checks pass : %s\n", yesNo(checksPassed(checks) == 8))
 }
 
 func capabilityList(c Capability) string {
