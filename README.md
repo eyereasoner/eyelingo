@@ -47,6 +47,16 @@ Snapshot files use plain lines rather than Markdown list markers, and add two tr
 
 Most examples load their domain fixture directly from `examples/input/<name>.json` through `exampleinput.Load`. A few examples still keep complex internal relation structures in Go, but they also have a matching JSON input file documenting the corresponding data or parameters.
 
+## Rationale
+
+Eyelingo is a small translation laboratory: it takes selected EyeReasoner/Eyeling N3 examples and rewrites them as compact, runnable Go programs. The goal is not to replace N3, but to make the reasoning patterns easy to inspect in a mainstream systems language: facts become typed input data, rules become explicit Go functions, and derived conclusions become reproducible reports.
+
+The examples keep an ARC-style shape: an `Answer` gives the computed result, `Reason why` explains the rule chain or decision path, and `Check` records the invariants that should still hold. This makes every example useful both as a demonstration and as a regression fixture. A reader should be able to scan the output and see not only what was concluded, but also why it was concluded and what was verified.
+
+The `Go audit details` section is intentional. It documents translation-level evidence such as source scenario, input counts, selected thresholds, rule counters, search bounds, precision choices, or platform details. These audit lines help distinguish domain conclusions from implementation evidence, and they make it easier to review changes when a Go translation evolves away from the original N3 file.
+
+STEM is the core of the collection. The examples are chosen to cover scientific measurement, technical interoperability, engineered systems, and mathematical reasoning. Together they show that rule-based examples can remain readable while still exercising realistic concerns: exact arithmetic, graph search, certificates, constraints, policy checks, safety envelopes, Bayesian reasoning, scheduling, routing, and optimization.
+
 ## STEM examples
 
 The examples are grouped by their main emphasis. Each row links to the example-specific JSON input, the Go translation, and the expected Markdown output.
