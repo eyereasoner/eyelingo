@@ -1,0 +1,13 @@
+{
+  "caseName": "Goldbach 1000",
+  "source": "goldbach-1000.n3",
+  "question": "Check the strong even Goldbach condition for all even integers from 4 through 1000.",
+  "maxEven": 1000,
+  "sampleEvens": [
+    4,
+    28,
+    100,
+    998,
+    1000
+  ]
+}

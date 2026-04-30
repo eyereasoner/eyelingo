@@ -1,0 +1,30 @@
+{
+  "caseName": "ACT photosynthetic exciton transfer",
+  "source": "act-photosynthetic-exciton-transfer.n3",
+  "question": "Can a tuned photosynthetic antenna deliver excitation efficiently to a reaction center while a detuned contrast complex cannot?",
+  "reactionCenter": "reactionCenter",
+  "complexes": [
+    {
+      "name": "tunedAntenna",
+      "role": "positive",
+      "excitonCoupling": "Strong",
+      "stateDelocalization": "Present",
+      "vibronicBridge": "Tuned",
+      "energyLandscape": "DownhillToReactionCenter",
+      "electronicCoherenceLifetime": "Short",
+      "dephasing": "Moderate",
+      "connectedTo": "reactionCenter"
+    },
+    {
+      "name": "detunedAntenna",
+      "role": "contrast",
+      "excitonCoupling": "Weak",
+      "stateDelocalization": "Absent",
+      "vibronicBridge": "Absent",
+      "energyLandscape": "TrappingMismatch",
+      "electronicCoherenceLifetime": "VeryShort",
+      "dephasing": "Strong",
+      "connectedTo": "reactionCenter"
+    }
+  ]
+}
