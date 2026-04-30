@@ -1,14 +1,14 @@
 # Alarm Bit Interoperability
 
-`alarm_bit_interoperability` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on classical alarm-bit copy and relay tasks contrasted with forbidden universal cloning. Its input fixture is organized around `CaseName`, `Question`, `ClassicalMedia`, `Superinformation`, `ExpectedCopyTasks`, `ExpectedImpossible`, `ExpectedCanDecision`, `ExpectedCantDecision`.
+`alarm_bit_interoperability` is a Go translation/adaptation of Eyeling's `act-alarm-bit-interoperability.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is interoperability between classical alarm systems. The example separates ordinary copying and relay of a classical alarm bit from quantum-like no-cloning constraints, which makes it a small but concrete technology-facing rule example.
 
 ## What it demonstrates
 
-This is mainly a **Technology** example. It demonstrates data representation, interoperability, policies, and computational artifacts in a form that can be read as code, data, and expected output.
+This example is mainly in the **Technology** category. Classical alarm-bit copy and relay tasks contrasted with forbidden universal cloning.
 
-In plain words, the answer section highlights: classical alarm-bit interoperability : YES universal cloning of the superinformation token : NO copy task : opticalBeacon -> relayRegister for AlarmBit
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: classical alarm-bit interoperabil
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - two unlike classical media are present C2 OK - classical media encode the same variable AlarmBit C3 OK - 2 directed copy tasks are possible
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

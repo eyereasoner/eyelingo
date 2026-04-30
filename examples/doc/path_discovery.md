@@ -1,14 +1,14 @@
 # Path Discovery
 
-`path_discovery` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on airport path discovery with stopover and routing constraints. Its input fixture is organized around `Question`, `SourceID`, `DestinationID`, `Labels`, `Edges`.
+`path_discovery` is a Go translation/adaptation of Eyeling's `path-discovery.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is large graph routing. Airport labels and outbound facts live in JSON, while the Go logic derives candidate paths under stopover and route constraints.
 
 ## What it demonstrates
 
-This is mainly a **Technology** example. It demonstrates data representation, interoperability, policies, and computational artifacts in a form that can be read as code, data, and expected output.
+This example is mainly in the **Technology** category. Airport path discovery with stopover and routing constraints.
 
-In plain words, the answer section highlights: The path discovery query finds 3 air routes with at most 2 stopovers. from : Ostend-Bruges International Airport to : Václav Havel Airport Prague
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: The path discovery query finds 3 
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - source and destination airport labels are known. C2 OK - Ostend-Bruges has one outbound route in the full N3 graph, to Liège Airport. C3 OK - the discovered route set matches the N3 query answer.
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

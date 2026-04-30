@@ -1,14 +1,14 @@
 # Superdense Coding
 
-`superdense_coding` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on quantum-information parity facts for superdense coding. Its input fixture is organized around `States`, `Primitive`, `AliceOps`, `BobTests`, `Note`.
+`superdense_coding` is a Go translation/adaptation of Eyeling's `superdense-coding.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is quantum information. Bell-state and parity facts are used to demonstrate how two classical bits are represented in a superdense-coding scenario.
 
 ## What it demonstrates
 
-This is mainly a **Science** example. It demonstrates scientific measurement, evidence handling, and domain checks in a form that can be read as code, data, and expected output.
+This example is mainly in the **Science** category. Quantum-information parity facts for superdense coding.
 
-In plain words, the answer section highlights: Superdense-coding facts that survive GF(2) parity cancellation: 0 dqc:superdense-coding 0 1 dqc:superdense-coding 1
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: Superdense-coding facts that surv
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: OK shared entanglement: |R) contains exactly |0,0) and |1,1) OK composition KG: KG is obtained by composing G then K, exactly as in the N3 rule OK composition GK: GK is obtained by composing K then G, exactly as in the N3 rule
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

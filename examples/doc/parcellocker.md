@@ -1,14 +1,14 @@
 # Parcel Locker
 
-`parcellocker` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on delegated parcel pickup-token authorization. Its input fixture is organized around `CaseName`, `Question`, `People`, `Parcel`, `Locker`, `Authorization`, `Requests`.
+`parcellocker` is a Go translation/adaptation of Eyeling's `parcellocker.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is delegated authorization. A one-time parcel pickup request is permitted only when identity, token, time, locker, and delegation constraints are all satisfied.
 
 ## What it demonstrates
 
-This is mainly a **Technology** example. It demonstrates data representation, interoperability, policies, and computational artifacts in a form that can be read as code, data, and expected output.
+This example is mainly in the **Technology** category. Delegated parcel pickup-token authorization.
 
-In plain words, the answer section highlights: May Noah use Maya's one-time pickup token to collect parcel123 from locker B17? decision : PERMIT release : Noah may collect parcel123 for Maya from locker B17 at Station West
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: May Noah use Maya's one-time pick
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - the source pickup request satisfies all ten authorization conditions C2 OK - the same token is denied for billing, redirect, wrong person, wrong locker, and reuse C3 OK - every request matches its expected PERMIT or DENY result
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

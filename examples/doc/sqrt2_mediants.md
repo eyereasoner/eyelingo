@@ -1,14 +1,14 @@
 # Integer-First Sqrt2 Mediants
 
-`sqrt2_mediants` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on rational lower/upper bounds for sqrt(2) certified by integer square comparisons. Its input fixture is organized around `caseName`, `question`, `maxDenominator`, `expected`.
+`sqrt2_mediants` is a Go translation/adaptation of Eyeling's `integer-first-sqrt2-mediants.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is exact rational approximation. Integer square comparisons certify lower and upper mediants for sqrt(2), avoiding floating-point dependence.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. Rational lower/upper bounds for sqrt(2) certified by integer square comparisons.
 
-In plain words, the answer section highlights: lower bound : 1393/985 = 1.414213197970 upper bound : 577/408 = 1.414215686275 certified interval width : 0.000002488305
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: lower bound : 1393/985 = 1.414213
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - nine convergents stay within the denominator limit C2 OK - the best lower bound is 1393/985 C3 OK - the best upper bound is 577/408
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

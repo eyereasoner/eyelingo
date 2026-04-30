@@ -1,14 +1,14 @@
 # Gradient Descent Step
 
-`gradient_descent_step` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on certified single gradient-descent step for a quadratic objective. Its input fixture is organized around `caseName`, `question`, `function`, `start`, `stepSize`, `maxStepNorm`, `expected`.
+`gradient_descent_step` is a Go translation/adaptation of Eyeling's `gd-step-certified.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is certified numerical optimization. A single gradient-descent step for a quadratic objective is computed and checked against the expected decrease conditions.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. Certified single gradient-descent step for a quadratic objective.
 
-In plain words, the answer section highlights: start point : (8.000, 5.000) gradient : (10.000, 24.000) step size : 0.100
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: start point : (8.000, 5.000) grad
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - gradient was derived from f(x,y) = (x-3)^2 + 2(y+1)^2 C2 OK - step size is positive and below the conservative bound C3 OK - new point is (7.000, 2.600)
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

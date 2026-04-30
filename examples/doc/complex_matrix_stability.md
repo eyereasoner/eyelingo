@@ -2,11 +2,13 @@
 
 `complex_matrix_stability` is a Go translation/adaptation of Eyeling's `complex-matrix-stability.n3`.
 
-The example classifies three diagonal complex matrices by spectral radius for discrete-time dynamics. It also audits complex multiplication and the expected scaling behaviour of the spectral radius squared.
+The context is discrete-time system stability. Complex diagonal entries are reduced to spectral radii, and the result classifies whether the matrix dynamics remain bounded.
 
 ## What it demonstrates
 
-This is mainly a **Engineering** example. The key idea is that diagonal entries are eigenvalues, so the largest eigenvalue modulus determines whether modes grow, remain marginal, or decay.
+This example is mainly in the **Engineering** category. Discrete-time stability classification using spectral radii of diagonal complex matrices.
+
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -16,7 +18,7 @@ This is mainly a **Engineering** example. The key idea is that diagonal entries 
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, counters, thresholds, derived facts, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

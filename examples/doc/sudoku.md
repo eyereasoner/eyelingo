@@ -1,14 +1,14 @@
 # Sudoku
 
-`sudoku` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on sudoku constraint solving with a unique completed grid. Its input fixture is organized around `Puzzle`, `Name`.
+`sudoku` is a Go translation/adaptation of Eyeling's `sudoku.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is grid-constraint solving. The puzzle is completed while preserving row, column, and box uniqueness, producing a verifiable solved board.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. Sudoku constraint solving with a unique completed grid.
 
-In plain words, the answer section highlights: The puzzle is solved, and the completed grid is the unique valid Sudoku solution. case : sudoku default puzzle : classic
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: The puzzle is solved, and the com
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - every given clue is preserved in the final grid. C2 OK - the final grid contains only digits 1 through 9, with no blanks left. C3 OK - each row contains every digit exactly once.
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

@@ -1,14 +1,14 @@
 # Genetic Knapsack Selection
 
-`genetic_knapsack_selection` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on deterministic genetic selection for a bounded knapsack. Its input fixture is organized around `CaseName`, `Question`, `Capacity`, `MaxGenerations`, `StartGenome`, `Items`, `Expected`.
+`genetic_knapsack_selection` is a Go translation/adaptation of Eyeling's `genetic-knapsack-selection.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is optimization with deterministic genetic steps. Candidate knapsack selections are scored, mutated, and filtered while preserving capacity and value checks.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. Deterministic genetic selection for a bounded knapsack.
 
-In plain words, the answer section highlights: final genome : 101000000101 selected items : item01, item03, item10, item12 weight : 50 / 50
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: final genome : 101000000101 selec
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - 12 items align with a 12-bit genome C2 OK - final weight 50 is within capacity 50 C3 OK - final genome is 101000000101
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

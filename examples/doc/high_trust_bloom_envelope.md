@@ -1,14 +1,14 @@
 # High Trust RDF Bloom Envelope
 
-`high_trust_bloom_envelope` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on bloom-envelope acceptance using canonical graph, index, and false-positive checks. Its input fixture is organized around `CaseName`, `Question`, `Artifact`, `Policies`, `Expected`.
+`high_trust_bloom_envelope` is a Go translation/adaptation of Eyeling's `high-trust-rdf-bloom-envelope.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is trustworthy membership checking. Canonical graph data, Bloom-index evidence, a decimal certificate, and false-positive bounds are all combined before accepting an envelope.
 
 ## What it demonstrates
 
-This is mainly a **Technology** example. It demonstrates data representation, interoperability, policies, and computational artifacts in a form that can be read as code, data, and expected output.
+This example is mainly in the **Technology** category. Bloom-envelope acceptance using canonical graph, index, and false-positive checks.
 
-In plain words, the answer section highlights: Deployment decision : AcceptForHighTrustUse for artifact. lambda : 0.5126953125 false-positive envelope : 0.001670806 .. 0.001670806
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: Deployment decision : AcceptForHi
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - numeric Bloom and workload parameters are positive C2 OK - canonical graph and SPO index agree on 1200 triples C3 OK - derived lambda 0.5126953125 matches the certified lambda
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

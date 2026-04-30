@@ -1,14 +1,14 @@
 # FFT8 Numeric
 
-`fft8_numeric` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on eight-point Fourier transform over a sampled sine wave with conjugate-bin and energy checks. Its input fixture is organized around `caseName`, `question`, `samples`, `expected`.
+`fft8_numeric` is a Go translation/adaptation of Eyeling's `fft8-numeric.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is signal processing. Eight samples from a sine wave are transformed into frequency bins, and the checks verify dominant bins, conjugate symmetry, zero DC, and energy preservation.
 
 ## What it demonstrates
 
-This is mainly a **Technology** example. It demonstrates data representation, interoperability, policies, and computational artifacts in a form that can be read as code, data, and expected output.
+This example is mainly in the **Technology** category. Eight-point Fourier transform over a sampled sine wave with conjugate-bin and energy checks.
 
-In plain words, the answer section highlights: sample vector : 0.000000, 0.707107, 1.000000, 0.707107, 0.000000, -0.707107, -1.000000, -0.707107 dominant bins : k=1 magnitude=4.000000 phase=-1.570796; k=7 magnitude=4.000000 phase=1.570796 time-domain energy : 4.000000
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: sample vector : 0.000000, 0.70710
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - the input contains exactly 8 time-domain samples C2 OK - the dominant bins are k=1 and k=7 C3 OK - the DC component is zero
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

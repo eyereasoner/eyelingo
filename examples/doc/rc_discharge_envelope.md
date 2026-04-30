@@ -1,14 +1,14 @@
 # RC Discharge Envelope
 
-`rc_discharge_envelope` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on certified exponential decay envelope for an RC discharge. Its input fixture is organized around `caseName`, `question`, `samplePeriod`, `timeConstant`, `exactDecaySymbol`, `decayLower`, `decayUpper`, `initialVoltage`.
+`rc_discharge_envelope` is a Go translation/adaptation of Eyeling's `rc-discharge-envelope.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is circuit behavior. An RC discharge is bounded by an exponential envelope, and the checks verify that the decay stays within the certified range.
 
 ## What it demonstrates
 
-This is mainly a **Science** example. It demonstrates scientific measurement, evidence handling, and domain checks in a form that can be read as code, data, and expected output.
+This example is mainly in the **Science** category. Certified exponential decay envelope for an RC discharge.
 
-In plain words, the answer section highlights: exact decay symbol : exp(-1/4) certified decay interval : [0.7788007830, 0.7788007831] first below tolerance step : 13
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: exact decay symbol : exp(-1/4) ce
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - decay certificate is nonempty, positive, and below 1 C2 OK - voltage upper envelope decreases at every sample C3 OK - step 12 remains above the voltage tolerance
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

@@ -1,14 +1,14 @@
 # Kaprekar 6174
 
-`kaprekar_6174` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on kaprekar chains and basin facts ending at 6174. Its input fixture is organized around `StartCount`, `TargetConstant`, `ZeroBasin`, `MaxKaprekarSteps`.
+`kaprekar_6174` is a Go translation/adaptation of Eyeling's `kaprekar-6174.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is finite iterative arithmetic. Four-digit Kaprekar chains are followed to 6174 with checks for bounded convergence and trace consistency.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. Kaprekar chains and basin facts ending at 6174.
 
-In plain words, the answer section highlights: Kaprekar chains that end at 6174 are emitted as :kaprekar facts. total emitted : 9990 omitted 0000 basin : 10
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: Kaprekar chains that end at 6174 
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - all digit patterns from 0000 through 9999 were considered C2 OK - the identity-based step matches direct digit sorting for every start C3 OK - 3524 follows the classic 3087 -> 8352 -> 6174 chain
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

@@ -2,11 +2,13 @@
 
 `photosynthetic_exciton_transfer` is a Go translation/adaptation of Eyeling's `act-photosynthetic-exciton-transfer.n3`.
 
-The example asks whether a tuned photosynthetic antenna can deliver an excitation to a reaction center while a detuned contrast antenna cannot. It is careful about the claim: short-lived quantum-assisted transfer is enough in the tuned regime; long-lived coherence is not assumed.
+The context is quantum biology. Tuned excitonic coupling, vibronic bridging, dephasing, and downhill transfer are contrasted with a detuned complex that fails to deliver the excitation.
 
 ## What it demonstrates
 
-This is mainly a **Science** example. The tuned complex has strong excitonic coupling, delocalization, a tuned vibronic bridge, moderate dephasing, and a downhill route. The contrast complex has weak coupling, no useful bridge, strong dephasing, and a trapping mismatch.
+This example is mainly in the **Science** category. CAN/CAN'T reasoning for tuned versus detuned exciton delivery to a reaction center.
+
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -16,7 +18,7 @@ This is mainly a **Science** example. The tuned complex has strong excitonic cou
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, counters, thresholds, derived facts, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

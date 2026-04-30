@@ -1,14 +1,14 @@
 # Dijkstra Risk Path
 
-`dijkstra_risk_path` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on risk-adjusted path selection using weighted network edges. Its input fixture is organized around `caseName`, `question`, `start`, `goal`, `riskWeight`, `edges`, `expected`.
+`dijkstra_risk_path` is a Go translation/adaptation of Eyeling's `dijkstra.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is route planning over weighted edges. The Go version computes a best path under risk-adjusted costs and records enough audit data to check the selected route.
 
 ## What it demonstrates
 
-This is mainly a **Engineering** example. It demonstrates systems decisions, safety envelopes, route planning, and operational constraints in a form that can be read as code, data, and expected output.
+This example is mainly in the **Engineering** category. Risk-adjusted path selection using weighted network edges.
 
-In plain words, the answer section highlights: selected path : ClinicA -> DepotB -> LabD -> HubZ raw cost : 10.00 risk sum : 0.55
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: selected path : ClinicA -> DepotB
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - all route edges were loaded from JSON C2 OK - edge score is cost + 2.00 × risk C3 OK - Dijkstra reached HubZ from ClinicA
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

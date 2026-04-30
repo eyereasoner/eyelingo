@@ -1,14 +1,14 @@
 # LLD — Leg Length Discrepancy Measurement
 
-`lldm` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on leg-length discrepancy measurement and alarm thresholding. Its input fixture is organized around `P1x`, `P1y`, `P2x`, `P2y`, `P3x`, `P3y`, `P4x`, `P4y`.
+`lldm` is a Go translation/adaptation of Eyeling's `lldm.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is clinical measurement. Leg-length values are compared to derive discrepancy size and whether an alarm threshold has been crossed.
 
 ## What it demonstrates
 
-This is mainly a **Science** example. It demonstrates scientific measurement, evidence handling, and domain checks in a form that can be read as code, data, and expected output.
+This example is mainly in the **Science** category. Leg-length discrepancy measurement and alarm thresholding.
 
-In plain words, the answer section highlights: LLD Alarm = TRUE (discrepancy dCm = -1.908234, threshold ±1.25) Key computed values: SL1 = -0.062857 SL3 = SL4 = 15.909091
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: LLD Alarm = TRUE (discrepancy dCm
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - L1 is perpendicular to L3 and L4 (slopes product ≈ -1). C2 OK - p5 lies on both L1 and L3. C3 OK - p6 lies on both L1 and L4.
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

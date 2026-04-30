@@ -1,14 +1,14 @@
 # Docking Abort Token
 
-`docking_abort_token` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on docking abort audit-token flow and safety-system copy restrictions. Its input fixture is organized around `caseName`, `question`, `variable`, `media`, `superinformationMedium`, `expected`.
+`docking_abort_token` is a Go translation/adaptation of Eyeling's `act-docking-abort-token.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is safety-token handling for an automated docking abort. The example distinguishes allowed propagation of an audit token from unsafe copying or fan-out behavior.
 
 ## What it demonstrates
 
-This is mainly a **Engineering** example. It demonstrates systems decisions, safety envelopes, route planning, and operational constraints in a form that can be read as code, data, and expected output.
+This example is mainly in the **Engineering** category. Docking abort audit-token flow and safety-system copy restrictions.
 
-In plain words, the answer section highlights: classical abort token : YES, it can be permuted, copied, measured, and composed into audit networks quantum authenticity seal : NO, it cannot be universally cloned or used as unrestricted audit fan-out serial witness : abortLamp -> flightPLC -> auditDisplay
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: classical abort token : YES, it c
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - four classical media encode AbortBit C2 OK - each classical medium can distinguish and locally permute the abort bit C3 OK - abortLamp can copy the token to flightPLC
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

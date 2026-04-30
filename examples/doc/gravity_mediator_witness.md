@@ -2,11 +2,13 @@
 
 `gravity_mediator_witness` is a Go translation/adaptation of Eyeling's `act-gravity-mediator-witness.n3`.
 
-The example models a mediator-only entanglement witness between two quantum sensors. The positive run uses a gravitational mediator under locality and interoperability; the contrast run uses a purely classical mediator model.
+The context is a physics witness scenario. The rules distinguish mediator-only entanglement evidence from classical alternatives, so the conclusion depends on which transformations are possible.
 
 ## What it demonstrates
 
-This is mainly a **Science** example. The output separates what the witness can support from what the classical contrast model cannot support under the same mediator-only setup.
+This example is mainly in the **Science** category. Mediator-only entanglement witness contrasting non-classical and purely classical gravitational mediators.
+
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -16,7 +18,7 @@ This is mainly a **Science** example. The output separates what the witness can 
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, counters, thresholds, derived facts, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

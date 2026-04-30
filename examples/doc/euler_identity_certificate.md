@@ -1,14 +1,14 @@
 # Euler Identity Certificate
 
-`euler_identity_certificate` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on high-precision certificate for the identity exp(iπ) + 1 = 0. Its input fixture is organized around `caseName`, `question`, `angle`, `tolerance`, `terms`, `expected`.
+`euler_identity_certificate` is a Go translation/adaptation of Eyeling's `euler-identity-certificate.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is numerical certification of a classic identity. High-precision arithmetic is used to show that exp(iπ)+1 is close enough to zero under an explicit tolerance.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. High-precision certificate for the identity exp(iπ) + 1 = 0.
 
-In plain words, the answer section highlights: expression : exp(iπ) + 1 terms used : 28 computed real part of exp(iπ) : -1.000000000000000
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: expression : exp(iπ) + 1 terms u
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - Taylor expansion used 28 terms from the JSON input C2 OK - computed real part is close to -1 C3 OK - computed imaginary part is close to 0
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

@@ -1,14 +1,14 @@
 # Ackermann
 
-`ackermann` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on exact Ackermann and hyperoperation facts, including very large integer results. Its input fixture is a list with 12 entries.
+`ackermann` is a Go translation/adaptation of Eyeling's `ackermann.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is exact integer reasoning over the Ackermann hierarchy. The Go version keeps the huge-number behavior explicit, so the example is useful for checking recursion, memoization, and exact arithmetic without hiding the result behind floating-point approximations.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. Exact Ackermann and hyperoperation facts, including very large integer results.
 
-In plain words, the answer section highlights: The ackermann.n3 test query derives 12 Ackermann facts. Computed values: A0 ackermann(0,0) = 1
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: The ackermann.n3 test query deriv
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - x=0 reduces to successor after the y+3 binary offset. C2 OK - x=1 reduces to addition after the y+3 binary offset. C3 OK - x=2 reduces to multiplication after the y+3 binary offset.
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

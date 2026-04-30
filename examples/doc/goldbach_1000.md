@@ -2,11 +2,13 @@
 
 `goldbach_1000` is a Go translation/adaptation of Eyeling's `goldbach-1000.n3`.
 
-The example checks the strong even Goldbach condition for every even integer from 4 through 1000. It caches primes and records representative witnesses such as 1000 = 3 + 997.
+The context is bounded number-theory checking. Every even integer in the selected range is tested for a Goldbach decomposition, giving a compact certificate for the finite bound.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. This is not a proof of the full conjecture; it is a bounded verification example with explicit arithmetic checks and audit counters.
+This example is mainly in the **Mathematics** category. Bounded strong-Goldbach checker for every even integer from 4 through 1000.
+
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -16,7 +18,7 @@ This is mainly a **Mathematics** example. This is not a proof of the full conjec
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, counters, thresholds, derived facts, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

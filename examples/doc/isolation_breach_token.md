@@ -1,14 +1,14 @@
 # Isolation Breach Token
 
-`isolation_breach_token` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on isolation-breach audit-token flow with cloning and fan-out restrictions. Its input fixture is organized around `caseName`, `question`, `variable`, `media`, `superinformationMedium`, `expected`.
+`isolation_breach_token` is a Go translation/adaptation of Eyeling's `act-isolation-breach-token.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is safety evidence in an isolation-breach scenario. The token flow records what may be copied or relayed and what must remain restricted.
 
 ## What it demonstrates
 
-This is mainly a **Engineering** example. It demonstrates systems decisions, safety envelopes, route planning, and operational constraints in a form that can be read as code, data, and expected output.
+This example is mainly in the **Engineering** category. Isolation-breach audit-token flow with cloning and fan-out restrictions.
 
-In plain words, the answer section highlights: classical breach token : YES, prepare, reversible permutation, copy, measure, serial audit, and parallel fan-out all succeed specimen provenance seal : NO, universal cloning and unrestricted parallel fan-out are blocked prepared witness : nursePager prepares CodeBreach
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: classical breach token : YES, pre
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - doorBeacon, containmentPLC, nursePager, and incidentBoard encode BreachBit C2 OK - nursePager can prepare CodeBreach C3 OK - doorBeacon can permute SafeGreen to BreachRed and back
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

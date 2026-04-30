@@ -1,14 +1,14 @@
 # Decimal Servo Envelope
 
-`decimal_servo_envelope` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on certified servo pole interval and settling-step envelope. Its input fixture is organized around `caseName`, `question`, `samplePeriod`, `timeConstant`, `exactPoleSymbol`, `poleLower`, `poleUpper`, `initialAbsError`.
+`decimal_servo_envelope` is a Go translation/adaptation of Eyeling's `decimal-transcendental-servo-envelope.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is certified servo behavior. Decimal intervals bound a pole and settling envelope, which lets the example express engineering guarantees without relying only on approximate simulation.
 
 ## What it demonstrates
 
-This is mainly a **Engineering** example. It demonstrates systems decisions, safety envelopes, route planning, and operational constraints in a form that can be read as code, data, and expected output.
+This example is mainly in the **Engineering** category. Certified servo pole interval and settling-step envelope.
 
-In plain words, the answer section highlights: exact pole symbol : exp(-1/3) certified pole interval : [0.7165313105, 0.7165313106] first settled step : 10
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: exact pole symbol : exp(-1/3) cer
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - pole certificate is nonempty, positive, and below 1 C2 OK - upper envelope strictly decreases at every sampled step C3 OK - step 9 is not yet below tolerance
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

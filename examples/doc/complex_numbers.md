@@ -1,14 +1,14 @@
 # Complex Numbers
 
-`complex_numbers` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on complex arithmetic and transcendental identity checks. Its input fixture is organized around `Question`, `Exponents`, `Inverses`.
+`complex_numbers` is a Go translation/adaptation of Eyeling's `complex.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is complex arithmetic. The example translates polar-form and transcendental identities into Go calculations and checks quadrant-sensitive behavior in a way that is easy to audit.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. Complex arithmetic and transcendental identity checks.
 
-In plain words, the answer section highlights: The complex.n3 test query derives 6 complex-number facts. Computed values: C1 sqrt(-1+0i) = 0 + 1i
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: The complex.n3 test query derives
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - N3 dial rules assign the expected polar angles for -1, e, and i. C2 OK - all four complex exponentiation answers match the complex.n3 test facts. C3 OK - i^i and e^(-pi/2) derive the same real value.
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

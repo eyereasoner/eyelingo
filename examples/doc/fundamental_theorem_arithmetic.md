@@ -1,14 +1,14 @@
 # Fundamental Theorem Arithmetic
 
-`fundamental_theorem_arithmetic` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on prime factorization and prime-power representation. Its input fixture is a list with 6 entries.
+`fundamental_theorem_arithmetic` is a Go translation/adaptation of Eyeling's `fundamental-theorem-arithmetic.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is integer factorization. The example checks that a number decomposes into prime factors and that the grouped prime-power representation is consistent.
 
 ## What it demonstrates
 
-This is mainly a **Mathematics** example. It demonstrates exact computation, formal constraints, certificates, and algorithmic invariants in a form that can be read as code, data, and expected output.
+This example is mainly in the **Mathematics** category. Prime factorization and prime-power representation.
 
-In plain words, the answer section highlights: Primary N3 case: n = 202692987 has prime factors 3 * 3 * 7 * 829 * 3881. primary prime-power form : 3^2 * 7 * 829 * 3881 sample count : 6
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: Primary N3 case: n = 202692987 ha
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - the source example factors 202692987 as 3,3,7,829,3881 C2 OK - the source example groups repeated factors as 3^2 * 7 * 829 * 3881 C3 OK - multiplying each computed factor list reconstructs its original number
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

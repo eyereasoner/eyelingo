@@ -1,14 +1,14 @@
 # E-Bike Motor Thermal Envelope
 
-`ebike_motor_thermal_envelope` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on certified e-bike motor-temperature envelope for an assist plan. Its input fixture is organized around `CaseName`, `Question`, `SamplePeriodSec`, `ThermalTimeConstantSec`, `ExactCoolingSymbol`, `CoolingLower`, `CoolingUpper`, `AmbientC`.
+`ebike_motor_thermal_envelope` is a Go translation/adaptation of Eyeling's `decimal-ebike-motor-thermal-envelope.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is embedded mobility safety. A planned e-bike assist profile is checked against a decimal motor-temperature envelope, making the safety margin visible.
 
 ## What it demonstrates
 
-This is mainly a **Science** example. It demonstrates scientific measurement, evidence handling, and domain checks in a form that can be read as code, data, and expected output.
+This example is mainly in the **Science** category. Certified e-bike motor-temperature envelope for an assist plan.
 
-In plain words, the answer section highlights: decision : ThermallySafeForThisAssistPlan cooling certificate : exp(-1/4) in 0.7788007830 .. 0.7788007831 maximum upper motor temperature : 40.2285 C
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: decision : ThermallySafeForThisAs
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - cooling interval 0.7788007830..0.7788007831 is positive, ordered, and contractive C2 OK - temperature trace has 13 samples including the initial state C3 OK - maximum upper temperature 40.2285 C stays below hard limit 45.0 C
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 

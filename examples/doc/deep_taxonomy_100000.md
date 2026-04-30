@@ -1,14 +1,14 @@
 # Deep Taxonomy 100000
 
-`deep_taxonomy_100000` translates a selected N3-style reasoning scenario into a compact Go example. It focuses on large taxonomy materialization benchmark through a very deep class chain. Its input fixture is organized around `TaxonomyDepth`.
+`deep_taxonomy_100000` is a Go translation/adaptation of Eyeling's `deep-taxonomy-100000.n3`.
 
-The example keeps the reasoning deliberately visible: the JSON file supplies the facts or parameters, the Go file encodes the translated rules and calculations, and the Markdown output records the result in ARC style.
+The context is large-scale materialization. A very deep taxonomy chain stresses rule application, termination, and counting, while the output keeps the benchmark result compact.
 
 ## What it demonstrates
 
-This is mainly a **Technology** example. It demonstrates data representation, interoperability, policies, and computational artifacts in a form that can be read as code, data, and expected output.
+This example is mainly in the **Technology** category. Large taxonomy materialization benchmark through a very deep class chain.
 
-In plain words, the answer section highlights: The deep taxonomy test succeeds. Starting fact : :ind a :N0 Reached class : :ind a :N100000
+The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
 ## How to read the output
 
@@ -18,9 +18,7 @@ In plain words, the answer section highlights: The deep taxonomy test succeeds. 
 
 `Check` records invariants that should hold if the translation is faithful and the computation is consistent.
 
-For this example, the checks include: C1 OK - the starting classification N0 is present. C2 OK - the first expansion produced N1 together with side labels I1 and J1. C3 OK - the chain reaches the midpoint N50000 and still carries both side-label branches.
-
-`Go audit details` separates implementation evidence from the domain conclusion: input sizes, thresholds, counters, source scenario names, precision choices, or platform details.
+`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
 
 ## Files
 
