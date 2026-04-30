@@ -4,6 +4,13 @@
 
 The context is biological lineage and constructor-theory style CAN/CAN'T reasoning. The scenario distinguishes viable reproduction, dormant preservation, and heritable variation from transformations that the supplied resources or laws do not permit.
 
+## How it works
+
+Inspired by Eyeling's `examples/act-barley-seed-lineage.n3`.
+
+The example keeps the N3 CAN/CAN'T shape: one viable barley lineage and four
+contrast lineages that fail for a single missing ingredient.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. Seed-lineage CAN/CAN'T reasoning for reproduction, dormancy, variation, and persistence.

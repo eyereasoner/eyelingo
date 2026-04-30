@@ -4,6 +4,13 @@
 
 The context is digital encoding. The generated Gray-code sequence is checked so adjacent codes differ by exactly one bit, a core property for robust counters.
 
+## How it works
+
+Inspired by Eyeling's `examples/gray-code-counter.n3`.
+
+The example generates a cyclic reflected binary Gray counter and audits its
+one-bit transition property.
+
 ## What it demonstrates
 
 This example is mainly in the **Technology** category. n-bit Gray-code sequence with one-bit transition checks.

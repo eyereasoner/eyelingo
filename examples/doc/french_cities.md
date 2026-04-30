@@ -4,6 +4,18 @@
 
 The context is small graph reachability. A route network between French cities is explored to derive which destinations are reachable under the supplied links.
 
+## How it works
+
+A self-contained Go translation of examples/french-cities.n3 from the Eyeling
+example suite, in ARC style.
+
+The original N3 program encodes a small graph of French cities connected by
+one‑way roads.  It uses RDFS/OWL rules to derive longer paths from shorter
+ones and answers the question: which cities can reach Nantes?
+
+This is intentionally not a full N3 reasoner – it is a concrete scenario that
+mirrors the structure of the original N3 example.
+
 ## What it demonstrates
 
 This example is mainly in the **Technology** category. Reachability over a small French city route graph.

@@ -4,6 +4,13 @@
 
 The context is safety-token handling for an automated docking abort. The example distinguishes allowed propagation of an audit token from unsafe copying or fan-out behavior.
 
+## How it works
+
+Inspired by Eyeling's `examples/act-docking-abort.n3`.
+
+This example derives possible classical abort-token tasks and impossible
+quantum-seal tasks from a small constructor-theory style fixture.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Docking abort audit-token flow and safety-system copy restrictions.

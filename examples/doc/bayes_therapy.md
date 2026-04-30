@@ -4,6 +4,19 @@
 
 The context is treatment selection under probabilistic evidence. Candidate therapies are scored by posterior-weighted utility, so the example combines Bayesian inference with an explicit decision criterion.
 
+## How it works
+
+A self-contained Go translation of examples/bayes-therapy.n3 from the Eyeling
+example suite, in ARC style.
+
+The original N3 program extends a Naive‑Bayes diagnostic model with a
+decision‑theoretic layer that scores five therapies by expected utility.
+It then recommends the therapy with the highest utility.
+
+This is intentionally not a generic N3 reasoner. The concrete N3 facts and
+rules are represented as ordinary Go data and functions so the probabilistic
+inference and decision logic are easy to read and directly runnable.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. Posterior-weighted utility selection of the best therapy.

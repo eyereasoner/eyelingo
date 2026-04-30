@@ -4,6 +4,13 @@
 
 The context is signal processing. Eight samples from a sine wave are transformed into frequency bins, and the checks verify dominant bins, conjugate symmetry, zero DC, and energy preservation.
 
+## How it works
+
+Inspired by Eyeling's `examples/fft8-numeric.n3`.
+
+The example computes an 8-point discrete Fourier transform and audits the
+dominant frequency bins of a single-cycle sine wave.
+
 ## What it demonstrates
 
 This example is mainly in the **Technology** category. Eight-point Fourier transform over a sampled sine wave with conjugate-bin and energy checks.

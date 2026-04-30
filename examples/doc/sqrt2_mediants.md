@@ -4,6 +4,13 @@
 
 The context is exact rational approximation. Integer square comparisons certify lower and upper mediants for sqrt(2), avoiding floating-point dependence.
 
+## How it works
+
+Inspired by Eyeling's `examples/integer-first-sqrt2-mediants.n3`.
+
+The example builds an integer-certified rational bracket for sqrt(2) using
+convergents of the continued fraction [1; 2, 2, 2, ...].
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Rational lower/upper bounds for sqrt(2) certified by integer square comparisons.

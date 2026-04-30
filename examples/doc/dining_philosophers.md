@@ -4,6 +4,23 @@
 
 The context is concurrent resource use. A Chandy-Misra style trace is replayed so the output can check fairness, ownership, and conflict freedom between philosophers and forks.
 
+## How it works
+
+A self-contained Go translation of dining-philosophers.n3 from the Eyeling
+examples.
+
+The N3 source describes a concrete Chandy-Misra dining-philosophers trace.
+Five philosophers sit in a ring and share five forks. A hungry philosopher
+asks for any adjacent fork they do not hold. The current holder sends the fork
+only when it is Dirty. A transferred fork arrives Clean, and after a meal the
+trace marks every fork Dirty again.
+
+This Go version keeps the same nine-round schedule from the N3 file:
+P1/P3 eat, then P2/P4 eat, then P5 eats, repeated three times. Goroutines are
+used inside each round to model philosophers making requests and checking
+whether they can eat. State updates are still applied phase by phase so the
+run is deterministic and easy to compare with the source trace.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Chandy-Misra dining-philosophers trace with concurrency conflict checks.

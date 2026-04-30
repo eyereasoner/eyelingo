@@ -4,6 +4,13 @@
 
 The context is renewable-energy engineering. Wind-speed intervals are classified and passed through a cubic power curve to estimate energy and operating-envelope status.
 
+## How it works
+
+Inspired by Eyeling's `examples/wind-turbine.n3`.
+
+The example classifies wind-speed samples for a turbine power curve and
+computes the certified energy contribution of the usable intervals.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Wind-speed envelope classification with cubic power curve and interval energy audit.

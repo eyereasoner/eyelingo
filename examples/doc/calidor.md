@@ -4,6 +4,24 @@
 
 The context is municipal response planning during heat or cooling stress. Needs, packages, budgets, signatures, and policy constraints are combined to decide whether an intervention bundle is admissible.
 
+## How it works
+
+A self-contained Go translation of the Eyeling Calidor heat-response
+insight-economy example.
+
+The source N3 file models an urgent city service without making the city
+collect raw household sensor, health, or prepaid-energy data. A local gateway
+turns those private signals into a narrow insight: this household needs
+priority cooling support during a heat-alert window. The city may use that
+signed and expiring envelope for heatwave response, but not for unrelated
+purposes such as tenant screening.
+
+This program is intentionally not a generic RDF, ODRL, crypto, or N3 reasoner.
+It translates the concrete facts and rules for this one example into ordinary
+Go structs and checks. That keeps the privacy pattern visible: raw signals stay
+local, while a minimal decision object is shared for a specific public-service
+purpose.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Municipal cooling intervention bundle chosen from active needs and budget constraints.

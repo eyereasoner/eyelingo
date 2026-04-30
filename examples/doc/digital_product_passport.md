@@ -4,6 +4,16 @@
 
 The context is product sustainability reporting. Component facts are rolled up into recycled-content, footprint, repairability, and critical-material conclusions similar to a digital product passport.
 
+## How it works
+
+A self-contained Go translation inspired by Eyeling's
+`examples/digital-product-passport.n3`.
+
+The scenario models a Digital Product Passport for a smartphone. It derives
+compact public indicators from component, material, document, lifecycle, and
+footprint facts: total mass, recycled content, critical raw material exposure,
+lifecycle footprint, and a repair-friendly circularity hint.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. Component roll-up for recycled content, carbon footprint, repairability, and critical materials.

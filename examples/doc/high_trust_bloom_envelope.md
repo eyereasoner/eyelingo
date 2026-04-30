@@ -4,6 +4,16 @@
 
 The context is trustworthy membership checking. Canonical graph data, Bloom-index evidence, a decimal certificate, and false-positive bounds are all combined before accepting an envelope.
 
+## How it works
+
+A self-contained Go translation inspired by Eyeling's
+`examples/high-trust-rdf-bloom-envelope.n3`.
+
+The scenario checks whether an RDF graph artifact can use a Bloom prefilter
+without making correctness depend on it. Exact maybe-positive results must be
+confirmed against the canonical graph, and a decimal certificate bounds the
+expected false-positive workload.
+
 ## What it demonstrates
 
 This example is mainly in the **Technology** category. Bloom-envelope acceptance using canonical graph, index, and false-positive checks.

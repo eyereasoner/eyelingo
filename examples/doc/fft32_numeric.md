@@ -4,6 +4,14 @@
 
 The context is signal processing. The example evaluates complete 32-point Fourier spectra for multiple waveform fixtures, then checks the dominant frequency bins and spectral invariants.
 
+## How it works
+
+Inspired by Eyeling's `examples/fft32-numeric.n3`.
+
+The example computes full 32-point Fourier spectra for several waveform
+fixtures and audits the dominant bins, flat-spectrum impulse behavior,
+conjugate symmetry, and Parseval energy preservation.
+
 ## What it demonstrates
 
 This example is mainly in the **Technology** category. Thirty-two-point Fourier transform over several sampled waveforms with dominant-bin, flat-spectrum, conjugate-symmetry, and energy checks.

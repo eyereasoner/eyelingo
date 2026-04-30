@@ -4,6 +4,15 @@
 
 The context is optimization with deterministic genetic steps. Candidate knapsack selections are scored, mutated, and filtered while preserving capacity and value checks.
 
+## How it works
+
+A deterministic Go translation inspired by Eyeling's
+`examples/genetic-algorithm-knapsack.n3`.
+
+The example evaluates a 0/1 knapsack genome, generates every single-bit
+mutant, and keeps the candidate with the lowest fitness until no improving
+mutant exists.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Deterministic genetic selection for a bounded knapsack.

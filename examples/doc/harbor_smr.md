@@ -4,6 +4,20 @@
 
 The context is port-energy dispatch. A small modular reactor insight is used only if scope, expiry, privacy, safety margin, and dispatch thresholds all pass.
 
+## How it works
+
+A self-contained Go translation inspired by Eyeling's `examples/harborsmr.n3`.
+
+The scenario models a port hydrogen hub that asks to use a narrow,
+permissioned SMR flexible-export insight for one four-hour electrolyzer
+dispatch window. The key point is data minimization: the hub receives only a
+bounded decision object, while raw reactor telemetry stays local to the SMR
+operator.
+
+This is intentionally not a generic RDF/N3/ODRL reasoner. The concrete facts
+and rules are represented as Go structs and ordinary functions so the policy,
+safety, and minimization checks stay visible and directly runnable.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Port electrolysis dispatch decision with safety margin and policy checks.

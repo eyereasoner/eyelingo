@@ -4,6 +4,13 @@
 
 The context is circuit behavior. An RC discharge is bounded by an exponential envelope, and the checks verify that the decay stays within the certified range.
 
+## How it works
+
+Inspired by Eyeling's `examples/floating-point-first-rc-discharge.n3`.
+
+The example propagates a certified floating-point decay interval for a
+sampled RC discharge and finds the first safe voltage sample.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. Certified exponential decay envelope for an RC discharge.

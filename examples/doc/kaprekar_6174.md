@@ -4,6 +4,23 @@
 
 The context is finite iterative arithmetic. Four-digit Kaprekar chains are followed to 6174 with checks for bounded convergence and trace consistency.
 
+## How it works
+
+A self-contained Go translation of kaprekar-6174.n3 from the Eyeling
+examples.
+
+Kaprekar's routine starts with any four digits, including leading zeroes.
+At each step it sorts those digits from high to low to make one number,
+sorts them from low to high to make another number, and subtracts the smaller
+from the larger. Most starts eventually reach 6174, Kaprekar's constant.
+Starts with four equal digits, such as 0000 or 2222, fall into 0000 instead
+and are intentionally omitted from the final :kaprekar facts.
+
+The N3 example unrolls the proof to a fixed seven-step bound, because no
+four-digit start that reaches 6174 needs more than seven Kaprekar steps. This
+Go version keeps the same bounded, explicit approach while using ordinary Go
+data structures instead of a general RDF/N3 reasoner.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Kaprekar chains and basin facts ending at 6174.

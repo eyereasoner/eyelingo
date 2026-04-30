@@ -4,6 +4,21 @@
 
 The context is regional industrial policy. Exporters, training capacity, intervention packages, and payload-signature checks are combined to select a retooling priority.
 
+## How it works
+
+A self-contained Go translation of the Eyeling Flandor insight-economy
+example.
+
+The source N3 file models a regional policy decision. Exporters, training
+actors, and grid operators keep their sensitive details local. The region only
+receives a narrow macro-economic insight: enough aggregated pressure is active
+to justify a temporary retooling response for Flanders.
+
+This program is intentionally not a generic RDF, ODRL, crypto, or N3 reasoner.
+It translates the concrete facts and rules for this example into ordinary Go
+structs and checks. That keeps the main idea visible: private micro-signals can
+become a minimal, signed, expiring decision object for a public policy board.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Regional retooling priority calculation for a Flanders scenario.

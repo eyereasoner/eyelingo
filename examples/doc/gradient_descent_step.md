@@ -4,6 +4,13 @@
 
 The context is certified numerical optimization. A single gradient-descent step for a quadratic objective is computed and checked against the expected decrease conditions.
 
+## How it works
+
+Inspired by Eyeling's `examples/gd-step-certified.n3`.
+
+The example certifies one bounded gradient-descent step on a convex
+quadratic instead of running an open-ended optimizer.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Certified single gradient-descent step for a quadratic objective.

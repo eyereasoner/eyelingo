@@ -4,6 +4,15 @@
 
 The context is constrained aerial navigation. Candidate drone corridors are filtered by restrictions, risk, and route feasibility before a path is accepted.
 
+## How it works
+
+A compact Go translation inspired by Eyeling's
+`examples/drone-corridor-planner.n3`.
+
+The example composes corridor actions into bounded plans from Gent to
+Oostende. Duration and cost are summed; belief and comfort are multiplied.
+Plans are kept only when they satisfy the same pruning style as the N3 file.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Constrained drone route planning through corridors and restricted zones.

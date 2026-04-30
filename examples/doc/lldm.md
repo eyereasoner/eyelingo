@@ -4,6 +4,21 @@
 
 The context is clinical measurement. Leg-length values are compared to derive discrepancy size and whether an alarm threshold has been crossed.
 
+## How it works
+
+A self-contained Go translation of examples/lldm.n3 from the Eyeling
+example suite, in ARC style.
+
+The original N3 program encodes a geometric model for Leg Length
+Discrepancy Measurement.  Four measurement points on a medical image are
+processed through a pipeline of coordinate differences, line slopes,
+intersection points, and Euclidean distances to decide whether an alarm
+should be raised.
+
+This is intentionally not a generic N3 reasoner.  The concrete N3 facts
+and derivation rules are represented as ordinary Go data and functions so
+the decision logic is easy to read and directly runnable.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. Leg-length discrepancy measurement and alarm thresholding.

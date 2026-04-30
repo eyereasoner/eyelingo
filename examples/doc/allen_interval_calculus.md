@@ -4,6 +4,14 @@
 
 The context is temporal reasoning. Intervals, endpoints, and Allen relations are derived and cross-checked so that ordering facts can be used as reliable inputs to planning or scheduling logic.
 
+## How it works
+
+A compact Go translation inspired by Eyeling's
+`examples/allen-interval-calculus.n3`.
+
+The example completes intervals with duration fields and classifies every
+ordered interval pair using Allen's 13 base relations.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Allen temporal interval relation closure over completed and explicit intervals.

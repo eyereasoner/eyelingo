@@ -4,6 +4,21 @@
 
 The context is goal-driven route planning. Road-network facts and goals are turned into a concrete route with derived cost and step information.
 
+## How it works
+
+A self-contained Go translation of examples/gps.n3 from the Eyeling example
+suite.
+
+The original N3 example is an ARC-style, goal-driven route planner for a tiny
+western-Belgium map. It starts from Gent, derives possible paths to Oostende,
+compares their computed metrics, recommends the better route, renders a small
+explanation, and checks that the recommendation is consistent with the route
+metrics.
+
+This is intentionally not a generic RDF/N3 reasoner. The concrete N3 facts
+and rules are represented as Go structs and ordinary functions so the path
+derivation and decision logic are easy to read and directly runnable.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Goal-driven route planning over a small road network.

@@ -4,6 +4,10 @@
 
 The context is bounded number-theory checking. Every even integer in the selected range is tested for a Goldbach decomposition, giving a compact certificate for the finite bound.
 
+## How it works
+
+Inspired by Eyeling's `examples/goldbach-1000.n3`.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Bounded strong-Goldbach checker for every even integer from 4 through 1000.

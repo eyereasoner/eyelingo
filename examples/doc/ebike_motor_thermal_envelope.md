@@ -4,6 +4,14 @@
 
 The context is embedded mobility safety. A planned e-bike assist profile is checked against a decimal motor-temperature envelope, making the safety margin visible.
 
+## How it works
+
+A Go translation inspired by Eyeling's
+`examples/decimal-ebike-motor-thermal-envelope.n3`.
+
+The example propagates a certified decimal interval for exp(-1/4) through a
+sampled e-bike motor thermal model.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. Certified e-bike motor-temperature envelope for an assist plan.

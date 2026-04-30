@@ -4,6 +4,13 @@
 
 The context is numerical certification of a classic identity. High-precision arithmetic is used to show that exp(iπ)+1 is close enough to zero under an explicit tolerance.
 
+## How it works
+
+Inspired by Eyeling's mathematical certificate examples such as
+`examples/euler-identity.n3`.
+
+The example verifies a finite residual certificate for exp(i*pi)+1.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. High-precision certificate for the identity exp(iπ) + 1 = 0.

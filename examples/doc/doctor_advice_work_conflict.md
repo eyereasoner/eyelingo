@@ -4,6 +4,14 @@
 
 The context is conflicting recommendations. Remote-work and office-work advice are evaluated through policy precedence and conflict-resolution rules, producing a clear final decision.
 
+## How it works
+
+A compact Go translation inspired by Eyeling's
+`examples/doctor-advice-work-conflict.n3`.
+
+The example keeps conflicting permit/deny conclusions visible and then applies
+deterministic conflict-resolution rules for home versus office work.
+
 ## What it demonstrates
 
 This example is mainly in the **Technology** category. Policy conflict resolution for remote-work and office-work advice.

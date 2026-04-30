@@ -4,6 +4,10 @@
 
 The context is a physics witness scenario. The rules distinguish mediator-only entanglement evidence from classical alternatives, so the conclusion depends on which transformations are possible.
 
+## How it works
+
+Inspired by Eyeling's `examples/act-gravity-mediator-witness.n3`.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. Mediator-only entanglement witness contrasting non-classical and purely classical gravitational mediators.

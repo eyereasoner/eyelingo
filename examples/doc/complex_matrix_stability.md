@@ -4,6 +4,10 @@
 
 The context is discrete-time system stability. Complex diagonal entries are reduced to spectral radii, and the result classifies whether the matrix dynamics remain bounded.
 
+## How it works
+
+Inspired by Eyeling's `examples/complex-matrix-stability.n3`.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Discrete-time stability classification using spectral radii of diagonal complex matrices.

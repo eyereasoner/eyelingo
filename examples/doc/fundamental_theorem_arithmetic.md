@@ -4,6 +4,24 @@
 
 The context is integer factorization. The example checks that a number decomposes into prime factors and that the grouped prime-power representation is consistent.
 
+## How it works
+
+A self-contained Go translation of fundamental-theorem-arithmetic.n3 from
+the Eyeling examples.
+
+The Fundamental Theorem of Arithmetic says that every integer greater than 1
+has a prime factorization, and that the factorization is unique except for
+the order of the factors. The source N3 file demonstrates this with:
+
+	202692987 = 3^2 * 7 * 829 * 3881
+
+This Go version keeps that source example as the primary case and adds a
+wider set of numbers, including larger composites, repeated factors, and a
+large prime. Each case is factored by repeatedly taking the smallest divisor.
+The program then checks the product, checks that the factors are prime, and
+compares smallest-first and largest-first traversals to confirm uniqueness up
+to order.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Prime factorization and prime-power representation.

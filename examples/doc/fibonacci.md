@@ -4,6 +4,15 @@
 
 The context is exact recurrence computation. A large Fibonacci value is produced with integer arithmetic, making it useful for checking deterministic dynamic-programming behavior.
 
+## How it works
+
+A self-contained Go translation of examples/fibonacci.n3 from the Eyeling
+example suite, extended to handle very large indices (up to F(10000)).
+It uses arbitrary‑precision integers to compute exact Fibonacci numbers.
+
+This is intentionally not a full N3 reasoner – it is a concrete scenario
+that mirrors the structure of the original N3 example.
+
 ## What it demonstrates
 
 This example is mainly in the **Mathematics** category. Exact computation of a large Fibonacci number.

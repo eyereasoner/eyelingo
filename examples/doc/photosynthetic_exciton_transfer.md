@@ -4,6 +4,10 @@
 
 The context is quantum biology. Tuned excitonic coupling, vibronic bridging, dephasing, and downhill transfer are contrasted with a detuned complex that fails to deliver the excitation.
 
+## How it works
+
+Inspired by Eyeling's `examples/act-photosynthetic-exciton-transfer.n3`.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. CAN/CAN'T reasoning for tuned versus detuned exciton delivery to a reaction center.

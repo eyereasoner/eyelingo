@@ -4,6 +4,13 @@
 
 The context is route planning over weighted edges. The Go version computes a best path under risk-adjusted costs and records enough audit data to check the selected route.
 
+## How it works
+
+Inspired by Eyeling's shortest-path style examples such as `dijkstra.n3`.
+
+The example finds the lowest risk-adjusted route through a small delivery
+graph using Dijkstra's algorithm.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Risk-adjusted path selection using weighted network edges.

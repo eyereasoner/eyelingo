@@ -4,6 +4,16 @@
 
 The context is electric-vehicle trip planning. Route choices combine battery state, charging, duration, cost, and comfort thresholds so the answer reflects several operational constraints at once.
 
+## How it works
+
+A self-contained Go translation inspired by Eyeling's
+`examples/ev-roundtrip-planner.n3`.
+
+The scenario models a bounded, GPS-style EV journey planner from Brussels to
+Cologne. Actions are represented as state transitions with duration, cost,
+belief, and comfort scores. The planner composes transitions while consuming a
+finite search budget, then keeps only plans that satisfy the query thresholds.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. EV route planning with battery, duration, cost, and comfort constraints.

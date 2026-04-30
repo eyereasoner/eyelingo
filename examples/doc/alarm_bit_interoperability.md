@@ -4,6 +4,14 @@
 
 The context is interoperability between classical alarm systems. The example separates ordinary copying and relay of a classical alarm bit from quantum-like no-cloning constraints, which makes it a small but concrete technology-facing rule example.
 
+## How it works
+
+A Go translation inspired by Eyeling's
+`examples/act-alarm-bit-interoperability.n3`.
+
+The example distinguishes what can be done with classical alarm-bit media
+from what cannot be done with a superinformation-like token.
+
 ## What it demonstrates
 
 This example is mainly in the **Technology** category. Classical alarm-bit copy and relay tasks contrasted with forbidden universal cloning.

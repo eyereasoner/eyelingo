@@ -4,6 +4,19 @@
 
 The context is medical diagnostic support under uncertainty. Symptoms and test evidence are combined into posterior probabilities, then ranked so the answer can be read as a transparent Bayesian decision aid rather than as a black-box classifier.
 
+## How it works
+
+A self-contained Go translation of examples/bayes-diagnosis.n3 from the Eyeling
+example suite, in ARC style.
+
+The original N3 program encodes a small Bayesian diagnostic model (four
+diseases, five symptoms), plugs in a patient-case evidence list, and computes
+posterior probabilities by multiplying prior × likelihood and normalising.
+
+This is intentionally not a generic N3 reasoner. The concrete N3 facts and
+rules are represented as ordinary Go data and functions so the probabilistic
+inference is easy to read and directly runnable.
+
 ## What it demonstrates
 
 This example is mainly in the **Science** category. Bayesian posterior ranking of possible diseases from symptoms and test evidence.

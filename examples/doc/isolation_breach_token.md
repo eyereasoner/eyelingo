@@ -4,6 +4,13 @@
 
 The context is safety evidence in an isolation-breach scenario. The token flow records what may be copied or relayed and what must remain restricted.
 
+## How it works
+
+Inspired by Eyeling's `examples/act-isolation-breach.n3`.
+
+This example keeps the can/can't split: breach-token tasks are possible for
+classical media, while the provenance seal refuses unrestricted fan-out.
+
 ## What it demonstrates
 
 This example is mainly in the **Engineering** category. Isolation-breach audit-token flow with cloning and fan-out restrictions.
