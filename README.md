@@ -59,7 +59,7 @@ The `Go audit details` section is intentional. It documents translation-level ev
 
 STEM is the core of the collection. The examples are chosen to cover scientific measurement, technical interoperability, engineered systems, and mathematical reasoning. Together they show that rule-based examples can remain readable while still exercising realistic concerns: exact arithmetic, graph search, certificates, constraints, policy checks, safety envelopes, Bayesian reasoning, scheduling, routing, and optimization.
 
-## STEM examples
+## ARC-style STEM examples
 
 The examples are grouped by their main emphasis. Each row links to the example-specific JSON input, the Go translation, the expected Markdown output, and the companion documentation.
 
@@ -71,7 +71,7 @@ The examples are grouped by their main emphasis. Each row links to the example-s
 | Barley Seed Lineage | Seed-lineage CAN/CAN'T reasoning for reproduction, dormancy, variation, and persistence. | [json](examples/input/barley_seed_lineage.json) | [go](examples/barley_seed_lineage.go) | [md](examples/output/barley_seed_lineage.md) | [md](examples/doc/barley_seed_lineage.md) |
 | Bayes Diagnosis | Bayesian posterior ranking of possible diseases from symptoms and test evidence. | [json](examples/input/bayes_diagnosis.json) | [go](examples/bayes_diagnosis.go) | [md](examples/output/bayes_diagnosis.md) | [md](examples/doc/bayes_diagnosis.md) |
 | Bayes Therapy Decision Support | Posterior-weighted utility selection of the best therapy. | [json](examples/input/bayes_therapy.json) | [go](examples/bayes_therapy.go) | [md](examples/output/bayes_therapy.md) | [md](examples/doc/bayes_therapy.md) |
-| BMI — ARC-style Body Mass Index example | Adult BMI calculation, category assignment, and healthy-weight interval. | [json](examples/input/bmi.json) | [go](examples/bmi.go) | [md](examples/output/bmi.md) | [md](examples/doc/bmi.md) |
+| BMI — Body Mass Index | Adult BMI calculation, category assignment, and healthy-weight interval. | [json](examples/input/bmi.json) | [go](examples/bmi.go) | [md](examples/output/bmi.md) | [md](examples/doc/bmi.md) |
 | Digital Product Passport | Component roll-up for recycled content, carbon footprint, repairability, and critical materials. | [json](examples/input/digital_product_passport.json) | [go](examples/digital_product_passport.go) | [md](examples/output/digital_product_passport.md) | [md](examples/doc/digital_product_passport.md) |
 | E-Bike Motor Thermal Envelope | Certified e-bike motor-temperature envelope for an assist plan. | [json](examples/input/ebike_motor_thermal_envelope.json) | [go](examples/ebike_motor_thermal_envelope.go) | [md](examples/output/ebike_motor_thermal_envelope.md) | [md](examples/doc/ebike_motor_thermal_envelope.md) |
 | Gravity Mediator Witness | Mediator-only entanglement witness contrasting non-classical and purely classical gravitational mediators. | [json](examples/input/gravity_mediator_witness.json) | [go](examples/gravity_mediator_witness.go) | [md](examples/output/gravity_mediator_witness.md) | [md](examples/doc/gravity_mediator_witness.md) |
@@ -102,7 +102,7 @@ The examples are grouped by their main emphasis. Each row links to the example-s
 |---|---|---|---|---|---|
 | Calidor | Municipal cooling intervention bundle chosen from active needs and budget constraints, echoing [Inside the Insight Economy](https://ruben.verborgh.org/blog/2025/08/12/inside-the-insight-economy/). | [json](examples/input/calidor.json) | [go](examples/calidor.go) | [md](examples/output/calidor.md) | [md](examples/doc/calidor.md) |
 | Complex Matrix Stability | Discrete-time stability classification using spectral radii of diagonal complex matrices. | [json](examples/input/complex_matrix_stability.json) | [go](examples/complex_matrix_stability.go) | [md](examples/output/complex_matrix_stability.md) | [md](examples/doc/complex_matrix_stability.md) |
-| Control System — ARC-style control-system example | Translated measurement and control rules for actuators, inputs, and disturbances. | [json](examples/input/control_system.json) | [go](examples/control_system.go) | [md](examples/output/control_system.md) | [md](examples/doc/control_system.md) |
+| Control System | Translated measurement and control rules for actuators, inputs, and disturbances. | [json](examples/input/control_system.json) | [go](examples/control_system.go) | [md](examples/output/control_system.md) | [md](examples/doc/control_system.md) |
 | Decimal Servo Envelope | Certified servo pole interval and settling-step envelope. | [json](examples/input/decimal_servo_envelope.json) | [go](examples/decimal_servo_envelope.go) | [md](examples/output/decimal_servo_envelope.md) | [md](examples/doc/decimal_servo_envelope.md) |
 | Dijkstra Risk Path | Risk-adjusted path selection using weighted network edges. | [json](examples/input/dijkstra_risk_path.json) | [go](examples/dijkstra_risk_path.go) | [md](examples/output/dijkstra_risk_path.md) | [md](examples/doc/dijkstra_risk_path.md) |
 | Docking Abort Token | Docking abort audit-token flow and safety-system copy restrictions. | [json](examples/input/docking_abort_token.json) | [go](examples/docking_abort_token.go) | [md](examples/output/docking_abort_token.md) | [md](examples/doc/docking_abort_token.md) |
