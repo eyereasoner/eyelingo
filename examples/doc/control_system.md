@@ -1,6 +1,6 @@
-# Control System — ARC-style control-system example
+# Control System
 
-`control_system` is a Go translation/adaptation of Eyeling's `control-system.n3`, with the rule structure kept close to EYE's `reasoning/control-system/rules-001.n3`.
+`control_system` is a Go translation/adaptation of Eyeling's `control-system.n3`.
 
 ## Background
 

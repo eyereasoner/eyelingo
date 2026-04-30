@@ -1,4 +1,4 @@
-# BMI — ARC-style Body Mass Index example
+# BMI — Body Mass Index
 
 `bmi` is a Go translation/adaptation of Eyeling's `bmi.n3`.
 
