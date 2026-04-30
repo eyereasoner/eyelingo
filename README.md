@@ -27,25 +27,7 @@ examples/doc/example_xyz.md
 
 The Go file contains the example logic and prints the original ARC-style report as Markdown. The matching input JSON file contains the example-specific facts, data, or parameters that are feasible to externalize. The companion doc file gives a short plain-language explanation of what the example demonstrates, how to read the output, and where the three main files live.
 
-The output is Markdown, with structured sections such as:
-
-Snapshot files use plain lines rather than Markdown list markers, and add two trailing spaces to every non-empty line so rendered Markdown keeps the same line breaks as stdout.
-
-```md
-# Example Title
-
-## Answer
-...
-
-## Reason why
-...
-
-## Check
-...
-
-## Go audit details
-...
-```
+Output is delivered in structured Markdown. Snapshotss use plain lines rather than Markdown list markers, and add two trailing spaces to every non-empty line so rendered Markdown keeps the same line breaks as `stdout`.
 
 Most examples load their domain fixture directly from `examples/input/<name>.json` through `exampleinput.Load`. A few examples still keep complex internal relation structures in Go, but they also have a matching JSON input file documenting the corresponding data or parameters.
 
