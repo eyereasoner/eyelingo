@@ -1,0 +1,15 @@
+{
+  "caseName": "wind-turbine",
+  "question": "Classify wind-speed samples against a turbine envelope and compute interval energy.",
+  "cutInMS": 3.5,
+  "ratedMS": 12.0,
+  "cutOutMS": 25.0,
+  "ratedPowerMW": 3.2,
+  "intervalMinutes": 10.0,
+  "windSpeedsMS": [3.0, 6.5, 11.2, 15.0, 24.5, 27.0],
+  "expected": {
+    "usableIntervals": 4,
+    "ratedIntervals": 2,
+    "stoppedIntervals": 2
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "caseName": "integer-first-sqrt2-mediants",
+  "question": "Find an integer-certified rational bracket for sqrt(2) under a denominator limit.",
+  "maxDenominator": 1000,
+  "expected": {
+    "lower": "1393/985",
+    "upper": "577/408"
+  }
+}

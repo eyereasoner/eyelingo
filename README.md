@@ -10,20 +10,22 @@ internal/exampleinput/          shared JSON input loader
 examples/                       Go examples
 examples/input/                 example-specific JSON data and parameters
 examples/output/                expected Markdown output for each example
+examples/doc/                   short explanatory notes for each example
 test                            run examples and compare with expected Markdown output
 ```
 
 ## Example structure
 
-Each example now has three pieces:
+Each example now has four pieces:
 
 ```text
 examples/example_xyz.go
 examples/input/example_xyz.json
 examples/output/example_xyz.md
+examples/doc/example_xyz.md
 ```
 
-The Go file contains the example logic and prints the original ARC-style report as Markdown. The matching input JSON file contains the example-specific facts, data, or parameters that are feasible to externalize.
+The Go file contains the example logic and prints the original ARC-style report as Markdown. The matching input JSON file contains the example-specific facts, data, or parameters that are feasible to externalize. The companion doc file gives a short plain-language explanation of what the example demonstrates, how to read the output, and where the three main files live.
 
 The output is Markdown, with structured sections such as:
 
@@ -87,9 +89,7 @@ The examples are grouped by their main emphasis. Each row links to the example-s
 | Delfour | Privacy-preserving retail insight and recommendation policy. | [json](examples/input/delfour.json) | [go](examples/delfour.go) | [md](examples/output/delfour.md) |
 | Doctor Advice Work Conflict | Policy conflict resolution for remote-work and office-work advice. | [json](examples/input/doctor_advice_work_conflict.json) | [go](examples/doctor_advice_work_conflict.go) | [md](examples/output/doctor_advice_work_conflict.md) |
 | French Cities | Reachability over a small French city route graph. | [json](examples/input/french_cities.json) | [go](examples/french_cities.go) | [md](examples/output/french_cities.md) |
-| Go Capture Scenario (Weiqi) | Weiqi move legality, capture detection, and board update. | [json](examples/input/go_capture.json) | [go](examples/go_capture.go) | [md](examples/output/go_capture.md) |
-| Go Eye Capture Scenario (Weiqi) | Weiqi single-eye capture reasoning for a surrounded group. | [json](examples/input/go_eye_capture.json) | [go](examples/go_eye_capture.go) | [md](examples/output/go_eye_capture.md) |
-| Go Ko Rule Scenario (Weiqi) | Weiqi ko-rule prevention through board-state comparison. | [json](examples/input/go_ko.json) | [go](examples/go_ko.go) | [md](examples/output/go_ko.md) |
+| FFT8 Numeric | Eight-point Fourier transform over a sampled sine wave with conjugate-bin and energy checks. | [json](examples/input/fft8_numeric.json) | [go](examples/fft8_numeric.go) | [md](examples/output/fft8_numeric.md) |
 | Gray Code Counter | n-bit Gray-code sequence with one-bit transition checks. | [json](examples/input/gray_code_counter.json) | [go](examples/gray_code_counter.go) | [md](examples/output/gray_code_counter.md) |
 | High Trust RDF Bloom Envelope | Bloom-envelope acceptance using canonical graph, index, and false-positive checks. | [json](examples/input/high_trust_bloom_envelope.json) | [go](examples/high_trust_bloom_envelope.go) | [md](examples/output/high_trust_bloom_envelope.md) |
 | Ranked DPV Risk Report | ODRL/DPV clause risk ranking by severity and risk class. | [json](examples/input/odrl_dpv_risk_ranked.json) | [go](examples/odrl_dpv_risk_ranked.go) | [md](examples/output/odrl_dpv_risk_ranked.md) |
@@ -112,6 +112,7 @@ The examples are grouped by their main emphasis. Each row links to the example-s
 | Flandor | Regional retooling priority calculation for a Flanders scenario. | [json](examples/input/flandor.json) | [go](examples/flandor.go) | [md](examples/output/flandor.md) |
 | GPS — Goal driven route planning | Goal-driven route planning over a small road network. | [json](examples/input/gps.json) | [go](examples/gps.go) | [md](examples/output/gps.md) |
 | HarborSMR Insight Dispatch | Port electrolysis dispatch decision with safety margin and policy checks. | [json](examples/input/harbor_smr.json) | [go](examples/harbor_smr.go) | [md](examples/output/harbor_smr.md) |
+| Wind Turbine Envelope | Wind-speed envelope classification with cubic power curve and interval energy audit. | [json](examples/input/wind_turbine.json) | [go](examples/wind_turbine.go) | [md](examples/output/wind_turbine.md) |
 | Isolation Breach Token | Isolation-breach audit-token flow with cloning and fan-out restrictions. | [json](examples/input/isolation_breach_token.json) | [go](examples/isolation_breach_token.go) | [md](examples/output/isolation_breach_token.md) |
 
 ### Mathematics
@@ -128,6 +129,7 @@ The examples are grouped by their main emphasis. Each row links to the example-s
 | Genetic Knapsack Selection | Deterministic genetic selection for a bounded knapsack. | [json](examples/input/genetic_knapsack_selection.json) | [go](examples/genetic_knapsack_selection.go) | [md](examples/output/genetic_knapsack_selection.md) |
 | Gradient Descent Step | Certified single gradient-descent step for a quadratic objective. | [json](examples/input/gradient_descent_step.json) | [go](examples/gradient_descent_step.go) | [md](examples/output/gradient_descent_step.md) |
 | Kaprekar 6174 | Kaprekar chains and basin facts ending at 6174. | [json](examples/input/kaprekar_6174.json) | [go](examples/kaprekar_6174.go) | [md](examples/output/kaprekar_6174.md) |
+| Integer-First Sqrt2 Mediants | Rational lower/upper bounds for sqrt(2) certified by integer square comparisons. | [json](examples/input/sqrt2_mediants.json) | [go](examples/sqrt2_mediants.go) | [md](examples/output/sqrt2_mediants.md) |
 | 8-Queens | 8-Queens constraint satisfaction with a valid board solution. | [json](examples/input/queens.json) | [go](examples/queens.go) | [md](examples/output/queens.md) |
 | Sudoku | Sudoku constraint solving with a unique completed grid. | [json](examples/input/sudoku.json) | [go](examples/sudoku.go) | [md](examples/output/sudoku.md) |
 
