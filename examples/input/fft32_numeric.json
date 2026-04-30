@@ -1,0 +1,49 @@
+{
+  "caseName": "fft32-numeric",
+  "sourceExample": "fft32-numeric.n3",
+  "question": "Compute whole 32-point FFT spectra for several waveform fixtures and certify their dominant bins.",
+  "length": 32,
+  "tolerance": 1e-8,
+  "expectedOperations": 6144,
+  "waveforms": [
+    {
+      "name": "alternating",
+      "kind": "alternating",
+      "expectedDominantBins": [16],
+      "expectedDominantMagnitude": 32.0
+    },
+    {
+      "name": "constant_ones",
+      "kind": "constant",
+      "expectedDominantBins": [0],
+      "expectedDominantMagnitude": 32.0
+    },
+    {
+      "name": "cosine_bin3",
+      "kind": "cosine",
+      "bin": 3,
+      "expectedDominantBins": [3, 29],
+      "expectedDominantMagnitude": 16.0
+    },
+    {
+      "name": "impulse",
+      "kind": "impulse",
+      "expectedDominantBins": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+      "expectedDominantMagnitude": 1.0,
+      "expectedFlatSpectrum": true
+    },
+    {
+      "name": "ramp_0_31",
+      "kind": "ramp",
+      "expectedDominantBins": [0],
+      "expectedDominantMagnitude": 496.0
+    },
+    {
+      "name": "sine_bin5",
+      "kind": "sine",
+      "bin": 5,
+      "expectedDominantBins": [5, 27],
+      "expectedDominantMagnitude": 16.0
+    }
+  ]
+}

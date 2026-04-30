@@ -1,12 +1,12 @@
-# Decimal Servo Envelope
+# FFT32 Numeric
 
-`decimal_servo_envelope` is a Go translation/adaptation of Eyeling's `decimal-transcendental-servo-envelope.n3`.
+`fft32_numeric` is a Go translation/adaptation of Eyeling's `fft32-numeric.n3`.
 
-The context is certified servo behavior. Decimal intervals bound a pole and settling envelope, which lets the example express engineering guarantees without relying only on approximate simulation.
+The context is signal processing. The example evaluates complete 32-point Fourier spectra for multiple waveform fixtures, then checks the dominant frequency bins and spectral invariants.
 
 ## What it demonstrates
 
-This example is mainly in the **Engineering** category. Certified servo pole interval and settling-step envelope.
+This example is mainly in the **Technology** category. Thirty-two-point Fourier transform over several sampled waveforms with dominant-bin, flat-spectrum, conjugate-symmetry, and energy checks.
 
 The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
 
@@ -22,8 +22,8 @@ The JSON file contains the example-specific facts, data, or parameters. The Go f
 
 ## Files
 
-Input JSON: [../input/decimal_servo_envelope.json](../input/decimal_servo_envelope.json)
+Input JSON: [../input/fft32_numeric.json](../input/fft32_numeric.json)
 
-Go translation: [../decimal_servo_envelope.go](../decimal_servo_envelope.go)
+Go translation: [../fft32_numeric.go](../fft32_numeric.go)
 
-Expected Markdown output: [../output/decimal_servo_envelope.md](../output/decimal_servo_envelope.md)
+Expected Markdown output: [../output/fft32_numeric.md](../output/fft32_numeric.md)
