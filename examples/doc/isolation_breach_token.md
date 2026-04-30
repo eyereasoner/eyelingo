@@ -2,35 +2,24 @@
 
 `isolation_breach_token` is a Go translation/adaptation of Eyeling's `act-isolation-breach-token.n3`.
 
-The context is safety evidence in an isolation-breach scenario. The token flow records what may be copied or relayed and what must remain restricted.
+## Background
 
-## How it works
-
-Inspired by Eyeling's `examples/act-isolation-breach.n3`.
-
-This example keeps the can/can't split: breach-token tasks are possible for
-classical media, while the provenance seal refuses unrestricted fan-out.
+Isolation-breach handling requires evidence to travel across systems while preserving provenance and safety boundaries. A token can prove that a breach signal is authorized, but copying or fanning it out without controls may create unsafe or misleading evidence. This example models which propagation steps are permitted and which are blocked.
 
 ## What it demonstrates
 
-This example is mainly in the **Engineering** category. Isolation-breach audit-token flow with cloning and fan-out restrictions.
+**Category:** Engineering. Isolation-breach audit-token flow with cloning and fan-out restrictions.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The Go code derives permitted breach-token propagation tasks for classical evidence and separates them from restricted provenance-seal operations. It records where copying or fan-out would violate the protected-token rules.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Checks compare the allowed and blocked task sets with the expected safety boundary.
 
 ## Files
 
 Input JSON: [../input/isolation_breach_token.json](../input/isolation_breach_token.json)
 
-Go translation: [../isolation_breach_token.go](../isolation_breach_token.go)
+Go implementation: [../isolation_breach_token.go](../isolation_breach_token.go)
 
 Expected Markdown output: [../output/isolation_breach_token.md](../output/isolation_breach_token.md)

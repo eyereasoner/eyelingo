@@ -2,35 +2,24 @@
 
 `sqrt2_mediants` is a Go translation/adaptation of Eyeling's `integer-first-sqrt2-mediants.n3`.
 
-The context is exact rational approximation. Integer square comparisons certify lower and upper mediants for sqrt(2), avoiding floating-point dependence.
+## Background
 
-## How it works
-
-Inspired by Eyeling's `examples/integer-first-sqrt2-mediants.n3`.
-
-The example builds an integer-certified rational bracket for sqrt(2) using
-convergents of the continued fraction [1; 2, 2, 2, ...].
+The square root of two is irrational, so it cannot be represented exactly as a fraction. Rational approximations can still be certified by squaring: if p²/q² is below 2, p/q is a lower bound; if it is above 2, p/q is an upper bound. Integer comparisons avoid floating-point rounding while narrowing the bracket.
 
 ## What it demonstrates
 
-This example is mainly in the **Mathematics** category. Rational lower/upper bounds for sqrt(2) certified by integer square comparisons.
+**Category:** Mathematics. Rational lower/upper bounds for sqrt(2) certified by integer square comparisons.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The Go code builds rational lower and upper bounds for `sqrt(2)` using integer arithmetic. It generates continued-fraction convergents, compares squared integers instead of floats, and keeps the certified bracket.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Checks confirm that the lower bound squares below 2, the upper bound squares above 2, and the interval width meets the target.
 
 ## Files
 
 Input JSON: [../input/sqrt2_mediants.json](../input/sqrt2_mediants.json)
 
-Go translation: [../sqrt2_mediants.go](../sqrt2_mediants.go)
+Go implementation: [../sqrt2_mediants.go](../sqrt2_mediants.go)
 
 Expected Markdown output: [../output/sqrt2_mediants.md](../output/sqrt2_mediants.md)

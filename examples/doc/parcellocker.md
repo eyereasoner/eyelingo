@@ -2,42 +2,24 @@
 
 `parcellocker` is a Go translation/adaptation of Eyeling's `parcellocker.n3`.
 
-The context is delegated authorization. A one-time parcel pickup request is permitted only when identity, token, time, locker, and delegation constraints are all satisfied.
+## Background
 
-## How it works
-
-A self-contained Go translation of the Eyeling ParcelLocker delegation
-example.
-
-The source N3 file models a narrow, one-time permission: Maya lets Noah pick
-up one specific parcel from one specific locker for the pickup purpose only.
-The same token must not reveal billing details, redirect the parcel, work for
-another person, work at another locker, or be used after it has been consumed.
-
-This program is intentionally not a generic RDF or N3 reasoner. It translates
-the concrete facts and rules for this example into ordinary Go structs and
-checks so the authorization boundary is easy to read and run.
+Delegated pickup systems let one person authorize another to collect a parcel, but the token must be limited by parcel, locker, identity, time window, and purpose. One-time use and anti-redirection checks prevent the same authorization from being reused or applied to unrelated data. This example models those constraints as an authorization decision.
 
 ## What it demonstrates
 
-This example is mainly in the **Technology** category. Delegated parcel pickup-token authorization.
+**Category:** Technology. Delegated parcel pickup-token authorization.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The Go code models a one-time delegated pickup token and evaluates it against identity, parcel, locker, purpose, time window, and consumption state. It rejects attempts to reuse the token, redirect the parcel, use a different locker, or expose unrelated billing data.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+The final authorization is reported with the specific constraints that passed or failed.
 
 ## Files
 
 Input JSON: [../input/parcellocker.json](../input/parcellocker.json)
 
-Go translation: [../parcellocker.go](../parcellocker.go)
+Go implementation: [../parcellocker.go](../parcellocker.go)
 
 Expected Markdown output: [../output/parcellocker.md](../output/parcellocker.md)

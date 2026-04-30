@@ -2,35 +2,24 @@
 
 `euler_identity_certificate` is a Go translation/adaptation of Eyeling's `euler-identity-certificate.n3`.
 
-The context is numerical certification of a classic identity. High-precision arithmetic is used to show that exp(iπ)+1 is close enough to zero under an explicit tolerance.
+## Background
 
-## How it works
-
-Inspired by Eyeling's mathematical certificate examples such as
-`examples/euler-identity.n3`.
-
-The example verifies a finite residual certificate for exp(i*pi)+1.
+Euler's identity connects five fundamental constants through complex exponentiation: e, i, π, 1, and 0. Numerically, certifying the identity means evaluating exp(iπ) + 1 and showing that the remaining real and imaginary parts are within a chosen tolerance. The challenge is not the formula itself but presenting enough precision evidence that the near-zero result is credible.
 
 ## What it demonstrates
 
-This example is mainly in the **Mathematics** category. High-precision certificate for the identity exp(iπ) + 1 = 0.
+**Category:** Mathematics. High-precision certificate for the identity exp(iπ) + 1 = 0.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The code evaluates the finite residual for `exp(i*pi)+1` using the configured precision and tolerance. It separates the computed complex residual, its magnitude, and the pass/fail certificate so the numerical claim is auditable.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Checks verify that the residual is within tolerance and that the reported certificate matches the computed value.
 
 ## Files
 
 Input JSON: [../input/euler_identity_certificate.json](../input/euler_identity_certificate.json)
 
-Go translation: [../euler_identity_certificate.go](../euler_identity_certificate.go)
+Go implementation: [../euler_identity_certificate.go](../euler_identity_certificate.go)
 
 Expected Markdown output: [../output/euler_identity_certificate.md](../output/euler_identity_certificate.md)

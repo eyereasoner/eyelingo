@@ -2,35 +2,24 @@
 
 `dijkstra_risk_path` is a Go translation/adaptation of Eyeling's `dijkstra.n3`.
 
-The context is route planning over weighted edges. The Go version computes a best path under risk-adjusted costs and records enough audit data to check the selected route.
+## Background
 
-## How it works
-
-Inspired by Eyeling's shortest-path style examples such as `dijkstra.n3`.
-
-The example finds the lowest risk-adjusted route through a small delivery
-graph using Dijkstra's algorithm.
+Path-finding in a weighted graph chooses a route by minimizing a cost assigned to each edge. Dijkstra's algorithm is the standard method when all edge costs are non-negative. In a risk-aware variant, the weights may combine distance, hazard, exposure, or operational risk, so the selected path is the lowest-risk route rather than simply the shortest route.
 
 ## What it demonstrates
 
-This example is mainly in the **Engineering** category. Risk-adjusted path selection using weighted network edges.
+**Category:** Engineering. Risk-adjusted path selection using weighted network edges.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The Go code builds a weighted graph where each edge has both cost and risk. It applies Dijkstra's algorithm to the risk-adjusted score, carrying the current path with each label so the chosen route can be printed directly.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+The check section verifies the selected path, total raw cost, accumulated risk, and final score.
 
 ## Files
 
 Input JSON: [../input/dijkstra_risk_path.json](../input/dijkstra_risk_path.json)
 
-Go translation: [../dijkstra_risk_path.go](../dijkstra_risk_path.go)
+Go implementation: [../dijkstra_risk_path.go](../dijkstra_risk_path.go)
 
 Expected Markdown output: [../output/dijkstra_risk_path.md](../output/dijkstra_risk_path.md)

@@ -2,38 +2,24 @@
 
 `high_trust_bloom_envelope` is a Go translation/adaptation of Eyeling's `high-trust-rdf-bloom-envelope.n3`.
 
-The context is trustworthy membership checking. Canonical graph data, Bloom-index evidence, a decimal certificate, and false-positive bounds are all combined before accepting an envelope.
+## Background
 
-## How it works
-
-A self-contained Go translation inspired by Eyeling's
-`examples/high-trust-rdf-bloom-envelope.n3`.
-
-The scenario checks whether an RDF graph artifact can use a Bloom prefilter
-without making correctness depend on it. Exact maybe-positive results must be
-confirmed against the canonical graph, and a decimal certificate bounds the
-expected false-positive workload.
+A Bloom filter is a compact probabilistic set-membership structure: it can say an item is definitely absent or maybe present, but a maybe-present result can be a false positive. High-trust use therefore requires exact confirmation against a canonical source. This example treats the Bloom filter as a prefilter and separately certifies the expected false-positive workload.
 
 ## What it demonstrates
 
-This example is mainly in the **Technology** category. Bloom-envelope acceptance using canonical graph, index, and false-positive checks.
+**Category:** Technology. Bloom-envelope acceptance using canonical graph, index, and false-positive checks.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The implementation treats the Bloom filter as a prefilter rather than as final proof. Maybe-positive membership hits are confirmed against the canonical graph, while decimal bounds estimate the expected false-positive workload.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+The envelope is accepted only when canonical membership, index evidence, certificate precision, and trust thresholds all pass.
 
 ## Files
 
 Input JSON: [../input/high_trust_bloom_envelope.json](../input/high_trust_bloom_envelope.json)
 
-Go translation: [../high_trust_bloom_envelope.go](../high_trust_bloom_envelope.go)
+Go implementation: [../high_trust_bloom_envelope.go](../high_trust_bloom_envelope.go)
 
 Expected Markdown output: [../output/high_trust_bloom_envelope.md](../output/high_trust_bloom_envelope.md)

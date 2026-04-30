@@ -2,35 +2,24 @@
 
 `fft8_numeric` is a Go translation/adaptation of Eyeling's `fft8-numeric.n3`.
 
-The context is signal processing. Eight samples from a sine wave are transformed into frequency bins, and the checks verify dominant bins, conjugate symmetry, zero DC, and energy preservation.
+## Background
 
-## How it works
-
-Inspired by Eyeling's `examples/fft8-numeric.n3`.
-
-The example computes an 8-point discrete Fourier transform and audits the
-dominant frequency bins of a single-cycle sine wave.
+A discrete Fourier transform converts a short sampled signal into frequency-domain coefficients. An 8-point transform is small enough to inspect manually but still shows key properties such as dominant bins, conjugate symmetry for real signals, and energy preservation between time and frequency domains.
 
 ## What it demonstrates
 
-This example is mainly in the **Technology** category. Eight-point Fourier transform over a sampled sine wave with conjugate-bin and energy checks.
+**Category:** Technology. Eight-point Fourier transform over a sampled sine wave with conjugate-bin and energy checks.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The implementation builds an 8-sample sine-wave fixture and computes its discrete Fourier transform directly. It records each complex bin, identifies the dominant frequency pair, and checks that the DC component and conjugate bins behave as expected.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Energy preservation is checked by comparing time-domain and frequency-domain totals within tolerance.
 
 ## Files
 
 Input JSON: [../input/fft8_numeric.json](../input/fft8_numeric.json)
 
-Go translation: [../fft8_numeric.go](../fft8_numeric.go)
+Go implementation: [../fft8_numeric.go](../fft8_numeric.go)
 
 Expected Markdown output: [../output/fft8_numeric.md](../output/fft8_numeric.md)

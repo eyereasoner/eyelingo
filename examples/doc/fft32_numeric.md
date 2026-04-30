@@ -2,36 +2,24 @@
 
 `fft32_numeric` is a Go translation/adaptation of Eyeling's `fft32-numeric.n3`.
 
-The context is signal processing. The example evaluates complete 32-point Fourier spectra for multiple waveform fixtures, then checks the dominant frequency bins and spectral invariants.
+## Background
 
-## How it works
-
-Inspired by Eyeling's `examples/fft32-numeric.n3`.
-
-The example computes full 32-point Fourier spectra for several waveform
-fixtures and audits the dominant bins, flat-spectrum impulse behavior,
-conjugate symmetry, and Parseval energy preservation.
+A discrete Fourier transform decomposes a finite sequence of samples into frequency bins. For real-valued signals, positive and negative frequency bins appear as conjugate pairs, and Parseval's theorem relates time-domain energy to frequency-domain energy. A 32-point transform gives enough bins to test several waveform shapes while keeping every bin visible in the output.
 
 ## What it demonstrates
 
-This example is mainly in the **Technology** category. Thirty-two-point Fourier transform over several sampled waveforms with dominant-bin, flat-spectrum, conjugate-symmetry, and energy checks.
+**Category:** Technology. Thirty-two-point Fourier transform over several sampled waveforms with dominant-bin, flat-spectrum, conjugate-symmetry, and energy checks.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The Go code creates 32-sample waveform fixtures, computes a full discrete Fourier spectrum for each waveform, and stores magnitude and phase per bin. It then identifies dominant bins and checks special cases such as impulse flatness.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+The audit also verifies conjugate symmetry and Parseval energy preservation within the configured tolerance.
 
 ## Files
 
 Input JSON: [../input/fft32_numeric.json](../input/fft32_numeric.json)
 
-Go translation: [../fft32_numeric.go](../fft32_numeric.go)
+Go implementation: [../fft32_numeric.go](../fft32_numeric.go)
 
 Expected Markdown output: [../output/fft32_numeric.md](../output/fft32_numeric.md)

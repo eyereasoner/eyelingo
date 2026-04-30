@@ -2,35 +2,24 @@
 
 `gray_code_counter` is a Go translation/adaptation of Eyeling's `gray-code-counter.n3`.
 
-The context is digital encoding. The generated Gray-code sequence is checked so adjacent codes differ by exactly one bit, a core property for robust counters.
+## Background
 
-## How it works
-
-Inspired by Eyeling's `examples/gray-code-counter.n3`.
-
-The example generates a cyclic reflected binary Gray counter and audits its
-one-bit transition property.
+A Gray code orders binary words so consecutive values differ in exactly one bit. This is useful in hardware and sensing because a one-step transition cannot momentarily flip several bits at once. The example builds the sequence and checks the one-bit Hamming-distance property between neighboring codes.
 
 ## What it demonstrates
 
-This example is mainly in the **Technology** category. n-bit Gray-code sequence with one-bit transition checks.
+**Category:** Technology. n-bit Gray-code sequence with one-bit transition checks.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The Go code generates a reflected binary Gray sequence for the configured bit width. It compares each adjacent pair, including the wrap-around pair, by counting bit differences.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+The checks verify sequence length, uniqueness, valid bit width, and the one-bit transition property.
 
 ## Files
 
 Input JSON: [../input/gray_code_counter.json](../input/gray_code_counter.json)
 
-Go translation: [../gray_code_counter.go](../gray_code_counter.go)
+Go implementation: [../gray_code_counter.go](../gray_code_counter.go)
 
 Expected Markdown output: [../output/gray_code_counter.md](../output/gray_code_counter.md)

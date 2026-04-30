@@ -2,38 +2,24 @@
 
 `ev_roundtrip_planner` is a Go translation/adaptation of Eyeling's `ev-roundtrip-planner.n3`.
 
-The context is electric-vehicle trip planning. Route choices combine battery state, charging, duration, cost, and comfort thresholds so the answer reflects several operational constraints at once.
+## Background
 
-## How it works
-
-A self-contained Go translation inspired by Eyeling's
-`examples/ev-roundtrip-planner.n3`.
-
-The scenario models a bounded, GPS-style EV journey planner from Brussels to
-Cologne. Actions are represented as state transitions with duration, cost,
-belief, and comfort scores. The planner composes transitions while consuming a
-finite search budget, then keeps only plans that satisfy the query thresholds.
+Electric-vehicle trip planning depends on state of charge, consumption, charger availability, dwell time, cost, and comfort constraints. A feasible round trip must keep the battery above reserve limits, choose charging stops that fit the route, and balance total duration against convenience. This example turns those constraints into an auditable route recommendation.
 
 ## What it demonstrates
 
-This example is mainly in the **Engineering** category. EV route planning with battery, duration, cost, and comfort constraints.
+**Category:** Engineering. EV route planning with battery, duration, cost, and comfort constraints.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The implementation treats route legs and charging stops as state transitions. It composes bounded plans from Brussels to Cologne, updating battery state, duration, cost, belief, and comfort at each step.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Candidate plans are filtered against the query thresholds, and the selected itinerary is checked for feasibility, final battery margin, and total trip metrics.
 
 ## Files
 
 Input JSON: [../input/ev_roundtrip_planner.json](../input/ev_roundtrip_planner.json)
 
-Go translation: [../ev_roundtrip_planner.go](../ev_roundtrip_planner.go)
+Go implementation: [../ev_roundtrip_planner.go](../ev_roundtrip_planner.go)
 
 Expected Markdown output: [../output/ev_roundtrip_planner.md](../output/ev_roundtrip_planner.md)

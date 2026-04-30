@@ -2,36 +2,24 @@
 
 `ebike_motor_thermal_envelope` is a Go translation/adaptation of Eyeling's `decimal-ebike-motor-thermal-envelope.n3`.
 
-The context is embedded mobility safety. A planned e-bike assist profile is checked against a decimal motor-temperature envelope, making the safety margin visible.
+## Background
 
-## How it works
-
-A Go translation inspired by Eyeling's
-`examples/decimal-ebike-motor-thermal-envelope.n3`.
-
-The example propagates a certified decimal interval for exp(-1/4) through a
-sampled e-bike motor thermal model.
+Electric motors heat up when they deliver torque, and excessive temperature can damage components or reduce lifetime. A thermal envelope describes acceptable temperature ranges over time, often with margins around warning and cutoff thresholds. This example samples an assist plan and checks whether the motor remains inside the certified envelope.
 
 ## What it demonstrates
 
-This example is mainly in the **Science** category. Certified e-bike motor-temperature envelope for an assist plan.
+**Category:** Science. Certified e-bike motor-temperature envelope for an assist plan.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The implementation propagates a certified decimal interval through a sampled motor-temperature model. Each assist segment updates the temperature envelope, tracks the safety margin, and records the worst-case sample.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Checks confirm that the plan stays below the thermal limit and that the interval arithmetic remains inside the declared tolerance.
 
 ## Files
 
 Input JSON: [../input/ebike_motor_thermal_envelope.json](../input/ebike_motor_thermal_envelope.json)
 
-Go translation: [../ebike_motor_thermal_envelope.go](../ebike_motor_thermal_envelope.go)
+Go implementation: [../ebike_motor_thermal_envelope.go](../ebike_motor_thermal_envelope.go)
 
 Expected Markdown output: [../output/ebike_motor_thermal_envelope.md](../output/ebike_motor_thermal_envelope.md)

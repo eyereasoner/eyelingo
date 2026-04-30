@@ -2,40 +2,24 @@
 
 `french_cities` is a Go translation/adaptation of Eyeling's `french-cities.n3`.
 
-The context is small graph reachability. A route network between French cities is explored to derive which destinations are reachable under the supplied links.
+## Background
 
-## How it works
-
-A self-contained Go translation of examples/french-cities.n3 from the Eyeling
-example suite, in ARC style.
-
-The original N3 program encodes a small graph of French cities connected by
-one‑way roads.  It uses RDFS/OWL rules to derive longer paths from shorter
-ones and answers the question: which cities can reach Nantes?
-
-This is intentionally not a full N3 reasoner – it is a concrete scenario that
-mirrors the structure of the original N3 example.
+A route graph represents cities as nodes and direct connections as edges. Reachability asks whether one node can be reached from another by following edges, optionally through intermediate nodes. This example keeps the graph small so the derived paths and transitive connections can be inspected directly.
 
 ## What it demonstrates
 
-This example is mainly in the **Technology** category. Reachability over a small French city route graph.
+**Category:** Technology. Reachability over a small French city route graph.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The implementation builds a directed road graph from city links and derives reachability by expanding paths until no new destinations appear. It keeps the discovered predecessor/path information so reachable cities can be explained rather than merely listed.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Checks confirm the expected destinations and guard against unreachable-city false positives.
 
 ## Files
 
 Input JSON: [../input/french_cities.json](../input/french_cities.json)
 
-Go translation: [../french_cities.go](../french_cities.go)
+Go implementation: [../french_cities.go](../french_cities.go)
 
 Expected Markdown output: [../output/french_cities.md](../output/french_cities.md)

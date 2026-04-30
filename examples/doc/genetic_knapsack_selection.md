@@ -2,37 +2,24 @@
 
 `genetic_knapsack_selection` is a Go translation/adaptation of Eyeling's `genetic-knapsack-selection.n3`.
 
-The context is optimization with deterministic genetic steps. Candidate knapsack selections are scored, mutated, and filtered while preserving capacity and value checks.
+## Background
 
-## How it works
-
-A deterministic Go translation inspired by Eyeling's
-`examples/genetic-algorithm-knapsack.n3`.
-
-The example evaluates a 0/1 knapsack genome, generates every single-bit
-mutant, and keeps the candidate with the lowest fitness until no improving
-mutant exists.
+The knapsack problem asks which items to choose when each item has value and weight and the total weight is bounded. Genetic algorithms search such spaces by keeping a population of candidate selections, scoring fitness, and applying selection, crossover, or mutation. This example uses a deterministic version so the optimization trace is reproducible.
 
 ## What it demonstrates
 
-This example is mainly in the **Mathematics** category. Deterministic genetic selection for a bounded knapsack.
+**Category:** Mathematics. Deterministic genetic selection for a bounded knapsack.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The implementation represents each knapsack candidate as a bit genome. It scores the current genome, generates all single-bit mutants, filters out capacity violations, and moves to the improving candidate with the best fitness until no mutant improves the score.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+The checks verify capacity, selected value, mutation count, and convergence of the deterministic search.
 
 ## Files
 
 Input JSON: [../input/genetic_knapsack_selection.json](../input/genetic_knapsack_selection.json)
 
-Go translation: [../genetic_knapsack_selection.go](../genetic_knapsack_selection.go)
+Go implementation: [../genetic_knapsack_selection.go](../genetic_knapsack_selection.go)
 
 Expected Markdown output: [../output/genetic_knapsack_selection.md](../output/genetic_knapsack_selection.md)

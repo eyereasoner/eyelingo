@@ -2,35 +2,24 @@
 
 `barley_seed_lineage` is a Go translation/adaptation of Eyeling's `act-barley-seed-lineage.n3`.
 
-The context is biological lineage and constructor-theory style CAN/CAN'T reasoning. The scenario distinguishes viable reproduction, dormant preservation, and heritable variation from transformations that the supplied resources or laws do not permit.
+## Background
 
-## How it works
-
-Inspired by Eyeling's `examples/act-barley-seed-lineage.n3`.
-
-The example keeps the N3 CAN/CAN'T shape: one viable barley lineage and four
-contrast lineages that fail for a single missing ingredient.
+Seed-lineage reasoning combines biological heredity with constraints on what transformations are physically or biologically possible. A viable seed line needs reproduction, persistence across time, enough copying accuracy, and some heritable variation for selection. Dormancy matters because seeds can remain viable without actively growing, while missing resources or broken heredity block a proposed lineage.
 
 ## What it demonstrates
 
-This example is mainly in the **Science** category. Seed-lineage CAN/CAN'T reasoning for reproduction, dormancy, variation, and persistence.
+**Category:** Science. Seed-lineage CAN/CAN'T reasoning for reproduction, dormancy, variation, and persistence.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The implementation evaluates each candidate lineage against the required conditions for viable heredity and selection. It derives copy, accuracy, closure, and adaptive-variation flags, then records the single missing ingredient that blocks each contrast lineage.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+The final result separates the evolvable lineage from the blocked ones and checks both lists against the expected fixture.
 
 ## Files
 
 Input JSON: [../input/barley_seed_lineage.json](../input/barley_seed_lineage.json)
 
-Go translation: [../barley_seed_lineage.go](../barley_seed_lineage.go)
+Go implementation: [../barley_seed_lineage.go](../barley_seed_lineage.go)
 
 Expected Markdown output: [../output/barley_seed_lineage.md](../output/barley_seed_lineage.md)

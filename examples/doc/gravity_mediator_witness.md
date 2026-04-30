@@ -2,32 +2,24 @@
 
 `gravity_mediator_witness` is a Go translation/adaptation of Eyeling's `act-gravity-mediator-witness.n3`.
 
-The context is a physics witness scenario. The rules distinguish mediator-only entanglement evidence from classical alternatives, so the conclusion depends on which transformations are possible.
+## Background
 
-## How it works
-
-Inspired by Eyeling's `examples/act-gravity-mediator-witness.n3`.
+In quantum-information thought experiments, entanglement between two systems can reveal something about the mediator that couples them. If gravity could mediate entanglement, that would suggest non-classical behavior in the mediator; a purely classical channel should not create the same witness. This example contrasts those cases using explicit CAN/CAN'T-style evidence.
 
 ## What it demonstrates
 
-This example is mainly in the **Science** category. Mediator-only entanglement witness contrasting non-classical and purely classical gravitational mediators.
+**Category:** Science. Mediator-only entanglement witness contrasting non-classical and purely classical gravitational mediators.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The implementation evaluates each experimental run from its mediator model, coupling mode, observed outcome, and control/probe status. It identifies the positive witness run and the contrast run, then derives whether mediator-only entanglement evidence is present.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Checks confirm that the positive case satisfies all witness conditions and that the classical contrast is blocked for a specific reason.
 
 ## Files
 
 Input JSON: [../input/gravity_mediator_witness.json](../input/gravity_mediator_witness.json)
 
-Go translation: [../gravity_mediator_witness.go](../gravity_mediator_witness.go)
+Go implementation: [../gravity_mediator_witness.go](../gravity_mediator_witness.go)
 
 Expected Markdown output: [../output/gravity_mediator_witness.md](../output/gravity_mediator_witness.md)

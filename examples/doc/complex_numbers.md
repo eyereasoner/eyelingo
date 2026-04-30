@@ -2,43 +2,24 @@
 
 `complex_numbers` is a Go translation/adaptation of Eyeling's `complex.n3`.
 
-The context is complex arithmetic. The example translates polar-form and transcendental identities into Go calculations and checks quadrant-sensitive behavior in a way that is easy to audit.
+## Background
 
-## How it works
-
-A self-contained Go translation of complex.n3 from the Eyeling examples.
-
-The original N3 file defines rules for complex polar conversion,
-quadrant-sensitive angle selection, complex exponentiation, and inverse sine /
-cosine over complex numbers. The test query asks for six derived complex
-values:
-
-	sqrt(-1), e^(i*pi), i^i, e^(-pi/2), asin(2), and acos(2)
-
-This Go version keeps those rules explicit instead of using Go's cmplx.Pow,
-cmplx.Asin, or cmplx.Acos helpers. That makes the same mathematical proof
-steps visible and auditable.
+Complex numbers extend real numbers with an imaginary component, written a + bi where i² = -1. They can also be represented in polar form by magnitude and angle, which makes exponentials, logarithms, powers, and rotations easier to express. Correct handling of the quadrant of the angle is important because several complex values can share related magnitudes or trigonometric components.
 
 ## What it demonstrates
 
-This example is mainly in the **Mathematics** category. Complex arithmetic and transcendental identity checks.
+**Category:** Mathematics. Complex arithmetic and transcendental identity checks.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The Go code spells out the complex-number derivations instead of delegating everything to high-level helpers. It computes polar conversion, quadrant-sensitive arguments, exponentials, logarithms, powers, and inverse trigonometric forms so the report can show the mathematical path.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+The checks compare the derived values with expected identities and tolerances, including cases where branch choice matters.
 
 ## Files
 
 Input JSON: [../input/complex_numbers.json](../input/complex_numbers.json)
 
-Go translation: [../complex_numbers.go](../complex_numbers.go)
+Go implementation: [../complex_numbers.go](../complex_numbers.go)
 
 Expected Markdown output: [../output/complex_numbers.md](../output/complex_numbers.md)

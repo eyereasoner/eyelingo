@@ -2,32 +2,24 @@
 
 `photosynthetic_exciton_transfer` is a Go translation/adaptation of Eyeling's `act-photosynthetic-exciton-transfer.n3`.
 
-The context is quantum biology. Tuned excitonic coupling, vibronic bridging, dephasing, and downhill transfer are contrasted with a detuned complex that fails to deliver the excitation.
+## Background
 
-## How it works
-
-Inspired by Eyeling's `examples/act-photosynthetic-exciton-transfer.n3`.
+Photosynthesis begins when absorbed light creates an exciton, an electronic excitation that must reach a reaction center efficiently. Coupling, energy gaps, vibronic effects, coherence, and dephasing all influence whether transfer is possible. This example compares a tuned complex that can deliver the excitation with a detuned contrast case that cannot.
 
 ## What it demonstrates
 
-This example is mainly in the **Science** category. CAN/CAN'T reasoning for tuned versus detuned exciton delivery to a reaction center.
+**Category:** Science. CAN/CAN'T reasoning for tuned versus detuned exciton delivery to a reaction center.
 
-The JSON file contains the example-specific facts, data, or parameters. The Go file makes the translated N3 rules, calculations, or search procedure explicit. The Markdown output records the result in ARC style so the answer, reasoning, checks, and implementation audit can be reviewed separately.
+## How the Go implementation works
 
-## How to read the output
+The Go code evaluates each photosynthetic complex against coupling, delocalization, vibronic bridge, energy landscape, coherence, dephasing, and connection-to-center fields. It derives CAN entries for the tuned complex and CAN'T entries for the detuned contrast.
 
-`Answer` gives the computed conclusion or selected result.
-
-`Reason why` explains the rule path, calculation path, or decision chain that led to the answer.
-
-`Check` records invariants that should hold if the translation is faithful and the computation is consistent.
-
-`Go audit details` separates implementation evidence from the domain conclusion: source scenario names, input sizes, thresholds, counters, precision choices, rule counts, or platform details.
+Checks make sure the successful transfer has all required conditions and that the failed case is blocked by the expected missing properties.
 
 ## Files
 
 Input JSON: [../input/photosynthetic_exciton_transfer.json](../input/photosynthetic_exciton_transfer.json)
 
-Go translation: [../photosynthetic_exciton_transfer.go](../photosynthetic_exciton_transfer.go)
+Go implementation: [../photosynthetic_exciton_transfer.go](../photosynthetic_exciton_transfer.go)
 
 Expected Markdown output: [../output/photosynthetic_exciton_transfer.md](../output/photosynthetic_exciton_transfer.md)
