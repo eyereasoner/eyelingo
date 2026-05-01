@@ -34,13 +34,13 @@ Regenerate expected Markdown outputs after an intentional change:
 
 ## What is in this repository
 
-The project is a translation laboratory. Facts from the original examples become typed input data, rules become explicit Go functions, and derived conclusions become reproducible Markdown reports.
+This project is a translation laboratory. Facts from the original examples become typed input data, rules become explicit Go functions, and derived conclusions become reproducible Markdown reports.
 
 The examples focus on STEM reasoning: scientific measurement, technical interoperability, engineered systems, and mathematics. They cover exact arithmetic, graph search, certificates, constraints, policy checks, safety envelopes, Bayesian reasoning, scheduling, routing, and optimization.
 
-## Example layout
+## Repository guide
 
-Each example is split across matching files with the same stem:
+The repository is organized around one stem per example. For an example named `<name>`, the main files are:
 
 ```text
 examples/<name>.go          Go translation that computes Answer and Reason why
@@ -48,6 +48,16 @@ examples/input/<name>.json  example-specific facts, data, or parameters
 examples/checks/<name>.py   independent Python implementation of Check
 examples/output/<name>.md   expected combined Markdown report
 examples/doc/<name>.md      short explanatory note
+```
+
+Supporting code and tools live alongside those example files:
+
+```text
+go.mod                         local module so examples can share input loading
+internal/exampleinput/         shared JSON input loader
+tools/run_check.py             run one Python Check implementation
+tools/build_output.py          append Python Check output to a Go report prefix
+test                           run examples and compare with expected Markdown output
 ```
 
 Most Go examples load their domain fixture from `examples/input/<name>.json` through `internal/exampleinput`. A few examples still keep complex relation structures directly in Go; those still have matching JSON input files that document the corresponding data or parameters.
@@ -77,21 +87,6 @@ Go title + Answer + Reason why
 This separation prevents the checks from calling Go helper functions or reusing Go intermediate state from the answer path. Shared Python helper code lives in `examples/checks/common.py`; substantive checks are implemented in the per-example modules.
 
 The visible output no longer includes Go audit details. Implementation diagnostics stay out of the report so the Markdown focuses on the domain answer, explanation, and independent verification.
-
-## Repository layout
-
-```text
-go.mod                          local module so examples can share input loading
-internal/exampleinput/          shared JSON input loader
-examples/                       Go example programs
-examples/input/                 example-specific JSON data and parameters
-examples/checks/                independent Python check implementations
-examples/output/                expected Markdown outputs
-examples/doc/                   short explanatory notes
-tools/run_check.py              run one Python Check implementation
-tools/build_output.py           append Python Check output to a Go report prefix
-test                            run examples and compare with expected Markdown output
-```
 
 ## Example catalog
 

@@ -1,2 +1,2 @@
-tools/__pycache__/
-examples/checks/__pycache__/
+__pycache__/
+*.md.prefix
