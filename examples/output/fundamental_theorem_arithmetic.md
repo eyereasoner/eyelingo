@@ -36,12 +36,16 @@ prime factors, even when the factors were discovered in the opposite order.
   source sorted comparison : 3 * 3 * 7 * 829 * 3881  
 
 The additional samples cover repeated small factors, special products,  
-large composites, and a larger prime that has no smaller divisor.  
+large composites, and a larger prime that has no smaller divisor.
 
-## Check  
-C1 OK - the source example factors 202692987 as 3,3,7,829,3881  
-C2 OK - the source example groups repeated factors as 3^2 * 7 * 829 * 3881  
-C3 OK - multiplying each computed factor list reconstructs its original number  
-C4 OK - every distinct factor in every decomposition is prime by trial division  
-C5 OK - smallest-first and largest-first traversals sort to the same multisets  
-C6 OK - the extended sample includes six cases and includes the ten-digit prime 9999999967  
+## Check
+C1 OK - the primary source number is factored independently
+C2 OK - the reported primary prime-power form matches grouped exponents
+C3 OK - multiplying every factor list reconstructs its source integer
+C4 OK - every distinct factor found by trial division is prime
+C5 OK - the report includes one sample factorization row for every JSON number
+C6 OK - every reported sample row matches the independently formatted factorization
+C7 OK - smallest-first and largest-first traversals sort to the same primary multiset
+C8 OK - reported sample count and largest sample match JSON
+C9 OK - reported total factor multiplicity and distinct-prime count match recomputation
+C10 OK - the ten-digit prime remains unfactored after trial division

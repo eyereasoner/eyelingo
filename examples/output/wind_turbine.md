@@ -11,12 +11,14 @@ total energy : 1.571 MWh
 Wind below cut-in and at or above cut-out is stopped for production and safety.  
 Wind between cut-in and rated speed follows a cubic power curve normalized to the rated point.  
 Wind between rated speed and cut-out is capped at rated power.  
-Energy is accumulated by multiplying each interval power by the ten-minute interval duration.  
+Energy is accumulated by multiplying each interval power by the ten-minute interval duration.
 
-## Check  
-C1 OK - cut-in, rated, and cut-out thresholds are ordered  
-C2 OK - usable intervals are exactly the samples inside the operating envelope  
-C3 OK - two intervals reach rated power  
-C4 OK - two intervals are stopped by low or cut-out wind  
-C5 OK - a below-rated usable wind speed follows the cubic power curve  
-C6 OK - the six ten-minute samples yield about 1.57 MWh  
+## Check
+C1 OK - cut-in, rated, and cut-out thresholds are strictly ordered
+C2 OK - usable intervals are exactly the samples inside the operating envelope
+C3 OK - rated intervals are speeds at or above rated and below cut-out
+C4 OK - stopped intervals are below cut-in or at/above cut-out
+C5 OK - below-rated usable speeds follow the cubic normalized power curve
+C6 OK - total interval energy is recomputed in MWh
+C7 OK - reported usable count and total energy match recomputation
+C8 OK - the answer reports every sample classification and power
