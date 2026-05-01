@@ -15,8 +15,11 @@ At every generation, all single-bit mutants of the parent are compared with the 
 The run stops at 101000000101 because every one-bit neighbor is no better under the capacity 50 rule.  
 
 ## Check  
-C1 OK - 12 items align with a 12-bit genome  
-C2 OK - final weight 50 is within capacity 50  
-C3 OK - final genome is 101000000101  
-C4 OK - final value is 101 using item01, item03, item10, item12  
-C5 OK - no single-bit neighbor improves the final candidate  
+C1 OK - the input has one item per genome bit and a valid binary start genome  
+C2 OK - Python independently simulates the deterministic single-bit local search to the reported final genome  
+C3 OK - reported selected items are exactly the one-bits in the final genome  
+C4 OK - reported weight, value, and fitness match independent genome evaluation  
+C5 OK - the final candidate is feasible and matches the expected fixture totals  
+C6 OK - no one-bit neighbor has a lower fitness than the final candidate  
+C7 OK - the reported generation count matches the independent simulation history length  
+C8 OK - the fixture has many feasible genomes, so the check validates the local-search rule rather than a text fragment  

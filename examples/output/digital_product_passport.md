@@ -25,13 +25,13 @@ Doc-RepairGuide RepairGuide https://example.org/repair/acme-x1000
 Doc-SpareParts SparePartsCatalog https://example.org/spares/acme-x1000  
 
 ## Check  
-C1 OK - component masses fold to 105 g  
-C2 OK - recycled component masses fold to 14 g  
-C3 OK - integer recycled-content percentage is 13%  
-C4 OK - lifecycle footprint totals 52500 gCO2e  
-C5 OK - critical raw material exposure is Cobalt, Lithium  
-C6 OK - replaceable battery plus repair and spare-parts documents derive repairFriendly  
-C7 OK - public section contains user manual, repair guide, and spare-parts catalog  
-C8 OK - restricted declarations stay in the restricted section  
-C9 OK - manufacturing, sale, and repair events are chronologically consistent  
-C10 OK - passport endpoint matches the product digital link  
+C1 OK - component masses are folded from the JSON component list  
+C2 OK - recycled mass and integer recycled-content percentage are recomputed independently  
+C3 OK - manufacturing, transport, and use-phase footprint values sum to the reported lifecycle footprint  
+C4 OK - critical raw-material exposure is derived by joining component materials to material declarations  
+C5 OK - repairFriendly is derived from a replaceable battery plus public repair and spare-parts documents  
+C6 OK - all required public document types are present only in the public document section  
+C7 OK - all restricted declaration document types stay in the restricted section  
+C8 OK - lifecycle events are chronological and follow manufacturing before sale before repair  
+C9 OK - the passport endpoint equals the product digital link and is reported publicly  
+C10 OK - PASS is reported only because every independent passport check succeeds  
