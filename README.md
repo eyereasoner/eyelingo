@@ -1,68 +1,101 @@
 # eyelingo
 
-Small Go translations of selected EyeReasoner/Eyeling N3 examples.
-
-## Layout
+Eyelingo is a collection of small, runnable Go translations of selected EyeReasoner/Eyeling N3 examples. Each example keeps the ARC-style report shape:
 
 ```text
-go.mod                          local module so examples can share input loading
-internal/exampleinput/          shared JSON input loader
-examples/                       Go examples
-examples/input/                 example-specific JSON data and parameters
-examples/output/                expected Markdown output for each example
-examples/checks/                independent Python check implementations
-examples/doc/                   short explanatory notes for each example
-tools/run_check.py              run one Python Check implementation
-tools/build_output.py           append Python Check output to a Go report prefix
-test                            run examples and compare with expected Markdown output
+Answer
+Reason why
+Check
 ```
 
-## Example structure
+The key design point is that `Check` is **not** produced by Go. Go computes and explains the answer; Python independently verifies it and appends the visible `## Check` section during testing.
 
-Each example now has five pieces:
+## Quick start
+
+Run the full regression suite:
+
+```sh
+./test
+```
+
+Run one Go example directly:
+
+```sh
+go run examples/bmi.go
+```
+
+That command prints only the report prefix: title, `## Answer`, and `## Reason why`. The `## Check` section is appended by the test/update pipeline.
+
+Regenerate expected Markdown outputs after an intentional change:
+
+```sh
+./test --update
+```
+
+## What is in this repository
+
+The project is a translation laboratory. Facts from the original examples become typed input data, rules become explicit Go functions, and derived conclusions become reproducible Markdown reports.
+
+The examples focus on STEM reasoning: scientific measurement, technical interoperability, engineered systems, and mathematics. They cover exact arithmetic, graph search, certificates, constraints, policy checks, safety envelopes, Bayesian reasoning, scheduling, routing, and optimization.
+
+## Example layout
+
+Each example is split across matching files with the same stem:
 
 ```text
-examples/example_xyz.go
-examples/input/example_xyz.json
-examples/checks/example_xyz.py
-examples/output/example_xyz.md
-examples/doc/example_xyz.md
+examples/<name>.go          Go translation that computes Answer and Reason why
+examples/input/<name>.json  example-specific facts, data, or parameters
+examples/checks/<name>.py   independent Python implementation of Check
+examples/output/<name>.md   expected combined Markdown report
+examples/doc/<name>.md      short explanatory note
 ```
 
-The Go file contains the example logic and prints the ARC-style title, `Answer`, and `Reason why` report prefix as Markdown. The corresponding Python file implements the independent `Check` section. The matching input JSON file contains the example-specific facts, data, or parameters that are feasible to externalize. The companion doc file gives a short plain-language explanation of what the example demonstrates, how to read the output, and where the main files live.
+Most Go examples load their domain fixture from `examples/input/<name>.json` through `internal/exampleinput`. A few examples still keep complex relation structures directly in Go; those still have matching JSON input files that document the corresponding data or parameters.
 
-Output is delivered in structured Markdown. Snapshotss use plain lines rather than Markdown list markers, and add two trailing spaces to every non-empty line so rendered Markdown keeps the same line breaks as `stdout`.
+Expected Markdown outputs use plain lines rather than Markdown list markers. Non-empty output lines end with two spaces so rendered Markdown preserves the same line breaks as stdout.
 
-Most examples load their domain fixture directly from `examples/input/<name>.json` through `exampleinput.Load`. A few examples still keep complex internal relation structures in Go, but they also have a matching JSON input file documenting the corresponding data or parameters.
+## Independent Python checks
 
-## Rationale
+The checks deliberately live in a different programming language from the answer implementation.
 
-Eyelingo is a small translation laboratory: it takes selected EyeReasoner/Eyeling N3 examples and rewrites them as compact, runnable Go programs. The goal is not to replace N3, but to make the reasoning patterns easy to inspect in a mainstream systems language: facts become typed input data, rules become explicit Go functions, and derived conclusions become reproducible reports.
+During `./test`:
 
-The examples keep an ARC-style shape: an `Answer` gives the computed result, `Reason why` explains the rule chain or decision path, and `Check` records the invariants that should still hold. The `Check` section is intentionally produced by Python, not Go, so it cannot call Go helper functions or reuse Go intermediate state from the answer path. The regression test builds each snapshot as `Go report prefix + Python Check`.
+1. The test runner executes `go run examples/<name>.go` and captures the Go report prefix.
+2. `tools/build_output.py` calls `tools/run_check.py` for the same example.
+3. `tools/run_check.py` imports `examples/checks/<name>.py`.
+4. The Python check module reconstructs the relevant facts from JSON and/or parses the captured report prefix.
+5. Python emits the visible `## Check` section.
+6. The combined report is compared with `examples/output/<name>.md`.
 
-The visible output no longer includes Go audit details. Implementation diagnostics are kept out of the report so the Markdown focuses on the domain answer, explanation, and independent verification.
-
-## Python Check flow
-
-The Go examples only produce the human-readable report prefix: the title, `## Answer`, and `## Reason why`. They do not print the `## Check` section and they do not call the Python check modules directly.
-
-During `./test`, the runner first captures that Go output prefix. It then calls `tools/build_output.py`, which imports the matching module from `examples/checks/<example>.py`. That Python module independently reconstructs the relevant facts from the JSON fixture and/or from the captured prefix, runs its own assertions, and returns the lines for the Markdown `## Check` section.
-
-The final snapshot compared by the test suite is therefore:
+The snapshot under test is therefore:
 
 ```text
 Go title + Answer + Reason why
 + Python-generated Check
 ```
 
-This keeps the visible checks in a separate implementation language and prevents them from sharing Go helper functions or intermediate Go state.
+This separation prevents the checks from calling Go helper functions or reusing Go intermediate state from the answer path. Shared Python helper code lives in `examples/checks/common.py`; substantive checks are implemented in the per-example modules.
 
-STEM is the core of the collection. The examples are chosen to cover scientific measurement, technical interoperability, engineered systems, and mathematical reasoning. Together they show that rule-based examples can remain readable while still exercising realistic concerns: exact arithmetic, graph search, certificates, constraints, policy checks, safety envelopes, Bayesian reasoning, scheduling, routing, and optimization.
+The visible output no longer includes Go audit details. Implementation diagnostics stay out of the report so the Markdown focuses on the domain answer, explanation, and independent verification.
 
-## ARC-style STEM examples
+## Repository layout
 
-The examples are grouped by their main emphasis. Each row links to the example-specific JSON input, the Go translation, the independent Python checks, the expected Markdown output, and the companion documentation.
+```text
+go.mod                          local module so examples can share input loading
+internal/exampleinput/          shared JSON input loader
+examples/                       Go example programs
+examples/input/                 example-specific JSON data and parameters
+examples/checks/                independent Python check implementations
+examples/output/                expected Markdown outputs
+examples/doc/                   short explanatory notes
+tools/run_check.py              run one Python Check implementation
+tools/build_output.py           append Python Check output to a Go report prefix
+test                            run examples and compare with expected Markdown output
+```
+
+## Example catalog
+
+Each row links to the example-specific JSON input, Go translation, independent Python checks, expected Markdown output, and companion documentation.
 
 ### Science
 
@@ -132,26 +165,3 @@ The examples are grouped by their main emphasis. Each row links to the example-s
 | Kaprekar 6174 | Kaprekar chains and basin facts ending at 6174. | [json](examples/input/kaprekar_6174.json) | [go](examples/kaprekar_6174.go) | [py](examples/checks/kaprekar_6174.py) | [md](examples/output/kaprekar_6174.md) | [md](examples/doc/kaprekar_6174.md) |
 | Sudoku | Sudoku constraint solving with a unique completed grid. | [json](examples/input/sudoku.json) | [go](examples/sudoku.go) | [py](examples/checks/sudoku.py) | [md](examples/output/sudoku.md) | [md](examples/doc/sudoku.md) |
 
-## Run
-
-Run one example from the repository root:
-
-```sh
-go run examples/bmi.go
-```
-
-The program writes the Markdown report prefix to stdout. During `./test`, Python appends the `## Check` section before the combined report is compared with `examples/output/*.md`.
-
-Run the full regression test:
-
-```sh
-./test
-```
-
-The test prints `OK` or `FAIL` for each example, per-example timing, and total time. It compares against `examples/output/*.md` after appending the corresponding independent Python `Check` implementation.
-
-Regenerate expected outputs after intentional changes:
-
-```sh
-./test --update
-```
