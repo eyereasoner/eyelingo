@@ -8,7 +8,7 @@ Reason
 Check
 ```
 
-The key design point is that `Check` is **not** produced by Go. Go computes and explains the answer; Python independently verifies it and appends the visible `## Check` section during testing.
+As suggested by Prof. Ruben Verborgh, the key design point is that `Check` is **not** produced by Go. Go computes and explains the answer; Python independently verifies it and appends the visible `## Check` section during testing.
 
 ## Quick start
 
@@ -36,7 +36,7 @@ Regenerate expected Markdown outputs after an intentional change:
 
 This project is a translation laboratory. Facts from the original examples become typed input data, rules become explicit Go functions, and derived conclusions become reproducible Markdown reports.
 
-The main inspiration is Ruben Verborgh's [Inside the Insight Economy](https://ruben.verborgh.org/blog/2025/08/12/inside-the-insight-economy/). In that spirit, many examples are small insight derivations: structured inputs are transformed into answers, decisions, rankings, or certificates, then checked independently rather than trusted because the report reads well.
+The main inspiration is Prof. Ruben Verborgh's [Inside the Insight Economy](https://ruben.verborgh.org/blog/2025/08/12/inside-the-insight-economy/). In that spirit, many examples are small insight derivations: structured inputs are transformed into answers, decisions, rankings, or certificates, then checked independently rather than trusted because the report reads well.
 
 The examples focus on STEM reasoning: scientific measurement, technical interoperability, engineered systems, and mathematics. They cover exact arithmetic, graph search, certificates, constraints, policy checks, safety envelopes, Bayesian reasoning, scheduling, routing, and optimization.
 
