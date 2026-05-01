@@ -9,17 +9,17 @@ The Fibonacci sequence is defined by F(0)=0, F(1)=1,
 and F(n)=F(n-1)+F(n-2) for n>=2.  
 Arbitrary‑precision arithmetic (math/big) is used to  
 compute the exact value without overflow, even for  
-indices as large as 10000.
+indices as large as 10000.  
 
-## Check
-C1 OK - base cases are recomputed as F(0)=0 and F(1)=1
-C2 OK - the recurrence F(n)=F(n-1)+F(n-2) holds over an independent prefix
-C3 OK - every JSON expected Fibonacci value matches fast-doubling recomputation
-C4 OK - the report answers the largest requested index
-C5 OK - the reported F(10000) exactly matches the independent big-integer value
-C6 OK - F(1000) has the expected exact decimal length and endpoints
-C7 OK - F(10000) has the expected exact decimal length and endpoints
-C8 OK - all requested Fibonacci numbers are nonnegative
-C9 OK - the Fibonacci sequence is nondecreasing from F(2) onward
-C10 OK - Cassini's identity holds at n=1000 for the same independent generator
-C11 OK - the explanation names arbitrary-precision arithmetic for the large integer
+## Check  
+C1 OK - base cases are recomputed as F(0)=0 and F(1)=1  
+C2 OK - the recurrence F(n)=F(n-1)+F(n-2) holds over an independent prefix  
+C3 OK - every JSON expected Fibonacci value matches fast-doubling recomputation  
+C4 OK - the report answers the largest requested index  
+C5 OK - the reported F(10000) exactly matches the independent big-integer value  
+C6 OK - F(1000) has the expected exact decimal length and endpoints  
+C7 OK - F(10000) has the expected exact decimal length and endpoints  
+C8 OK - all requested Fibonacci numbers are nonnegative  
+C9 OK - the Fibonacci sequence is nondecreasing from F(2) onward  
+C10 OK - Cassini's identity holds at n=1000 for the same independent generator  
+C11 OK - the explanation names arbitrary-precision arithmetic for the large integer  

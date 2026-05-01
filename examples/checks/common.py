@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Callable, Iterable
+from typing import Iterable
 
 
 class CheckContext:
     def __init__(self, root: Path, name: str, prefix: str):
         self.root = Path(root)
         self.name = name
-        self.prefix = prefix.rstrip() + "\n"
+        self.prefix = "\n".join(line.rstrip() for line in prefix.rstrip().splitlines()) + "\n"
         self.input_path = self.root / "examples" / "input" / f"{name}.json"
         self._input_loaded = False
         self._input = None
@@ -39,12 +39,6 @@ class CheckContext:
     def reason(self) -> str:
         return self.section("Reason why")
 
-    def contains_all(self, fragments):
-        if isinstance(fragments, str):
-            fragments = [fragments]
-        missing = [fragment for fragment in fragments if fragment not in self.prefix]
-        return not missing, missing
-
 
 def check_line(ok: bool, index: int, description: str) -> str:
     return f"C{index} {'OK' if ok else 'FAIL'} - {description}"
@@ -59,15 +53,3 @@ def run_checks(specs: Iterable[tuple[str, bool]]) -> tuple[bool, list[str]]:
         all_ok = all_ok and ok
     return all_ok, lines
 
-
-def run_fragment_checks(ctx: CheckContext, specs):
-    # Legacy helper used by examples that have not yet been upgraded to a
-    # domain-specific Python verifier.
-    ctx.load_input()
-    lines = []
-    all_ok = True
-    for index, (description, fragments) in enumerate(specs, 1):
-        ok, _missing = ctx.contains_all(fragments)
-        lines.append(check_line(ok, index, description))
-        all_ok = all_ok and ok
-    return all_ok, lines

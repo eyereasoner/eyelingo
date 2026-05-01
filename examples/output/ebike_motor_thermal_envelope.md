@@ -11,7 +11,7 @@ hard limit : 45.0 C
 The model keeps an interval for motor temperature excess over ambient instead of pretending to know the transcendental cooling factor exactly.  
 For each 5 second sample, the lower and upper excess envelopes are propagated with the certified cooling interval and the mode-specific heat injection.  
 Turbo pushes the upper envelope to 40.2285 C, then Tour, Eco, and Coast allow the envelope to decrease.  
-The upper envelope returns below the 35.0 C warning limit at step 8 and remains below the 45.0 C hard limit throughout.
+The upper envelope returns below the 35.0 C warning limit at step 8 and remains below the 45.0 C hard limit throughout.  
 
 ## Check  
 C1 OK - the cooling certificate brackets exp(-sample/tau)  
@@ -22,4 +22,4 @@ C5 OK - the upper envelope first exceeds the warning limit during Turbo
 C6 OK - the reported warning-recovery step matches the independently propagated envelope  
 C7 OK - all upper temperatures remain below the hard thermal limit  
 C8 OK - the final Coast samples cool monotonically  
-C9 OK - the final decision matches the safety envelope
+C9 OK - the final decision matches the safety envelope  

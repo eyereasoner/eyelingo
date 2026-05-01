@@ -79,7 +79,7 @@ G – AI training (opt-out)
   care-team linked : no  
   subject opt-in : no  
   subject opt-out : yes  
-  trace : subject_opted_out,deny:subject_opted_out_ai_training
+  trace : subject_opted_out,deny:subject_opted_out_ai_training  
 
 ## Check  
 C1 OK - all seven scenario decisions are recomputed  
@@ -89,4 +89,4 @@ C4 OK - quality improvement is allowed only with both required categories in the
 C5 OK - insurance management is denied by the matching prohibition  
 C6 OK - research requires opt-in, anonymisation, and the secure environment  
 C7 OK - AI training is denied because the subject opted out  
-C8 OK - permit and deny counts match the report
+C8 OK - permit and deny counts match the report  

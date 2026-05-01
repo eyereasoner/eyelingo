@@ -30,15 +30,15 @@ C3 scale=0.207879576351 angleMix=0 result=0.207879576351 + 0i; i has polar angle
 C4 scale=0.207879576351 angleMix=0 result=0.207879576351 + 0i; a real exponent of e gives the same exp(-pi/2) value as i^i  
 inverse-trig traces:  
 C5 asin: E=1 F=2 lnTerm=1.316957896925 result=1.570796326795 + 1.316957896925i; the real input is outside [-1,1], so the inverse sine has a positive imaginary part  
-C6 acos: E=1 F=2 lnTerm=1.316957896925 result=0 - 1.316957896925i; the companion inverse cosine carries the opposite imaginary part
+C6 acos: E=1 F=2 lnTerm=1.316957896925 result=0 - 1.316957896925i; the companion inverse cosine carries the opposite imaginary part  
 
-## Check
-C1 OK - principal polar angles for -1, e, and i match the N3 dial cases
-C2 OK - all four complex exponentiation answers match independent complex arithmetic
-C3 OK - i^i and e^(-pi/2) recompute to the same real value
-C4 OK - asin(2) and acos(2) match independent inverse-trig recomputation
-C5 OK - sin(asin(2)) and cos(acos(2)) round-trip to 2+0i
-C6 OK - asin(2) + acos(2) equals pi/2 with cancelling imaginary parts
-C7 OK - all six reported complex outputs match recomputation to displayed precision
-C8 OK - the report contains four exponentiation and two inverse-trig queries
-C9 OK - all recomputed outputs are finite real/imaginary pairs
+## Check  
+C1 OK - principal polar angles for -1, e, and i match the N3 dial cases  
+C2 OK - all four complex exponentiation answers match independent complex arithmetic  
+C3 OK - i^i and e^(-pi/2) recompute to the same real value  
+C4 OK - asin(2) and acos(2) match independent inverse-trig recomputation  
+C5 OK - sin(asin(2)) and cos(acos(2)) round-trip to 2+0i  
+C6 OK - asin(2) + acos(2) equals pi/2 with cancelling imaginary parts  
+C7 OK - all six reported complex outputs match recomputation to displayed precision  
+C8 OK - the report contains four exponentiation and two inverse-trig queries  
+C9 OK - all recomputed outputs are finite real/imaginary pairs  

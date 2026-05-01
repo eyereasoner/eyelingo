@@ -29,7 +29,7 @@ Surviving explanations:
   0 -> 0 because count=1 is odd; all competing counts are even.  
   1 -> 1 because count=1 is odd; all competing counts are even.  
   2 -> 2 because count=1 is odd; all competing counts are even.  
-  3 -> 3 because count=1 is odd; all competing counts are even.
+  3 -> 3 because count=1 is odd; all competing counts are even.  
 
 ## Check  
 C1 OK - shared entanglement R contains exactly |0,0) and |1,1)  
@@ -39,4 +39,4 @@ C4 OK - the raw superdense rule creates 24 candidate derivations
 C5 OK - GF(2) cancellation leaves odd diagonal and even off-diagonal counts  
 C6 OK - reported surviving decoded messages match the parity survivors  
 C7 OK - the four Alice operations produce distinct encoded supports  
-C8 OK - the JSON relation facts match the primitive teaching-model relations
+C8 OK - the JSON relation facts match the primitive teaching-model relations  

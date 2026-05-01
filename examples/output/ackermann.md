@@ -41,7 +41,7 @@ A11 binary offset -> T(5,3,2) -> higher hyperoperation recursion gives T=65536, 
 hyperoperation highlights:  
 A7 is 2^1003 - 3, an exact 302-digit integer.  
 A10 is 2^65536 - 3, an exact 19,729-digit integer summarized by fingerprint.  
-A11 reuses the pentation step T(5,3,2)=T(4,4,2)=65536, so A11 equals A9.
+A11 reuses the pentation step T(5,3,2)=T(4,4,2)=65536, so A11 equals A9.  
 
 ## Check  
 C1 OK - all twelve JSON Ackermann queries are recomputed  
@@ -53,4 +53,4 @@ C6 OK - A(4,0) and A(4,1) match the first tetration cases
 C7 OK - A(4,2) is held exactly as 2^65536-3 with the reported fingerprint  
 C8 OK - A(5,0) lands on the same value as A(4,1)  
 C9 OK - all non-huge reported exact values match recomputation  
-C10 OK - the reported proof statistics match the query and memo structure
+C10 OK - the reported proof statistics match the query and memo structure  

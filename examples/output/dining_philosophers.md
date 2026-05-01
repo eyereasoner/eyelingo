@@ -72,7 +72,7 @@ Round derivation:
     requests : P5 asks P4 for F45; P5 asks P1 for F51  
     transfers : P4 sends F45 to P5; P1 sends F51 to P5  
     kept forks : F12,F23,F34  
-    meals : P5#3
+    meals : P5#3  
 
 ## Check  
 C1 OK - the JSON schedule contains nine deterministic rounds  
@@ -84,4 +84,4 @@ C6 OK - the first round transfers only F23 to P3 and lets P1/P3 eat
 C7 OK - the P5-only rounds derive one meal each  
 C8 OK - all forks end dirty after the final phase  
 C9 OK - the final fork holders match the independent simulation  
-C10 OK - request and transfer counts are nontrivial and internally consistent
+C10 OK - request and transfer counts are nontrivial and internally consistent  

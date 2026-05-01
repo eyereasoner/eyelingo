@@ -27,7 +27,7 @@ taxonomy-step rule applications : 100000
 terminal rule applications : 1  
 success rule applications : 1  
 classification facts derived : 100001 N classes + 200000 side labels + A2 = 300002 type facts  
-The side labels are not needed for the final A2 proof, but carrying both I and J at every level checks that the whole wide/deep expansion was performed, not just the main N-chain.
+The side labels are not needed for the final A2 proof, but carrying both I and J at every level checks that the whole wide/deep expansion was performed, not just the main N-chain.  
 
 ## Check  
 C1 OK - the requested taxonomy depth is 100000  
@@ -39,4 +39,4 @@ C6 OK - agenda pops match one pop per N-class fact in the main chain
 C7 OK - taxonomy-step applications match the depth  
 C8 OK - terminal and success rules fire exactly once  
 C9 OK - classification fact total accounts for N, I/J side labels, and A2  
-C10 OK - midpoint and endpoint checkpoints are present
+C10 OK - midpoint and endpoint checkpoints are present  

@@ -10,7 +10,7 @@ invalid intervals : 0
 The example completes any interval that has a start plus duration before comparing endpoints.  
 Each ordered pair is then classified with the 13 Allen base relations, including the six converse relations.  
 The relation rules are purely endpoint constraints, so the result is deterministic and traceable.  
-The duration-derived intervals participate in the same relation table as directly supplied intervals.
+The duration-derived intervals participate in the same relation table as directly supplied intervals.  
 
 ## Check  
 C1 OK - duration-based intervals are completed from start plus minutes  
@@ -20,4 +20,4 @@ C4 OK - every required Allen relation is recomputed from endpoints
 C5 OK - A/B, A/C, and A/D demonstrate before, meets, and overlaps  
 C6 OK - converse relations are independently recovered  
 C7 OK - start, finish, during, contains, and equals cases all occur  
-C8 OK - the showcase text includes each required forward example
+C8 OK - the showcase text includes each required forward example  

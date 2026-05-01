@@ -34,16 +34,16 @@ Examples omitted because they fall to 0000:
   0000 -> (0000)  
   1111 -> (0000)  
   2222 -> (0000)  
-  9999 -> (0000)
+  9999 -> (0000)  
 
-## Check
-C1 OK - all four-digit starts from 0000 through 9999 are considered
-C2 OK - the optimized Kaprekar step equals direct descending-minus-ascending digit sorting
-C3 OK - the classic 3524 chain is recomputed independently
-C4 OK - 0001 is treated as padded four-digit input
-C5 OK - 0000 and the nine nonzero repdigits fall to the zero basin
-C6 OK - every emitted chain reaches 6174 within the configured bound
-C7 OK - the recomputed maximum step count is seven
-C8 OK - reported emitted and omitted counts match recomputation
-C9 OK - the step-count distribution in the explanation matches recomputation
-C10 OK - selected reported chains match the recomputed chains
+## Check  
+C1 OK - all four-digit starts from 0000 through 9999 are considered  
+C2 OK - the optimized Kaprekar step equals direct descending-minus-ascending digit sorting  
+C3 OK - the classic 3524 chain is recomputed independently  
+C4 OK - 0001 is treated as padded four-digit input  
+C5 OK - 0000 and the nine nonzero repdigits fall to the zero basin  
+C6 OK - every emitted chain reaches 6174 within the configured bound  
+C7 OK - the recomputed maximum step count is seven  
+C8 OK - reported emitted and omitted counts match recomputation  
+C9 OK - the step-count distribution in the explanation matches recomputation  
+C10 OK - selected reported chains match the recomputed chains  

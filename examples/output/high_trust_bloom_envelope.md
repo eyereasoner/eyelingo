@@ -13,7 +13,7 @@ The canonical graph and the SPO index have the same triple count, so exact membe
 The Bloom prefilter has n=1200 triples, m=16384 bits, and k=7 hash functions, giving lambda 0.5126953125.  
 Instead of asking the engine to know exp(-k*n/m) exactly, the input carries a decimal interval certificate for exp(-lambda).  
 That certificate bounds (1-exp(-lambda))^k below the 0.002 false-positive budget and keeps extra exact confirmations below 100.0.  
-Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.
+Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.  
 
 ## Check  
 C1 OK - numeric Bloom parameters are positive  
@@ -25,4 +25,4 @@ C6 OK - false-positive upper bound stays below the policy budget
 C7 OK - expected extra exact lookups stay below budget  
 C8 OK - maybe-positive answers must be confirmed against the canonical graph  
 C9 OK - definite negatives may return absent without exact lookup  
-C10 OK - the deployment decision matches the recomputed envelope
+C10 OK - the deployment decision matches the recomputed envelope  

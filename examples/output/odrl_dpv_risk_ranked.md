@@ -25,7 +25,7 @@ mitigation for clause C4: Add a permission allowing data export (or remove the p
 ## Reason why  
 The agreement policy is scanned for permissions and prohibitions that conflict with the consumer profile needs.  
 Each triggered rule derives a risk row with a normalized score, a source clause, and one or more mitigation measures.  
-Rows are sorted by descending score so the highest-risk clauses are reviewed first.
+Rows are sorted by descending score so the highest-risk clauses are reviewed first.  
 
 ## Check  
 C1 OK - four risk rows are derived from the policy/profile conflict scan  
@@ -36,4 +36,4 @@ C5 OK - user-data sharing without explicit consent is scored as high risk
 C6 OK - three-day terms-change notice is below the fourteen-day consumer requirement  
 C7 OK - data-export prohibition creates the portability risk row  
 C8 OK - risk level counts recompute to high=3, moderate=1, low=0  
-C9 OK - five mitigation measures are generated
+C9 OK - five mitigation measures are generated  

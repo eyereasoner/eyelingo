@@ -54,7 +54,7 @@ Noah reuses the token
   state override : token has already been used once  
   decision : DENY  
   reason : Deny: C6 authorization must be active and not already consumed.  
-  passed conditions : 9/10
+  passed conditions : 9/10  
 
 ## Check  
 C1 OK - the source pickup request satisfies all ten authorization conditions  
@@ -65,4 +65,4 @@ C5 OK - wrong-person use is denied because requester must match the delegate
 C6 OK - wrong-locker use is denied because locker must match the token  
 C7 OK - single-use reuse is denied after the token is already consumed  
 C8 OK - guardrail denials recompute to five out of five  
-C9 OK - the release text matches parcel owner, delegate, parcel, locker, and site
+C9 OK - the release text matches parcel owner, delegate, parcel, locker, and site  

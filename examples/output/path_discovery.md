@@ -35,7 +35,7 @@ Bastia-Poretta Airport (res:AIRPORT_1321)
 Diagoras Airport (res:AIRPORT_1472)  
 Heraklion International Nikos Kazantzakis Airport (res:AIRPORT_1452)  
 Lille-Lesquin Airport (res:AIRPORT_1399)  
-Palma De Mallorca Airport (res:AIRPORT_3998)
+Palma De Mallorca Airport (res:AIRPORT_3998)  
 
 ## Check  
 C1 OK - source and destination airport labels are known  
@@ -47,4 +47,4 @@ C6 OK - every discovered hop is backed by an outbound-route fact
 C7 OK - no discovered route revisits an airport  
 C8 OK - the translated graph size matches the full source counts  
 C9 OK - the second-hop candidates from Liège are independently recovered  
-C10 OK - route output is sorted deterministically by airport labels
+C10 OK - route output is sorted deterministically by airport labels  

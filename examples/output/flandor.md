@@ -35,7 +35,7 @@ candidate packages:
 Selected package "Flandor Retooling Pulse" covers export=yes, skills=yes, grid=yes, cost=€120M.  
 Usage is permitted only for purpose "regional_stabilization" and the envelope expires at 2026-04-08T19:00:00+00:00.  
 Surveillance reuse is blocked by a prohibition on odrl:distribute for purpose "firm_surveillance".  
-Deletion duty time : 2026-04-08T18:30:00+00:00
+Deletion duty time : 2026-04-08T18:30:00+00:00  
 
 ## Check  
 C1 OK - export weakness, skills strain, and grid stress are all active  
@@ -50,4 +50,4 @@ C9 OK - deletion duty is scheduled before envelope expiry
 C10 OK - shared insight omits firm names and payroll rows  
 C11 OK - reported signature metadata matches the trusted precomputed input  
 C12 OK - the expected six files and one audit entry are recorded  
-C13 OK - export-weak cluster names are independently identified
+C13 OK - export-weak cluster names are independently identified  

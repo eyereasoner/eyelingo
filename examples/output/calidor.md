@@ -38,7 +38,7 @@ Selected package "Calidor Priority Cooling Bundle" covers bill_credit, cooling_k
 Usage is permitted only for purpose "heatwave_response" and the envelope expires at 2026-07-18T21:00:00+00:00.  
 Tenant-screening reuse is blocked by a prohibition on odrl:distribute for purpose "tenant_screening".  
 reason.txt : The gateway keeps raw indoor heat, vulnerability, and prepaid-energy data local, derives a priority-support signal, and shares only a scoped heatwave-response envelope with expiry.  
-dispatches logged : 1
+dispatches logged : 1  
 
 ## Check  
 C1 OK - four active heat-response needs are recomputed from the local signals  
@@ -52,4 +52,4 @@ C8 OK - tenant-screening reuse is prohibited by the policy
 C9 OK - deletion duty is scheduled before envelope expiry  
 C10 OK - vulnerability flags and local raw stress signals are omitted from the serialized insight  
 C11 OK - reported signature metadata matches the trusted precomputed input  
-C12 OK - scope metadata is explicit for device, event, municipality, creation, and expiry
+C12 OK - scope metadata is explicit for device, event, municipality, creation, and expiry  
