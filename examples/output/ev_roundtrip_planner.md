@@ -21,13 +21,15 @@ Top acceptable plans:
 2. buy_pass_brussels -> drive_bru_liege -> drive_liege_aachen -> shuttle_aachen_cologne | duration=220.0 cost=0.058 belief=0.973201 comfort=0.889337 final=Cologne/low/yes  
 3. buy_pass_brussels -> drive_bru_liege -> drive_liege_aachen -> fast_charge_aachen_pass -> premium_corridor_aachen_cologne | duration=220.0 cost=0.063 belief=0.953737 comfort=0.880398 final=Cologne/low/yes  
 4. drive_bru_liege -> buy_pass_liege -> drive_liege_aachen -> shuttle_aachen_cologne | duration=225.0 cost=0.057 belief=0.969304 comfort=0.880354 final=Cologne/low/yes  
-5. drive_bru_liege -> buy_pass_liege -> drive_liege_aachen -> fast_charge_aachen_pass -> premium_corridor_aachen_cologne | duration=225.0 cost=0.062 belief=0.949918 comfort=0.871505 final=Cologne/low/yes  
+5. drive_bru_liege -> buy_pass_liege -> drive_liege_aachen -> fast_charge_aachen_pass -> premium_corridor_aachen_cologne | duration=225.0 cost=0.062 belief=0.949918 comfort=0.871505 final=Cologne/low/yes
 
 ## Check  
-C1 OK - 8 acceptable Brussels-to-Cologne plans were derived  
-C2 OK - selected plan duration 210.0 is below 260.0  
-C3 OK - selected plan cost 0.054 is below 0.090  
-C4 OK - selected plan belief 0.974175 is above 0.93  
-C5 OK - selected plan reaches Cologne  
-C6 OK - selected plan uses the high-belief Aachen-Cologne shuttle for the last mile  
-C7 OK - bounded search consumed at most 8 of 8 fuel tokens  
+C1 OK - bounded search finds eight acceptable Brussels-to-Cologne plans  
+C2 OK - the selected plan is the fastest acceptable candidate  
+C3 OK - selected duration and fuel remaining are recomputed  
+C4 OK - selected cost, belief, and comfort are recomputed by summing/multiplying actions  
+C5 OK - the selected final state satisfies the wildcard goal  
+C6 OK - the selected plan satisfies reliability, cost, and duration thresholds  
+C7 OK - the last mile uses the high-belief Aachen-Cologne shuttle  
+C8 OK - search depth stays within the fuel-step bound  
+C9 OK - the top two acceptable plans are ordered by duration then cost

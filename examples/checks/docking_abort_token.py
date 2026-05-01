@@ -1,16 +1,29 @@
 # Independent Python checks for the docking_abort_token example.
-from .common import run_fragment_checks
+from __future__ import annotations
 
-CHECKS = [
-    ('four classical media encode AbortBit', ['All four classical media encode the same abstract AbortBit variable, so the model treats them as interoperable information media.']),
-    ('each classical medium can distinguish and locally permute the abort bit', ['Local permutation and local cloning are allowed on each classical medium, while copying and measuring are allowed between media that carry the same variable.']),
-    ('abortLamp can copy the token to flightPLC', ['classical abort token : YES, it can be permuted, copied, measured, and composed into audit networks']),
-    ('radioFrame can be measured into auditDisplay', ['parallel witness : flightPLC -> radioFrame and auditDisplay']),
-    ('a serial abortLamp -> flightPLC -> auditDisplay network is possible', ['serial witness : abortLamp -> flightPLC -> auditDisplay']),
-    ('a parallel flightPLC fan-out to radioFrame and auditDisplay is possible', ['Those primitive tasks compose into a serial audit path and a parallel fan-out witness.']),
-    ('quantumSeal cannot universally clone all seal states', ['quantum authenticity seal : NO, it cannot be universally cloned or used as unrestricted audit fan-out']),
-    ('quantumSeal cannot be used for unrestricted audit fan-out', ['The quantum seal is modeled as a superinformation medium, so universal cloning and unrestricted audit fan-out are explicitly blocked.']),
-]
+import re
+
+from .common import run_checks
+
 
 def run(ctx):
-    return run_fragment_checks(ctx, CHECKS)
+    data = ctx.load_input()
+    media = data["media"]
+    names = [m["name"] for m in media]
+    copy_tasks = [(a, b) for a in names for b in names if a != b]
+    serial = data["expected"]["serial"].split("->")
+    parallel_source = data["expected"]["parallelSource"]
+    reported_copy = re.search(r"possible copy tasks : (\d+)", ctx.answer)
+    reported_copy_count = int(reported_copy.group(1)) if reported_copy else None
+
+    checks = [
+        ("all four media carry the same AbortBit variable", len(media) == 4 and data["variable"] == "AbortBit"),
+        ("each medium has distinct zero and one states", all(m["zero"] != m["one"] for m in media)),
+        ("the directed copy-task count is recomputed as n*(n-1)", reported_copy_count == len(copy_tasks) == 12),
+        ("the expected serial witness uses known media in order", all(item in names for item in serial) and f"{serial[0]} -> {serial[1]} -> {serial[2]}" in ctx.answer),
+        ("the serial witness is backed by two legal copy/measure edges", (serial[0], serial[1]) in copy_tasks and (serial[1], serial[2]) in copy_tasks),
+        ("the expected parallel source can fan out to two other media", parallel_source in names and sum(1 for a, _b in copy_tasks if a == parallel_source) >= 2 and "parallel witness : flightPLC -> radioFrame and auditDisplay" in ctx.answer),
+        ("the quantum seal is separate from the classical AbortBit variable", data["superinformationMedium"]["variable"] != data["variable"]),
+        ("the answer blocks universal cloning and unrestricted audit fan-out for the seal", "cannot be universally cloned" in ctx.answer and "unrestricted audit fan-out" in ctx.answer),
+    ]
+    return run_checks(checks)

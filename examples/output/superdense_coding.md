@@ -29,13 +29,14 @@ Surviving explanations:
   0 -> 0 because count=1 is odd; all competing counts are even.  
   1 -> 1 because count=1 is odd; all competing counts are even.  
   2 -> 2 because count=1 is odd; all competing counts are even.  
-  3 -> 3 because count=1 is odd; all competing counts are even.  
+  3 -> 3 because count=1 is odd; all competing counts are even.
 
 ## Check  
-C1 OK - shared entanglement: |R) contains exactly |0,0) and |1,1)  
-C2 OK - composition KG: KG is obtained by composing G then K, exactly as in the N3 rule  
-C3 OK - composition GK: GK is obtained by composing K then G, exactly as in the N3 rule  
-C4 OK - candidate multiplicity: the raw superdense rule creates 24 candidate derivations before parity cancellation  
-C5 OK - GF(2) cancellation: off-diagonal answers occur zero or two times and cancel; diagonal answers occur once  
-C6 OK - decoded messages: after odd-parity filtering, Bob recovers Alice's original two-bit message  
-C7 OK - encoded supports distinct: the four Alice operations produce four different supports over the two mobits  
+C1 OK - shared entanglement R contains exactly |0,0) and |1,1)  
+C2 OK - composition KG is recomputed by composing G then K  
+C3 OK - composition GK is recomputed by composing K then G  
+C4 OK - the raw superdense rule creates 24 candidate derivations  
+C5 OK - GF(2) cancellation leaves odd diagonal and even off-diagonal counts  
+C6 OK - reported surviving decoded messages match the parity survivors  
+C7 OK - the four Alice operations produce distinct encoded supports  
+C8 OK - the JSON relation facts match the primitive teaching-model relations

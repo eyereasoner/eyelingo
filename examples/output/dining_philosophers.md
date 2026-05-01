@@ -72,14 +72,16 @@ Round derivation:
     requests : P5 asks P4 for F45; P5 asks P1 for F51  
     transfers : P4 sends F45 to P5; P1 sends F51 to P5  
     kept forks : F12,F23,F34  
-    meals : P5#3  
+    meals : P5#3
 
 ## Check  
-C1 OK - the translated run follows the nine start-of-round configs from the N3 source  
-C2 OK - 26 dirty-fork requests transfer and the other 19 fork-round pairs are kept  
-C3 OK - rounds 1/4/7 feed P1,P3; rounds 2/5/8 feed P2,P4; rounds 3/6/9 feed P5  
-C4 OK - each philosopher has exactly three derived meals  
-C5 OK - no two philosophers eat with the same fork in the same round  
-C6 OK - the end-of-round state makes every fork Dirty again, matching the trace model  
-C7 OK - the final ownership is F12,F23 with P2; F34 with P4; F45,F51 with P5  
-C8 OK - each of the nine rounds used request, transfer, and meal goroutine batches  
+C1 OK - the JSON schedule contains nine deterministic rounds  
+C2 OK - the Chandy-Misra trace yields exactly 15 meals  
+C3 OK - each philosopher eats exactly three times  
+C4 OK - no two meals in the same round use the same fork  
+C5 OK - dirty-fork transfer simulation reproduces the reported meal pattern  
+C6 OK - the first round transfers only F23 to P3 and lets P1/P3 eat  
+C7 OK - the P5-only rounds derive one meal each  
+C8 OK - all forks end dirty after the final phase  
+C9 OK - the final fork holders match the independent simulation  
+C10 OK - request and transfer counts are nontrivial and internally consistent

@@ -41,14 +41,16 @@ A11 binary offset -> T(5,3,2) -> higher hyperoperation recursion gives T=65536, 
 hyperoperation highlights:  
 A7 is 2^1003 - 3, an exact 302-digit integer.  
 A10 is 2^65536 - 3, an exact 19,729-digit integer summarized by fingerprint.  
-A11 reuses the pentation step T(5,3,2)=T(4,4,2)=65536, so A11 equals A9.  
+A11 reuses the pentation step T(5,3,2)=T(4,4,2)=65536, so A11 equals A9.
 
 ## Check  
-C1 OK - x=0 reduces to successor after the y+3 binary offset  
-C2 OK - x=1 reduces to addition after the y+3 binary offset  
-C3 OK - x=2 reduces to multiplication after the y+3 binary offset  
-C4 OK - x=3 reduces to exact BigInt exponentiation, including 2^1003-3  
-C5 OK - x=4 derives the first tetration cases T(4,3,2)-3 and T(4,4,2)-3  
-C6 OK - A(4,2) is held exactly as 2^65536-3, not as a floating-point approximation  
-C7 OK - the pentation query A(5,0) lands on the same value as A(4,1)  
-C8 OK - the evaluator reached the expected largest exact integer and memoized each distinct ternary fact once  
+C1 OK - all twelve JSON Ackermann queries are recomputed  
+C2 OK - x=0 queries reduce to successor after the +3 binary offset  
+C3 OK - x=1 queries reduce to addition after the +3 binary offset  
+C4 OK - x=2 queries reduce to multiplication after the +3 binary offset  
+C5 OK - x=3 queries reduce to exact base-2 exponentiation  
+C6 OK - A(4,0) and A(4,1) match the first tetration cases  
+C7 OK - A(4,2) is held exactly as 2^65536-3 with the reported fingerprint  
+C8 OK - A(5,0) lands on the same value as A(4,1)  
+C9 OK - all non-huge reported exact values match recomputation  
+C10 OK - the reported proof statistics match the query and memo structure

@@ -1,17 +1,45 @@
 # Independent Python checks for the high_trust_bloom_envelope example.
-from .common import run_fragment_checks
+from __future__ import annotations
 
-CHECKS = [
-    ('numeric Bloom and workload parameters are positive', ['The Bloom prefilter has n=1200 triples, m=16384 bits, and k=7 hash functions, giving lambda 0.5126953125.']),
-    ('canonical graph and SPO index agree on 1200 triples', ['The canonical graph and the SPO index have the same triple count, so exact membership remains grounded in the graph snapshot.']),
-    ('derived lambda 0.5126953125 matches the certified lambda', ['lambda : 0.5126953125']),
-    ('decimal interval 0.5988792348..0.5988792349 is a valid exp(-lambda) certificate', ['Instead of asking the engine to know exp(-k*n/m) exactly, the input carries a decimal interval certificate for exp(-lambda).']),
-    ('false-positive upper bound 0.001670806 is below 0.002', ['That certificate bounds (1-exp(-lambda))^k below the 0.002 false-positive budget and keeps extra exact confirmations below 100.0.']),
-    ('expected extra exact lookups 83.540 stay below 100.0', ['expected extra exact lookups upper : 83.540 per 50000 negative lookups']),
-    ('maybe-positive Bloom hits are confirmed against the canonical graph', ['Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.']),
-    ('definite Bloom negatives may be returned absent without exact lookup', ['false-positive envelope : 0.001670806 .. 0.001670806']),
-    ('deployment decision is AcceptForHighTrustUse', ['Deployment decision : AcceptForHighTrustUse for artifact.']),
-]
+import math
+import re
+
+from .common import run_checks
+
+
+def parse_answer(answer: str):
+    def grab(pattern, cast=float):
+        m = re.search(pattern, answer)
+        return cast(m.group(1)) if m else None
+    fp = re.search(r"false-positive envelope : ([0-9.]+) \.\. ([0-9.]+)", answer)
+    return {
+        "lambda": grab(r"lambda : ([0-9.]+)"),
+        "fp_low": float(fp.group(1)) if fp else None,
+        "fp_high": float(fp.group(2)) if fp else None,
+        "extra": grab(r"expected extra exact lookups upper : ([0-9.]+)"),
+    }
+
 
 def run(ctx):
-    return run_fragment_checks(ctx, CHECKS)
+    data = ctx.load_input()
+    a = data["Artifact"]
+    reported = parse_answer(ctx.answer)
+    lam = a["HashFunctions"] * a["CanonicalTripleCount"] / a["BloomBits"]
+    fp_low = (1.0 - a["ExpMinusLambdaUpper"]) ** a["HashFunctions"]
+    fp_high = (1.0 - a["ExpMinusLambdaLower"]) ** a["HashFunctions"]
+    extra_upper = fp_high * a["NegativeLookupsPerBatch"]
+    exact_exp = math.exp(-lam)
+
+    checks = [
+        ("numeric Bloom parameters are positive", all(a[k] > 0 for k in ["CanonicalTripleCount", "BloomBits", "HashFunctions", "NegativeLookupsPerBatch"])),
+        ("canonical graph and SPO index triple counts agree", a["CanonicalTripleCount"] == a["SPOIndexTripleCount"]),
+        ("lambda recomputes as k*n/m", abs(reported["lambda"] - lam) < 1e-12 and abs(lam - a["CertifiedLambda"]) < 1e-12),
+        ("the exp(-lambda) decimal certificate brackets the exact Python value", a["ExpMinusLambdaLower"] <= exact_exp <= a["ExpMinusLambdaUpper"]),
+        ("false-positive envelope is recomputed from the certificate", abs(reported["fp_low"] - fp_low) < 5e-10 and abs(reported["fp_high"] - fp_high) < 5e-10),
+        ("false-positive upper bound stays below the policy budget", fp_high < a["FPRateBudget"]),
+        ("expected extra exact lookups stay below budget", abs(reported["extra"] - extra_upper) < 5e-3 and extra_upper < a["ExtraExactLookupsBudget"]),
+        ("maybe-positive answers must be confirmed against the canonical graph", data["Policies"]["MaybePositivePolicy"] == "ConfirmAgainstCanonicalGraph" and "maybe-positive policy : ConfirmAgainstCanonicalGraph" in ctx.answer),
+        ("definite negatives may return absent without exact lookup", data["Policies"]["DefiniteNegativePolicy"] == "ReturnAbsent" and "definite-negative policy : ReturnAbsent" in ctx.answer),
+        ("the deployment decision matches the recomputed envelope", data["Expected"]["Decision"] in ctx.answer and fp_high < a["FPRateBudget"] and extra_upper < a["ExtraExactLookupsBudget"]),
+    ]
+    return run_checks(checks)

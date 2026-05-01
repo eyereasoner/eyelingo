@@ -11,14 +11,14 @@ possible copy tasks : 12
 All four classical media encode the same abstract AbortBit variable, so the model treats them as interoperable information media.  
 Local permutation and local cloning are allowed on each classical medium, while copying and measuring are allowed between media that carry the same variable.  
 Those primitive tasks compose into a serial audit path and a parallel fan-out witness.  
-The quantum seal is modeled as a superinformation medium, so universal cloning and unrestricted audit fan-out are explicitly blocked.  
+The quantum seal is modeled as a superinformation medium, so universal cloning and unrestricted audit fan-out are explicitly blocked.
 
 ## Check  
-C1 OK - four classical media encode AbortBit  
-C2 OK - each classical medium can distinguish and locally permute the abort bit  
-C3 OK - abortLamp can copy the token to flightPLC  
-C4 OK - radioFrame can be measured into auditDisplay  
-C5 OK - a serial abortLamp -> flightPLC -> auditDisplay network is possible  
-C6 OK - a parallel flightPLC fan-out to radioFrame and auditDisplay is possible  
-C7 OK - quantumSeal cannot universally clone all seal states  
-C8 OK - quantumSeal cannot be used for unrestricted audit fan-out  
+C1 OK - all four media carry the same AbortBit variable  
+C2 OK - each medium has distinct zero and one states  
+C3 OK - the directed copy-task count is recomputed as n*(n-1)  
+C4 OK - the expected serial witness uses known media in order  
+C5 OK - the serial witness is backed by two legal copy/measure edges  
+C6 OK - the expected parallel source can fan out to two other media  
+C7 OK - the quantum seal is separate from the classical AbortBit variable  
+C8 OK - the answer blocks universal cloning and unrestricted audit fan-out for the seal

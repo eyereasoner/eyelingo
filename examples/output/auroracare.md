@@ -79,13 +79,14 @@ G – AI training (opt-out)
   care-team linked : no  
   subject opt-in : no  
   subject opt-out : yes  
-  trace : subject_opted_out,deny:subject_opted_out_ai_training  
+  trace : subject_opted_out,deny:subject_opted_out_ai_training
 
 ## Check  
-C1 OK - all seven scenarios match the PERMIT/DENY outcomes encoded in the N3 example  
-C2 OK - primary-care access requires a clinician role and a care-team link  
-C3 OK - quality improvement is allowed only when both lab results and patient summary are requested in the secure environment  
-C4 OK - insurance management is denied by a matching prohibition  
-C5 OK - research is allowed only with patient opt-in and anonymisation in the secure environment  
-C6 OK - AI training is denied because the subject opted out  
-C7 OK - four scenarios are permitted and three are denied  
+C1 OK - all seven scenario decisions are recomputed  
+C2 OK - reported decisions match the independent PDP evaluation  
+C3 OK - primary-care access requires clinician role and care-team link  
+C4 OK - quality improvement is allowed only with both required categories in the secure environment  
+C5 OK - insurance management is denied by the matching prohibition  
+C6 OK - research requires opt-in, anonymisation, and the secure environment  
+C7 OK - AI training is denied because the subject opted out  
+C8 OK - permit and deny counts match the report

@@ -1,18 +1,38 @@
 # Independent Python checks for the gravity_mediator_witness example.
-from .common import run_fragment_checks
+from __future__ import annotations
 
-CHECKS = [
-    ('locality is assumed in the positive run', ['The positive run assumes locality and interoperability, excludes direct coupling, and observes entanglement after interaction through the gravitational mediator alone.']),
-    ('interoperability is assumed in the positive run', ['YES for the mediator-only witness run.']),
-    ('direct coupling between the two quantum systems is excluded', ['Under those conditions the mediator-only witness supports a non-classical-mediator conclusion, while the purely classical contrast model cannot support the same witness.']),
-    ('the positive run has a mediator-only interaction path', ['NO for a purely classical mediator model under the same mediator-only conditions.']),
-    ('an entanglement witness is observed in the positive run', ['## Answer']),
-    ('the positive run has both information-transfer and local-readout interfaces', ['## Answer']),
-    ('the gravitational mediator is derived to be non-classical', ['## Answer']),
-    ('a purely classical mediator model is ruled out by the positive run', ['## Answer']),
-    ('the contrast run is also mediator-only', ['## Answer']),
-    ('the purely classical contrast mediator cannot support the witness', ['## Answer']),
-]
+from .common import run_checks
+
+
+def nonclassical_witness(run: dict) -> bool:
+    return (
+        run["couplingMode"] == "Gravitational"
+        and "Locality" in run["assumes"]
+        and "Interoperability" in run["assumes"]
+        and run["directCouplingStatus"] == "NoDirectCoupling"
+        and run["observed"] == "EntanglementWitnessPassed"
+        and run["probeStatus"] == "LocalProbeReadoutPresent"
+        and run["controlStatus"] == "CopyLikeControlPresent"
+    )
+
 
 def run(ctx):
-    return run_fragment_checks(ctx, CHECKS)
+    data = ctx.load_input()
+    by_role = {item["role"]: item for item in data["runs"]}
+    positive = by_role["positive"]
+    contrast = by_role["contrast"]
+    positive_yes = nonclassical_witness(positive)
+    contrast_yes = nonclassical_witness(contrast)
+
+    checks = [
+        ("the positive run assumes locality", "Locality" in positive["assumes"]),
+        ("the positive run assumes interoperability", "Interoperability" in positive["assumes"]),
+        ("direct coupling is excluded in the positive run", positive["directCouplingStatus"] == "NoDirectCoupling"),
+        ("the positive run is gravitational and mediator-only", positive["couplingMode"] == "Gravitational" and positive["mediator"] == "gravityMediator"),
+        ("the entanglement witness is observed in the positive run", positive["observed"] == "EntanglementWitnessPassed"),
+        ("local readout and copy-like control interfaces are both present", positive["probeStatus"] == "LocalProbeReadoutPresent" and positive["controlStatus"] == "CopyLikeControlPresent"),
+        ("the non-classical mediator conclusion is independently derived for the positive run", positive_yes and "YES for the mediator-only witness run" in ctx.answer),
+        ("the purely classical contrast has the same mediator-only setup but no entanglement witness", contrast["mediatorModel"] == "PurelyClassical" and contrast["directCouplingStatus"] == "NoDirectCoupling" and contrast["observed"] == "NoEntanglementWitness"),
+        ("the contrast run cannot support the same witness conclusion", not contrast_yes and "NO for a purely classical mediator model" in ctx.answer),
+    ]
+    return run_checks(checks)

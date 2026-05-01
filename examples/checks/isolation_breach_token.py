@@ -1,17 +1,32 @@
 # Independent Python checks for the isolation_breach_token example.
-from .common import run_fragment_checks
+from __future__ import annotations
 
-CHECKS = [
-    ('doorBeacon, containmentPLC, nursePager, and incidentBoard encode BreachBit', ['serial witness : doorBeacon -> containmentPLC -> incidentBoard']),
-    ('nursePager can prepare CodeBreach', ['prepared witness : nursePager prepares CodeBreach']),
-    ('doorBeacon can permute SafeGreen to BreachRed and back', ['The specimen seal is separate and superinformation-like, so it records provenance without becoming an unrestricted cloneable broadcast token.']),
-    ('containmentPLC can copy the breach token to nursePager', ['The breach token is an ordinary classical information variable carried by four unlike media in the lab workflow.']),
-    ('nursePager can be measured into incidentBoard', ['Copy and measurement compose into an incident-board audit path, and copy pairs compose into a parallel notification witness.']),
-    ('doorBeacon -> containmentPLC -> incidentBoard is a serial audit network', ['classical breach token : YES, prepare, reversible permutation, copy, measure, serial audit, and parallel fan-out all succeed']),
-    ('containmentPLC can fan out to nursePager and incidentBoard', ['Since each medium carries BreachBit, the example derives preparation, reversible permutation, copying, and measurement tasks.']),
-    ('specimenSeal cannot universally clone all provenance states', ['specimen provenance seal : NO, universal cloning and unrestricted parallel fan-out are blocked']),
-    ('specimenSeal blocks unrestricted parallel fan-out', ['possible prepare tasks : 8']),
-]
+import re
+
+from .common import run_checks
+
 
 def run(ctx):
-    return run_fragment_checks(ctx, CHECKS)
+    data = ctx.load_input()
+    media = data["media"]
+    names = [m["name"] for m in media]
+    states = [(m["zero"], m["one"]) for m in media]
+    prepare_tasks = [(m["name"], state) for m in media for state in (m["zero"], m["one"])]
+    copy_tasks = [(a, b) for a in names for b in names if a != b]
+    serial = data["expected"]["serial"].split("->")
+    reported_prepare = re.search(r"possible prepare tasks : (\d+)", ctx.answer)
+    reported_prepare_count = int(reported_prepare.group(1)) if reported_prepare else None
+    prepared_state = data["expected"]["preparedState"]
+
+    checks = [
+        ("all classical lab media carry the BreachBit variable", len(media) == 4 and data["variable"] == "BreachBit"),
+        ("each medium has distinguishable safe/breach states", all(zero != one for zero, one in states)),
+        ("prepare-task count is independently recomputed from all states", reported_prepare_count == len(prepare_tasks) == 8),
+        ("the expected prepared breach state belongs to nursePager", any(m["name"] == "nursePager" and m["one"] == prepared_state for m in media) and f"nursePager prepares {prepared_state}" in ctx.answer),
+        ("the expected serial audit path is backed by legal directed edges", all(item in names for item in serial) and all(edge in copy_tasks for edge in zip(serial, serial[1:]))),
+        ("containmentPLC has at least two legal fan-out targets", sum(1 for a, _b in copy_tasks if a == "containmentPLC") >= 2),
+        ("the specimen seal has a separate non-classical provenance variable", data["superinformationMedium"]["variable"] != data["variable"] and len(data["superinformationMedium"]["states"]) >= 3),
+        ("the answer blocks universal cloning and unrestricted parallel fan-out for the specimen seal", "universal cloning" in ctx.answer and "unrestricted parallel fan-out" in ctx.answer),
+        ("all three expected witnesses are reported in the answer", "classical breach token : YES" in ctx.answer and "specimen provenance seal : NO" in ctx.answer and "serial witness" in ctx.answer),
+    ]
+    return run_checks(checks)

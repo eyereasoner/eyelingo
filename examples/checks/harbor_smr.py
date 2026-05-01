@@ -1,18 +1,57 @@
 # Independent Python checks for the harbor_smr example.
-from .common import run_fragment_checks
+from __future__ import annotations
 
-CHECKS = [
-    ('reserve margin 24 MW exceeds threshold 19 MW', ['PERMIT - North Quay Hydrogen Hub may use https://example.org/insight/harborsmr to run PEM_electrolyzer_train_2 at 16 MW from 2026-06-18T14:00:00Z to 2026-06-18T18:00:00Z.']),
-    ('cooling margin 18% exceeds threshold 14%', ['The SMR operator exposes a bounded 18 MW flexible-export insight for day_ahead_balancing, not raw reactor telemetry.']),
-    ('no planned outage blocks the balancing window', ['The requested 16 MW electrolysis dispatch fits inside that window, safety margins clear the thresholds, no outage is planned, and the policy permits use only for electrolysis_dispa']),
-    ('requested 16 MW fits inside the 18 MW flexible-export insight', ['The approved dispatch is 64 MWh over the four-hour window, scoped to port-hydrogen-hub and PEM_electrolyzer_train_2.']),
-    ('serialized insight omits sensitive telemetry terms', ['## Answer']),
-    ('aggregate flags confirm raw reactor telemetry stays local', ['## Answer']),
-    ('policy permits use for electrolysis dispatch before the insight expires', ['## Answer']),
-    ('policy prohibits redistribution for market resale', ['## Answer']),
-    ('scope is explicit: device, event, start, and expiry', ['## Answer']),
-    ('dispatch plan matches the requested load, power, and insight window', ['## Answer']),
-]
+import re
+from datetime import datetime
+
+from .common import run_checks
+
+
+def dt(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
 
 def run(ctx):
-    return run_fragment_checks(ctx, CHECKS)
+    data = ctx.load_input()
+    agg = data["Aggregate"]
+    insight = data["Insight"]
+    req = data["Request"]
+    dispatch = data["Dispatch"]
+    policy = data["Policy"]
+    thresholds = data["Thresholds"]
+    auth_time = dt(data["HubAuthAt"])
+    expires = dt(insight["ExpiresAt"])
+    window_start = dt(dispatch["WindowStart"])
+    window_end = dt(dispatch["WindowEnd"])
+    duration_h = (window_end - window_start).total_seconds() / 3600.0
+    energy_mwh = dispatch["DispatchMW"] * duration_h
+    sensitive_terms = ["coretemperature", "rodposition", "neutronflux", "operatorbadge"]
+    serialized = insight["SerializedLowercase"].lower()
+
+    permit = (
+        data["RequestPurpose"] == req["Purpose"] == policy["Permission"]["Purpose"]
+        and data["RequestAction"] == policy["Permission"]["Action"]
+        and policy["Permission"]["Target"] == insight["ID"]
+        and req["TargetLoad"] == insight["TargetLoad"] == dispatch["ForLoad"]
+        and req["RequestedMW"] == dispatch["DispatchMW"]
+        and req["RequestedMW"] <= insight["ExportMW"] <= agg["AvailableFlexibleExportMW"]
+        and agg["ReserveMarginMW"] >= thresholds["MinReserveMarginMW"]
+        and agg["CoolingMarginPct"] >= thresholds["MinCoolingMarginPct"]
+        and not agg["PlannedOutage"]
+        and auth_time < expires
+    )
+
+    checks = [
+        ("reserve margin exceeds the configured threshold", agg["ReserveMarginMW"] >= thresholds["MinReserveMarginMW"]),
+        ("cooling margin exceeds the configured threshold", agg["CoolingMarginPct"] >= thresholds["MinCoolingMarginPct"]),
+        ("no planned outage blocks the balancing window", agg["PlannedOutage"] is False),
+        ("requested dispatch fits inside the flexible-export insight", req["RequestedMW"] <= insight["ExportMW"] <= agg["AvailableFlexibleExportMW"]),
+        ("serialized insight omits sensitive reactor telemetry terms", not any(term in serialized for term in sensitive_terms)),
+        ("aggregate flags keep raw reactor telemetry local", not any(agg[k] for k in ["ContainsCoreTemperature", "ContainsRodPosition", "ContainsNeutronFlux", "ContainsOperatorBadgeIDs"])),
+        ("permission policy authorizes electrolysis dispatch before expiry", permit and "PERMIT" in ctx.answer),
+        ("market-resale redistribution is separately prohibited", policy["Prohibition"]["Action"] == "odrl:distribute" and policy["Prohibition"]["Purpose"] == "market_resale"),
+        ("scope is explicit for device, event, start, and expiry", all(insight.get(k) for k in ["ScopeDevice", "ScopeEvent", "WindowStart", "ExpiresAt"])),
+        ("dispatch energy recomputes to 64 MWh over the four-hour window", energy_mwh == 64 and "64 MWh" in ctx.reason),
+        ("the reported load, power, and window match the request and dispatch", req["TargetLoad"] in ctx.answer and f"at {req['RequestedMW']} MW" in ctx.answer and dispatch["WindowStart"] in ctx.answer and dispatch["WindowEnd"] in ctx.answer),
+    ]
+    return run_checks(checks)

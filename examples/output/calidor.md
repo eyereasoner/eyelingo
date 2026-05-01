@@ -38,19 +38,18 @@ Selected package "Calidor Priority Cooling Bundle" covers bill_credit, cooling_k
 Usage is permitted only for purpose "heatwave_response" and the envelope expires at 2026-07-18T21:00:00+00:00.  
 Tenant-screening reuse is blocked by a prohibition on odrl:distribute for purpose "tenant_screening".  
 reason.txt : The gateway keeps raw indoor heat, vulnerability, and prepaid-energy data local, derives a priority-support signal, and shares only a scoped heatwave-response envelope with expiry.  
-dispatches logged : 1  
+dispatches logged : 1
 
 ## Check  
-C1 OK - the trusted precomputed HMAC signature verifies  
-C2 OK - payload hash matches the source envelope digest  
-C3 OK - the shared insight strips raw heat, vulnerability, credit, and meter-trace terms  
-C4 OK - the insight has a device scope, event scope, and expiry  
-C5 OK - heatwave-response use is authorized before the insight expires  
-C6 OK - the heat alert is active  
-C7 OK - indoor heat is unsafe for long enough to trigger support  
-C8 OK - the active-need count reaches the priority threshold  
-C9 OK - the recommended package is within budget and covers every required capability  
-C10 OK - the lowest-cost eligible package is chosen  
-C11 OK - the deletion duty is scheduled before expiry  
-C12 OK - reuse for tenant screening is prohibited  
-C13 OK - all source-level policy, scope, signature, and package checks pass  
+C1 OK - four active heat-response needs are recomputed from the local signals  
+C2 OK - the insight threshold of three active needs is met  
+C3 OK - the lowest-cost eligible package covering all required capabilities is selected  
+C4 OK - the selected package fits inside the €20 budget  
+C5 OK - cheaper packages are rejected because they do not cover all capabilities  
+C6 OK - the deluxe package is rejected because it is over budget  
+C7 OK - policy permission authorizes heatwave-response use before expiry  
+C8 OK - tenant-screening reuse is prohibited by the policy  
+C9 OK - deletion duty is scheduled before envelope expiry  
+C10 OK - vulnerability flags and local raw stress signals are omitted from the serialized insight  
+C11 OK - reported signature metadata matches the trusted precomputed input  
+C12 OK - scope metadata is explicit for device, event, municipality, creation, and expiry

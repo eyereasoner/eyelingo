@@ -35,15 +35,16 @@ Bastia-Poretta Airport (res:AIRPORT_1321)
 Diagoras Airport (res:AIRPORT_1472)  
 Heraklion International Nikos Kazantzakis Airport (res:AIRPORT_1452)  
 Lille-Lesquin Airport (res:AIRPORT_1399)  
-Palma De Mallorca Airport (res:AIRPORT_3998)  
+Palma De Mallorca Airport (res:AIRPORT_3998)
 
 ## Check  
 C1 OK - source and destination airport labels are known  
-C2 OK - Ostend-Bruges has one outbound route in the full N3 graph, to Liège Airport  
-C3 OK - the discovered route set matches the N3 query answer  
-C4 OK - no direct or one-stop route exists under the same bound  
-C5 OK - every discovered route has at most two stopovers  
-C6 OK - every hop is backed by a nepo:hasOutboundRouteTo fact  
-C7 OK - no route revisits an airport  
-C8 OK - the Go translation loaded every airport label and outbound-route fact from the N3 source  
-C9 OK - route output is sorted deterministically by airport labels  
+C2 OK - Ostend-Bruges has one outbound route in the full graph, to Liège Airport  
+C3 OK - bounded DFS independently finds exactly three two-stopover routes  
+C4 OK - reported route labels match the independently discovered route set  
+C5 OK - no direct or one-stop route exists under the same bound  
+C6 OK - every discovered hop is backed by an outbound-route fact  
+C7 OK - no discovered route revisits an airport  
+C8 OK - the translated graph size matches the full source counts  
+C9 OK - the second-hop candidates from Liège are independently recovered  
+C10 OK - route output is sorted deterministically by airport labels

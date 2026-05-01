@@ -54,11 +54,15 @@ Noah reuses the token
   state override : token has already been used once  
   decision : DENY  
   reason : Deny: C6 authorization must be active and not already consumed.  
-  passed conditions : 9/10  
+  passed conditions : 9/10
 
 ## Check  
 C1 OK - the source pickup request satisfies all ten authorization conditions  
-C2 OK - the same token is denied for billing, redirect, wrong person, wrong locker, and reuse  
-C3 OK - every request matches its expected PERMIT or DENY result  
-C4 OK - single-use state permits the first pickup but rejects reuse  
-C5 OK - billing details stay hidden and parcel redirection remains blocked  
+C2 OK - all reported request decisions match independent policy evaluation  
+C3 OK - billing access is denied by the privacy guardrail  
+C4 OK - redirect is denied by the parcel-redirection guardrail  
+C5 OK - wrong-person use is denied because requester must match the delegate  
+C6 OK - wrong-locker use is denied because locker must match the token  
+C7 OK - single-use reuse is denied after the token is already consumed  
+C8 OK - guardrail denials recompute to five out of five  
+C9 OK - the release text matches parcel owner, delegate, parcel, locker, and site

@@ -13,15 +13,16 @@ The canonical graph and the SPO index have the same triple count, so exact membe
 The Bloom prefilter has n=1200 triples, m=16384 bits, and k=7 hash functions, giving lambda 0.5126953125.  
 Instead of asking the engine to know exp(-k*n/m) exactly, the input carries a decimal interval certificate for exp(-lambda).  
 That certificate bounds (1-exp(-lambda))^k below the 0.002 false-positive budget and keeps extra exact confirmations below 100.0.  
-Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.  
+Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.
 
 ## Check  
-C1 OK - numeric Bloom and workload parameters are positive  
-C2 OK - canonical graph and SPO index agree on 1200 triples  
-C3 OK - derived lambda 0.5126953125 matches the certified lambda  
-C4 OK - decimal interval 0.5988792348..0.5988792349 is a valid exp(-lambda) certificate  
-C5 OK - false-positive upper bound 0.001670806 is below 0.002  
-C6 OK - expected extra exact lookups 83.540 stay below 100.0  
-C7 OK - maybe-positive Bloom hits are confirmed against the canonical graph  
-C8 OK - definite Bloom negatives may be returned absent without exact lookup  
-C9 OK - deployment decision is AcceptForHighTrustUse  
+C1 OK - numeric Bloom parameters are positive  
+C2 OK - canonical graph and SPO index triple counts agree  
+C3 OK - lambda recomputes as k*n/m  
+C4 OK - the exp(-lambda) decimal certificate brackets the exact Python value  
+C5 OK - false-positive envelope is recomputed from the certificate  
+C6 OK - false-positive upper bound stays below the policy budget  
+C7 OK - expected extra exact lookups stay below budget  
+C8 OK - maybe-positive answers must be confirmed against the canonical graph  
+C9 OK - definite negatives may return absent without exact lookup  
+C10 OK - the deployment decision matches the recomputed envelope

@@ -35,19 +35,19 @@ candidate packages:
 Selected package "Flandor Retooling Pulse" covers export=yes, skills=yes, grid=yes, cost=€120M.  
 Usage is permitted only for purpose "regional_stabilization" and the envelope expires at 2026-04-08T19:00:00+00:00.  
 Surveillance reuse is blocked by a prohibition on odrl:distribute for purpose "firm_surveillance".  
-Deletion duty time : 2026-04-08T18:30:00+00:00  
+Deletion duty time : 2026-04-08T18:30:00+00:00
 
 ## Check  
-C1 OK - payload hash matches the source envelope digest  
-C2 OK - HMAC value matches the trusted precomputed signature  
-C3 OK - export weakness, skills strain, and grid stress reach the three-need threshold  
-C4 OK - the insight has a device scope, event scope, and expiry  
-C5 OK - the shared insight omits firm names, payroll rows, and other sensitive terms  
-C6 OK - regional stabilization use is authorized before the insight expires  
-C7 OK - the deletion duty is scheduled before expiry  
-C8 OK - reuse for firm surveillance is prohibited  
-C9 OK - the recommended package fits inside the €140M budget  
-C10 OK - the recommended package covers all active needs  
-C11 OK - the lowest-cost eligible package is chosen  
-C12 OK - the expected six files are recorded as written  
-C13 OK - all source-level policy, scope, signature, and package checks pass  
+C1 OK - export weakness, skills strain, and grid stress are all active  
+C2 OK - active need count meets the insight threshold  
+C3 OK - the lowest-cost package covering all active needs is selected  
+C4 OK - the selected package fits inside the €140M budget  
+C5 OK - cheaper packages are rejected because each covers only one active need  
+C6 OK - the full corridor package covers all needs but is over budget  
+C7 OK - policy permission authorizes regional-stabilization use before expiry  
+C8 OK - firm-surveillance redistribution is prohibited  
+C9 OK - deletion duty is scheduled before envelope expiry  
+C10 OK - shared insight omits firm names and payroll rows  
+C11 OK - reported signature metadata matches the trusted precomputed input  
+C12 OK - the expected six files and one audit entry are recorded  
+C13 OK - export-weak cluster names are independently identified

@@ -1,16 +1,83 @@
 # Independent Python checks for the ackermann example.
-from .common import run_fragment_checks
+from __future__ import annotations
 
-CHECKS = [
-    ('x=0 reduces to successor after the y+3 binary offset', ['A1 binary offset -> T(0,9,2) -> successor gives T=10, answer=T-3=7']),
-    ('x=1 reduces to addition after the y+3 binary offset', ['The N3 source defines binary ackermann(x,y) by computing T(x,y+3,2) and subtracting 3. The ternary predicate T uses direct rules for successor, addition, multiplication, and expone']),
-    ('x=2 reduces to multiplication after the y+3 binary offset', ['A5 binary offset -> T(2,12,2) -> multiplication gives T=24, answer=T-3=21']),
-    ('x=3 reduces to exact BigInt exponentiation, including 2^1003-3', ['A7 binary offset -> T(3,1003,2) -> exponentiation gives T=302-digit integer [857206885749013856758740...220995094697645344555008; sha256=00800470f0cc96fd412c9f2f9cb3e7d9c6d3a244820']),
-    ('x=4 derives the first tetration cases T(4,3,2)-3 and T(4,4,2)-3', ['A10 binary offset -> T(4,5,2) -> tetration recursion gives T=19729-digit integer [200352993040684646497907...339445587895905719156736; sha256=64829919027d6b545f931768c171c25c302262']),
-    ('A(4,2) is held exactly as 2^65536-3, not as a floating-point approximation', ['A9 binary offset -> T(4,4,2) -> tetration recursion gives T=65536, answer=T-3=65533']),
-    ('the pentation query A(5,0) lands on the same value as A(4,1)', ['A11 reuses the pentation step T(5,3,2)=T(4,4,2)=65536, so A11 equals A9.']),
-    ('the evaluator reached the expected largest exact integer and memoized each distinct ternary fact once', ['A10 is 2^65536 - 3, an exact 19,729-digit integer summarized by fingerprint.']),
-]
+import hashlib
+import re
+import sys
+
+from .common import run_checks
+
+try:
+    sys.set_int_max_str_digits(0)
+except AttributeError:
+    pass
+
+
+def summarize(n: int) -> tuple[int, str, str, str]:
+    s = str(n)
+    return len(s), s[:24], s[-24:], hashlib.sha256(s.encode("ascii")).hexdigest()
+
+
+def ackermann_binary(x: int, y: int) -> int:
+    # This example uses A(x,y)=T(x,y+3,2)-3, where the T rules are the
+    # base-2 hyperoperation ladder used in the N3 source.
+    t_y = y + 3
+    if x == 0:
+        value = t_y + 1
+    elif x == 1:
+        value = t_y + 2
+    elif x == 2:
+        value = 2 * t_y
+    elif x == 3:
+        value = 1 << t_y
+    elif x == 4:
+        if t_y == 3:
+            value = 16
+        elif t_y == 4:
+            value = 65536
+        elif t_y == 5:
+            value = 1 << 65536
+        else:
+            raise ValueError("unsupported tetration query")
+    elif x == 5 and t_y == 3:
+        value = 65536
+    else:
+        raise ValueError("unsupported Ackermann query")
+    return value - 3
+
+
+def parse_small(answer: str) -> dict[str, int]:
+    rows = {}
+    for ident, value in re.findall(r"^(A\d+) ackermann\(\d+,\d+\) = (\d+)$", answer, flags=re.MULTILINE):
+        rows[ident] = int(value)
+    return rows
+
+
+def parse_fingerprints(answer: str) -> dict[str, tuple[int, str, str, str]]:
+    rows = {}
+    for ident, digits, leading, trailing, sha in re.findall(r"^(A\d+) digits=(\d+) leading=([0-9]+) trailing=([0-9]+) sha256=([0-9a-f]+)$", answer, flags=re.MULTILINE):
+        rows[ident] = (int(digits), leading, trailing, sha)
+    return rows
+
 
 def run(ctx):
-    return run_fragment_checks(ctx, CHECKS)
+    data = ctx.load_input()
+    values = {item["ID"]: ackermann_binary(int(item["X"]), int(item["Y"])) for item in data}
+    small = parse_small(ctx.answer)
+    fingerprints = parse_fingerprints(ctx.answer)
+    a7_summary = summarize(values["A7"])
+    a10_summary = summarize(values["A10"])
+
+    checks = [
+        ("all twelve JSON Ackermann queries are recomputed", len(values) == 12),
+        ("x=0 queries reduce to successor after the +3 binary offset", values["A0"] == 1 and values["A1"] == 7),
+        ("x=1 queries reduce to addition after the +3 binary offset", values["A2"] == 4 and values["A3"] == 9),
+        ("x=2 queries reduce to multiplication after the +3 binary offset", values["A4"] == 7 and values["A5"] == 21),
+        ("x=3 queries reduce to exact base-2 exponentiation", values["A6"] == 125 and a7_summary == fingerprints.get("A7")),
+        ("A(4,0) and A(4,1) match the first tetration cases", values["A8"] == 13 and values["A9"] == 65533),
+        ("A(4,2) is held exactly as 2^65536-3 with the reported fingerprint", a10_summary == fingerprints.get("A10")),
+        ("A(5,0) lands on the same value as A(4,1)", values["A11"] == values["A9"] == 65533),
+        ("all non-huge reported exact values match recomputation", all(small[k] == values[k] for k in small)),
+        ("the reported proof statistics match the query and memo structure", "primitive test queries : 12" in ctx.reason and "binary reductions : 12" in ctx.reason and "distinct ternary facts : 23" in ctx.reason),
+    ]
+    return run_checks(checks)

@@ -27,16 +27,16 @@ taxonomy-step rule applications : 100000
 terminal rule applications : 1  
 success rule applications : 1  
 classification facts derived : 100001 N classes + 200000 side labels + A2 = 300002 type facts  
-The side labels are not needed for the final A2 proof, but carrying both I and J at every level checks that the whole wide/deep expansion was performed, not just the main N-chain.  
+The side labels are not needed for the final A2 proof, but carrying both I and J at every level checks that the whole wide/deep expansion was performed, not just the main N-chain.
 
 ## Check  
-C1 OK - the starting classification N0 is present  
-C2 OK - the first expansion produced N1 together with side labels I1 and J1  
-C3 OK - the chain reaches the midpoint N50000 and still carries both side-label branches  
-C4 OK - the final taxonomy step from N99999 to N100000 was completed  
-C5 OK - once N100000 is reached, the terminal class A2 is derived  
-C6 OK - the success flag is raised only after the terminal class A2 is present  
-C7 OK - all 100001 N-level classifications are present with no missing level  
-C8 OK - all 200000 side-label classifications I1..I100000 and J1..J100000 are present  
-C9 OK - exactly 100000 taxonomy-step rules, one terminal rule, and one success rule fired  
-C10 OK - a linear scan finds no skipped taxonomy level  
+C1 OK - the requested taxonomy depth is 100000  
+C2 OK - the terminal class N100000 is reported as reached  
+C3 OK - the terminal A2 class and success flag are reported  
+C4 OK - taxonomy-step rule count matches the JSON depth  
+C5 OK - total source-rule count recomputes from start, step, terminal, success, and report rules  
+C6 OK - agenda pops match one pop per N-class fact in the main chain  
+C7 OK - taxonomy-step applications match the depth  
+C8 OK - terminal and success rules fire exactly once  
+C9 OK - classification fact total accounts for N, I/J side labels, and A2  
+C10 OK - midpoint and endpoint checkpoints are present
