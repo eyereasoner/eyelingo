@@ -22,15 +22,3 @@ C5 OK - a serial abortLamp -> flightPLC -> auditDisplay network is possible
 C6 OK - a parallel flightPLC fan-out to radioFrame and auditDisplay is possible  
 C7 OK - quantumSeal cannot universally clone all seal states  
 C8 OK - quantumSeal cannot be used for unrestricted audit fan-out  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : docking_abort_token  
-question : Can a docking-abort token be propagated across unlike classical media while the quantum seal stays non-clonable?  
-classical media : 4  
-copy tasks : 12  
-measure tasks : 16  
-serial networks : 48  
-parallel networks : 24  
-impossible tasks : 2  
-checks passed : 8/8  

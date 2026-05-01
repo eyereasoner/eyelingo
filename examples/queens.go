@@ -15,7 +15,6 @@
 //
 //	go run queens.go 14 1
 //
-// The final “Go audit details” section is intentionally diagnostic. It exposes
 // the normalized command-line settings and search counters so the translation is
 // easy to inspect, compare, and regression-test.
 package main
@@ -182,7 +181,7 @@ func renderReason(n int) {
 
 func renderChecks(n int, count uint64, stats SolveStats) {
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	fmt.Printf("C1 %s - search reached depth %d.\n", statusWord(stats.MaxDepth == n || n == 0), stats.MaxDepth)
 	fmt.Printf("C2 %s - first solution places one queen in each row.\n", statusWord(len(stats.FirstSolution) == n || count == 0))
 	fmt.Printf("C3 %s - first solution columns are unique.\n", statusWord(columnsUnique(stats.FirstSolution)))
@@ -236,7 +235,6 @@ func statusWord(ok bool) string {
 // than part of the mathematical N-Queens answer.
 func renderGoAuditDetails(n int, maxPrint int, count uint64, stats SolveStats) {
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("normalized board size : %d\n", n)
 	fmt.Printf("normalized max print : %d\n", maxPrint)
@@ -315,10 +313,8 @@ func main() {
 	fmt.Printf("Printing at most %d solution(s).\n", maxPrint)
 	fmt.Println()
 
-	count, stats := solveNQueens(n, maxPrint)
+	count, _ := solveNQueens(n, maxPrint)
 
 	fmt.Printf("Total solutions for %d-Queens: %d\n", n, count)
 	renderReason(n)
-	renderChecks(n, count, stats)
-	renderGoAuditDetails(n, maxPrint, count, stats)
 }

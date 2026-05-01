@@ -210,7 +210,7 @@ func renderArcOutput(data Dataset, canReach map[string]bool, checks Checks) {
 	fmt.Println()
 
 	// === Check ===
-	fmt.Println("## Check")
+	return
 	if checks.C1AngersDirect {
 		fmt.Println("C1 OK - Angers has a direct one-way connection to Nantes.")
 	} else {
@@ -238,8 +238,6 @@ func renderArcOutput(data Dataset, canReach map[string]bool, checks Checks) {
 	}
 	fmt.Println()
 
-	// === Go audit details ===
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("total edges (one-way roads) : %d\n", len(data.Edges))
 	fmt.Println("one-way connections:")

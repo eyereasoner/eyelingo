@@ -12,21 +12,14 @@ compute the exact value without overflow, even for
 indices as large as 10000.  
 
 ## Check  
-C1 OK - base cases F(0)=0 and F(1)=1 hold.  
-C2 OK - recurrence holds for all computed steps.  
+C1 OK - base cases F(0)=0 and F(1)=1 hold  
+C2 OK - recurrence holds for all computed steps  
 C3 OK - all requested Fibonacci numbers match expected values:  
-    F(0) = 0  
-    F(1) = 1  
-    F(10) = 55  
-    F(100) = 354224848179261915075  
-    F(1000) = 434665576869374564356885276750 ... 516003704476137795166849228875  
-    F(10000) = 336447648764317832666216120051 ... 171121233066073310059947366875  
-C4 OK - all Fibonacci numbers are non‑negative.  
-C5 OK - the sequence is non‑decreasing from F(2) onward.  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-max computed index : 10000  
-computed F(10000) length : 2090 digits  
-checks passed : 5/5  
-recommendation consistent : yes  
+C4 OK - F(0) = 0  
+C5 OK - F(1) = 1  
+C6 OK - F(10) = 55  
+C7 OK - F(100) = 354224848179261915075  
+C8 OK - F(1000) = 434665576869374564356885276750 ... 516003704476137795166849228875  
+C9 OK - F(10000) = 336447648764317832666216120051 ... 171121233066073310059947366875  
+C10 OK - all Fibonacci numbers are non‑negative  
+C11 OK - the sequence is non‑decreasing from F(2) onward  

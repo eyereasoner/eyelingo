@@ -30,50 +30,13 @@ classification facts derived : 100001 N classes + 200000 side labels + A2 = 3000
 The side labels are not needed for the final A2 proof, but carrying both I and J at every level checks that the whole wide/deep expansion was performed, not just the main N-chain.  
 
 ## Check  
-C1 OK - the starting classification N0 is present.  
-C2 OK - the first expansion produced N1 together with side labels I1 and J1.  
-C3 OK - the chain reaches the midpoint N50000 and still carries both side-label branches.  
-C4 OK - the final taxonomy step from N99999 to N100000 was completed.  
-C5 OK - once N100000 is reached, the terminal class A2 is derived.  
-C6 OK - the success flag is raised only after the terminal class A2 is present.  
-C7 OK - all 100001 N-level classifications are present with no missing level.  
-C8 OK - all 200000 side-label classifications I1..I100000 and J1..J100000 are present.  
-C9 OK - exactly 100000 taxonomy-step rules, one terminal rule, and one success rule fired.  
-C10 OK - a linear scan finds no skipped taxonomy level.  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-source file : deep-taxonomy-100000.n3  
-question : Can one starting individual be classified through 100000 taxonomy levels and trigger A2?  
-taxonomy depth : 100000  
-midpoint depth : 50000  
-source fact assertions : 1  
-source taxonomy-step rules : 100000  
-source terminal rules : 1  
-source success rules : 1  
-source ARC check rules : 6  
-source ARC report rules : 1  
-source total rules counted : 100009  
-bitset words per N/I/J column : 1563  
-N classifications present : 100001  
-I side labels present : 100000  
-J side labels present : 100000  
-A2 present : yes  
-test true : yes  
-expected type facts : 300002  
-actual type facts : 300002  
-agenda pops : 100001  
-step rule tests : 100000  
-step rule applications : 100000  
-terminal rule tests : 1  
-terminal rule applications : 1  
-success rule tests : 1  
-success rule applications : 1  
-new N classes : 100001  
-new I side labels : 100000  
-new J side labels : 100000  
-duplicate assertions ignored : 0  
-max N reached : N100000  
-last agenda item : N100000  
-checks passed : 10/10  
-all checks pass : yes  
+C1 OK - the starting classification N0 is present  
+C2 OK - the first expansion produced N1 together with side labels I1 and J1  
+C3 OK - the chain reaches the midpoint N50000 and still carries both side-label branches  
+C4 OK - the final taxonomy step from N99999 to N100000 was completed  
+C5 OK - once N100000 is reached, the terminal class A2 is derived  
+C6 OK - the success flag is raised only after the terminal class A2 is present  
+C7 OK - all 100001 N-level classifications are present with no missing level  
+C8 OK - all 200000 side-label classifications I1..I100000 and J1..J100000 are present  
+C9 OK - exactly 100000 taxonomy-step rules, one terminal rule, and one success rule fired  
+C10 OK - a linear scan finds no skipped taxonomy level  

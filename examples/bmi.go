@@ -352,7 +352,7 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("## Check")
+	return
 	fmt.Printf("C1 %s\n", chk.C1InputPositiveSI)
 	fmt.Printf("C2 %s\n", chk.C2HeightSquared)
 	fmt.Printf("C3 %s\n", chk.C3BMIMatchesFormula)
@@ -364,8 +364,6 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Printf("C9 %s\n", chk.C9HealthyBand)
 	fmt.Println()
 
-	// --- Go audit details ---
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("unit system : %s\n", data.UnitSystem)
 	fmt.Printf("input weight : %.1f\n", data.Weight)

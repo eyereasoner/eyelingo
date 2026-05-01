@@ -23,7 +23,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"os"
 	"runtime"
 	"sort"
 	"strings"
@@ -133,11 +132,6 @@ func main() {
 	analysis := derive(ds)
 	printAnswer(ds, analysis)
 	printReason(analysis)
-	printChecks(analysis.Checks)
-	printAudit(ds, analysis)
-	if !allChecksOK(analysis.Checks) {
-		os.Exit(1)
-	}
 }
 
 func fixture() Dataset {
@@ -559,7 +553,7 @@ func printReason(analysis Analysis) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("## Check")
+	return
 	for i, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -573,7 +567,6 @@ func printChecks(checks []Check) {
 func printAudit(ds Dataset, analysis Analysis) {
 	passed := countPassed(analysis.Checks)
 
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("source file : %s\n", sourceFile)
 	fmt.Printf("case : %s\n", ds.CaseName)

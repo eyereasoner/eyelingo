@@ -14,12 +14,3 @@ C2 OK - there are 499 even integers from 4 through 1000
 C3 OK - every checked even integer has a prime-pair witness  
 C4 OK - each requested sample even has a witness  
 C5 OK - there are 168 primes at or below 1000  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-question : Check the strong even Goldbach condition for all even integers from 4 through 1000.  
-translated source : goldbach-1000.n3  
-prime cache size : 168  
-even values checked : 499  
-counterexamples found : 0  
-checks passed : 5/5  

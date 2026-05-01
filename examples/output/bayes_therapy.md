@@ -30,32 +30,10 @@ and utility = benefitWeight × expectedSuccess − harmWeight × adverse.
 The recommended therapy is the one with the highest utility.  
 
 ## Check  
-C1 OK - all prior probabilities are in [0,1].  
-C2 OK - all conditional probabilities are in [0,1].  
-C3 OK - all adverse probabilities are in [0,1].  
-C4 OK - all success probabilities are in [0,1].  
-C5 OK - evidence total is non‑zero.  
-C6 OK - number of diseases matches success list length.  
-C7 OK - number of therapies is correct.  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-diseases : 4  
-symptoms : 5  
-therapies : 5  
-evidence items : 5  
-evidence total : 0.01918233  
-posteriors :  
-  COVID19               unnormalized=0.00928200  posterior=0.483883  
-  Influenza             unnormalized=0.00820800  posterior=0.427894  
-  AllergicRhinitis      unnormalized=0.00012825  posterior=0.006686  
-  BacterialPneumonia    unnormalized=0.00156408  posterior=0.081538  
-therapy scores :  
-  Paxlovid              expSucc=0.388517  adverse=0.10  utility=3.585174  
-  Oseltamivir           expSucc=0.285141  adverse=0.08  utility=2.611410  
-  Antihistamine         expSucc=0.100269  adverse=0.03  utility=0.912689  
-  Antibiotic            expSucc=0.110953  adverse=0.07  utility=0.899526  
-  SupportiveCare        expSucc=0.291512  adverse=0.01  utility=2.885120  
-best therapy : Paxlovid  
-checks passed : 7/7  
-recommendation consistent : yes  
+C1 OK - all prior probabilities are in [0,1]  
+C2 OK - all conditional probabilities are in [0,1]  
+C3 OK - all adverse probabilities are in [0,1]  
+C4 OK - all success probabilities are in [0,1]  
+C5 OK - evidence total is non‑zero  
+C6 OK - number of diseases matches success list length  
+C7 OK - number of therapies is correct  

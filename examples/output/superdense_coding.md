@@ -32,18 +32,10 @@ Surviving explanations:
   3 -> 3 because count=1 is odd; all competing counts are even.  
 
 ## Check  
-  OK shared entanglement:     |R) contains exactly |0,0) and |1,1)  
-  OK composition KG:          KG is obtained by composing G then K, exactly as in the N3 rule  
-  OK composition GK:          GK is obtained by composing K then G, exactly as in the N3 rule  
-  OK candidate multiplicity:  the raw superdense rule creates 24 candidate derivations before parity cancellation  
-  OK GF(2) cancellation:      off-diagonal answers occur zero or two times and cancel; diagonal answers occur once  
-  OK decoded messages:        after odd-parity filtering, Bob recovers Alice's original two-bit message  
-  OK encoded supports distinct: the four Alice operations produce four different supports over the two mobits  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-mobit values: 0, 1  
-states      : R={(0,0), (1,1)} S={(0,1), (1,0)} U={(0,0), (1,0), (1,1)} V={(0,0), (0,1), (1,0)}  
-relations   : id={(0,0), (1,1)} G={(0,1), (1,0)} K={(0,0), (1,0), (1,1)} KG={(0,0), (0,1), (1,0)} GK={(0,1), (1,0), (1,1)}  
-raw candidates before cancellation: 24  
-surviving facts after odd-parity filter: 4  
+C1 OK - shared entanglement: |R) contains exactly |0,0) and |1,1)  
+C2 OK - composition KG: KG is obtained by composing G then K, exactly as in the N3 rule  
+C3 OK - composition GK: GK is obtained by composing K then G, exactly as in the N3 rule  
+C4 OK - candidate multiplicity: the raw superdense rule creates 24 candidate derivations before parity cancellation  
+C5 OK - GF(2) cancellation: off-diagonal answers occur zero or two times and cancel; diagonal answers occur once  
+C6 OK - decoded messages: after odd-parity filtering, Bob recovers Alice's original two-bit message  
+C7 OK - encoded supports distinct: the four Alice operations produce four different supports over the two mobits  

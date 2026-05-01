@@ -17,19 +17,10 @@ The posterior for each disease is computed as:
 where for an absent symptom the factor is 1 − P(symptom|d).  
 
 ## Check  
-C1 OK - all prior probabilities are in [0,1].  
-C2 OK - all conditional probabilities are in [0,1].  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-diseases : 4  
-symptoms : 5  
-evidence items : 5  
-evidence total : 0.00164363  
-posteriors :  
-  COVID19               unnormalized=0.00154700  posterior=0.941209  
-  Influenza             unnormalized=0.00004800  posterior=0.029204  
-  AllergicRhinitis      unnormalized=0.00000075  posterior=0.000456  
-  BacterialPneumonia    unnormalized=0.00004788  posterior=0.029131  
-checks passed : 2/2  
-recommendation consistent : yes  
+C1 OK - all prior probabilities are in [0,1]  
+C2 OK - all conditional probabilities are in [0,1]  
+C3 OK - the evidence total is non-zero and reported as the Bayesian normalizing constant  
+C4 OK - COVID19 has the largest posterior probability  
+C5 OK - the posterior distribution contains four diseases  
+C6 OK - absent Sneezing is handled through a complement likelihood factor  
+C7 OK - posterior probabilities are normalized by the evidence total  

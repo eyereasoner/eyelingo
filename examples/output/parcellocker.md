@@ -62,14 +62,3 @@ C2 OK - the same token is denied for billing, redirect, wrong person, wrong lock
 C3 OK - every request matches its expected PERMIT or DENY result  
 C4 OK - single-use state permits the first pickup but rejects reuse  
 C5 OK - billing details stay hidden and parcel redirection remains blocked  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-source file : parcellocker.n3  
-case : parcellocker  
-people : Maya,Noah  
-request count : 6  
-guardrail denials : 5  
-condition passes : 51/60  
-checks passed : 5/5  
-all checks pass : yes  

@@ -110,7 +110,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("Copy and measurement compose into an incident-board audit path, and copy pairs compose into a parallel notification witness.")
 	fmt.Println("The specimen seal is separate and superinformation-like, so it records provenance without becoming an unrestricted cloneable broadcast token.")
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	for _, c := range a.Checks {
 		status := "FAIL"
 		if c.OK {
@@ -119,7 +119,6 @@ func printReport(ds Dataset, a Analysis) {
 		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
 	}
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

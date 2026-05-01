@@ -25,17 +25,3 @@ C6 OK - expected extra exact lookups 83.540 stay below 100.0
 C7 OK - maybe-positive Bloom hits are confirmed against the canonical graph  
 C8 OK - definite Bloom negatives may be returned absent without exact lookup  
 C9 OK - deployment decision is AcceptForHighTrustUse  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : high_trust_bloom_envelope  
-question : Can a high-trust RDF graph artifact use a Bloom prefilter while keeping correctness grounded in exact canonical graph checks?  
-artifact : artifact  
-triple counts : canonical=1200 spoIndex=1200 agreement=true  
-bloom parameters : bits=16384 hashFunctions=7 lambda=0.5126953125  
-certificate : symbol=exp(-k*n/m) certifiedLambda=0.5126953125 expLower=0.5988792348 expUpper=0.5988792349 certified=true  
-fp envelope : lower=0.001670806 upper=0.001670806 budget=0.002 within=true  
-lookup budget : negativeLookups=50000 extraUpper=83.540 budget=100.0 within=true  
-policies : maybePositive=ConfirmAgainstCanonicalGraph definiteNegative=ReturnAbsent  
-checks passed : 9/9  
-decision : AcceptForHighTrustUse  

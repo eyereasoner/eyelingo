@@ -20,14 +20,3 @@ C3 OK - Dijkstra reached HubZ from ClinicA
 C4 OK - selected path is ClinicA -> DepotB -> LabD -> HubZ  
 C5 OK - selected total score is 11.10  
 C6 OK - higher-risk shortcut through DepotC is rejected  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : dijkstra_risk_path  
-question : Which clinic-to-hub route has the lowest risk-adjusted score?  
-start : ClinicA  
-goal : HubZ  
-edges loaded : 8  
-risk weight : 2.00  
-visited nodes : 6  
-checks passed : 6/6  

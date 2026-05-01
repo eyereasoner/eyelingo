@@ -21,14 +21,3 @@ C3 OK - each adjacent transition flips exactly one bit
 C4 OK - the final state wraps to the first with one bit flip  
 C5 OK - first four states match the reflected binary Gray-code prefix  
 C6 OK - the numeric generator is n xor (n >> 1)  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : gray_code_counter  
-question : Does a 4-bit Gray counter visit all states while flipping exactly one bit at each step?  
-bits : 4  
-requested steps : 16  
-unique states : 16  
-adjacent transitions checked : 16  
-wrap hamming distance : 1  
-checks passed : 6/6  

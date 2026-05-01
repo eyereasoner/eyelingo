@@ -45,18 +45,3 @@ C5 OK - 0000 and the nine non-zero repdigits fall to 0000 and are not emitted
 C6 OK - every :kaprekar fact kept by the translation reaches Kaprekar's constant  
 C7 OK - no emitted chain needs more than the seven steps unrolled in the N3 source  
 C8 OK - all 9990 non-repdigit starts are emitted, including 6174 itself  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-source file : kaprekar-6174.n3  
-question : Which four-digit starts have a Kaprekar chain ending at 6174?  
-starts enumerated : 10000  
-optimized step checks : 10000  
-direct step mismatches : 0  
-bounded step applications : 46647  
-emitted kaprekar facts : 9990  
-omitted zero-basin starts : 10  
-max steps to target : 7  
-histogram : 0:1, 1:383, 2:576, 3:2400, 4:1272, 5:1518, 6:1656, 7:2184  
-checks passed : 8/8  
-all checks pass : yes  

@@ -276,7 +276,7 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("## Check")
+	return
 	if checks.Perpendicular {
 		fmt.Println("C1 OK - L1 is perpendicular to L3 and L4 (slopes product ≈ -1).")
 	} else {
@@ -304,8 +304,6 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 	}
 	fmt.Println()
 
-	// --- Go audit details ---
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("input points : p1(%.1f, %.1f) p2(%.1f, %.1f) p3(%.1f, %.1f) p4(%.1f, %.1f)\n",
 		res.Input.P1x, res.Input.P1y,

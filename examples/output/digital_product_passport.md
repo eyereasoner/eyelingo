@@ -35,18 +35,3 @@ C7 OK - public section contains user manual, repair guide, and spare-parts catal
 C8 OK - restricted declarations stay in the restricted section  
 C9 OK - manufacturing, sale, and repair events are chronologically consistent  
 C10 OK - passport endpoint matches the product digital link  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : digital_product_passport  
-question : Can the public Digital Product Passport for a smartphone expose useful circularity and footprint indicators while keeping restricted conformity and substance declarations scoped to auditors?  
-passport : Passport-ACME-X1000-SN123 version=1.0 issued=2026-02-10 endpoint=https://example.org/dpp/ACME-X1000-SN123  
-product : ACME-X1000-SN123 model=ACME X1000 serial=SN123 batch=BATCH-2026-01 category=Smartphone  
-manufacturer : AcmeElectronics (Acme Electronics NV, BE) site=FactoryBE01  
-components : 3 totalMassG=105 recycledMassG=14 recycledPct=13%  
-critical raw materials : Cobalt, Lithium  
-documents : public=3 restricted=2  
-lifecycle events : 3 latest=Event-Repair-01 RepairEvent 2026-02-05  
-footprint : manufacturing=32000 transport=2500 use=18000 total=52500  
-checks passed : 10/10  
-decision : PASS  

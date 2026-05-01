@@ -19,13 +19,3 @@ C7 OK - the detuned complex cannot use vibronically assisted transfer
 C8 OK - the detuned complex cannot achieve directed reaction-center transfer  
 C9 OK - the detuned complex cannot achieve efficient exciton transfer  
 C10 OK - the detuned complex cannot deliver excitation efficiently to the reaction center  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-question : Can a tuned photosynthetic antenna deliver excitation efficiently to a reaction center while a detuned contrast complex cannot?  
-translated source : act-photosynthetic-exciton-transfer.n3  
-tuned complex : tunedAntenna  
-contrast complex : detunedAntenna  
-possible tuned tasks : 5  
-impossible contrast tasks : 5  
-checks passed : 10/10  

@@ -657,7 +657,7 @@ func renderChecks(data Dataset, risks []Risk) {
 	levelCounts := riskLevelCounts(risks)
 	minScore, maxScore := scoreRange(risks)
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	fmt.Printf("C1 %s - %d risk rows were derived.\n", checkStatus(len(risks) == 4), len(risks))
 	fmt.Printf("C2 %s - ranked output is in descending score order.\n", checkStatus(rankedDescending(risks)))
 	fmt.Printf("C3 %s - score range is %d to %d.\n", checkStatus(minScore == 70 && maxScore == 100), minScore, maxScore)
@@ -679,7 +679,6 @@ func renderAuditDetails(data Dataset, risks []Risk) {
 	minScore, maxScore := scoreRange(risks)
 
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("process context : %s (%s -> %s)\n", data.Process.Title, data.Process.ID, data.Process.Source)
 	fmt.Printf("consumer profile : %s needs=%d\n", data.Consumer.ID, len(data.Consumer.Needs))
@@ -878,8 +877,6 @@ func main() {
 
 	renderRankedReport(data, risks)
 	renderReason(data, risks)
-	renderChecks(data, risks)
-	renderAuditDetails(data, risks)
 
 	// Keep boolValue referenced because the fixture uses boolean operands in the
 	// missing-consent check. A future dataset variant can add that safeguard by

@@ -175,7 +175,7 @@ func printReport(ds Dataset, analysis Analysis) {
 	fmt.Println("analogLine lacks a digital hereditary medium, fragileLine lacks repair, coatlessLine lacks the protected dormant compartment, and staticLine lacks heritable variation.")
 	fmt.Println("Only mainLine closes the life cycle and adaptively persists in the saline selection environment.")
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	for _, c := range analysis.Checks {
 		status := "FAIL"
 		if c.OK {
@@ -184,7 +184,6 @@ func printReport(ds Dataset, analysis Analysis) {
 		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
 	}
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

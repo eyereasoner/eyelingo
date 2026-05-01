@@ -83,20 +83,3 @@ C5 OK - no two philosophers eat with the same fork in the same round
 C6 OK - the end-of-round state makes every fork Dirty again, matching the trace model  
 C7 OK - the final ownership is F12,F23 with P2; F34 with P4; F45,F51 with P5  
 C8 OK - each of the nine rounds used request, transfer, and meal goroutine batches  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-source file : dining-philosophers.n3  
-question : Can five philosophers complete a Chandy-Misra trace where each eats three times?  
-philosophers : P1,P2,P3,P4,P5  
-forks : F12,F23,F34,F45,F51  
-rounds run : 9  
-requests derived : 26  
-transfers sent : 26  
-keep fork facts : 19  
-meals derived : 15  
-goroutine phase batches : 27  
-meal counts : P1:3, P2:3, P3:3, P4:3, P5:3  
-final state : F12=P2/Dirty, F23=P2/Dirty, F34=P4/Dirty, F45=P5/Dirty, F51=P5/Dirty  
-checks passed : 8/8  
-all checks pass : yes  

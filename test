@@ -45,6 +45,12 @@ if ! command -v go >/dev/null 2>&1; then
   exit 127
 fi
 
+PYTHON=${PYTHON:-python3}
+if ! command -v "$PYTHON" >/dev/null 2>&1; then
+  printf '%s python3 not found\n' "$(fail)" >&2
+  exit 127
+fi
+
 mkdir -p "$OUTPUT_DIR"
 TMPDIR=$(mktemp -d "${TMPDIR:-/tmp}/eyelingo-test.XXXXXX")
 trap 'rm -rf "$TMPDIR"' EXIT
@@ -89,21 +95,35 @@ run_example() {
   local file=$1
   local name=${file%.go}
   local expected="$OUTPUT_DIR/$name.md"
+  local raw="$TMPDIR/$name.go.md"
   local actual="$TMPDIR/$name.md"
   local actual_norm="$TMPDIR/$name.actual.norm"
   local expected_norm="$TMPDIR/$name.expected.norm"
   local diff_file="$TMPDIR/$name.diff"
 
-  local start end elapsed_ms status
+  local start end elapsed_ms status phase
   start=$(now_ms)
-  if (cd "$ROOT" && go run "./examples/$file") > "$actual" 2>&1; then
-    status=0
+  phase="go"
+  if (cd "$ROOT" && go run "./examples/$file") > "$raw" 2>&1; then
+    phase="python"
+    if (cd "$ROOT" && "$PYTHON" "$ROOT/tools/build_output.py" "$name" "$raw") > "$actual" 2>&1; then
+      status=0
+    else
+      status=$?
+    fi
   else
     status=$?
+    cp "$raw" "$actual"
   fi
   end=$(now_ms)
   elapsed_ms=$(( end - start ))
   total_ms=$(( total_ms + elapsed_ms ))
+
+  if [ $status -ne 0 ] && [ "$phase" = "python" ]; then
+    printf '%s %-*s %6sms Python Check failed\n' "$(fail)" "$name_width" "$name" "$elapsed_ms"
+    sed 's/^/  /' "$actual"
+    return 1
+  fi
 
   if [ $UPDATE -eq 1 ] && [ $status -eq 0 ]; then
     markdown_hardbreaks < "$actual" > "$expected"

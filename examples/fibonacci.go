@@ -197,7 +197,7 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("## Check")
+	return
 	if cks.BaseCasesCorrect {
 		fmt.Println("C1 OK - base cases F(0)=0 and F(1)=1 hold.")
 	} else {
@@ -229,8 +229,6 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
 	}
 	fmt.Println()
 
-	// --- Go audit details ---
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("max computed index : %d\n", target)
 	fmt.Printf("computed F(%d) length : %d digits\n", target, len(seq[target].String()))

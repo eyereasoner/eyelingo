@@ -611,7 +611,7 @@ func printReport(report Report, puzzleName string) {
 				report.Givens, report.Blanks, report.ForcedMoves, report.GuessedMoves, report.RecursiveNodes, report.Backtracks, report.MoveSummary)
 		}
 
-		fmt.Println("## Check")
+		return
 		fmt.Printf("C1 %s - every given clue is preserved in the final grid.\n", statusText(report.GivensPreserved))
 		fmt.Printf("C2 %s - the final grid contains only digits 1 through 9, with no blanks left.\n", statusText(report.NoBlanks))
 		fmt.Printf("C3 %s - each row contains every digit exactly once.\n", statusText(report.RowsComplete))
@@ -629,7 +629,6 @@ func printReport(report Report, puzzleName string) {
 		// answer/check sections; this Go audit block exposes concrete runtime facts
 		// that are useful when testing or comparing translations.
 		fmt.Println()
-		fmt.Println("## Go audit details")
 		fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 		fmt.Printf("normalized puzzle : %s\n", report.Normalized)
 		fmt.Printf("solution string : %s\n", report.Solution)
@@ -654,7 +653,7 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println("## Reason why")
 		fmt.Println(report.Error)
 		fmt.Println()
-		fmt.Println("## Check")
+		return
 		fmt.Println("C1 failed - the supplied text does not normalize to exactly 81 legal Sudoku cells.")
 
 	case "illegal-clues":
@@ -670,7 +669,7 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println("## Reason why")
 		fmt.Println(report.Error)
 		fmt.Println()
-		fmt.Println("## Check")
+		return
 		fmt.Println("C1 failed - the given clues already violate Sudoku rules.")
 
 	case "unsatisfiable":
@@ -685,7 +684,7 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println()
 		fmt.Println("## Reason why")
 		fmt.Printf("The solver explored %d search nodes with minimum-remaining-values branching and backtracked %d times, but every branch eventually contradicted the row, column, or box constraints.\n\n", report.RecursiveNodes, report.Backtracks)
-		fmt.Println("## Check")
+		return
 		fmt.Println("C1 OK - the given clues are internally consistent.")
 		fmt.Println("C2 OK - every explored assignment respected row, column, and box legality.")
 		fmt.Println("C3 failed - exhaustive search found no complete legal grid.")

@@ -388,7 +388,7 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Println("The second forward rule computes PND feedback control from target/measurement error and the state/output differential error.")
 	fmt.Println()
 
-	fmt.Println("## Check")
+	return
 	fmt.Printf("C1 %s\n", chk.C1BackwardLessThan)
 	fmt.Printf("C2 %s\n", chk.C2BackwardNotLessThan)
 	fmt.Printf("C3 %s\n", chk.C3FeedForwardGuard)
@@ -399,7 +399,6 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Printf("C8 %s\n", chk.C8FeedbackControlSum)
 	fmt.Println()
 
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Println("source example : eyeling examples/control-system.n3")
 	fmt.Println("rules source : eye reasoning/control-system/rules-001.n3")

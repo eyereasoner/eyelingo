@@ -20,13 +20,3 @@ C2 OK - computed real part is close to -1
 C3 OK - computed imaginary part is close to 0  
 C4 OK - |exp(iπ)+1| is below the configured tolerance  
 C5 OK - the audit records the finite residual rather than asserting exact real arithmetic  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : euler_identity_certificate  
-question : Does a finite complex calculation certify the Euler identity residual within tolerance?  
-angle radians : 3.141592653589793  
-terms : 28  
-tolerance : 1.0e-12  
-residual : 2.628e-16  
-checks passed : 5/5  

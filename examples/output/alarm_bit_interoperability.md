@@ -21,17 +21,3 @@ C4 OK - each classical medium supports a local permutation
 C5 OK - quantumToken cannot be universally cloned  
 C6 OK - unrestricted classical-style fan-out is blocked for the superinformation token  
 C7 OK - CAN=YES and CANNOT=NO decisions are both derived  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : alarm_bit_interoperability  
-question : Can the harbor alarm bit be copied between unlike classical media, and what exactly cannot be done for a superinformation-like token?  
-classical media : 2  
-medium : name=opticalBeacon variable=AlarmBit zero=BlueLamp one=RedLamp  
-medium : name=relayRegister variable=AlarmBit zero=LowVoltage one=HighVoltage  
-superinformation medium : name=quantumToken variable=PolarizationVariable states=Horizontal,Vertical,Diagonal,AntiDiagonal  
-local permutations : opticalBeacon, relayRegister  
-copy tasks : 2  
-impossible task types : CloneAllStates  
-cannot states : UniversalClone, UnrestrictedStateFanOut  
-checks passed : 7/7  

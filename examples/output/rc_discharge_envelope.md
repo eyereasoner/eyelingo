@@ -20,15 +20,3 @@ C3 OK - step 12 remains above the voltage tolerance
 C4 OK - step 13 is the first certified discharge step  
 C5 OK - settling time is 0.325 s  
 C6 OK - the certificate uses the JSON double interval rather than an exact transcendental value  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : rc_discharge_envelope  
-question : When is a sampled RC capacitor guaranteed below the voltage tolerance using a double decay certificate?  
-sample period : 0.025 s  
-time constant : 0.100 s  
-max step : 18  
-initial voltage : 24.000 V  
-tolerance : 1.000 V  
-envelope rows : 19  
-checks passed : 6/6  

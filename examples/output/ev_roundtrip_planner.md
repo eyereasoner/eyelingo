@@ -31,22 +31,3 @@ C4 OK - selected plan belief 0.974175 is above 0.93
 C5 OK - selected plan reaches Cologne  
 C6 OK - selected plan uses the high-belief Aachen-Cologne shuttle for the last mile  
 C7 OK - bounded search consumed at most 8 of 8 fuel tokens  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : ev_roundtrip_planner  
-question : Which bounded EV journey from Brussels to Cologne satisfies the reliability, cost, and duration thresholds?  
-vehicle : car1 start=Brussels battery=high pass=none  
-goal : at=Cologne battery=* pass=*  
-thresholds : minBelief=0.93 maxCost=0.090 maxDuration=260.0 fuel=8  
-actions : 12  
-acceptable plans : 8  
-selected final state : Cologne battery=low pass=none  
-selected actions : drive_bru_liege -> drive_liege_aachen -> shuttle_aachen_cologne  
-selected metrics : duration=210.0 cost=0.054 belief=0.974175 comfort=0.898320 fuelRemaining=5  
-search recursive calls : 30  
-search action tests : 240  
-search actions taken : 29  
-search state prunes : 3  
-search max depth : 8  
-checks passed : 7/7  

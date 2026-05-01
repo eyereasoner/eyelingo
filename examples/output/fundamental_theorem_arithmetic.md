@@ -45,26 +45,3 @@ C3 OK - multiplying each computed factor list reconstructs its original number
 C4 OK - every distinct factor in every decomposition is prime by trial division  
 C5 OK - smallest-first and largest-first traversals sort to the same multisets  
 C6 OK - the extended sample includes six cases and includes the ten-digit prime 9999999967  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-source file : fundamental-theorem-arithmetic.n3  
-question : What are the prime factorizations, and are they unique up to order?  
-primary n : 202692987  
-primary smallest-first factors : 3,3,7,829,3881  
-primary largest-first factors : 3881,829,7,3,3  
-primary flat factor string : 3 * 3 * 7 * 829 * 3881  
-primary prime-power string : 3^2 * 7 * 829 * 3881  
-expected flat string : 3 * 3 * 7 * 829 * 3881  
-expected largest-first string : 3881 * 829 * 7 * 3 * 3  
-sample numbers : 360360,202692987,4294967295,600851475143,9876543210,9999999967  
-sample count : 6  
-largest sample : 600851475143  
-total prime factors counted with multiplicity : 31  
-distinct primes seen across samples : 17  
-smallest-divisor searches : 31  
-divisibility tests : 104580  
-primality checks : 25  
-prime-divisor tests : 50580  
-checks passed : 6/6  
-all checks pass : yes  

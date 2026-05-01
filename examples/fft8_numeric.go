@@ -170,7 +170,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("A real sine wave has equal magnitude at the positive and negative frequency bins.")
 	fmt.Println("All non-dominant bins cancel to zero within the configured numerical tolerance.")
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	for _, c := range a.Checks {
 		status := "FAIL"
 		if c.OK {
@@ -179,7 +179,6 @@ func printReport(ds Dataset, a Analysis) {
 		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
 	}
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

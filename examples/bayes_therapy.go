@@ -442,7 +442,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Check ---
-	fmt.Println("## Check")
+	return
 	if checks.PriorsInRange {
 		fmt.Println("C1 OK - all prior probabilities are in [0,1].")
 	} else {
@@ -480,8 +480,6 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	}
 	fmt.Println()
 
-	// --- Go audit details ---
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("diseases : %d\n", len(data.Diseases))
 	fmt.Printf("symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))

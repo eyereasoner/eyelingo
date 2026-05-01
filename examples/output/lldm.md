@@ -21,23 +21,8 @@ dCm = d53 − d64 is the leg-length discrepancy.  An alarm fires when
 |dCm| > 1.25 cm.  
 
 ## Check  
-C1 OK - L1 is perpendicular to L3 and L4 (slopes product ≈ -1).  
-C2 OK - p5 lies on both L1 and L3.  
-C3 OK - p6 lies on both L1 and L4.  
-C4 OK - squared distances are non‑negative.  
-C5 OK - dCm is a finite number.  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-input points : p1(10.1, 7.8) p2(45.1, 5.6) p3(3.6, 29.8) p4(54.7, 28.5)  
-cL1 (slope L1)          : -0.06285714  
-cL3 (slope L3, L4)      : 15.90909091  
-p5 (x, y)               : 2.24816562, 8.29354388  
-p6 (x, y)               : 53.22845573, 5.08906850  
-d53                     : 21.54890046 cm  
-d64                     : 23.45713445 cm  
-dCm (LL discrepancy)    : -1.90823398 cm  
-alarm threshold         : ±1.25 cm  
-LLD alarm               : true  
-checks passed           : 5/5  
-recommendation consistent : yes  
+C1 OK - L1 is perpendicular to L3 and L4 (slopes product ≈ -1)  
+C2 OK - p5 lies on both L1 and L3  
+C3 OK - p6 lies on both L1 and L4  
+C4 OK - squared distances are non‑negative  
+C5 OK - dCm is a finite number  

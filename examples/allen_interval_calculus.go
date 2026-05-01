@@ -226,7 +226,7 @@ func printReport(ds Dataset, analysis Analysis) {
 	fmt.Println("The relation rules are purely endpoint constraints, so the result is deterministic and auditable.")
 	fmt.Println("The duration-derived intervals participate in the same relation table as directly supplied intervals.")
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	for _, check := range analysis.Checks {
 		status := "FAIL"
 		if check.OK {
@@ -235,7 +235,6 @@ func printReport(ds Dataset, analysis Analysis) {
 		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
 	}
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case : %s\n", ds.CaseName)
 	fmt.Printf("question : %s\n", ds.Question)

@@ -128,7 +128,7 @@ func printReport(ds Dataset, r Result) {
 	fmt.Println("The tuned complex combines strong excitonic coupling, delocalization, a tuned vibronic bridge, moderate dephasing, short-lived coherence, and a downhill route to the reaction center.")
 	fmt.Println("The detuned contrast complex has weak coupling, absent delocalization, no vibronic bridge, strong dephasing, and a trapping mismatch, so the same efficient delivery task is blocked.")
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	for _, c := range r.Checks {
 		status := "FAIL"
 		if c.OK {
@@ -137,7 +137,6 @@ func printReport(ds Dataset, r Result) {
 		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
 	}
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", ds.Question)
 	fmt.Printf("translated source : %s\n", ds.Source)

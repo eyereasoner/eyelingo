@@ -19,13 +19,3 @@ C3 OK - the DC component is zero
 C4 OK - the two conjugate sine bins have magnitude 4  
 C5 OK - Parseval energy is preserved by the unnormalized DFT convention  
 C6 OK - real-valued samples produce conjugate-symmetric bins  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : fft8-numeric  
-question : Compute the dominant DFT bins for an 8-sample sine wave.  
-sample count : 8  
-tolerance : 1.0e-09  
-bins evaluated : 8  
-dominant bin count : 2  
-checks passed : 6/6  

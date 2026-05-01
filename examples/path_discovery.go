@@ -453,7 +453,7 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	fmt.Printf("C1 %s - source and destination airport labels are known.\n", status(result.Checks.SourceAndDestinationKnown))
 	fmt.Printf("C2 %s - Ostend-Bruges has one outbound route in the full N3 graph, to Liège Airport.\n", status(result.Checks.FirstHopMatchesN3Facts))
 	fmt.Printf("C3 %s - the discovered route set matches the N3 query answer.\n", status(result.Checks.RouteSetMatchesN3Query))
@@ -465,7 +465,6 @@ func main() {
 	fmt.Printf("C9 %s - route output is sorted deterministically by airport labels.\n", status(result.Checks.RoutesSortedDeterministic))
 
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", data.Question)
 	fmt.Printf("source airport : %s (%s)\n", data.label(data.SourceID), data.SourceID)

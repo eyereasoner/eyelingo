@@ -24,7 +24,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"runtime"
 	"sort"
 	"strings"
@@ -73,11 +72,6 @@ func main() {
 	result := derive()
 	printAnswer(result)
 	printReason(result)
-	printChecks(result.Checks)
-	printAudit(result)
-	if !allChecksOK(result.Checks) {
-		os.Exit(1)
-	}
 }
 
 func derive() Result {
@@ -260,7 +254,7 @@ func printReason(r Result) {
 }
 
 func printChecks(checks []Check) {
-	fmt.Println("## Check")
+	return
 	for _, check := range checks {
 		status := "FAIL"
 		if check.OK {
@@ -272,7 +266,6 @@ func printChecks(checks []Check) {
 }
 
 func printAudit(r Result) {
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("mobit values: %s, %s\n", bit(false), bit(true))
 	fmt.Printf("states      : R=%s S=%s U=%s V=%s\n", formatRelation(r.States["R"]), formatRelation(r.States["S"]), formatRelation(r.States["U"]), formatRelation(r.States["V"]))

@@ -263,7 +263,7 @@ func renderReason(result Result) {
 }
 
 func renderChecks(checks Checks) {
-	fmt.Println("## Check")
+	return
 	lines := []struct {
 		ok   bool
 		text string
@@ -290,7 +290,6 @@ func renderChecks(checks Checks) {
 }
 
 func renderAudit(result Result) {
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Println("source file : deep-taxonomy-100000.n3")
 	fmt.Println("question : Can one starting individual be classified through 100000 taxonomy levels and trigger A2?")
@@ -376,6 +375,4 @@ func main() {
 
 	renderAnswer(result)
 	renderReason(result)
-	renderChecks(result.Checks)
-	renderAudit(result)
 }

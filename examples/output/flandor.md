@@ -51,16 +51,3 @@ C10 OK - the recommended package covers all active needs
 C11 OK - the lowest-cost eligible package is chosen  
 C12 OK - the expected six files are recorded as written  
 C13 OK - all source-level policy, scope, signature, and package checks pass  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-source file : flandor.n3  
-case : flandor  
-policy profile : Flandor-Insight-Policy  
-packages : 4  
-active needs : 3/3  
-recommended package id : pkg:RET_FLEX_120  
-files written : 6/6  
-audit entries : 1  
-checks passed : 13/13  
-all checks pass : yes  

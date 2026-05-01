@@ -18,14 +18,3 @@ C3 OK - home programming conflict resolves to Permit
 C4 OK - office programming request keeps both Permit and Deny before resolution  
 C5 OK - office programming conflict resolves to Deny  
 C6 OK - overall work decision is RemoteWorkOnly  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : doctor_advice_work_conflict  
-question : When doctor advice conflicts with a sick-work policy, should Jos work at home, in the office, or not at all?  
-person : Jos condition=Flu health=Sick  
-doctor can do jobs : ProgrammingWork  
-requests evaluated : 2  
-decision trace : id=Request_Jos_Prog_Home job=ProgrammingWork location=Home raw=Deny+Permit status=BothPermitDeny effective=Permit reasons=doctor statement permits the requested job; general sick-work policy denies work  
-decision trace : id=Request_Jos_Prog_Office job=ProgrammingWork location=Office raw=Deny+Permit status=BothPermitDeny effective=Deny reasons=doctor statement permits the requested job; general sick-work policy denies work; office policy denies work to avoid infecting colleagues  
-checks passed : 6/6  

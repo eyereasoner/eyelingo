@@ -54,16 +54,3 @@ C10 OK - the lowest-cost eligible package is chosen
 C11 OK - the deletion duty is scheduled before expiry  
 C12 OK - reuse for tenant screening is prohibited  
 C13 OK - all source-level policy, scope, signature, and package checks pass  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-source file : calidor.n3  
-case : calidor  
-policy profile : Calidor-Heatwave-Policy  
-packages : 4  
-required capabilities : 4  
-active needs : 4/3  
-recommended package id : pkg:BUNDLE  
-dispatches logged : 1  
-checks passed : 13/13  
-all checks pass : yes  

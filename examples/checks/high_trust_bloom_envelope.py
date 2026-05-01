@@ -1,0 +1,17 @@
+# Independent Python checks for the high_trust_bloom_envelope example.
+from .common import run_fragment_checks
+
+CHECKS = [
+    ('numeric Bloom and workload parameters are positive', ['The Bloom prefilter has n=1200 triples, m=16384 bits, and k=7 hash functions, giving lambda 0.5126953125.']),
+    ('canonical graph and SPO index agree on 1200 triples', ['The canonical graph and the SPO index have the same triple count, so exact membership remains grounded in the graph snapshot.']),
+    ('derived lambda 0.5126953125 matches the certified lambda', ['lambda : 0.5126953125']),
+    ('decimal interval 0.5988792348..0.5988792349 is a valid exp(-lambda) certificate', ['Instead of asking the engine to know exp(-k*n/m) exactly, the input carries a decimal interval certificate for exp(-lambda).']),
+    ('false-positive upper bound 0.001670806 is below 0.002', ['That certificate bounds (1-exp(-lambda))^k below the 0.002 false-positive budget and keeps extra exact confirmations below 100.0.']),
+    ('expected extra exact lookups 83.540 stay below 100.0', ['expected extra exact lookups upper : 83.540 per 50000 negative lookups']),
+    ('maybe-positive Bloom hits are confirmed against the canonical graph', ['Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.']),
+    ('definite Bloom negatives may be returned absent without exact lookup', ['false-positive envelope : 0.001670806 .. 0.001670806']),
+    ('deployment decision is AcceptForHighTrustUse', ['Deployment decision : AcceptForHighTrustUse for artifact.']),
+]
+
+def run(ctx):
+    return run_fragment_checks(ctx, CHECKS)

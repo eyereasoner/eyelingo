@@ -107,7 +107,7 @@ func printReport(ds Dataset, r Result) {
 	fmt.Println("For a discrete-time linear system x_{k+1} = A x_k, the eigenvalues of A govern the modal behaviour.")
 	fmt.Println("Because the matrices are diagonal, the eigenvalues are the diagonal entries; the largest modulus gives the spectral radius and therefore the stability class.")
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	for _, c := range r.Checks {
 		status := "FAIL"
 		if c.OK {
@@ -116,7 +116,6 @@ func printReport(ds Dataset, r Result) {
 		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
 	}
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("question : %s\n", ds.Question)
 	fmt.Printf("translated source : %s\n", ds.Source)

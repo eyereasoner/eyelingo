@@ -89,15 +89,3 @@ C4 OK - insurance management is denied by a matching prohibition
 C5 OK - research is allowed only with patient opt-in and anonymisation in the secure environment  
 C6 OK - AI training is denied because the subject opted out  
 C7 OK - four scenarios are permitted and three are denied  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-source file : auroracare.n3  
-case : auroracare  
-scenario count : 7  
-policy count : 4  
-policy uids : urn:policy:deny-insurance,urn:policy:primary-care-001,urn:policy:qi-2025-aurora,urn:policy:research-aurora-diabetes  
-permit count : 4  
-deny count : 3  
-checks passed : 7/7  
-all checks pass : yes  

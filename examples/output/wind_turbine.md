@@ -20,14 +20,3 @@ C3 OK - two intervals reach rated power
 C4 OK - two intervals are stopped by low or cut-out wind  
 C5 OK - a below-rated usable wind speed follows the cubic power curve  
 C6 OK - the six ten-minute samples yield about 1.57 MWh  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : wind-turbine  
-question : Classify wind-speed samples against a turbine envelope and compute interval energy.  
-samples evaluated : 6  
-interval minutes : 10.0  
-partial intervals : 2  
-rated intervals : 2  
-stopped intervals : 2  
-checks passed : 6/6  

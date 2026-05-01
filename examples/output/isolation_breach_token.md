@@ -23,17 +23,3 @@ C6 OK - doorBeacon -> containmentPLC -> incidentBoard is a serial audit network
 C7 OK - containmentPLC can fan out to nursePager and incidentBoard  
 C8 OK - specimenSeal cannot universally clone all provenance states  
 C9 OK - specimenSeal blocks unrestricted parallel fan-out  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-case : isolation_breach_token  
-question : Can an isolation-breach token be prepared, copied, measured, and audited while a specimen seal blocks unrestricted fan-out?  
-classical media : 4  
-prepare tasks : 8  
-permutation tasks : 8  
-copy tasks : 12  
-measure tasks : 16  
-serial networks : 48  
-parallel networks : 24  
-impossible tasks : 2  
-checks passed : 9/9  

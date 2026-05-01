@@ -23,14 +23,3 @@ C4 OK - Parseval energy is preserved for every waveform under the unnormalized D
 C5 OK - real-valued waveforms produce conjugate-symmetric spectra  
 C6 OK - the impulse waveform has a flat unit-magnitude spectrum  
 C7 OK - the full spectrum is computed once per waveform  
-
-## Go audit details  
-platform : go1.23.2 linux/amd64  
-case : fft32-numeric  
-source example : fft32-numeric.n3  
-question : Compute whole 32-point FFT spectra for several waveform fixtures and certify their dominant bins.  
-sample count per waveform : 32  
-waveform count : 6  
-complex bin sums : 6144  
-tolerance : 1.0e-08  
-checks passed : 7/7  

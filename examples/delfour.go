@@ -573,7 +573,7 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	fmt.Printf("bus files written : %d\n", data.Case.FilesWritten)
 
 	fmt.Println()
-	fmt.Println("## Check")
+	return
 	fmt.Printf("signature verifies : %s\n", yesNo(result.Checks.SignatureVerifies))
 	fmt.Printf("payload hash matches : %s\n", yesNo(result.Checks.PayloadHashMatches))
 	fmt.Printf("minimization strips sensitive terms: %s\n", yesNo(result.Checks.MinimizationStripsSensitiveTerms))
@@ -584,7 +584,6 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	fmt.Printf("duty timing consistent : %s\n", yesNo(result.Checks.DutyTimingConsistent))
 	fmt.Printf("marketing prohibited : %s\n", yesNo(result.Checks.MarketingProhibited))
 
-	renderGoAuditDetails(data, result)
 }
 
 // renderGoAuditDetails prints Go-side diagnostics that are not part of the N3
@@ -596,7 +595,6 @@ func renderGoAuditDetails(data Dataset, result InferenceResult) {
 	sugarDropTenths := result.Scanned.SugarTenths - result.SuggestedAlternative.SugarTenths
 
 	fmt.Println()
-	fmt.Println("## Go audit details")
 	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("case facts : case=%s requestAction=%s requestPurpose=%s\n", data.Case.CaseName, data.Case.RequestAction, data.Case.RequestPurpose)
 	fmt.Printf("catalog products : %d\n", len(data.Products))

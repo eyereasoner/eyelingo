@@ -19,13 +19,3 @@ C7 OK - the gravitational mediator is derived to be non-classical
 C8 OK - a purely classical mediator model is ruled out by the positive run  
 C9 OK - the contrast run is also mediator-only  
 C10 OK - the purely classical contrast mediator cannot support the witness  
-
-## Go audit details  
-platform : go1.26.2 linux/amd64  
-question : If two quantum sensors become entangled only through a gravitational mediator while locality and interoperability hold, what can be concluded?  
-translated source : act-gravity-mediator-witness.n3  
-positive run : run via gravityMediator  
-contrast run : contrastRun via classicalGravityMediator  
-positive conclusion derived : true  
-contrast block derived : true  
-checks passed : 10/10  
