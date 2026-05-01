@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Callable, Iterable
 
 
 class CheckContext:
@@ -49,9 +50,19 @@ def check_line(ok: bool, index: int, description: str) -> str:
     return f"C{index} {'OK' if ok else 'FAIL'} - {description}"
 
 
+def run_checks(specs: Iterable[tuple[str, bool]]) -> tuple[bool, list[str]]:
+    lines = []
+    all_ok = True
+    for index, (description, ok) in enumerate(specs, 1):
+        ok = bool(ok)
+        lines.append(check_line(ok, index, description))
+        all_ok = all_ok and ok
+    return all_ok, lines
+
+
 def run_fragment_checks(ctx: CheckContext, specs):
-    # Parse the independent JSON input for every example before checking the
-    # answer/reason evidence emitted by the Go program.
+    # Legacy helper used by examples that have not yet been upgraded to a
+    # domain-specific Python verifier.
     ctx.load_input()
     lines = []
     all_ok = True

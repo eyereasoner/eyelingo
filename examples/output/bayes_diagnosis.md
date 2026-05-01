@@ -14,13 +14,16 @@ Evidence: Fever=present, DryCough=present, LossOfSmell=present, Sneezing=absent,
 Evidence total (normalizing constant) = 0.00164363.  
 The posterior for each disease is computed as:  
   posterior(d) = prior(d) × ∏ P(symptom|d) / evidenceTotal  
-where for an absent symptom the factor is 1 − P(symptom|d).  
+where for an absent symptom the factor is 1 − P(symptom|d).
 
-## Check  
-C1 OK - all prior probabilities are in [0,1]  
-C2 OK - all conditional probabilities are in [0,1]  
-C3 OK - the evidence total is non-zero and reported as the Bayesian normalizing constant  
-C4 OK - COVID19 has the largest posterior probability  
-C5 OK - the posterior distribution contains four diseases  
-C6 OK - absent Sneezing is handled through a complement likelihood factor  
-C7 OK - posterior probabilities are normalized by the evidence total  
+## Check
+C1 OK - all priors are probabilities and the prior mass is less than one
+C2 OK - every conditional probability is in [0, 1]
+C3 OK - all evidence symptoms are available for every disease
+C4 OK - the absent Sneezing evidence uses the complement likelihood
+C5 OK - the Bayesian normalizing constant is recomputed independently
+C6 OK - the reported distribution contains one posterior for each disease
+C7 OK - each reported unnormalized likelihood matches the Python recomputation
+C8 OK - each reported posterior matches likelihood divided by evidence total
+C9 OK - the reported posteriors sum to one after rounding
+C10 OK - COVID19 is independently selected as the maximum-posterior disease
