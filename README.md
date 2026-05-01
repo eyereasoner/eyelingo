@@ -8,8 +8,6 @@ Reason
 Check
 ```
 
-As suggested by Prof. Ruben Verborgh, the key design point is that `Check` is **not** produced by Go. Go computes and explains the answer; Python independently verifies it and appends the visible `## Check` section during testing.
-
 ## Quick start
 
 Run the full regression suite:
@@ -85,6 +83,8 @@ The snapshot under test is therefore:
 Go title + Answer + Reason
 + Python-generated Check
 ```
+
+Following a design suggestion by Prof. Ruben Verborgh, the `Check` section is deliberately not produced by Go. Go computes and explains the answer; Python independently verifies it and appends the visible `## Check` section during testing.
 
 This separation prevents the checks from calling Go helper functions or reusing Go intermediate state from the answer path. Shared Python helper code lives in `examples/checks/common.py`; substantive checks are implemented in the per-example modules.
 
