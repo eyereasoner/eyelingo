@@ -12,7 +12,6 @@
 //
 // This program is intentionally not a generic RDF, ODRL, crypto, or N3 reasoner.
 // It translates the concrete facts and rules for this one example into ordinary
-// Go structs and checks. That keeps the privacy pattern visible: raw signals stay
 // local, while a minimal decision object is shared for a specific public-service
 // purpose.
 //
@@ -26,7 +25,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 	"time"
@@ -498,32 +496,6 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Printf("reason.txt : %s\n", ds.ReasonText)
 	fmt.Printf("dispatches logged : %d\n", ds.DispatchesLogged)
 	fmt.Println()
-}
-
-func printChecks(checks []Check) {
-	return
-	for _, check := range checks {
-		fmt.Printf("%s %s - %s\n", check.Label, okText(check.OK), check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("source file : %s\n", sourceFile)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("policy profile : %s\n", ds.Policy.Profile)
-	fmt.Printf("packages : %d\n", len(ds.Packages))
-	fmt.Printf("required capabilities : %d\n", len(analysis.RequiredCapabilities))
-	fmt.Printf("active needs : %d/%d\n", analysis.ActiveNeedCount, ds.MinimumActiveNeedCount)
-	if analysis.RecommendationFound {
-		fmt.Printf("recommended package id : %s\n", analysis.RecommendedPackage.PackageID)
-	} else {
-		fmt.Println("recommended package id : none")
-	}
-	fmt.Printf("dispatches logged : %d\n", ds.DispatchesLogged)
-	fmt.Printf("checks passed : %d/%d\n", passedCount(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
 }
 
 func activeText(active bool) string {

@@ -10,7 +10,6 @@
 //
 // This program is intentionally not a generic RDF or N3 reasoner. It translates
 // the concrete facts and rules for this example into ordinary Go structs and
-// checks so the authorization boundary is easy to read and run.
 //
 // Run:
 //
@@ -22,7 +21,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -395,30 +393,6 @@ func printReason(ds Dataset, analysis Analysis) {
 		fmt.Printf("  passed conditions : %d/%d\n", countPassed(result.Conditions), len(result.Conditions))
 		fmt.Println()
 	}
-}
-
-func printChecks(checks []Check) {
-	return
-	for _, check := range checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.Label, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("source file : %s\n", sourceFile)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("people : %s\n", personNames(ds.People))
-	fmt.Printf("request count : %d\n", len(ds.Requests))
-	fmt.Printf("guardrail denials : %d\n", analysis.GuardrailDeny)
-	fmt.Printf("condition passes : %d/%d\n", analysis.ConditionsPass, len(ds.Requests)*10)
-	fmt.Printf("checks passed : %d/%d\n", passedChecks(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
 }
 
 func lockerLabel(id string) string {

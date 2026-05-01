@@ -1,12 +1,10 @@
 // sudoku.go
 //
 // Standalone Go translation of the Eyeling Sudoku example:
-//   - examples/sudoku.n3 supplies the default puzzle and report/check structure.
 //   - examples/builtin/sudoku.js supplies the solving and validation logic.
 //
 // The program reads an 81-cell Sudoku puzzle, solves it with constraint propagation
 // plus depth-first search, and prints an N3-style explanation report with answer,
-// reasoning summary, consistency checks, and Go-specific audit details.
 //
 // Usage:
 //
@@ -23,7 +21,6 @@ import (
 	"fmt"
 	"math/bits"
 	"os"
-	"runtime"
 	"strings"
 	"unicode"
 )
@@ -44,7 +41,6 @@ type Move struct {
 	Forced         bool
 }
 
-// Stats collects search metrics that are printed in the explanation and audit output.
 type Stats struct {
 	Givens         int
 	Blanks         int
@@ -258,7 +254,6 @@ func summarizeMoves(moves []Move, limit int) string {
 	return strings.Join(parts, ", ")
 }
 
-// unitIsComplete checks one row, column, or box for exactly the digits 1 through 9.
 func unitIsComplete(values []int) bool {
 	seen := 0
 	for _, v := range values {
@@ -475,7 +470,6 @@ func boxesComplete(cells []int) bool {
 	return true
 }
 
-// computeReport normalizes input, solves the puzzle, runs checks, and assembles output data.
 func computeReport(raw string) Report {
 	cells, err := parsePuzzle(raw)
 	if err != nil {
@@ -581,7 +575,6 @@ func yesNo(ok bool) string {
 	return "no"
 }
 
-// printReport renders the N3-style answer, reason, check, and Go audit sections.
 func printReport(report Report, puzzleName string) {
 	switch report.Status {
 	case "ok":
@@ -612,37 +605,6 @@ func printReport(report Report, puzzleName string) {
 		}
 
 		return
-		fmt.Printf("C1 %s - every given clue is preserved in the final grid.\n", statusText(report.GivensPreserved))
-		fmt.Printf("C2 %s - the final grid contains only digits 1 through 9, with no blanks left.\n", statusText(report.NoBlanks))
-		fmt.Printf("C3 %s - each row contains every digit exactly once.\n", statusText(report.RowsComplete))
-		fmt.Printf("C4 %s - each column contains every digit exactly once.\n", statusText(report.ColsComplete))
-		fmt.Printf("C5 %s - each 3×3 box contains every digit exactly once.\n", statusText(report.BoxesComplete))
-		fmt.Printf("C6 %s - replaying the recorded placements from the original puzzle remains legal at every step.\n", statusText(report.ReplayLegal))
-		fmt.Printf("C7 %s - the search statistics and the successful proof path are internally consistent.\n", statusText(report.StoryConsistent))
-		if report.Unique {
-			fmt.Println("C8 OK - a second search found no alternative solution, so the solution is unique.")
-		} else {
-			fmt.Println("C8 INFO - a second search found another solution, so the puzzle is not unique.")
-		}
-
-		// Extra implementation-oriented details. The N3 example focuses on the proof-style
-		// answer/check sections; this Go audit block exposes concrete runtime facts
-		// that are useful when testing or comparing translations.
-		fmt.Println()
-		fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-		fmt.Printf("normalized puzzle : %s\n", report.Normalized)
-		fmt.Printf("solution string : %s\n", report.Solution)
-		fmt.Printf("givens : %d\n", report.Givens)
-		fmt.Printf("blanks : %d\n", report.Blanks)
-		fmt.Printf("recorded placements : %d\n", report.MoveCount)
-		fmt.Printf("forced placements : %d\n", report.ForcedMoves)
-		fmt.Printf("guesses tried : %d\n", report.GuessedMoves)
-		fmt.Printf("recursive nodes : %d\n", report.RecursiveNodes)
-		fmt.Printf("backtracks : %d\n", report.Backtracks)
-		fmt.Printf("max search depth : %d\n", report.MaxDepth)
-		fmt.Printf("unique solution : %s\n", yesNo(report.Unique))
-		fmt.Printf("story consistent : %s\n", yesNo(report.StoryConsistent))
-
 	case "invalid-input":
 		fmt.Println("# Sudoku")
 		fmt.Println()
@@ -654,8 +616,6 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println(report.Error)
 		fmt.Println()
 		return
-		fmt.Println("C1 failed - the supplied text does not normalize to exactly 81 legal Sudoku cells.")
-
 	case "illegal-clues":
 		fmt.Println("# Sudoku")
 		fmt.Println()
@@ -670,8 +630,6 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println(report.Error)
 		fmt.Println()
 		return
-		fmt.Println("C1 failed - the given clues already violate Sudoku rules.")
-
 	case "unsatisfiable":
 		fmt.Println("# Sudoku")
 		fmt.Println()
@@ -685,10 +643,6 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println("## Reason why")
 		fmt.Printf("The solver explored %d search nodes with minimum-remaining-values branching and backtracked %d times, but every branch eventually contradicted the row, column, or box constraints.\n\n", report.RecursiveNodes, report.Backtracks)
 		return
-		fmt.Println("C1 OK - the given clues are internally consistent.")
-		fmt.Println("C2 OK - every explored assignment respected row, column, and box legality.")
-		fmt.Println("C3 failed - exhaustive search found no complete legal grid.")
-
 	default:
 		fmt.Fprintf(os.Stderr, "unknown report status: %s\n", report.Status)
 		os.Exit(1)

@@ -29,8 +29,6 @@ import (
 	"fmt"
 	"math/bits"
 	"os"
-	"runtime"
-	"strings"
 )
 
 const eyelingoExampleName = "deep_taxonomy_100000"
@@ -260,71 +258,6 @@ func renderReason(result Result) {
 	fmt.Printf("classification facts derived : %d N classes + %d side labels + A2 = %d type facts\n", result.Facts.N.count(), result.Facts.I.count()+result.Facts.J.count(), expectedTypeFacts)
 	fmt.Println("The side labels are not needed for the final A2 proof, but carrying both I and J at every level checks that the whole wide/deep expansion was performed, not just the main N-chain.")
 	fmt.Println()
-}
-
-func renderChecks(checks Checks) {
-	return
-	lines := []struct {
-		ok   bool
-		text string
-	}{
-		{checks.StartPresent, "C1 OK - the starting classification N0 is present."},
-		{checks.FirstExpansionComplete, "C2 OK - the first expansion produced N1 together with side labels I1 and J1."},
-		{checks.MidpointComplete, "C3 OK - the chain reaches the midpoint N50000 and still carries both side-label branches."},
-		{checks.FinalStepComplete, "C4 OK - the final taxonomy step from N99999 to N100000 was completed."},
-		{checks.TerminalClassDerived, "C5 OK - once N100000 is reached, the terminal class A2 is derived."},
-		{checks.SuccessFlagRaised, "C6 OK - the success flag is raised only after the terminal class A2 is present."},
-		{checks.ClassCountsCorrect, "C7 OK - all 100001 N-level classifications are present with no missing level."},
-		{checks.SideLabelCountsCorrect, "C8 OK - all 200000 side-label classifications I1..I100000 and J1..J100000 are present."},
-		{checks.RuleApplicationsExact, "C9 OK - exactly 100000 taxonomy-step rules, one terminal rule, and one success rule fired."},
-		{checks.NoSkippedLevel, "C10 OK - a linear scan finds no skipped taxonomy level."},
-	}
-	for _, line := range lines {
-		if line.ok {
-			fmt.Println(line.text)
-		} else {
-			fmt.Println(strings.Replace(line.text, "OK", "FAIL", 1))
-		}
-	}
-	fmt.Println()
-}
-
-func renderAudit(result Result) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Println("source file : deep-taxonomy-100000.n3")
-	fmt.Println("question : Can one starting individual be classified through 100000 taxonomy levels and trigger A2?")
-	fmt.Printf("taxonomy depth : %d\n", taxonomyDepth)
-	fmt.Printf("midpoint depth : %d\n", midpointDepth)
-	fmt.Printf("source fact assertions : %d\n", sourceFactAssertions)
-	fmt.Printf("source taxonomy-step rules : %d\n", sourceStepRules)
-	fmt.Printf("source terminal rules : %d\n", sourceTerminalRules)
-	fmt.Printf("source success rules : %d\n", sourceSuccessRules)
-	fmt.Printf("source ARC check rules : %d\n", sourceARCCheckRules)
-	fmt.Printf("source ARC report rules : %d\n", sourceARCReportRules)
-	fmt.Printf("source total rules counted : %d\n", sourceTotalRules)
-	fmt.Printf("bitset words per N/I/J column : %d\n", len(result.Facts.N))
-	fmt.Printf("N classifications present : %d\n", result.Facts.N.count())
-	fmt.Printf("I side labels present : %d\n", result.Facts.I.count())
-	fmt.Printf("J side labels present : %d\n", result.Facts.J.count())
-	fmt.Printf("A2 present : %s\n", yesNo(result.Facts.A2))
-	fmt.Printf("test true : %s\n", yesNo(result.Facts.Test))
-	fmt.Printf("expected type facts : %d\n", expectedTypeFacts)
-	fmt.Printf("actual type facts : %d\n", result.Facts.N.count()+result.Facts.I.count()+result.Facts.J.count()+boolInt(result.Facts.A2))
-	fmt.Printf("agenda pops : %d\n", result.Stats.AgendaPops)
-	fmt.Printf("step rule tests : %d\n", result.Stats.StepRuleTests)
-	fmt.Printf("step rule applications : %d\n", result.Stats.StepRuleApplications)
-	fmt.Printf("terminal rule tests : %d\n", result.Stats.TerminalRuleTests)
-	fmt.Printf("terminal rule applications : %d\n", result.Stats.TerminalRuleApplications)
-	fmt.Printf("success rule tests : %d\n", result.Stats.SuccessRuleTests)
-	fmt.Printf("success rule applications : %d\n", result.Stats.SuccessRuleApplications)
-	fmt.Printf("new N classes : %d\n", result.Stats.NewNClasses)
-	fmt.Printf("new I side labels : %d\n", result.Stats.NewSideI)
-	fmt.Printf("new J side labels : %d\n", result.Stats.NewSideJ)
-	fmt.Printf("duplicate assertions ignored : %d\n", result.Stats.DuplicateAssertions)
-	fmt.Printf("max N reached : N%d\n", result.Stats.MaxNReached)
-	fmt.Printf("last agenda item : N%d\n", result.Stats.LastAgenda)
-	fmt.Printf("checks passed : %d/10\n", countChecks(result.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(countChecks(result.Checks) == 10))
 }
 
 func countChecks(checks Checks) int {

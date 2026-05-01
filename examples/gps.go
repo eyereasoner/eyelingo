@@ -6,7 +6,6 @@
 // The original N3 example is an ARC-style, goal-driven route planner for a tiny
 // western-Belgium map. It starts from Gent, derives possible paths to Oostende,
 // compares their computed metrics, recommends the better route, renders a small
-// explanation, and checks that the recommendation is consistent with the route
 // metrics.
 //
 // This is intentionally not a generic RDF/N3 reasoner. The concrete N3 facts
@@ -25,7 +24,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -100,10 +98,6 @@ type Decision struct {
 	Outcome          string
 }
 
-// Checks mirrors the proof obligations at the bottom of gps.n3.
-//
-// The first two checks confirm that both concrete routes were derived. The last
-// three checks confirm that the direct route really dominates the alternative.
 type Checks struct {
 	DirectRouteDerived      bool
 	AlternativeRouteDerived bool
@@ -115,7 +109,6 @@ type Checks struct {
 // SearchStats records operational details from the Go depth-first path search.
 //
 // These counters are not part of the original N3 proof. They make the Go
-// translation easier to audit by showing how much graph exploration was needed
 // to derive the candidate routes.
 type SearchStats struct {
 	RecursiveCalls int
@@ -334,7 +327,6 @@ func sameActions(left, right []string) bool {
 	return true
 }
 
-// allChecksPass is the Go counterpart of the N3 verification rules that fail
 // loudly when a recommended route contradicts the computed metrics.
 func allChecksPass(checks Checks) bool {
 	return checks.DirectRouteDerived &&
@@ -344,8 +336,6 @@ func allChecksPass(checks Checks) bool {
 		checks.RecommendedScoresHigher
 }
 
-// checkCount returns the number of passed verification checks for compact audit
-// output. The total is fixed because gps.n3 has five explicit consistency checks.
 func checkCount(checks Checks) int {
 	count := 0
 	if checks.DirectRouteDerived {
@@ -386,24 +376,8 @@ func scoreDelta(direct, alternative float64) float64 {
 	return direct - alternative
 }
 
-// renderPathAudit prints every derived path with its action sequence and
-// accumulated metrics. This is useful for checking that the Go DFS found the
 // same candidates that the N3 recursive path rule would derive.
-func renderPathAudit(paths []Path) {
-	for i, path := range paths {
-		fmt.Printf(
-			"derived path %d : %s | duration=%s cost=%s belief=%s comfort=%s\n",
-			i+1,
-			actionPath(path),
-			formatDuration(path.Duration),
-			formatDecimal(path.Cost, 3),
-			formatDecimal(path.Belief, 6),
-			formatDecimal(path.Comfort, 4),
-		)
-	}
-}
 
-// renderArcOutput prints the same answer / reason / check style as the N3
 // string:concatenation + log:outputString section.
 func renderArcOutput(data Dataset, result InferenceResult) {
 	directLabel := data.Routes[routeDirectID].Label
@@ -438,38 +412,6 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 
 	fmt.Println()
 	return
-	fmt.Println("C1 OK - the direct Gent → Brugge → Oostende route was derived.")
-	fmt.Println("C2 OK - the alternative Gent → Kortrijk → Brugge → Oostende route was derived.")
-	fmt.Println("C3 OK - the recommended route is faster than the alternative.")
-	fmt.Println("C4 OK - the recommended route is cheaper than the alternative.")
-	fmt.Println("C5 OK - the recommended route has higher belief and comfort scores.")
-
-	// Extra audit details are useful in this Go translation because they show the
-	// concrete graph search, route comparisons, and runtime context that led to
-	// the recommendation.
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", data.Question)
-	fmt.Printf("traveller : %s\n", data.Traveller.ID)
-	fmt.Printf("start : %s\n", data.Traveller.Location)
-	fmt.Printf("goal : %s\n", locationOostende)
-	fmt.Printf("map edges : %d\n", len(data.Edges))
-	fmt.Printf("named routes : %d\n", len(data.Routes))
-	fmt.Printf("paths derived : %d\n", len(result.AllPaths))
-	renderPathAudit(result.AllPaths)
-	fmt.Printf("direct actions : %s\n", actionPath(result.DirectRoute))
-	fmt.Printf("alternative actions : %s\n", actionPath(result.AlternativeRoute))
-	fmt.Printf("duration advantage seconds : %s\n", formatDuration(metricDelta(result.AlternativeRoute.Duration, result.DirectRoute.Duration)))
-	fmt.Printf("cost advantage : %s\n", formatDecimal(metricDelta(result.AlternativeRoute.Cost, result.DirectRoute.Cost), 3))
-	fmt.Printf("belief advantage : %s\n", formatDecimal(scoreDelta(result.DirectRoute.Belief, result.AlternativeRoute.Belief), 6))
-	fmt.Printf("comfort advantage : %s\n", formatDecimal(scoreDelta(result.DirectRoute.Comfort, result.AlternativeRoute.Comfort), 4))
-	fmt.Printf("search recursive calls : %d\n", result.Stats.RecursiveCalls)
-	fmt.Printf("search edge tests : %d\n", result.Stats.EdgeTests)
-	fmt.Printf("search edges extended : %d\n", result.Stats.EdgesExtended)
-	fmt.Printf("search revisit prunes : %d\n", result.Stats.RevisitPrunes)
-	fmt.Printf("search max depth : %d\n", result.Stats.MaxDepth)
-	fmt.Printf("checks passed : %d/5\n", checkCount(result.Checks))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(result.Checks)))
 }
 
 func yesNo(value bool) string {

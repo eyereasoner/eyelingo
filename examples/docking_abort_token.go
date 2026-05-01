@@ -10,7 +10,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "docking_abort_token"
@@ -112,22 +111,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("The quantum seal is modeled as a superinformation medium, so universal cloning and unrestricted audit fan-out are explicitly blocked.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("classical media : %d\n", len(ds.Media))
-	fmt.Printf("copy tasks : %d\n", a.CopyTasks)
-	fmt.Printf("measure tasks : %d\n", a.MeasureTasks)
-	fmt.Printf("serial networks : %d\n", a.SerialNetworks)
-	fmt.Printf("parallel networks : %d\n", a.ParallelNetworks)
-	fmt.Printf("impossible tasks : %d\n", a.ImpossibleTasks)
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

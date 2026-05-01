@@ -5,7 +5,6 @@
 //
 // The scenario models a privacy-preserving retail interaction. A phone turns a
 // sensitive household condition into a narrow, expiring shopping insight; a
-// store scanner checks the envelope and policy; and, if authorized, suggests a
 // lower-sugar product.
 //
 // This is intentionally not a generic RDF/N3 reasoner. The concrete N3 facts
@@ -17,7 +16,6 @@
 //	go run delfour.go
 //
 // The program has no third-party dependencies. It only uses the standard
-// library to compute the SHA-256 payload hash used by the fixture checks.
 package main
 
 import (
@@ -27,7 +25,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -60,7 +57,6 @@ type Dataset struct {
 	ReasonText string
 }
 
-// CaseFacts contains the runtime request and audit facts for the fixture.
 type CaseFacts struct {
 	CaseName       string
 	RequestPurpose string
@@ -165,7 +161,6 @@ type Banner struct {
 	SuggestedAlternative string
 }
 
-// Checks mirrors the Check section of the N3 output. Each field is a named proof
 // condition rather than an anonymous boolean.
 type Checks struct {
 	PayloadHashMatches               bool
@@ -320,7 +315,6 @@ func infer(data Dataset) (InferenceResult, error) {
 		return InferenceResult{}, errors.New("no lower-sugar alternative found")
 	}
 
-	// The N3 file has hard checks that fail the proof immediately. Keep them as
 	// early Go errors so a broken fixture cannot silently render.
 	if err := hardChecks(data, insight, scanned, suggestedAlternative); err != nil {
 		return InferenceResult{}, err
@@ -395,7 +389,6 @@ func chooseLowestSugarAlternative(products []Product, scanned Product) (Product,
 	return best, found
 }
 
-// hardChecks translates N3 checks that are intended to stop the proof if core
 // fixture invariants no longer hold.
 func hardChecks(data Dataset, insight Insight, scanned Product, suggestedAlternative Product) error {
 	if data.Case.FilesWritten != expectedFilesWritten {
@@ -429,7 +422,6 @@ func minimizationStripsSensitiveTerms(insight Insight) bool {
 		!strings.Contains(insight.SerializedLowercase, "medical")
 }
 
-// scopeComplete checks that the insight is tied to a device, an event, and an
 // expiry time before the scanner can use it.
 func scopeComplete(insight Insight) bool {
 	return insight.ScopeDevice != "" && insight.ScopeEvent != "" && insight.ExpiresAt != ""
@@ -456,7 +448,6 @@ func marketingProhibited(policy Policy) bool {
 		policy.Prohibition.Constraint.RightOperand == "marketing"
 }
 
-// AllPass returns true only when every named check succeeded.
 func (checks Checks) AllPass() bool {
 	return checks.PayloadHashMatches &&
 		checks.SignatureVerifies &&
@@ -470,8 +461,6 @@ func (checks Checks) AllPass() bool {
 		checks.FilesWrittenExpected
 }
 
-// CountPassed returns how many named checks are true and the total number of
-// checks represented by the struct.
 func (checks Checks) CountPassed() (int, int) {
 	values := []bool{
 		checks.PayloadHashMatches,
@@ -508,7 +497,6 @@ func lowerSugarCandidates(products []Product, scanned Product) []Product {
 	return candidates
 }
 
-// derivedNeedLabel keeps the audit output explicit about whether the
 // desensitization rule produced the neutral low-sugar need.
 func derivedNeedLabel(needsLowSugar bool) string {
 	if needsLowSugar {
@@ -546,8 +534,6 @@ func sha256Hex(text string) string {
 	return hex.EncodeToString(sum[:])
 }
 
-// renderArcOutput renders the same answer/check style as the N3 log:outputString
-// section, with a final Go-specific audit detail block.
 func renderArcOutput(data Dataset, result InferenceResult) {
 	fmt.Println("# Delfour")
 	fmt.Println()
@@ -574,59 +560,6 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 
 	fmt.Println()
 	return
-	fmt.Printf("signature verifies : %s\n", yesNo(result.Checks.SignatureVerifies))
-	fmt.Printf("payload hash matches : %s\n", yesNo(result.Checks.PayloadHashMatches))
-	fmt.Printf("minimization strips sensitive terms: %s\n", yesNo(result.Checks.MinimizationStripsSensitiveTerms))
-	fmt.Printf("scope complete : %s\n", yesNo(result.Checks.ScopeComplete))
-	fmt.Printf("authorization allowed : %s\n", yesNo(result.Checks.AuthorizationAllowed))
-	fmt.Printf("high-sugar banner : %s\n", yesNo(result.Checks.BannerFlagsHighSugar))
-	fmt.Printf("alternative lowers sugar : %s\n", yesNo(result.Checks.AlternativeIsLowerSugar))
-	fmt.Printf("duty timing consistent : %s\n", yesNo(result.Checks.DutyTimingConsistent))
-	fmt.Printf("marketing prohibited : %s\n", yesNo(result.Checks.MarketingProhibited))
-
-}
-
-// renderGoAuditDetails prints Go-side diagnostics that are not part of the N3
-// answer, but help verify the translated facts, rule decisions, and checks.
-func renderGoAuditDetails(data Dataset, result InferenceResult) {
-	candidates := lowerSugarCandidates(data.Products, result.Scanned)
-	canonicalEscaped := canonicalJSONEscaped()
-	passedChecks, totalChecks := result.Checks.CountPassed()
-	sugarDropTenths := result.Scanned.SugarTenths - result.SuggestedAlternative.SugarTenths
-
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case facts : case=%s requestAction=%s requestPurpose=%s\n", data.Case.CaseName, data.Case.RequestAction, data.Case.RequestPurpose)
-	fmt.Printf("catalog products : %d\n", len(data.Products))
-	fmt.Printf("scanned product id : %s\n", data.Scan.ScannedProductID)
-	fmt.Printf("scanned sugar : %.1fg per serving (%d tenths)\n", result.Scanned.SugarPerServing, result.Scanned.SugarTenths)
-	fmt.Printf("threshold sugar : %.1fg per serving (%d tenths)\n", data.Insight.ThresholdG, data.Insight.ThresholdTenths)
-	fmt.Printf("lower-sugar candidates : %d\n", len(candidates))
-	for _, candidate := range candidates {
-		fmt.Printf("%s sugar=%.1fg (%d tenths)\n", candidate.Name, candidate.SugarPerServing, candidate.SugarTenths)
-	}
-	fmt.Printf("selected alternative : %s\n", result.SuggestedAlternative.Name)
-	fmt.Printf("sugar reduction : %.1fg per serving (%d tenths)\n", float64(sugarDropTenths)/10.0, sugarDropTenths)
-	fmt.Printf("needs low sugar : %s\n", yesNo(result.NeedsLowSugar))
-	fmt.Printf("derived need : %s\n", derivedNeedLabel(result.NeedsLowSugar))
-	fmt.Printf("authorization window : %s <= %s -> %s\n", result.Decision.At, data.Insight.ExpiresAt, yesNo(notGreaterThanISOUTC(result.Decision.At, data.Insight.ExpiresAt)))
-	fmt.Printf("duty deadline check : %s <= %s -> %s\n", data.Case.ScannerDutyAt, data.Insight.ExpiresAt, yesNo(result.Checks.DutyTimingConsistent))
-	fmt.Printf("decision target : %s\n", result.Decision.Target)
-	fmt.Printf("policy profile : %s\n", data.Policy.Profile)
-	fmt.Printf("permission rule : action=%s target=%s purpose=%s\n", data.Policy.Permission.Action, data.Policy.Permission.Target, data.Policy.Permission.Constraint.RightOperand)
-	fmt.Printf("prohibition rule : action=%s target=%s purpose=%s\n", data.Policy.Prohibition.Action, data.Policy.Prohibition.Target, data.Policy.Prohibition.Constraint.RightOperand)
-	fmt.Printf("delete duty : action=%s due=%s\n", data.Policy.Duty.Action, data.Policy.Duty.Constraint.RightOperand)
-	fmt.Printf("signature mode : %s\n", data.Signature.HMACVerificationMode)
-	fmt.Printf("signature key id : %s\n", data.Signature.KeyID)
-	fmt.Printf("signature hmac : %s\n", data.Signature.SignatureHMAC)
-	fmt.Printf("canonical json bytes : %d\n", len(canonicalJSON))
-	fmt.Printf("escaped payload bytes : %d\n", len(canonicalEscaped))
-	fmt.Printf("payload sha256 : %s\n", sha256Hex(canonicalEscaped))
-	fmt.Printf("expected sha256 : %s\n", data.Signature.PayloadHashSHA256)
-	fmt.Printf("checks passed : %d/%d\n", passedChecks, totalChecks)
-	fmt.Printf("all checks pass : %s\n", yesNo(result.Checks.AllPass()))
-	fmt.Printf("audit entries : %d\n", data.Case.AuditEntries)
-	fmt.Printf("files written : %d/%d\n", data.Case.FilesWritten, expectedFilesWritten)
 }
 
 // yesNo prints booleans in the N3 example's human-readable style.

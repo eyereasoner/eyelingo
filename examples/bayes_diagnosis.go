@@ -24,7 +24,6 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -66,7 +65,6 @@ type InferenceResult struct {
 	Results []PosteriorResult
 }
 
-// checks mirrors the proof obligations at the bottom of bayes-diagnosis.n3.
 // In the N3 source, guards fire if any probability is outside [0,1].
 type Checks struct {
 	PriorsInRange    bool
@@ -195,8 +193,6 @@ func infer(data Dataset) InferenceResult {
 	return InferenceResult{Scores: scores, Total: total, Results: results}
 }
 
-// ---------- checks ----------
-
 func performChecks(data Dataset) Checks {
 	priorsOK := true
 	for _, d := range data.Diseases {
@@ -247,7 +243,6 @@ func formatEvidence(ev []EvidenceItem) string {
 	return strings.Join(parts, ", ")
 }
 
-// renderArcOutput prints the answer / reason / check / audit style.
 func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println("# Bayes Diagnosis")
 	fmt.Println()
@@ -278,32 +273,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println("where for an absent symptom the factor is 1 − P(symptom|d).")
 	fmt.Println()
 
-	// --- Check ---
 	return
-	if checks.PriorsInRange {
-		fmt.Println("C1 OK - all prior probabilities are in [0,1].")
-	} else {
-		fmt.Println("C1 FAIL - one or more prior probabilities are outside [0,1].")
-	}
-	if checks.CondProbsInRange {
-		fmt.Println("C2 OK - all conditional probabilities are in [0,1].")
-	} else {
-		fmt.Println("C2 FAIL - one or more conditional probabilities are outside [0,1].")
-	}
-	fmt.Println()
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("diseases : %d\n", len(data.Diseases))
-	fmt.Printf("symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))
-	fmt.Printf("evidence items : %d\n", len(data.Evidence))
-	fmt.Printf("evidence total : %.8f\n", result.Total)
-	fmt.Println("posteriors :")
-	for _, r := range result.Results {
-		fmt.Printf("  %-20s  unnormalized=%.8f  posterior=%.6f\n",
-			r.Disease, r.Unnormalized, r.Posterior)
-	}
-	fmt.Printf("checks passed : %d/2\n", checkCount(checks))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
 }
 
 func yesNo(value bool) string {
@@ -318,10 +288,8 @@ func yesNo(value bool) string {
 func main() {
 	data := exampleinput.Load(eyelingoExampleName, dataset())
 
-	// Run inference (guards are checked inside infer).
 	result := infer(data)
 
-	// Perform explicit consistency checks.
 	checks := performChecks(data)
 
 	// Render ARC-style output.

@@ -2,7 +2,6 @@
 //
 // Inspired by Eyeling's `examples/gray-code-counter.n3`.
 //
-// The example generates a cyclic reflected binary Gray counter and audits its
 // one-bit transition property.
 package main
 
@@ -10,7 +9,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -132,21 +130,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("A valid cyclic Gray counter therefore changes exactly one bit at every step.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("bits : %d\n", ds.Bits)
-	fmt.Printf("requested steps : %d\n", ds.Steps)
-	fmt.Printf("unique states : %d\n", unique(a.Sequence))
-	fmt.Printf("adjacent transitions checked : %d\n", len(a.Distances))
-	fmt.Printf("wrap hamming distance : %d\n", a.Distances[len(a.Distances)-1])
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

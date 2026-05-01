@@ -15,7 +15,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -233,37 +232,4 @@ func printReason(ds Dataset, analysis Analysis) {
 		fmt.Printf("The selected plan is the lowest-cost surviving plan; the next cheapest starts with %s and costs %.3f.\n", firstAction(analysis.Plans[1]), analysis.Plans[1].Cost)
 	}
 	fmt.Println()
-}
-
-func printChecks(analysis Analysis) {
-	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("start : location=%s battery=%s permit=%s\n", ds.Start.Location, ds.Start.Battery, ds.Start.Permit)
-	fmt.Printf("goal location : %s\n", ds.GoalLocation)
-	fmt.Printf("fuel tokens : %d\n", ds.Fuel)
-	fmt.Printf("actions loaded : %d\n", len(ds.Actions))
-	fmt.Printf("thresholds : minBelief=%.2f maxCost=%.2f\n", ds.Thresholds.MinBelief, ds.Thresholds.MaxCost)
-	fmt.Printf("plans passing thresholds : %d\n", len(analysis.Plans))
-	limit := len(analysis.Plans)
-	if limit > 5 {
-		limit = 5
-	}
-	for i := 0; i < limit; i++ {
-		plan := analysis.Plans[i]
-		fmt.Printf("rank %d : %s duration=%d cost=%.3f belief=%.6f comfort=%.6f endBattery=%s permit=%s fuelLeft=%d\n", i+1, strings.Join(plan.Actions, " -> "), plan.DurationSec, plan.Cost, plan.Belief, plan.Comfort, plan.End.Battery, plan.End.Permit, plan.FuelLeft)
-	}
-	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
 }

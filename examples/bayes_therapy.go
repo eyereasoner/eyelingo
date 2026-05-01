@@ -23,7 +23,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -85,7 +84,6 @@ type InferenceResult struct {
 	BestTherapy     string
 }
 
-// Checks mirrors the proof obligations at the bottom of bayes-therapy.n3.
 // In the N3 source, guards fire if any probability is outside [0,1].
 type Checks struct {
 	PriorsInRange        bool
@@ -312,12 +310,9 @@ func infer(data Dataset) InferenceResult {
 	}
 }
 
-// ---------- checks ----------
-
 func performChecks(data Dataset, result InferenceResult) Checks {
 	c := Checks{}
 
-	// Check priors are in [0,1].
 	c.PriorsInRange = true
 	for _, d := range data.Diseases {
 		if !probInRange(d.Prior) {
@@ -326,7 +321,6 @@ func performChecks(data Dataset, result InferenceResult) Checks {
 		}
 	}
 
-	// Check conditional probabilities are in [0,1].
 	c.CondProbsInRange = true
 	for _, syms := range data.ProbGiven {
 		for _, p := range syms {
@@ -337,7 +331,6 @@ func performChecks(data Dataset, result InferenceResult) Checks {
 		}
 	}
 
-	// Check adverse rates are in [0,1].
 	c.AdverseInRange = true
 	for _, t := range data.Therapies {
 		if !probInRange(t.Adverse) {
@@ -346,7 +339,6 @@ func performChecks(data Dataset, result InferenceResult) Checks {
 		}
 	}
 
-	// Check success rates are in [0,1].
 	c.SuccessInRange = true
 	for _, t := range data.Therapies {
 		for _, p := range t.SuccessByDisease {
@@ -357,13 +349,10 @@ func performChecks(data Dataset, result InferenceResult) Checks {
 		}
 	}
 
-	// Check that evidence total is non‑zero.
 	c.EvidenceTotalNonZero = result.EvidenceTotal > 0
 
-	// Check that the number of diseases matches the success list length.
 	c.DiseaseCountMatch = len(data.Diseases) == len(data.Therapies[0].SuccessByDisease)
 
-	// Check that the number of therapies matches the expected count.
 	c.TherapyCountMatch = len(data.Therapies) == 5
 
 	return c
@@ -441,64 +430,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println("The recommended therapy is the one with the highest utility.")
 	fmt.Println()
 
-	// --- Check ---
 	return
-	if checks.PriorsInRange {
-		fmt.Println("C1 OK - all prior probabilities are in [0,1].")
-	} else {
-		fmt.Println("C1 FAIL - one or more prior probabilities are outside [0,1].")
-	}
-	if checks.CondProbsInRange {
-		fmt.Println("C2 OK - all conditional probabilities are in [0,1].")
-	} else {
-		fmt.Println("C2 FAIL - one or more conditional probabilities are outside [0,1].")
-	}
-	if checks.AdverseInRange {
-		fmt.Println("C3 OK - all adverse probabilities are in [0,1].")
-	} else {
-		fmt.Println("C3 FAIL - one or more adverse probabilities are outside [0,1].")
-	}
-	if checks.SuccessInRange {
-		fmt.Println("C4 OK - all success probabilities are in [0,1].")
-	} else {
-		fmt.Println("C4 FAIL - one or more success probabilities are outside [0,1].")
-	}
-	if checks.EvidenceTotalNonZero {
-		fmt.Println("C5 OK - evidence total is non‑zero.")
-	} else {
-		fmt.Println("C5 FAIL - evidence total is zero.")
-	}
-	if checks.DiseaseCountMatch {
-		fmt.Println("C6 OK - number of diseases matches success list length.")
-	} else {
-		fmt.Println("C6 FAIL - disease count mismatch.")
-	}
-	if checks.TherapyCountMatch {
-		fmt.Println("C7 OK - number of therapies is correct.")
-	} else {
-		fmt.Println("C7 FAIL - therapy count mismatch.")
-	}
-	fmt.Println()
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("diseases : %d\n", len(data.Diseases))
-	fmt.Printf("symptoms : %d\n", len(data.ProbGiven[data.Diseases[0].Name]))
-	fmt.Printf("therapies : %d\n", len(data.Therapies))
-	fmt.Printf("evidence items : %d\n", len(data.Evidence))
-	fmt.Printf("evidence total : %.8f\n", result.EvidenceTotal)
-	fmt.Println("posteriors :")
-	for _, r := range result.PosteriorDetail {
-		fmt.Printf("  %-20s  unnormalized=%.8f  posterior=%.6f\n",
-			r.Disease, r.Unnormalized, r.Posterior)
-	}
-	fmt.Println("therapy scores :")
-	for _, tr := range result.TherapyResults {
-		fmt.Printf("  %-20s  expSucc=%.6f  adverse=%.2f  utility=%.6f\n",
-			tr.Therapy, tr.ExpectedSuccess, tr.ExpectedAdverse, tr.Utility)
-	}
-	fmt.Printf("best therapy : %s\n", result.BestTherapy)
-	fmt.Printf("checks passed : %d/7\n", checkCount(checks))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
 }
 
 func therapyUtility(results []TherapyResult, name string) float64 {
@@ -522,10 +454,8 @@ func yesNo(value bool) string {
 func main() {
 	data := exampleinput.Load(eyelingoExampleName, dataset())
 
-	// Run inference (guards are checked inside infer).
 	result := infer(data)
 
-	// Perform explicit consistency checks.
 	checks := performChecks(data, result)
 
 	// Render ARC‑style output.

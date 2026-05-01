@@ -14,7 +14,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 )
 
 const eyelingoExampleName = "ebike_motor_thermal_envelope"
@@ -169,30 +168,4 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Printf("Turbo pushes the upper envelope to %.4f C, then Tour, Eco, and Coast allow the envelope to decrease.\n", analysis.MaxUpperC)
 	fmt.Printf("The upper envelope returns below the %.1f C warning limit at step %d and remains below the %.1f C hard limit throughout.\n", ds.WarningLimitC, analysis.WarningRecoveryStep, ds.HardLimitC)
 	fmt.Println()
-}
-
-func printChecks(analysis Analysis) {
-	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("sample period : %.0f s\n", ds.SamplePeriodSec)
-	fmt.Printf("thermal time constant : %.0f s\n", ds.ThermalTimeConstantSec)
-	fmt.Printf("assist plan length : %d\n", len(ds.AssistPlan))
-	for _, point := range analysis.Trace {
-		fmt.Printf("trace step %02d : mode=%s tempLower=%.4fC tempUpper=%.4fC\n", point.Step, point.Mode, point.TempLowerC, point.TempUpperC)
-	}
-	fmt.Printf("decreasing steps : %v\n", analysis.DecreasingSteps)
-	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
 }

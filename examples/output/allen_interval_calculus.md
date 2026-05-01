@@ -9,7 +9,7 @@ invalid intervals : 0
 ## Reason why  
 The example completes any interval that has a start plus duration before comparing endpoints.  
 Each ordered pair is then classified with the 13 Allen base relations, including the six converse relations.  
-The relation rules are purely endpoint constraints, so the result is deterministic and auditable.  
+The relation rules are purely endpoint constraints, so the result is deterministic and traceable.  
 The duration-derived intervals participate in the same relation table as directly supplied intervals.  
 
 ## Check  

@@ -6,12 +6,10 @@
 // The source N3 file models a policy decision point (PDP). The same health data
 // can be allowed or denied depending on purpose, requester role, care-team
 // relationship, environment, privacy safeguards, and patient consent. This Go
-// version keeps those concrete policy checks visible as ordinary structs and
 // functions.
 //
 // This is intentionally not a generic RDF, ODRL, DPV, EHDS, or N3 reasoner. It
 // translates the source facts and rules for this one example into explicit Go
-// data and deterministic checks, then emits a compact report.
 //
 // Run:
 //
@@ -23,7 +21,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -550,33 +547,6 @@ func printReason(analysis Analysis) {
 		fmt.Printf("  trace : %s\n", joinStrings(result.Trace, ","))
 		fmt.Println()
 	}
-}
-
-func printChecks(checks []Check) {
-	return
-	for i, check := range checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("C%d %s - %s\n", i+1, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	passed := countPassed(analysis.Checks)
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("source file : %s\n", sourceFile)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("scenario count : %d\n", len(analysis.Results))
-	fmt.Printf("policy count : %d\n", len(ds.Policies))
-	fmt.Printf("policy uids : %s\n", joinStrings(analysis.PolicyUIDs, ","))
-	fmt.Printf("permit count : %d\n", analysis.PermitCount)
-	fmt.Printf("deny count : %d\n", analysis.DenyCount)
-	fmt.Printf("checks passed : %d/%d\n", passed, len(analysis.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(passed == len(analysis.Checks)))
 }
 
 func resultsByKey(results []ScenarioResult) map[string]ScenarioResult {

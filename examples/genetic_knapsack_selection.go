@@ -15,7 +15,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -193,29 +192,4 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Println("At every generation, all single-bit mutants of the parent are compared with the parent, and the lowest-fitness candidate is selected deterministically.")
 	fmt.Printf("The run stops at %s because every one-bit neighbor is no better under the capacity %d rule.\n", analysis.Final.Genome, ds.Capacity)
 	fmt.Println()
-}
-
-func printChecks(analysis Analysis) {
-	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("capacity : %d\n", ds.Capacity)
-	fmt.Printf("items : %d\n", len(ds.Items))
-	fmt.Printf("max generations : %d\n", ds.MaxGenerations)
-	for _, step := range analysis.History {
-		fmt.Printf("generation %d : parent=%s fitness=%d weight=%d value=%d best=%s bestFitness=%d bestWeight=%d bestValue=%d\n", step.Index, step.Parent.Genome, step.Parent.Fitness, step.Parent.Weight, step.Parent.Value, step.Best.Genome, step.Best.Fitness, step.Best.Weight, step.Best.Value)
-	}
-	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
 }

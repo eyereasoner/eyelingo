@@ -12,7 +12,6 @@
 // number of times.
 //
 // This Go version keeps that rule structure visible: relation composition,
-// superdense candidate generation, parity cancellation, and audit checks are all
 // explicit.
 //
 // Run:
@@ -24,7 +23,6 @@ package main
 
 import (
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -251,27 +249,6 @@ func printReason(r Result) {
 		fmt.Printf("  %d -> %d because count=%d is odd; all competing counts are even.\n", msg, r.Survivors[msg], r.Counts[[2]int{msg, r.Survivors[msg]}])
 	}
 	fmt.Println()
-}
-
-func printChecks(checks []Check) {
-	return
-	for _, check := range checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("  %s %-24s %s\n", status, check.Label+":", check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(r Result) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("mobit values: %s, %s\n", bit(false), bit(true))
-	fmt.Printf("states      : R=%s S=%s U=%s V=%s\n", formatRelation(r.States["R"]), formatRelation(r.States["S"]), formatRelation(r.States["U"]), formatRelation(r.States["V"]))
-	fmt.Printf("relations   : id=%s G=%s K=%s KG=%s GK=%s\n", formatRelation(r.Primitive["id"]), formatRelation(r.Primitive["g"]), formatRelation(r.Primitive["k"]), formatRelation(r.Composed["kg"]), formatRelation(r.Composed["gk"]))
-	fmt.Printf("raw candidates before cancellation: %d\n", len(r.Candidates))
-	fmt.Printf("surviving facts after odd-parity filter: %d\n", len(r.Survivors))
 }
 
 func relation(pairs ...Pair) Relation {

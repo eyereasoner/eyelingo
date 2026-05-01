@@ -12,7 +12,6 @@
 // This Go version keeps that source example as the primary case and adds a
 // wider set of numbers, including larger composites, repeated factors, and a
 // large prime. Each case is factored by repeatedly taking the smallest divisor.
-// The program then checks the product, checks that the factors are prime, and
 // compares smallest-first and largest-first traversals to confirm uniqueness up
 // to order.
 //
@@ -26,7 +25,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -331,44 +329,6 @@ func printReason(a Analysis) {
 	fmt.Println("The additional samples cover repeated small factors, special products,")
 	fmt.Println("large composites, and a larger prime that has no smaller divisor.")
 	fmt.Println()
-}
-
-func printChecks(checks []Check) {
-	return
-	for i, check := range checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("C%d %s - %s\n", i+1, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(a Analysis) {
-	passed := countPassed(a.Checks)
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("source file : %s\n", sourceFile)
-	fmt.Printf("question : %s\n", a.Question)
-	fmt.Printf("primary n : %d\n", a.Primary.N)
-	fmt.Printf("primary smallest-first factors : %s\n", joinInts(a.Primary.FactorsSmallest, ","))
-	fmt.Printf("primary largest-first factors : %s\n", joinInts(a.Primary.FactorsLargest, ","))
-	fmt.Printf("primary flat factor string : %s\n", a.Primary.FlatString)
-	fmt.Printf("primary prime-power string : %s\n", a.Primary.PrimePowerString)
-	fmt.Printf("expected flat string : %s\n", expectedPrimaryFlat)
-	fmt.Printf("expected largest-first string : %s\n", expectedPrimaryLargestFlat)
-	fmt.Printf("sample numbers : %s\n", joinCaseNumbers(a.Cases, ","))
-	fmt.Printf("sample count : %d\n", len(a.Cases))
-	fmt.Printf("largest sample : %d\n", a.LargestN)
-	fmt.Printf("total prime factors counted with multiplicity : %d\n", a.TotalFactors)
-	fmt.Printf("distinct primes seen across samples : %d\n", a.DistinctCount)
-	fmt.Printf("smallest-divisor searches : %d\n", a.Stats.SmallestDivisorSearches)
-	fmt.Printf("divisibility tests : %d\n", a.Stats.DivisibilityTests)
-	fmt.Printf("primality checks : %d\n", a.Stats.PrimalityChecks)
-	fmt.Printf("prime-divisor tests : %d\n", a.Stats.PrimeDivisorTests)
-	fmt.Printf("checks passed : %d/%d\n", passed, len(a.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(passed == len(a.Checks)))
 }
 
 func product(values []int64) int64 {

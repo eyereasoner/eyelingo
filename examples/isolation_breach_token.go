@@ -10,7 +10,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "isolation_breach_token"
@@ -111,24 +110,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("The specimen seal is separate and superinformation-like, so it records provenance without becoming an unrestricted cloneable broadcast token.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("classical media : %d\n", len(ds.Media))
-	fmt.Printf("prepare tasks : %d\n", a.Prepare)
-	fmt.Printf("permutation tasks : %d\n", a.Permute)
-	fmt.Printf("copy tasks : %d\n", a.Copy)
-	fmt.Printf("measure tasks : %d\n", a.Measure)
-	fmt.Printf("serial networks : %d\n", a.Serial)
-	fmt.Printf("parallel networks : %d\n", a.Parallel)
-	fmt.Printf("impossible tasks : %d\n", a.Impossible)
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

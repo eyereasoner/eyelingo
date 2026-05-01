@@ -22,7 +22,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -119,8 +118,6 @@ func reachable(data Dataset) map[string]bool {
 	return result
 }
 
-// ---------- checks ----------
-
 func performChecks(data Dataset, canReach map[string]bool) Checks {
 	c := Checks{}
 
@@ -209,60 +206,7 @@ func renderArcOutput(data Dataset, canReach map[string]bool, checks Checks) {
 	fmt.Println("The original example says that every :oneway link is also a :path, and that :path is transitive. So once Angers can reach Nantes directly, longer routes can be built by chaining earlier links. Angers reaches Nantes directly. Le Mans reaches Nantes through Angers. Chartres reaches Nantes through Le Mans and Angers. Paris reaches Nantes through Chartres, Le Mans, and Angers.")
 	fmt.Println()
 
-	// === Check ===
 	return
-	if checks.C1AngersDirect {
-		fmt.Println("C1 OK - Angers has a direct one-way connection to Nantes.")
-	} else {
-		fmt.Println("C1 FAIL - Angers does not have a direct connection to Nantes.")
-	}
-	if checks.C2LeMansChain {
-		fmt.Println("C2 OK - Le Mans reaches Nantes by chaining Le Mans → Angers → Nantes.")
-	} else {
-		fmt.Println("C2 FAIL - Le Mans chain check failed.")
-	}
-	if checks.C3ChartresChain {
-		fmt.Println("C3 OK - Chartres reaches Nantes by chaining Chartres → Le Mans → Angers → Nantes.")
-	} else {
-		fmt.Println("C3 FAIL - Chartres chain check failed.")
-	}
-	if checks.C4ParisChain {
-		fmt.Println("C4 OK - Paris reaches Nantes by chaining Paris → Chartres → Le Mans → Angers → Nantes.")
-	} else {
-		fmt.Println("C4 FAIL - Paris chain check failed.")
-	}
-	if checks.C5NonReachableFuse {
-		fmt.Println("C5 OK - cities without a chain to Nantes are rejected by fail-loud fuse rules.")
-	} else {
-		fmt.Println("C5 FAIL - non-reachable city check failed.")
-	}
-	fmt.Println()
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("total edges (one-way roads) : %d\n", len(data.Edges))
-	fmt.Println("one-way connections:")
-	for _, e := range data.Edges {
-		fmt.Printf("  %s → %s\n", data.Labels[e.From], data.Labels[e.To])
-	}
-	fmt.Println()
-	fmt.Println("reachable from Nantes:")
-	for _, id := range reachableOrder {
-		marker := "no"
-		if canReach[id] {
-			marker = "yes"
-		}
-		fmt.Printf("  %s : %s\n", data.Labels[id], marker)
-	}
-	nonReachableOrder := []string{"orleans", "amiens", "bourges", "blois", "tours"}
-	for _, id := range nonReachableOrder {
-		marker := "no"
-		if canReach[id] {
-			marker = "yes"
-		}
-		fmt.Printf("  %s : %s\n", data.Labels[id], marker)
-	}
-	fmt.Printf("checks passed : %d/5\n", checkCount(checks))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
 }
 
 func yesNo(value bool) string {

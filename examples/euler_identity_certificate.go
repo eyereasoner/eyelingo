@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"math/cmplx"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "euler_identity_certificate"
@@ -102,20 +101,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("That gives a reproducible finite certificate for the familiar Euler-identity witness.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("angle radians : %.15f\n", ds.Angle)
-	fmt.Printf("terms : %d\n", ds.Terms)
-	fmt.Printf("tolerance : %.1e\n", ds.Tolerance)
-	fmt.Printf("residual : %.3e\n", a.Residual)
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

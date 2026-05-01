@@ -7,7 +7,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "goldbach_1000"
@@ -99,21 +98,6 @@ func printReport(ds Dataset, r Result) {
 	fmt.Println("No counterexample is found in the bounded range, so the bounded Goldbach condition succeeds for this dataset.")
 	fmt.Println()
 	return
-	for _, c := range r.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("translated source : %s\n", ds.Source)
-	fmt.Printf("prime cache size : %d\n", r.PrimeCount)
-	fmt.Printf("even values checked : %d\n", r.EvenCount)
-	fmt.Printf("counterexamples found : %d\n", len(r.Failures))
-	fmt.Printf("checks passed : %d/%d\n", countOK(r.Checks), len(r.Checks))
 }
 
 func firstWitness(e int, primes map[int]bool) (Witness, bool) {

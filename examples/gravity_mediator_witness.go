@@ -7,7 +7,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "gravity_mediator_witness"
@@ -104,22 +103,6 @@ func printReport(ds Dataset, r Result) {
 	fmt.Println("Under those conditions the mediator-only witness supports a non-classical-mediator conclusion, while the purely classical contrast model cannot support the same witness.")
 	fmt.Println()
 	return
-	for _, c := range r.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("translated source : %s\n", ds.Source)
-	fmt.Printf("positive run : %s via %s\n", r.Positive.Name, r.Positive.Mediator)
-	fmt.Printf("contrast run : %s via %s\n", r.Contrast.Name, r.Contrast.Mediator)
-	fmt.Printf("positive conclusion derived : %t\n", r.PositiveConclusion)
-	fmt.Printf("contrast block derived : %t\n", r.ContrastBlock)
-	fmt.Printf("checks passed : %d/%d\n", countOK(r.Checks), len(r.Checks))
 }
 
 func has(xs []string, x string) bool {

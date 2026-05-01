@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "complex_matrix_stability"
@@ -108,21 +107,6 @@ func printReport(ds Dataset, r Result) {
 	fmt.Println("Because the matrices are diagonal, the eigenvalues are the diagonal entries; the largest modulus gives the spectral radius and therefore the stability class.")
 	fmt.Println()
 	return
-	for _, c := range r.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("translated source : %s\n", ds.Source)
-	fmt.Printf("matrices checked : %d\n", len(ds.Matrices))
-	fmt.Printf("scale factor : %.0f\n", ds.Scale)
-	fmt.Printf("scaled unstable radius squared : %.0f\n", r.ScaledRadiusSq)
-	fmt.Printf("checks passed : %d/%d\n", countOK(r.Checks), len(r.Checks))
 }
 
 func abs2(z Complex) float64 { return z.Re*z.Re + z.Im*z.Im }

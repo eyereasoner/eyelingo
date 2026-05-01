@@ -24,7 +24,6 @@ import (
 	"fmt"
 	"math/bits"
 	"os"
-	"runtime"
 	"strconv"
 )
 
@@ -32,7 +31,6 @@ const eyelingoExampleName = "queens"
 
 // SolveStats records implementation-level counters from the backtracking run.
 // These values are not needed to solve the puzzle, but they make the Go output
-// easier to audit in the same spirit as the other translated examples.
 type SolveStats struct {
 	Nodes               uint64
 	CandidatePlacements uint64
@@ -43,7 +41,6 @@ type SolveStats struct {
 }
 
 // solveNQueens validates the board size, prepares the initial bit mask, and
-// starts the recursive search. It returns both the solution count and the audit
 // counters collected along the way.
 func solveNQueens(n int, maxPrint int) (uint64, SolveStats) {
 	if n <= 0 {
@@ -179,20 +176,6 @@ func renderReason(n int) {
 	fmt.Println("Counting continues after the printed solution limit, so the total solution count remains complete.")
 }
 
-func renderChecks(n int, count uint64, stats SolveStats) {
-	fmt.Println()
-	return
-	fmt.Printf("C1 %s - search reached depth %d.\n", statusWord(stats.MaxDepth == n || n == 0), stats.MaxDepth)
-	fmt.Printf("C2 %s - first solution places one queen in each row.\n", statusWord(len(stats.FirstSolution) == n || count == 0))
-	fmt.Printf("C3 %s - first solution columns are unique.\n", statusWord(columnsUnique(stats.FirstSolution)))
-	fmt.Printf("C4 %s - no pair of queens in the first solution shares a diagonal.\n", statusWord(diagonalsSafe(stats.FirstSolution)))
-	if n == 8 {
-		fmt.Printf("C5 %s - counted %d solutions for the normalized 8-Queens input.\n", statusWord(count == 92), count)
-	} else {
-		fmt.Printf("C5 %s - counted %d solutions for the normalized N-Queens input.\n", statusWord(count > 0 || n == 0), count)
-	}
-}
-
 func columnsUnique(board []int) bool {
 	seen := map[int]bool{}
 	for _, col := range board {
@@ -230,30 +213,8 @@ func statusWord(ok bool) string {
 	return "FAIL"
 }
 
-// renderGoAuditDetails prints implementation-specific details that help verify
 // what was solved and how the search behaved. These lines are diagnostic rather
 // than part of the mathematical N-Queens answer.
-func renderGoAuditDetails(n int, maxPrint int, count uint64, stats SolveStats) {
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("normalized board size : %d\n", n)
-	fmt.Printf("normalized max print : %d\n", maxPrint)
-	fmt.Printf("total solutions counted : %d\n", count)
-	fmt.Printf("solutions printed : %d\n", stats.SolutionsPrinted)
-	fmt.Printf("recursive nodes visited : %d\n", stats.Nodes)
-	fmt.Printf("candidate placements tried : %d\n", stats.CandidatePlacements)
-	fmt.Printf("dead-end branches : %d\n", stats.DeadEnds)
-	fmt.Printf("max recursion depth : %d\n", stats.MaxDepth)
-	fmt.Printf("bit-mask columns used : %d\n", n)
-	fmt.Printf("search complete : %s\n", yesNo(stats.MaxDepth == n || n == 0))
-	fmt.Printf("has at least one solution : %s\n", yesNo(count > 0))
-
-	if len(stats.FirstSolution) > 0 {
-		fmt.Printf("first solution columns : %s\n", formatOneBasedColumns(stats.FirstSolution))
-	} else {
-		fmt.Println("first solution columns : none")
-	}
-}
 
 // formatOneBasedColumns converts the internal zero-based board representation
 // into a compact, human-readable one-based column list.
@@ -268,7 +229,6 @@ func formatOneBasedColumns(board []int) string {
 	return result + "]"
 }
 
-// yesNo renders boolean audit fields in the same compact style as the other
 // translated examples.
 func yesNo(value bool) string {
 	if value {

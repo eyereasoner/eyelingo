@@ -22,7 +22,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"sort"
 )
 
@@ -339,7 +338,6 @@ func inferAccountRemovalWithoutSafeguards(data Dataset) (Risk, bool, error) {
 		return Risk{}, false, nil
 	}
 
-	// These checks correspond to the N3 log:notIncludes patterns.
 	if hasConstraint(perm.Constraints, LeftNoticeDays, "") || hasDutyAction(perm.Duties, ActionInform) {
 		return Risk{}, false, nil
 	}
@@ -653,18 +651,6 @@ func renderReason(data Dataset, risks []Risk) {
 	fmt.Println("Rows are sorted by descending score so the highest-risk clauses are reviewed first.")
 }
 
-func renderChecks(data Dataset, risks []Risk) {
-	levelCounts := riskLevelCounts(risks)
-	minScore, maxScore := scoreRange(risks)
-	fmt.Println()
-	return
-	fmt.Printf("C1 %s - %d risk rows were derived.\n", checkStatus(len(risks) == 4), len(risks))
-	fmt.Printf("C2 %s - ranked output is in descending score order.\n", checkStatus(rankedDescending(risks)))
-	fmt.Printf("C3 %s - score range is %d to %d.\n", checkStatus(minScore == 70 && maxScore == 100), minScore, maxScore)
-	fmt.Printf("C4 %s - high=%d moderate=%d low=%d risk levels were derived.\n", checkStatus(levelCounts["risk:HighRisk"] == 3 && levelCounts["risk:ModerateRisk"] == 1), levelCounts["risk:HighRisk"], levelCounts["risk:ModerateRisk"], levelCounts["risk:LowRisk"])
-	fmt.Printf("C5 %s - %d mitigation measures were generated.\n", checkStatus(countMitigations(risks) == 5), countMitigations(risks))
-}
-
 func checkStatus(ok bool) string {
 	if ok {
 		return "OK"
@@ -672,65 +658,7 @@ func checkStatus(ok bool) string {
 	return "FAIL"
 }
 
-// renderAuditDetails is extra Go-side output that makes the translation easier
 // to inspect without changing the primary ranked report above.
-func renderAuditDetails(data Dataset, risks []Risk) {
-	levelCounts := riskLevelCounts(risks)
-	minScore, maxScore := scoreRange(risks)
-
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("process context : %s (%s -> %s)\n", data.Process.Title, data.Process.ID, data.Process.Source)
-	fmt.Printf("consumer profile : %s needs=%d\n", data.Consumer.ID, len(data.Consumer.Needs))
-	fmt.Printf("agreement : %s policy=%s\n", data.Agreement.ID, data.Agreement.Policy.ID)
-	fmt.Printf("policy graph size : permissions=%d prohibitions=%d clauses=%d duties=%d constraints=%d\n",
-		len(data.Agreement.Policy.Permissions),
-		len(data.Agreement.Policy.Prohibitions),
-		len(data.Agreement.Clauses),
-		countDuties(data),
-		countConstraints(data),
-	)
-	fmt.Printf("risks derived : %d\n", len(risks))
-	fmt.Printf("risk levels : high=%d moderate=%d low=%d\n", levelCounts["risk:HighRisk"], levelCounts["risk:ModerateRisk"], levelCounts["risk:LowRisk"])
-	fmt.Printf("score range : min=%d max=%d\n", minScore, maxScore)
-	fmt.Printf("ranked descending : %s\n", yesNo(rankedDescending(risks)))
-	fmt.Printf("mitigation measures : %d\n", countMitigations(risks))
-	fmt.Printf("R1 account removal without safeguards : %s\n", yesNo(ruleTriggered(risks, ":PermDeleteAccount")))
-	fmt.Printf("R2 change terms notice too short : %s\n", yesNo(ruleTriggered(risks, ":PermChangeTerms")))
-	fmt.Printf("R3 share data without consent : %s\n", yesNo(ruleTriggered(risks, ":PermShareData")))
-	fmt.Printf("R4 export data prohibited : %s\n", yesNo(ruleTriggered(risks, ":ProhibitExportData")))
-
-	fmt.Println("need weights:")
-	for _, need := range sortedNeeds(data.Consumer.Needs) {
-		if need.MinNoticeDays > 0 {
-			fmt.Printf("%s importance=%d minNoticeDays=%d\n", need.ID, need.Importance, need.MinNoticeDays)
-		} else {
-			fmt.Printf("%s importance=%d\n", need.ID, need.Importance)
-		}
-	}
-
-	fmt.Println("policy actions:")
-	for _, line := range policyActionLines(data) {
-		fmt.Printf("%s\n", line)
-	}
-
-	fmt.Println("derived risk rows:")
-	for rank, risk := range risks {
-		fmt.Printf(
-			" #%d %s clause=%s raw=%d normalized=%d level=%s severity=%s violates=%s source=%s mitigations=%d\n",
-			rank+1,
-			risk.ID,
-			risk.Clause.ID,
-			risk.ScoreRaw,
-			risk.Score,
-			risk.RiskLevel,
-			risk.Severity,
-			risk.ViolatesNeed,
-			risk.SourceRuleID,
-			len(risk.Mitigations),
-		)
-	}
-}
 
 // countDuties counts nested ODRL duty blocks in all translated permissions.
 func countDuties(data Dataset) int {
@@ -817,7 +745,6 @@ func ruleTriggered(risks []Risk, sourceRuleID string) bool {
 	return false
 }
 
-// sortedNeeds returns consumer needs in stable ID order for deterministic audit output.
 func sortedNeeds(needs map[string]Need) []Need {
 	ids := make([]string, 0, len(needs))
 	for id := range needs {
@@ -879,7 +806,6 @@ func main() {
 	renderReason(data, risks)
 
 	// Keep boolValue referenced because the fixture uses boolean operands in the
-	// missing-consent check. A future dataset variant can add that safeguard by
 	// appending Constraint{LeftOperand: LeftConsent, Operator: OperatorEQ,
 	// RightOperand: boolValue(true)} to :PermShareData.
 	_ = boolValue

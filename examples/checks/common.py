@@ -1,9 +1,3 @@
-# Shared support for independent Python checks.
-#
-# The Go examples do not import this package. The test runner executes these
-# Python checks after the Go example has emitted its Answer and Reason why
-# sections.
-
 from __future__ import annotations
 
 import json

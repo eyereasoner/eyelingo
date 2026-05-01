@@ -14,7 +14,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -268,29 +267,4 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Println("The conflict resolver permits sick ProgrammingWork at Home but denies Office work because of colleague-infection risk.")
 	fmt.Println("Since Home is permitted and Office is denied, the combined recommendation is RemoteWorkOnly.")
 	fmt.Println()
-}
-
-func printChecks(analysis Analysis) {
-	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("person : %s condition=%s health=%s\n", ds.Person.Name, ds.Person.Condition, analysis.HealthStatus)
-	fmt.Printf("doctor can do jobs : %s\n", strings.Join(ds.DoctorCanDoJobs, ", "))
-	fmt.Printf("requests evaluated : %d\n", len(analysis.Decisions))
-	for _, decision := range analysis.Decisions {
-		fmt.Printf("decision trace : id=%s job=%s location=%s raw=%s status=%s effective=%s reasons=%s\n", decision.Request.ID, decision.Request.Job, decision.Request.Location, strings.Join(decision.RawDecisions, "+"), decision.DecisionStatus, decision.EffectiveDecision, strings.Join(decision.Reasons, "; "))
-	}
-	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
 }

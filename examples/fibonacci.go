@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"math/big"
 	"os"
-	"runtime"
 	"sort" // needed for stable output ordering
 )
 
@@ -29,7 +28,6 @@ const eyelingoExampleName = "fibonacci"
 // ---------- expected values ----------
 // These are the exact decimal representations of F(n) for selected n,
 // taken from the well‑known Fibonacci sequence.  They are used as
-// ground truth for the checks.
 
 var expected = map[int]string{
 	0:     "0",
@@ -75,8 +73,6 @@ func sortedKeys(m map[int]string) []int {
 	sort.Ints(keys)
 	return keys
 }
-
-// ---------- checks ----------
 
 type Checks struct {
 	BaseCasesCorrect   bool
@@ -196,44 +192,7 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
 	fmt.Println("indices as large as 10000.")
 	fmt.Println()
 
-	// --- Check ---
 	return
-	if cks.BaseCasesCorrect {
-		fmt.Println("C1 OK - base cases F(0)=0 and F(1)=1 hold.")
-	} else {
-		fmt.Println("C1 FAIL - base cases incorrect.")
-	}
-	if cks.RecurrenceHolds {
-		fmt.Println("C2 OK - recurrence holds for all computed steps.")
-	} else {
-		fmt.Println("C2 FAIL - recurrence violated.")
-	}
-	if cks.AllTargetsMatch {
-		fmt.Println("C3 OK - all requested Fibonacci numbers match expected values:")
-		// Print in sorted order to guarantee stable output
-		for _, idx := range sortedKeys(expected) {
-			fmt.Printf("    F(%d) = %s\n", idx, abbreviated(seq[idx]))
-		}
-	} else {
-		fmt.Println("C3 FAIL - at least one target value does not match.")
-	}
-	if cks.NonNegative {
-		fmt.Println("C4 OK - all Fibonacci numbers are non‑negative.")
-	} else {
-		fmt.Println("C4 FAIL - negative value encountered.")
-	}
-	if cks.MonotonicFromStart {
-		fmt.Println("C5 OK - the sequence is non‑decreasing from F(2) onward.")
-	} else {
-		fmt.Println("C5 FAIL - monotonic property violated.")
-	}
-	fmt.Println()
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("max computed index : %d\n", target)
-	fmt.Printf("computed F(%d) length : %d digits\n", target, len(seq[target].String()))
-	fmt.Printf("checks passed : %d/5\n", checkCount(cks))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(cks)))
 }
 
 func yesNo(value bool) string {

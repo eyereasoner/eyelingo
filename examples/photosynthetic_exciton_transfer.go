@@ -7,7 +7,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "photosynthetic_exciton_transfer"
@@ -129,22 +128,6 @@ func printReport(ds Dataset, r Result) {
 	fmt.Println("The detuned contrast complex has weak coupling, absent delocalization, no vibronic bridge, strong dephasing, and a trapping mismatch, so the same efficient delivery task is blocked.")
 	fmt.Println()
 	return
-	for _, c := range r.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("translated source : %s\n", ds.Source)
-	fmt.Printf("tuned complex : %s\n", r.Tuned.Name)
-	fmt.Printf("contrast complex : %s\n", r.Detuned.Name)
-	fmt.Printf("possible tuned tasks : %d\n", len(r.Can[r.Tuned.Name]))
-	fmt.Printf("impossible contrast tasks : %d\n", len(r.Cannot[r.Detuned.Name]))
-	fmt.Printf("checks passed : %d/%d\n", countOK(r.Checks), len(r.Checks))
 }
 
 func has(xs []string, x string) bool {

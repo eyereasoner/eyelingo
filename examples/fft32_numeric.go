@@ -3,7 +3,6 @@
 // Inspired by Eyeling's `examples/fft32-numeric.n3`.
 //
 // The example computes full 32-point Fourier spectra for several waveform
-// fixtures and audits the dominant bins, flat-spectrum impulse behavior,
 // conjugate symmetry, and Parseval energy preservation.
 package main
 
@@ -13,7 +12,6 @@ import (
 	"math"
 	"math/cmplx"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -316,21 +314,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("The checks verify dominant bins, magnitudes, flat impulse spectrum, conjugate symmetry, and energy preservation.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("source example : %s\n", ds.SourceExample)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("sample count per waveform : %d\n", ds.Length)
-	fmt.Printf("waveform count : %d\n", len(ds.Waveforms))
-	fmt.Printf("complex bin sums : %d\n", a.Operations)
-	fmt.Printf("tolerance : %.1e\n", ds.Tolerance)
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

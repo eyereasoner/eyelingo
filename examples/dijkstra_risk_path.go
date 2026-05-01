@@ -10,7 +10,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -150,21 +149,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("The selected route balances cost and risk through DepotB and LabD.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("start : %s\n", ds.Start)
-	fmt.Printf("goal : %s\n", ds.Goal)
-	fmt.Printf("edges loaded : %d\n", len(ds.Edges))
-	fmt.Printf("risk weight : %.2f\n", ds.RiskWeight)
-	fmt.Printf("visited nodes : %d\n", a.Visited)
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

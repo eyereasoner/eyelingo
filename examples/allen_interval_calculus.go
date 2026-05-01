@@ -11,7 +11,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"strings"
 	"time"
 )
@@ -223,25 +222,8 @@ func printReport(ds Dataset, analysis Analysis) {
 	fmt.Println("## Reason why")
 	fmt.Println("The example completes any interval that has a start plus duration before comparing endpoints.")
 	fmt.Println("Each ordered pair is then classified with the 13 Allen base relations, including the six converse relations.")
-	fmt.Println("The relation rules are purely endpoint constraints, so the result is deterministic and auditable.")
+	fmt.Println("The relation rules are purely endpoint constraints, so the result is deterministic and traceable.")
 	fmt.Println("The duration-derived intervals participate in the same relation table as directly supplied intervals.")
 	fmt.Println()
 	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("intervals loaded : %d\n", len(analysis.Intervals))
-	fmt.Printf("duration-completed intervals : %d\n", analysis.Completed)
-	fmt.Printf("ordered pairs classified : %d\n", len(analysis.Relations))
-	fmt.Println("relation vocabulary : before, meets, overlaps, starts, during, finishes, equals, after, metBy, overlappedBy, startedBy, contains, finishedBy")
-	fmt.Printf("required relations checked : %d\n", len(ds.Expected.RequiredRelations))
-	fmt.Printf("checks passed : %d/%d\n", countOK(analysis.Checks), len(analysis.Checks))
 }

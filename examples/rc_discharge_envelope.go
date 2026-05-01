@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "rc_discharge_envelope"
@@ -123,22 +122,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("The first such witness occurs before the configured maximum step.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("sample period : %.3f s\n", ds.SamplePeriod)
-	fmt.Printf("time constant : %.3f s\n", ds.TimeConstant)
-	fmt.Printf("max step : %d\n", ds.MaxStep)
-	fmt.Printf("initial voltage : %.3f V\n", ds.InitialVoltage)
-	fmt.Printf("tolerance : %.3f V\n", ds.Tolerance)
-	fmt.Printf("envelope rows : %d\n", len(a.Envelope))
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

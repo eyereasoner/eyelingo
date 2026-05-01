@@ -23,7 +23,6 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "control_system"
@@ -256,8 +255,6 @@ func applyPNDFeedbackRule(in Input) (PNDFeedbackControl, error) {
 	}, nil
 }
 
-// ---------- checks ----------
-
 func performChecks(in Input, result InferenceResult) Checks {
 	const tolerance = 1e-9
 	var checks Checks
@@ -367,7 +364,6 @@ func nearlyEqual(a, b, tolerance float64) bool {
 func renderArcOutput(data Input, result InferenceResult) {
 	ff := result.FeedForward
 	fb := result.PNDFeedback
-	chk := result.Checks
 
 	fmt.Println("# Control System — ARC-style control-system example")
 	fmt.Println()
@@ -389,38 +385,6 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Println()
 
 	return
-	fmt.Printf("C1 %s\n", chk.C1BackwardLessThan)
-	fmt.Printf("C2 %s\n", chk.C2BackwardNotLessThan)
-	fmt.Printf("C3 %s\n", chk.C3FeedForwardGuard)
-	fmt.Printf("C4 %s\n", chk.C4FeedForwardArithmetic)
-	fmt.Printf("C5 %s\n", chk.C5FeedbackError)
-	fmt.Printf("C6 %s\n", chk.C6DifferentialError)
-	fmt.Printf("C7 %s\n", chk.C7NonlinearPart)
-	fmt.Printf("C8 %s\n", chk.C8FeedbackControlSum)
-	fmt.Println()
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Println("source example : eyeling examples/control-system.n3")
-	fmt.Println("rules source : eye reasoning/control-system/rules-001.n3")
-	fmt.Printf("input1 measurement1 : (%.6f %.6f)\n", data.Input1.Measurement1[0], data.Input1.Measurement1[1])
-	fmt.Printf("input2 measurement2 : %t\n", data.Input2.Measurement2)
-	fmt.Printf("input3 measurement3 : %.6f\n", data.Input3.Measurement3)
-	fmt.Printf("disturbance1 measurement3 : %.6f\n", data.Disturbance1.Measurement3)
-	fmt.Printf("disturbance2 measurement1 : (%.6f %.6f)\n", data.Disturbance2.Measurement1[0], data.Disturbance2.Measurement1[1])
-	fmt.Printf("state1 observation1 : %.6f\n", data.State1.Observation1)
-	fmt.Printf("state2 observation2 : %t\n", data.State2.Observation2)
-	fmt.Printf("state3 observation3 : %.6f\n", data.State3.Observation3)
-	fmt.Printf("output2 measurement4 : %.6f\n", data.Output2.Measurement4)
-	fmt.Printf("output2 target2 : %.6f\n", data.Output2.Target2)
-	fmt.Printf("feedforward product part : %.6f\n", ff.ProductPart)
-	fmt.Printf("feedforward compensation part : %.6f\n", ff.CompensationPart)
-	fmt.Printf("feedback error : %.6f\n", fb.Error)
-	fmt.Printf("feedback differential error : %.6f\n", fb.DifferentialError)
-	fmt.Printf("feedback proportional part : %.6f\n", fb.ProportionalPart)
-	fmt.Printf("feedback nonlinear factor : %.6f\n", fb.NonlinearFactor)
-	fmt.Printf("feedback nonlinear part : %.6f\n", fb.NonlinearPart)
-	fmt.Printf("checks passed : %d/8\n", checkCount(chk))
-	fmt.Printf("control rules consistent : %s\n", yesNo(allChecksPass(chk)))
 }
 
 func yesNo(value bool) string {

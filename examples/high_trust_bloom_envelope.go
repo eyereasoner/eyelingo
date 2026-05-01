@@ -3,7 +3,6 @@
 // A self-contained Go translation inspired by Eyeling's
 // `examples/high-trust-rdf-bloom-envelope.n3`.
 //
-// The scenario checks whether an RDF graph artifact can use a Bloom prefilter
 // without making correctness depend on it. Exact maybe-positive results must be
 // confirmed against the canonical graph, and a decimal certificate bounds the
 // expected false-positive workload.
@@ -17,7 +16,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"math"
-	"runtime"
 )
 
 const eyelingoExampleName = "high_trust_bloom_envelope"
@@ -168,31 +166,4 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Printf("That certificate bounds (1-exp(-lambda))^k below the %.3f false-positive budget and keeps extra exact confirmations below %.1f.\n", ds.Artifact.FPRateBudget, ds.Artifact.ExtraExactLookupsBudget)
 	fmt.Println("Correctness never depends on the Bloom filter alone: maybe-positive answers must be confirmed against the canonical graph.")
 	fmt.Println()
-}
-
-func printChecks(analysis Analysis) {
-	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("artifact : %s\n", ds.Artifact.ID)
-	fmt.Printf("triple counts : canonical=%d spoIndex=%d agreement=%v\n", ds.Artifact.CanonicalTripleCount, ds.Artifact.SPOIndexTripleCount, analysis.IndexAgreement)
-	fmt.Printf("bloom parameters : bits=%d hashFunctions=%d lambda=%.10f\n", ds.Artifact.BloomBits, ds.Artifact.HashFunctions, analysis.Lambda)
-	fmt.Printf("certificate : symbol=%s certifiedLambda=%.10f expLower=%.10f expUpper=%.10f certified=%v\n", ds.Artifact.ExactTranscendentalSymbol, ds.Artifact.CertifiedLambda, ds.Artifact.ExpMinusLambdaLower, ds.Artifact.ExpMinusLambdaUpper, analysis.IntervalCertified)
-	fmt.Printf("fp envelope : lower=%.9f upper=%.9f budget=%.3f within=%v\n", analysis.FPRateLower, analysis.FPRateUpper, ds.Artifact.FPRateBudget, analysis.WithinFPRateBudget)
-	fmt.Printf("lookup budget : negativeLookups=%d extraUpper=%.3f budget=%.1f within=%v\n", ds.Artifact.NegativeLookupsPerBatch, analysis.ExpectedExtraLookupUpper, ds.Artifact.ExtraExactLookupsBudget, analysis.WithinExactLookupBudget)
-	fmt.Printf("policies : maybePositive=%s definiteNegative=%s\n", ds.Policies.MaybePositivePolicy, ds.Policies.DefiniteNegativePolicy)
-	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("decision : %s\n", analysis.Decision)
 }

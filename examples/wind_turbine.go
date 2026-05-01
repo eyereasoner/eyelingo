@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -148,21 +147,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("Energy is accumulated by multiplying each interval power by the ten-minute interval duration.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("samples evaluated : %d\n", len(ds.WindSpeedsMS))
-	fmt.Printf("interval minutes : %.1f\n", ds.IntervalMinutes)
-	fmt.Printf("partial intervals : %d\n", countState(a.Intervals, "partial"))
-	fmt.Printf("rated intervals : %d\n", countState(a.Intervals, "rated"))
-	fmt.Printf("stopped intervals : %d\n", countState(a.Intervals, "stopped"))
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

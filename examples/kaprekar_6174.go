@@ -25,7 +25,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -166,7 +165,6 @@ func kaprekarStep(n int) int {
 }
 
 // directKaprekarStep is a slower, more literal version of the rule. It is used
-// only as a check that the optimized identity computes the same value.
 func directKaprekarStep(n int) int {
 	digits := digitsAscending(n)
 	ascending := 1000*digits[0] + 100*digits[1] + 10*digits[2] + digits[3]
@@ -272,34 +270,6 @@ func printReason(a Analysis) {
 		fmt.Printf("  %s -> (%s)\n", fourDigits(start), formatPath(a.Omitted[start]))
 	}
 	fmt.Println()
-}
-
-func printChecks(checks []Check) {
-	return
-	for index, check := range checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("C%d %s - %s\n", index+1, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(a Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Println("source file : kaprekar-6174.n3")
-	fmt.Printf("question : %s\n", a.Question)
-	fmt.Printf("starts enumerated : %d\n", a.Stats.StartsEnumerated)
-	fmt.Printf("optimized step checks : %d\n", a.Stats.IdentityChecks)
-	fmt.Printf("direct step mismatches : %d\n", a.Stats.DirectStepMismatches)
-	fmt.Printf("bounded step applications : %d\n", a.Stats.StepFactsComputed)
-	fmt.Printf("emitted kaprekar facts : %d\n", a.Stats.ChainsEmitted)
-	fmt.Printf("omitted zero-basin starts : %d\n", a.Stats.ZeroBasinStarts)
-	fmt.Printf("max steps to target : %d\n", a.Stats.MaxStepsToTarget)
-	fmt.Printf("histogram : %s\n", formatHistogram(a.Stats.HistogramByStepCount))
-	fmt.Printf("checks passed : %d/%d\n", countChecks(a.Checks), len(a.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(a.Checks)))
 }
 
 func formatPath(path []int) string {

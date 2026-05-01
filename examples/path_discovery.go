@@ -13,7 +13,6 @@
 // 7,698 airport labels and 37,505 nepo:hasOutboundRouteTo facts. The bounded
 // query still touches only the 338 outbound candidates reachable from
 // Ostend-Bruges within the two-stopover bound, but the full graph is loaded
-// and checked.
 //
 // This is intentionally not a generic RDF/N3 reasoner. The concrete route rules
 // are represented as ordinary Go functions, and the concrete airport labels and
@@ -30,8 +29,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"os"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -412,7 +409,6 @@ func status(ok bool) string {
 func main() {
 	data := exampleinput.Load(eyelingoExampleName, Dataset{})
 	result := infer(data)
-	checksPassed, checksTotal := countChecks(result.Checks)
 
 	fmt.Println("# Path Discovery")
 
@@ -454,53 +450,4 @@ func main() {
 
 	fmt.Println()
 	return
-	fmt.Printf("C1 %s - source and destination airport labels are known.\n", status(result.Checks.SourceAndDestinationKnown))
-	fmt.Printf("C2 %s - Ostend-Bruges has one outbound route in the full N3 graph, to Liège Airport.\n", status(result.Checks.FirstHopMatchesN3Facts))
-	fmt.Printf("C3 %s - the discovered route set matches the N3 query answer.\n", status(result.Checks.RouteSetMatchesN3Query))
-	fmt.Printf("C4 %s - no direct or one-stop route exists under the same bound.\n", status(result.Checks.NoShorterRouteExists))
-	fmt.Printf("C5 %s - every discovered route has at most two stopovers.\n", status(result.Checks.RoutesWithinStopoverLimit))
-	fmt.Printf("C6 %s - every hop is backed by a nepo:hasOutboundRouteTo fact.\n", status(result.Checks.EveryHopHasFact))
-	fmt.Printf("C7 %s - no route revisits an airport.\n", status(result.Checks.NoAirportRevisited))
-	fmt.Printf("C8 %s - the Go translation loaded every airport label and outbound-route fact from the N3 source.\n", status(result.Checks.FullSourceGraphLoaded))
-	fmt.Printf("C9 %s - route output is sorted deterministically by airport labels.\n", status(result.Checks.RoutesSortedDeterministic))
-
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", data.Question)
-	fmt.Printf("source airport : %s (%s)\n", data.label(data.SourceID), data.SourceID)
-	fmt.Printf("destination airport : %s (%s)\n", data.label(data.DestinationID), data.DestinationID)
-	fmt.Printf("source graph airport labels : %d\n", sourceGraphAirportLabels)
-	fmt.Printf("source graph outbound facts : %d\n", sourceGraphOutboundFacts)
-	fmt.Printf("translated full airport labels : %d\n", result.LoadedAirportLabels)
-	fmt.Printf("translated full outbound-route facts : %d\n", result.LoadedOutboundFacts)
-	fmt.Printf("airport terms appearing in outbound facts : %d\n", result.EdgeEndpointAirports)
-	fmt.Printf("bounded search outbound facts touched : %d\n", result.Stats.EdgeTests)
-	fmt.Printf("max stopovers : %d\n", maxStopovers)
-	fmt.Printf("max hops : %d\n", maxHops)
-	fmt.Printf("routes discovered : %d\n", len(result.Routes))
-	fmt.Printf("mandatory first hop : %s (%s)\n", data.label(mandatoryFirstHop), mandatoryFirstHop)
-	fmt.Println("expanded airports:")
-	for _, airport := range result.ExpandedAirports {
-		fmt.Printf("%s (%s)\n", data.label(airport), airport)
-	}
-	for i, route := range result.Routes {
-		fmt.Printf("route %d terms : %s\n", i+1, routeTerms(route))
-		fmt.Printf("route %d labels : %s\n", i+1, routeLabel(data, route))
-		fmt.Printf("route %d hops : %d\n", i+1, route.Hops())
-		fmt.Printf("route %d stopovers : %d\n", i+1, route.Stopovers())
-	}
-	fmt.Printf("search recursive calls : %d\n", result.Stats.RecursiveCalls)
-	fmt.Printf("search edge tests : %d\n", result.Stats.EdgeTests)
-	fmt.Printf("search edges extended : %d\n", result.Stats.EdgesExtended)
-	fmt.Printf("search revisit prunes : %d\n", result.Stats.RevisitPrunes)
-	fmt.Printf("search depth-limit leaves : %d\n", result.Stats.DepthLimitLeaves)
-	fmt.Printf("search dead ends : %d\n", result.Stats.DeadEnds)
-	fmt.Printf("search routes emitted : %d\n", result.Stats.RoutesEmitted)
-	fmt.Printf("search max depth : %d\n", result.Stats.MaxDepth)
-	fmt.Printf("checks passed : %d/%d\n", checksPassed, checksTotal)
-	fmt.Printf("all checks pass : %s\n", map[bool]string{true: "yes", false: "no"}[checksPassed == checksTotal])
-
-	if checksPassed != checksTotal {
-		os.Exit(1)
-	}
 }

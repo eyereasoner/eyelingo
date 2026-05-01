@@ -25,7 +25,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"math"
-	"runtime"
 )
 
 const eyelingoExampleName = "lldm"
@@ -79,7 +78,6 @@ type InferenceResult struct {
 	Alarm bool
 }
 
-// Checks mirrors the proof obligations from the N3 axioms.
 type Checks struct {
 	PointsOnLines        bool
 	Perpendicular        bool
@@ -181,28 +179,21 @@ func infer(m Measurement) InferenceResult {
 	}
 }
 
-// ---------- checks ----------
-
 func performChecks(m Measurement, d Derived) Checks {
 	const eps = 1e-9
 
-	// Check that p5 is incident on L1 and L3.
 	yL1atP5 := d.CL1*d.P5x + (m.P1y - d.CL1*m.P1x)
 	yL3atP5 := d.CL3*d.P5x + (m.P3y - d.CL3*m.P3x)
 	p5onLines := math.Abs(d.P5y-yL1atP5) < eps && math.Abs(d.P5y-yL3atP5) < eps
 
-	// Check that p6 is incident on L1 and L4.
 	yL1atP6 := d.CL1*d.P6x + (m.P1y - d.CL1*m.P1x)
 	yL4atP6 := d.CL3*d.P6x + (m.P4y - d.CL3*m.P4x)
 	p6onLines := math.Abs(d.P6y-yL1atP6) < eps && math.Abs(d.P6y-yL4atP6) < eps
 
-	// Check perpendicular: product of slopes should be -1.
 	perp := math.Abs(d.CL1*d.CL3+1.0) < eps
 
-	// Check that squared sums are non‑negative (always true for squares).
 	distsNonNeg := d.Ssd53 >= 0 && d.Ssd64 >= 0
 
-	// Check that dCm is within reasonable range (not NaN or Inf).
 	dcmOk := !math.IsNaN(d.D) && !math.IsInf(d.D, 0)
 
 	return Checks{
@@ -275,53 +266,7 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 	fmt.Println("|dCm| > 1.25 cm.")
 	fmt.Println()
 
-	// --- Check ---
 	return
-	if checks.Perpendicular {
-		fmt.Println("C1 OK - L1 is perpendicular to L3 and L4 (slopes product ≈ -1).")
-	} else {
-		fmt.Println("C1 FAIL - L1 not perpendicular to L3/L4.")
-	}
-	if checks.P5Intersection {
-		fmt.Println("C2 OK - p5 lies on both L1 and L3.")
-	} else {
-		fmt.Println("C2 FAIL - p5 not incident on L1∩L3.")
-	}
-	if checks.P6Intersection {
-		fmt.Println("C3 OK - p6 lies on both L1 and L4.")
-	} else {
-		fmt.Println("C3 FAIL - p6 not incident on L1∩L4.")
-	}
-	if checks.DistancesNonNegative {
-		fmt.Println("C4 OK - squared distances are non‑negative.")
-	} else {
-		fmt.Println("C4 FAIL - negative squared distance.")
-	}
-	if checks.DcmInRange {
-		fmt.Println("C5 OK - dCm is a finite number.")
-	} else {
-		fmt.Println("C5 FAIL - dCm is NaN or Inf.")
-	}
-	fmt.Println()
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("input points : p1(%.1f, %.1f) p2(%.1f, %.1f) p3(%.1f, %.1f) p4(%.1f, %.1f)\n",
-		res.Input.P1x, res.Input.P1y,
-		res.Input.P2x, res.Input.P2y,
-		res.Input.P3x, res.Input.P3y,
-		res.Input.P4x, res.Input.P4y,
-	)
-	fmt.Printf("cL1 (slope L1)          : %.8f\n", res.D.CL1)
-	fmt.Printf("cL3 (slope L3, L4)      : %.8f\n", res.D.CL3)
-	fmt.Printf("p5 (x, y)               : %.8f, %.8f\n", res.D.P5x, res.D.P5y)
-	fmt.Printf("p6 (x, y)               : %.8f, %.8f\n", res.D.P6x, res.D.P6y)
-	fmt.Printf("d53                     : %.8f cm\n", res.D.D53)
-	fmt.Printf("d64                     : %.8f cm\n", res.D.D64)
-	fmt.Printf("dCm (LL discrepancy)    : %.8f cm\n", res.D.D)
-	fmt.Printf("alarm threshold         : ±1.25 cm\n")
-	fmt.Printf("LLD alarm               : %v\n", res.Alarm)
-	fmt.Printf("checks passed           : %d/5\n", checkCount(checks))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(checks)))
 }
 
 func yesNo(value bool) string {

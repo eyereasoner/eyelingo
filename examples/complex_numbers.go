@@ -11,7 +11,7 @@
 //
 // This Go version keeps those rules explicit instead of using Go's cmplx.Pow,
 // cmplx.Asin, or cmplx.Acos helpers. That makes the same mathematical proof
-// steps visible and auditable.
+// steps visible and traceable.
 //
 // Run:
 //
@@ -24,7 +24,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"math"
-	"runtime"
 	"strings"
 )
 
@@ -386,59 +385,6 @@ func printReason(a Analysis) {
 		fmt.Printf("%s %s: E=%s F=%s lnTerm=%s result=%s; %s\n", c.ID, c.Operation, formatFloat(c.E), formatFloat(c.F), formatFloat(c.LogTerm), formatComplex(c.Result), c.Reason)
 	}
 	fmt.Println()
-}
-
-func printChecks(a Analysis) {
-	return
-	for _, check := range a.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.Label, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(a Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", a.Question)
-	fmt.Println("translated source : complex.n3")
-	fmt.Printf("primitive test facts : %d\n", a.PrimitiveFacts)
-	fmt.Printf("polar derivations : %d\n", a.PolarDerivations)
-	fmt.Printf("rule applications : %d\n", a.RuleApplications)
-	fmt.Println("N3 expressions:")
-	for _, c := range a.ExponentCases {
-		fmt.Printf("%s %s\n", c.ID, c.Expression)
-	}
-	for _, c := range a.InverseCases {
-		fmt.Printf("%s %s\n", c.ID, c.Expression)
-	}
-	fmt.Println("dial details:")
-	for _, c := range a.ExponentCases {
-		fmt.Printf("%s base=%s absAngle=%s theta=%s rule=%s\n", c.ID, formatComplex(c.Base), formatFloat(c.Polar.BaseAngle), formatFloat(c.Polar.Theta), c.Polar.DialRule)
-	}
-	fmt.Println("derived exponentiation facts:")
-	for _, c := range a.ExponentCases {
-		fmt.Printf("%s base=%s power=%s result=%s expected=%s\n", c.ID, formatComplex(c.Base), formatComplex(c.Power), formatComplex(c.Result), formatComplex(c.Expected))
-	}
-	fmt.Println("derived inverse-trig facts:")
-	for _, c := range a.InverseCases {
-		fmt.Printf("%s input=%s result=%s expected=%s leftRadius=%s rightRadius=%s\n", c.ID, formatComplex(c.Input), formatComplex(c.Result), formatComplex(c.Expected), formatFloat(c.LeftRadius), formatFloat(c.RightRadius))
-	}
-	fmt.Printf("finite output components : %d/12\n", a.FiniteValues)
-	passed := 0
-	for _, check := range a.Checks {
-		if check.OK {
-			passed++
-		}
-	}
-	fmt.Printf("checks passed : %d/%d\n", passed, len(a.Checks))
-	if passed == len(a.Checks) {
-		fmt.Println("all checks pass : yes")
-	} else {
-		fmt.Println("all checks pass : no")
-	}
 }
 
 func shortName(id string) string {

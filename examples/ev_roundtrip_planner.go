@@ -16,7 +16,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 )
@@ -285,37 +284,4 @@ func printReason(ds Dataset, analysis Analysis) {
 		)
 	}
 	fmt.Println()
-}
-
-func printChecks(analysis Analysis) {
-	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	best := analysis.BestPlan
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("vehicle : %s start=%s battery=%s pass=%s\n", ds.Vehicle.ID, ds.Vehicle.At, ds.Vehicle.Battery, ds.Vehicle.Pass)
-	fmt.Printf("goal : at=%s battery=%s pass=%s\n", ds.Goal.At, ds.Goal.Battery, ds.Goal.Pass)
-	fmt.Printf("thresholds : minBelief=%.2f maxCost=%.3f maxDuration=%.1f fuel=%d\n", ds.Thresholds.MinBelief, ds.Thresholds.MaxCost, ds.Thresholds.MaxDuration, ds.FuelSteps)
-	fmt.Printf("actions : %d\n", len(ds.Actions))
-	fmt.Printf("acceptable plans : %d\n", len(analysis.AcceptablePlans))
-	fmt.Printf("selected final state : %s battery=%s pass=%s\n", best.FinalState.At, best.FinalState.Battery, best.FinalState.Pass)
-	fmt.Printf("selected actions : %s\n", strings.Join(best.Actions, " -> "))
-	fmt.Printf("selected metrics : duration=%.1f cost=%.3f belief=%.6f comfort=%.6f fuelRemaining=%d\n", best.Duration, best.Cost, best.Belief, best.Comfort, best.FuelRemaining)
-	fmt.Printf("search recursive calls : %d\n", analysis.Stats.RecursiveCalls)
-	fmt.Printf("search action tests : %d\n", analysis.Stats.ActionTests)
-	fmt.Printf("search actions taken : %d\n", analysis.Stats.ActionsTaken)
-	fmt.Printf("search state prunes : %d\n", analysis.Stats.StatePrunes)
-	fmt.Printf("search max depth : %d\n", analysis.Stats.MaxDepth)
-	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
 }

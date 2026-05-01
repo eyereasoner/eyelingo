@@ -10,7 +10,6 @@
 //
 // This program is intentionally not a generic RDF, ODRL, crypto, or N3 reasoner.
 // It translates the concrete facts and rules for this example into ordinary Go
-// structs and checks. That keeps the main idea visible: private micro-signals can
 // become a minimal, signed, expiring decision object for a public policy board.
 //
 // Run:
@@ -23,7 +22,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 	"time"
@@ -532,32 +530,6 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Printf("Surveillance reuse is blocked by a prohibition on %s for purpose \"%s\".\n", ds.Policy.ProhibitionAction, ds.Policy.ProhibitionPurpose)
 	fmt.Printf("Deletion duty time : %s\n", ds.BoardDutyAt)
 	fmt.Println()
-}
-
-func printChecks(checks []Check) {
-	return
-	for _, check := range checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.Label, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("source file : %s\n", sourceFile)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("policy profile : %s\n", ds.Policy.Profile)
-	fmt.Printf("packages : %d\n", len(ds.Packages))
-	fmt.Printf("active needs : %d/%d\n", analysis.ActiveNeedCount, ds.Insight.ThresholdScore)
-	fmt.Printf("recommended package id : %s\n", analysis.RecommendedPackage.PackageID)
-	fmt.Printf("files written : %d/%d\n", ds.FilesWritten, ds.ExpectedFilesWritten)
-	fmt.Printf("audit entries : %d\n", ds.AuditEntries)
-	fmt.Printf("checks passed : %d/%d\n", passedChecks(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(analysis.Checks)))
 }
 
 func clusterSummary(clusters []IndustrialCluster) string {

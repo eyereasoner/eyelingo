@@ -11,7 +11,6 @@
 //
 // This Go version keeps the same nine-round schedule from the N3 file:
 // P1/P3 eat, then P2/P4 eat, then P5 eats, repeated three times. Goroutines are
-// used inside each round to model philosophers making requests and checking
 // whether they can eat. State updates are still applied phase by phase so the
 // run is deterministic and easy to compare with the source trace.
 //
@@ -25,7 +24,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"sort"
 	"strings"
 	"sync"
@@ -427,36 +425,6 @@ func printReason(a Analysis) {
 		fmt.Printf("    meals : %s\n", formatMealNames(trace.Meals))
 	}
 	fmt.Println()
-}
-
-func printChecks(checks []Check) {
-	return
-	for i, check := range checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("C%d %s - %s\n", i+1, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(a Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("source file : %s\n", sourceFile)
-	fmt.Printf("question : %s\n", a.Question)
-	fmt.Printf("philosophers : %s\n", strings.Join(philosophers, ","))
-	fmt.Printf("forks : %s\n", strings.Join(forks, ","))
-	fmt.Printf("rounds run : %d\n", a.Stats.RoundsRun)
-	fmt.Printf("requests derived : %d\n", a.Stats.RequestsDerived)
-	fmt.Printf("transfers sent : %d\n", a.Stats.TransfersSent)
-	fmt.Printf("keep fork facts : %d\n", a.Stats.KeepFacts)
-	fmt.Printf("meals derived : %d\n", a.Stats.MealsDerived)
-	fmt.Printf("goroutine phase batches : %d\n", a.Stats.GoroutineBatches)
-	fmt.Printf("meal counts : %s\n", formatMealCounts(a.MealCounts))
-	fmt.Printf("final state : %s\n", formatState(a.FinalState))
-	fmt.Printf("checks passed : %d/%d\n", countPassed(a.Checks), len(a.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(a.Checks)))
 }
 
 func forkOnSide(philosopher string, side string) string {

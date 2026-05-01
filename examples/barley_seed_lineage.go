@@ -10,7 +10,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -176,21 +175,4 @@ func printReport(ds Dataset, analysis Analysis) {
 	fmt.Println("Only mainLine closes the life cycle and adaptively persists in the saline selection environment.")
 	fmt.Println()
 	return
-	for _, c := range analysis.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("lineages loaded : %d\n", len(ds.Lineages))
-	fmt.Printf("world no-design laws : %t\n", ds.World.NoDesignLaws)
-	fmt.Printf("selection favours : %s\n", ds.World.SelectionFavours)
-	fmt.Printf("evolvable count : %d\n", len(evolvableNames(analysis.Results)))
-	fmt.Printf("blocked count : %d\n", len(blockedNames(analysis.Results)))
-	fmt.Printf("checks passed : %d/%d\n", countOK(analysis.Checks), len(analysis.Checks))
 }

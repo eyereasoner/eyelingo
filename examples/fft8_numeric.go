@@ -2,7 +2,6 @@
 //
 // Inspired by Eyeling's `examples/fft8-numeric.n3`.
 //
-// The example computes an 8-point discrete Fourier transform and audits the
 // dominant frequency bins of a single-cycle sine wave.
 package main
 
@@ -12,7 +11,6 @@ import (
 	"math"
 	"math/cmplx"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -171,20 +169,4 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("All non-dominant bins cancel to zero within the configured numerical tolerance.")
 	fmt.Println()
 	return
-	for _, c := range a.Checks {
-		status := "FAIL"
-		if c.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", c.ID, status, c.Text)
-	}
-	fmt.Println()
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("sample count : %d\n", len(ds.Samples))
-	fmt.Printf("tolerance : %.1e\n", ds.Expected.Tolerance)
-	fmt.Printf("bins evaluated : %d\n", len(a.Bins))
-	fmt.Printf("dominant bin count : %d\n", len(a.DominantBins))
-	fmt.Printf("checks passed : %d/%d\n", countOK(a.Checks), len(a.Checks))
 }

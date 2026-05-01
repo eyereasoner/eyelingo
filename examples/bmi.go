@@ -5,7 +5,6 @@
 //
 // The original N3 program encodes a small Body Mass Index calculator that
 // normalizes metric or US inputs, computes BMI, assigns a WHO adult category,
-// derives a healthy-range weight band, and runs nine independent checks.
 //
 // This is intentionally not a generic N3 reasoner.  The concrete N3 facts and
 // rules are represented as ordinary Go data and functions so the
@@ -24,7 +23,6 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"runtime"
 )
 
 const eyelingoExampleName = "bmi"
@@ -65,7 +63,6 @@ type Reason struct {
 	UnitsExplanation string
 }
 
-// Checks mirrors the nine proof obligations at the bottom of bmi.n3.
 type Checks struct {
 	C1InputPositiveSI       string // input normalized into positive SI values
 	C2HeightSquared         string // height squared reconstructed
@@ -165,7 +162,6 @@ func infer(in Input) (InferenceResult, error) {
 		"then the result was mapped to the WHO adult category table."
 	r.CategoryRule = d.Category
 
-	// ---------- Checks ----------
 	checks := performChecks(c)
 
 	return InferenceResult{
@@ -176,8 +172,6 @@ func infer(in Input) (InferenceResult, error) {
 		Checks:   checks,
 	}, nil
 }
-
-// ---------- checks ----------
 
 func performChecks(c Case) Checks {
 	var checks Checks
@@ -280,7 +274,6 @@ func classifyBmi(bmi float64) string {
 	}
 }
 
-// allChecksPass returns true if all nine checks are OK.
 func allChecksPass(checks Checks) bool {
 	return checks.C1InputPositiveSI[:2] == "OK" &&
 		checks.C2HeightSquared[:2] == "OK" &&
@@ -293,7 +286,6 @@ func allChecksPass(checks Checks) bool {
 		checks.C9HealthyBand[:2] == "OK"
 }
 
-// checkCount returns the number of passed checks.
 func checkCount(checks Checks) int {
 	count := 0
 	if checks.C1InputPositiveSI[:2] == "OK" {
@@ -331,7 +323,6 @@ func checkCount(checks Checks) int {
 func renderArcOutput(data Input, result InferenceResult) {
 	c := result.Case
 	d := result.Decision
-	chk := result.Checks
 
 	fmt.Println("# BMI — ARC-style Body Mass Index example")
 	fmt.Println()
@@ -351,33 +342,7 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Printf("The input was %s, so %s\n", data.UnitSystem, result.Reason.Units)
 	fmt.Println()
 
-	// --- Check ---
 	return
-	fmt.Printf("C1 %s\n", chk.C1InputPositiveSI)
-	fmt.Printf("C2 %s\n", chk.C2HeightSquared)
-	fmt.Printf("C3 %s\n", chk.C3BMIMatchesFormula)
-	fmt.Printf("C4 %s\n", chk.C4BelowNormalThreshold)
-	fmt.Printf("C5 %s\n", chk.C5LowerBoundaryHalfOpen)
-	fmt.Printf("C6 %s\n", chk.C6OverweightStart)
-	fmt.Printf("C7 %s\n", chk.C7ObesityIStart)
-	fmt.Printf("C8 %s\n", chk.C8Monotonic)
-	fmt.Printf("C9 %s\n", chk.C9HealthyBand)
-	fmt.Println()
-
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("unit system : %s\n", data.UnitSystem)
-	fmt.Printf("input weight : %.1f\n", data.Weight)
-	fmt.Printf("input height : %.1f\n", data.Height)
-	fmt.Printf("normalized weight (kg) : %.6f\n", c.WeightKg)
-	fmt.Printf("normalized height (m) : %.6f\n", c.HeightM)
-	fmt.Printf("height squared (m²) : %.6f\n", c.HeightSquared)
-	fmt.Printf("bmi : %.6f\n", c.Bmi)
-	fmt.Printf("bmi rounded : %.1f\n", c.BmiRounded)
-	fmt.Printf("category : %s\n", d.Category)
-	fmt.Printf("healthy min (kg) : %.1f\n", c.HealthyMinKgRounded)
-	fmt.Printf("healthy max (kg) : %.1f\n", c.HealthyMaxKgRounded)
-	fmt.Printf("checks passed : %d/9\n", checkCount(chk))
-	fmt.Printf("recommendation consistent : %s\n", yesNo(allChecksPass(chk)))
 }
 
 func yesNo(value bool) string {

@@ -14,7 +14,7 @@
 //
 // This Go version keeps the reduction and recursive rules explicit. It uses
 // math/big for exact arithmetic and reports large answers by decimal digit
-// count plus SHA-256 fingerprint so the output stays readable and auditable.
+// count plus SHA-256 fingerprint so the output stays readable and traceable.
 //
 // Run:
 //
@@ -29,7 +29,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"math/big"
-	"runtime"
 )
 
 const eyelingoExampleName = "ackermann"
@@ -328,48 +327,6 @@ func printReason(a Analysis) {
 	fmt.Println("A10 is 2^65536 - 3, an exact 19,729-digit integer summarized by fingerprint.")
 	fmt.Println("A11 reuses the pentation step T(5,3,2)=T(4,4,2)=65536, so A11 equals A9.")
 	fmt.Println()
-}
-
-func printChecks(a Analysis) {
-	return
-	for _, check := range a.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.Label, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(a Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("question : %s\n", a.Question)
-	fmt.Println("translated source : ackermann.n3")
-	fmt.Printf("binary definition : ackermann(x,y) = T(x,y+3,2)-3\n")
-	fmt.Printf("primitive test queries : %d\n", a.PrimitiveQueries)
-	fmt.Printf("computed ternary facts : %d\n", a.Stats.ComputedRules)
-	fmt.Printf("calls including memo hits : %d\n", a.Stats.Calls)
-	fmt.Printf("memo hits : %d\n", a.Stats.MemoHits)
-	fmt.Printf("successor rules : %d\n", a.Stats.SuccessorRules)
-	fmt.Printf("addition rules : %d\n", a.Stats.AdditionRules)
-	fmt.Printf("multiplication rules : %d\n", a.Stats.MultiplicationRules)
-	fmt.Printf("power rules : %d\n", a.Stats.PowerRules)
-	fmt.Printf("one/base rules : %d\n", a.Stats.OneRules)
-	fmt.Printf("recursive hyperoperation rules : %d\n", a.Stats.RecursiveRules)
-	fmt.Printf("max x reached : %d\n", a.Stats.MaxX)
-	fmt.Printf("max y decimal digits : %d\n", a.Stats.MaxYDigits)
-	fmt.Printf("max result decimal digits : %d\n", a.Stats.MaxResultDigits)
-	fmt.Println("N3 test expressions:")
-	for _, fact := range a.Facts {
-		fmt.Printf("%s (%d %d) :ackermann ?%s\n", fact.Query.ID, fact.Query.X, fact.Query.Y, fact.Query.ID)
-	}
-	fmt.Println("derived fact fingerprints:")
-	for _, fact := range a.Facts {
-		fmt.Printf("%s ackermann(%d,%d) digits=%d sha256=%s\n", fact.Query.ID, fact.Query.X, fact.Query.Y, fact.Summary.Digits, fact.Summary.SHA256)
-	}
-	fmt.Printf("checks passed : %d/%d\n", countChecks(a.Checks), len(a.Checks))
-	fmt.Printf("all checks pass : %s\n", yesNo(allChecksOK(a.Checks)))
 }
 
 func formatSummary(s ValueSummary) string {

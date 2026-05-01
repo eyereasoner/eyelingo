@@ -43,6 +43,21 @@ The examples keep an ARC-style shape: an `Answer` gives the computed result, `Re
 
 The visible output no longer includes Go audit details. Implementation diagnostics are kept out of the report so the Markdown focuses on the domain answer, explanation, and independent verification.
 
+## Python Check flow
+
+The Go examples only produce the human-readable report prefix: the title, `## Answer`, and `## Reason why`. They do not print the `## Check` section and they do not call the Python check modules directly.
+
+During `./test`, the runner first captures that Go output prefix. It then calls `tools/build_output.py`, which imports the matching module from `examples/checks/<example>.py`. That Python module independently reconstructs the relevant facts from the JSON fixture and/or from the captured prefix, runs its own assertions, and returns the lines for the Markdown `## Check` section.
+
+The final snapshot compared by the test suite is therefore:
+
+```text
+Go title + Answer + Reason why
++ Python-generated Check
+```
+
+This keeps the visible checks in a separate implementation language and prevents them from sharing Go helper functions or intermediate Go state.
+
 STEM is the core of the collection. The examples are chosen to cover scientific measurement, technical interoperability, engineered systems, and mathematical reasoning. Together they show that rule-based examples can remain readable while still exercising realistic concerns: exact arithmetic, graph search, certificates, constraints, policy checks, safety envelopes, Bayesian reasoning, scheduling, routing, and optimization.
 
 ## ARC-style STEM examples

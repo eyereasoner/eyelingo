@@ -17,7 +17,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"os"
-	"runtime"
 	"sort"
 	"strings"
 	"time"
@@ -382,32 +381,4 @@ func printReason(ds Dataset, analysis Analysis) {
 		fmt.Printf("%s %s %s\n", document.ID, document.DocType, document.URL)
 	}
 	fmt.Println()
-}
-
-func printChecks(analysis Analysis) {
-	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("passport : %s version=%s issued=%s endpoint=%s\n", ds.Passport.ID, ds.Passport.Version, ds.Passport.IssuedAt, ds.Passport.PublicEndpoint)
-	fmt.Printf("product : %s model=%s serial=%s batch=%s category=%s\n", ds.Product.ID, ds.Product.Model, ds.Product.SerialNumber, ds.Product.BatchID, ds.Product.Category)
-	fmt.Printf("manufacturer : %s (%s, %s) site=%s\n", ds.Organization.ID, ds.Organization.LegalName, ds.Organization.Country, ds.Site.ID)
-	fmt.Printf("components : %d totalMassG=%d recycledMassG=%d recycledPct=%d%%\n", len(ds.Components), analysis.TotalMassG, analysis.RecycledMassG, analysis.RecycledPct)
-	fmt.Printf("critical raw materials : %s\n", strings.Join(analysis.CriticalMaterials, ", "))
-	fmt.Printf("documents : public=%d restricted=%d\n", len(analysis.PublicDocs), len(analysis.RestrictedDocs))
-	fmt.Printf("lifecycle events : %d latest=%s %s %s\n", len(ds.Lifecycle), analysis.LatestEvent.ID, analysis.LatestEvent.Type, analysis.LatestEvent.OnDate)
-	fmt.Printf("footprint : manufacturing=%d transport=%d use=%d total=%d\n", ds.Footprint.ManufacturingGCO2e, ds.Footprint.TransportGCO2e, ds.Footprint.UsePhaseGCO2e, analysis.LifecycleGCO2e)
-	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
-	fmt.Printf("decision : %s\n", analysis.Decision)
 }

@@ -14,7 +14,6 @@ package main
 import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
-	"runtime"
 	"strings"
 )
 
@@ -178,32 +177,4 @@ func printReason(ds Dataset, analysis Analysis) {
 	fmt.Printf("The %s is treated as a superinformation medium with states %s.\n", ds.Superinformation.Name, strings.Join(ds.Superinformation.States, ", "))
 	fmt.Println("That contrast substrate cannot support universal cloning of all states, so unrestricted classical-style fan-out is also blocked.")
 	fmt.Println()
-}
-
-func printChecks(analysis Analysis) {
-	return
-	for _, check := range analysis.Checks {
-		status := "FAIL"
-		if check.OK {
-			status = "OK"
-		}
-		fmt.Printf("%s %s - %s\n", check.ID, status, check.Text)
-	}
-	fmt.Println()
-}
-
-func printAudit(ds Dataset, analysis Analysis) {
-	fmt.Printf("platform : %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("case : %s\n", ds.CaseName)
-	fmt.Printf("question : %s\n", ds.Question)
-	fmt.Printf("classical media : %d\n", len(ds.ClassicalMedia))
-	for _, medium := range ds.ClassicalMedia {
-		fmt.Printf("medium : name=%s variable=%s zero=%s one=%s\n", medium.Name, medium.Variable, medium.ZeroState, medium.OneState)
-	}
-	fmt.Printf("superinformation medium : name=%s variable=%s states=%s\n", ds.Superinformation.Name, ds.Superinformation.Variable, strings.Join(ds.Superinformation.States, ","))
-	fmt.Printf("local permutations : %s\n", strings.Join(analysis.LocalPermutations, ", "))
-	fmt.Printf("copy tasks : %d\n", len(analysis.CopyTasks))
-	fmt.Printf("impossible task types : %s\n", strings.Join(analysis.ImpossibleTasks, ", "))
-	fmt.Printf("cannot states : %s\n", strings.Join(analysis.CannotStates, ", "))
-	fmt.Printf("checks passed : %d/%d\n", countChecksOK(analysis.Checks), len(analysis.Checks))
 }
