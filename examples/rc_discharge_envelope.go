@@ -115,7 +115,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Printf("first below tolerance time : %.3f s\n", float64(a.First)*ds.SamplePeriod)
 	fmt.Printf("upper voltage at step %d : %.6f V\n", a.First, row.Upper)
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The physical decay factor is exp(-1/4), but the example uses a finite double interval as the certificate.")
 	fmt.Println("Because the interval lies strictly between 0 and 1, the capacitor voltage envelope contracts each sample.")
 	fmt.Println("The upper envelope is the safety-relevant bound: once it falls below 1.0 V, every compatible exact trajectory is below tolerance.")

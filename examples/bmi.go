@@ -336,7 +336,7 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println(result.Reason.Formula)
 	fmt.Println(result.Reason.Calculation)
 	fmt.Printf("The input was %s, so %s\n", data.UnitSystem, result.Reason.Units)

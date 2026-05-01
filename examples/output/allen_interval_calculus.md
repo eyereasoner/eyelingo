@@ -6,7 +6,7 @@ showcase : A before B | A meets C | A overlaps D | F starts A | G finishes A | A
 completed intervals : I=16:00-18:00, K=13:30-14:00  
 invalid intervals : 0  
 
-## Reason why  
+## Reason  
 The example completes any interval that has a start plus duration before comparing endpoints.  
 Each ordered pair is then classified with the 13 Allen base relations, including the six converse relations.  
 The relation rules are purely endpoint constraints, so the result is deterministic and traceable.  

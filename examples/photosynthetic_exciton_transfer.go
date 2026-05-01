@@ -123,7 +123,7 @@ func printReport(ds Dataset, r Result) {
 	fmt.Println("YES for the tuned antenna complex.")
 	fmt.Println("NO for the detuned, strongly decohered contrast complex.")
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The tuned complex combines strong excitonic coupling, delocalization, a tuned vibronic bridge, moderate dephasing, short-lived coherence, and a downhill route to the reaction center.")
 	fmt.Println("The detuned contrast complex has weak coupling, absent delocalization, no vibronic bridge, strong dephasing, and a trapping mismatch, so the same efficient delivery task is blocked.")
 	fmt.Println()

@@ -359,7 +359,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The passport folds the explicit component list to derive total mass and recycled mass, then computes an integer recycled-content percentage.")
 	fmt.Println("Lifecycle footprint is derived by summing manufacturing, transport, and use-phase emissions.")
 	fmt.Println("The product is repair-friendly because the battery is replaceable and the public passport section exposes both repair and spare-parts documentation.")

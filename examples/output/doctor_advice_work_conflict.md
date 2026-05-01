@@ -5,7 +5,7 @@ overall decision for Jos : RemoteWorkOnly
 Request_Jos_Prog_Home : raw=Deny+Permit status=BothPermitDeny effective=Permit  
 Request_Jos_Prog_Office : raw=Deny+Permit status=BothPermitDeny effective=Deny  
 
-## Reason why  
+## Reason  
 Jos has Flu, so the health context classifies the agent as Sick.  
 The doctor's statement permits ProgrammingWork, but the general sick-work policy also denies work, so the raw closure deliberately keeps the conflict visible.  
 The conflict resolver permits sick ProgrammingWork at Home but denies Office work because of colleague-infection risk.  

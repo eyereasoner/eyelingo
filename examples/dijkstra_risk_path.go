@@ -142,7 +142,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Printf("risk-adjusted score : %.2f\n", a.Best.Score)
 	fmt.Printf("edges in selected path : %d\n", len(a.Best.Path)-1)
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("Each edge contributes its delivery cost plus the configured risk penalty.")
 	fmt.Println("Dijkstra's queue expands the lowest accumulated score first, so the first time HubZ is popped the selected route is optimal for the weighted graph.")
 	fmt.Println("The DepotC shortcut has lower early cost but carries enough risk to lose under the configured risk weight.")

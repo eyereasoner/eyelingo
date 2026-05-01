@@ -267,7 +267,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Printf("The SMR operator exposes a bounded %d MW flexible-export insight for %s, not raw reactor telemetry.\n",
 		ds.Insight.ExportMW,
 		ds.Insight.ScopeEvent,

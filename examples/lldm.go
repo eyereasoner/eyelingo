@@ -256,7 +256,7 @@ func renderArcOutput(res InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The measurement points p1-p4 define two parallel lines L1 and L3/L4.")
 	fmt.Println("L1 is defined by p1 and p2; L3 passes through p3; L4 passes through p4.")
 	fmt.Println("L3 and L4 are perpendicular to L1.  Intersection points p5 (L1∩L3)")

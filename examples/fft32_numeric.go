@@ -307,7 +307,7 @@ func printReport(ds Dataset, a Analysis) {
 		fmt.Printf("%s : %s; energy=%.6f\n", s.Spec.Name, binSummary(s), s.EnergyTime)
 	}
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The upstream FFT32 fixture defines several 32-sample waveforms and asks for the whole spectrum of each waveform.")
 	fmt.Println("The Go translation evaluates every frequency bin by summing samples against the corresponding complex root of unity.")
 	fmt.Println("Constant, alternating, cosine, sine, impulse, and ramp fixtures exercise different spectral shapes.")

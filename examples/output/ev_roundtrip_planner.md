@@ -10,7 +10,7 @@ comfort : 0.898320
 acceptable plans : 8  
 fuel remaining : 5 of 8  
 
-## Reason why  
+## Reason  
 The planner starts with car1 at Brussels, battery=high, pass=none, then composes action descriptions until the goal city Cologne is reached.  
 Duration and cost are summed across each candidate; belief and comfort are multiplied, matching the N3 planner pattern.  
 The selected plan is the fastest acceptable candidate under belief > 0.93, cost < 0.090, and duration < 260.0.  

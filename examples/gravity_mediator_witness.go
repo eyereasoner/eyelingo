@@ -98,7 +98,7 @@ func printReport(ds Dataset, r Result) {
 	fmt.Println("YES for the mediator-only witness run.")
 	fmt.Println("NO for a purely classical mediator model under the same mediator-only conditions.")
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The positive run assumes locality and interoperability, excludes direct coupling, and observes entanglement after interaction through the gravitational mediator alone.")
 	fmt.Println("Under those conditions the mediator-only witness supports a non-classical-mediator conclusion, while the purely classical contrast model cannot support the same witness.")
 	fmt.Println()

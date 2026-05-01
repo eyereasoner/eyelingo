@@ -9,7 +9,7 @@ impulse : all 32 bins magnitude=1.000000; energy=1.000000
 ramp_0_31 : k=0 magnitude=496.000000 phase=0.000000; energy=10416.000000  
 sine_bin5 : k=5 magnitude=16.000000 phase=-1.570796; k=27 magnitude=16.000000 phase=1.570796; energy=16.000000  
 
-## Reason why  
+## Reason  
 The upstream FFT32 fixture defines several 32-sample waveforms and asks for the whole spectrum of each waveform.  
 The Go translation evaluates every frequency bin by summing samples against the corresponding complex root of unity.  
 Constant, alternating, cosine, sine, impulse, and ramp fixtures exercise different spectral shapes.  

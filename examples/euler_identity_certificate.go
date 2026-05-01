@@ -94,7 +94,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Printf("residual magnitude : %.3e\n", a.Residual)
 	fmt.Printf("within tolerance : %t\n", a.Residual < ds.Tolerance)
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The example approximates exp(iπ) by a finite Taylor series over complex numbers.")
 	fmt.Println("The resulting residual is not claimed to be mathematically exact zero; it is checked against the explicit tolerance from JSON.")
 	fmt.Println("The computed real part is effectively -1 and the imaginary part is near 0 at the chosen precision.")

@@ -14,7 +14,7 @@ Scenario decisions:
   F – Research on anonymised dataset : PERMIT (urn:policy:research-aurora-diabetes)  
   G – AI training (opt-out) : DENY (no policy matched)  
 
-## Reason why  
+## Reason  
 A – Primary care visit  
   request : role=clinician purpose=PrimaryCareManagement environment=api_gateway categories=PATIENT_SUMMARY  
   decision : PERMIT  

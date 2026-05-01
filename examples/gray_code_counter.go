@@ -123,7 +123,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Printf("wrap transition : %s -> %s\n", fmtBits(a.Sequence[len(a.Sequence)-1], ds.Bits), fmtBits(a.Sequence[0], ds.Bits))
 	fmt.Printf("maximum adjacent Hamming distance : %d\n", maxInt(a.Distances))
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The counter maps each integer n to n xor (n >> 1), which is the reflected binary Gray-code construction.")
 	fmt.Println("For 4 bits, the first 16 integers cover the full state space without duplicates.")
 	fmt.Println("The Hamming-distance check compares each state with the next state, including the final wraparound transition.")

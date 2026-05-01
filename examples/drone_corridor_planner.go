@@ -223,7 +223,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The planner treats each corridor description as a state transition over location, battery, and permit state.")
 	fmt.Printf("Search is fuel-bounded to %d steps, which keeps cycles finite while still allowing charging and permit actions.\n", ds.Fuel)
 	fmt.Println("For composed plans, duration and cost are summed while belief and comfort are multiplied along the path.")

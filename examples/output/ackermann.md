@@ -19,7 +19,7 @@ Large exact-value fingerprints:
 A7 digits=302 leading=857206885749013856758740 trailing=220995094697645344555005 sha256=365b71740f457d3277649054c99e1e3632b6590da448939739a259cf1152377e  
 A10 digits=19729 leading=200352993040684646497907 trailing=339445587895905719156733 sha256=daeafdfae592d817542850bc06b0ae8c808ab7727edd8a71f0c5d588c7b7083b  
 
-## Reason why  
+## Reason  
 The N3 source defines binary ackermann(x,y) by computing T(x,y+3,2) and subtracting 3. The ternary predicate T uses direct rules for successor, addition, multiplication, and exponentiation, then uses the recursive hyperoperation rule T(x,y,z)=T(x-1,T(x,y-1,z),z) when x>3 and y is non-zero.  
 primitive test queries : 12  
 binary reductions : 12  

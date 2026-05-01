@@ -103,7 +103,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("serial witness : doorBeacon -> containmentPLC -> incidentBoard")
 	fmt.Printf("possible prepare tasks : %d\n", a.Prepare)
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The breach token is an ordinary classical information variable carried by four unlike media in the lab workflow.")
 	fmt.Println("Since each medium carries BreachBit, the example derives preparation, reversible permutation, copying, and measurement tasks.")
 	fmt.Println("Copy and measurement compose into an incident-board audit path, and copy pairs compose into a parallel notification witness.")

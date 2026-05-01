@@ -261,7 +261,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Printf("%s has %s, so the health context classifies the agent as %s.\n", ds.Person.Name, ds.Person.Condition, analysis.HealthStatus)
 	fmt.Println("The doctor's statement permits ProgrammingWork, but the general sick-work policy also denies work, so the raw closure deliberately keeps the conflict visible.")
 	fmt.Println("The conflict resolver permits sick ProgrammingWork at Home but denies Office work because of colleague-infection risk.")

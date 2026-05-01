@@ -458,7 +458,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Printf("question : %s\n", ds.Question)
 	fmt.Println("The gateway desensitizes local heat, vulnerability, and prepaid-energy stress into an expiring municipal support insight.")
 	fmt.Printf("metric : %s\n", ds.Insight.Metric)

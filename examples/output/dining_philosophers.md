@@ -19,7 +19,7 @@ Meal trace:
   round 8 cycle 3 : P2#3 uses F12,F23; P4#3 uses F34,F45  
   round 9 cycle 3 : P5#3 uses F45,F51  
 
-## Reason why  
+## Reason  
 Each round has three phases. Hungry philosophers first request adjacent  
 forks they do not hold. A holder sends a requested fork only when it is  
 Dirty, and the receiver gets that fork Clean. After the meal phase, all  

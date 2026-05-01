@@ -308,7 +308,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("Existence comes from repeated smallest-divisor decomposition.")
 	fmt.Println("At each step, the first divisor found is prime because no smaller")
 	fmt.Println("positive divisor can divide the current number.")

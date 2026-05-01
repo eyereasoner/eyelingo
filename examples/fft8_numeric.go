@@ -162,7 +162,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Printf("time-domain energy : %.6f\n", a.EnergyTime)
 	fmt.Printf("frequency-domain energy / 8 : %.6f\n", a.EnergyFreq)
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The input samples describe one sine cycle over eight equally spaced samples.")
 	fmt.Println("The DFT projects the signal onto eight complex roots of unity.")
 	fmt.Println("A real sine wave has equal magnitude at the positive and negative frequency bins.")

@@ -4,7 +4,7 @@ Eyelingo is a collection of small, runnable Go translations of selected EyeReaso
 
 ```text
 Answer
-Reason why
+Reason
 Check
 ```
 
@@ -24,7 +24,7 @@ Run one Go example directly:
 go run examples/bmi.go
 ```
 
-That command prints only the report prefix: title, `## Answer`, and `## Reason why`. The `## Check` section is appended by the test/update pipeline.
+That command prints only the report prefix: title, `## Answer`, and `## Reason`. The `## Check` section is appended by the test/update pipeline.
 
 Regenerate expected Markdown outputs after an intentional change:
 
@@ -43,7 +43,7 @@ The examples focus on STEM reasoning: scientific measurement, technical interope
 The repository is organized around one stem per example. For an example named `<name>`, the main files are:
 
 ```text
-examples/<name>.go          Go translation that computes Answer and Reason why
+examples/<name>.go          Go translation that computes Answer and Reason
 examples/input/<name>.json  example-specific facts, data, or parameters
 examples/checks/<name>.py   independent Python implementation of Check
 examples/output/<name>.md   expected combined Markdown report
@@ -80,7 +80,7 @@ During `./test`:
 The snapshot under test is therefore:
 
 ```text
-Go title + Answer + Reason why
+Go title + Answer + Reason
 + Python-generated Check
 ```
 

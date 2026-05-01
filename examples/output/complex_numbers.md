@@ -13,7 +13,7 @@ Key equivalences:
 i^i = e^(-pi/2) = 0.207879576351  
 asin(2) + acos(2) = 1.570796326795 + 0i  
 
-## Reason why  
+## Reason  
 The N3 source first converts each complex base (x,y) to polar form using r=sqrt(x^2+y^2) and quadrant-sensitive dial rules. It then applies (a+bi)^(c+di)=r^c*e^(-d*theta)*(cos(d*ln(r)+c*theta), sin(d*ln(r)+c*theta)). The asin/acos rules use the same pair of distances from 1+a and 1-a, then recover the imaginary part with ln(F+sqrt(F^2-1)).  
 primitive test facts : 6  
 polar derivations : 4  

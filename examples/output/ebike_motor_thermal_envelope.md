@@ -7,7 +7,7 @@ maximum upper motor temperature : 40.2285 C
 warning recovery : step 8 at 40 s  
 hard limit : 45.0 C  
 
-## Reason why  
+## Reason  
 The model keeps an interval for motor temperature excess over ambient instead of pretending to know the transcendental cooling factor exactly.  
 For each 5 second sample, the lower and upper excess envelopes are propagated with the certified cooling interval and the mode-specific heat injection.  
 Turbo pushes the upper envelope to 40.2285 C, then Tour, Eco, and Coast allow the envelope to decrease.  

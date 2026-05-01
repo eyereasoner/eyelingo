@@ -8,7 +8,7 @@ value : 101
 fitness : 999899  
 generations evaluated : 5  
 
-## Reason why  
+## Reason  
 Each genome bit says whether the corresponding item is selected for the knapsack.  
 Feasible candidates get fitness 1000000 minus value, so higher value means lower fitness; overweight candidates are penalized above every feasible candidate.  
 At every generation, all single-bit mutants of the parent are compared with the parent, and the lowest-fitness candidate is selected deterministically.  

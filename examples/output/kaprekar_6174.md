@@ -13,7 +13,7 @@ Selected facts, shown with four-digit padding for readability:
   9831 :kaprekar (8442 5994 5355 1998 8082 8532 6174)  
   9998 :kaprekar (0999 8991 8082 8532 6174)  
 
-## Reason why  
+## Reason  
 Each start is read as four digits, so 1 is treated as 0001.  
 The digits are sorted once, then the optimized identity computes the  
 same result as descending-number minus ascending-number.  

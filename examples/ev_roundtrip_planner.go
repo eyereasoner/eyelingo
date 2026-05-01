@@ -260,7 +260,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 
 func printReason(ds Dataset, analysis Analysis) {
 	best := analysis.BestPlan
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Printf("The planner starts with %s at %s, battery=%s, pass=%s, then composes action descriptions until the goal city %s is reached.\n", ds.Vehicle.ID, analysis.Start.At, analysis.Start.Battery, analysis.Start.Pass, ds.Goal.At)
 	fmt.Printf("Duration and cost are summed across each candidate; belief and comfort are multiplied, matching the N3 planner pattern.\n")
 	fmt.Printf("The selected plan is the fastest acceptable candidate under belief > %.2f, cost < %.3f, and duration < %.1f.\n", ds.Thresholds.MinBelief, ds.Thresholds.MaxCost, ds.Thresholds.MaxDuration)

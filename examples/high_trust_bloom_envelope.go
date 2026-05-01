@@ -159,7 +159,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The canonical graph and the SPO index have the same triple count, so exact membership remains grounded in the graph snapshot.")
 	fmt.Printf("The Bloom prefilter has n=%d triples, m=%d bits, and k=%d hash functions, giving lambda %.10f.\n", ds.Artifact.CanonicalTripleCount, ds.Artifact.BloomBits, ds.Artifact.HashFunctions, analysis.Lambda)
 	fmt.Printf("Instead of asking the engine to know %s exactly, the input carries a decimal interval certificate for exp(-lambda).\n", ds.Artifact.ExactTranscendentalSymbol)

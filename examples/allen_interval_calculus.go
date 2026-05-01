@@ -219,7 +219,7 @@ func printReport(ds Dataset, analysis Analysis) {
 	fmt.Println("completed intervals : I=16:00-18:00, K=13:30-14:00")
 	fmt.Printf("invalid intervals : %d\n", analysis.Invalid)
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The example completes any interval that has a start plus duration before comparing endpoints.")
 	fmt.Println("Each ordered pair is then classified with the 13 Allen base relations, including the six converse relations.")
 	fmt.Println("The relation rules are purely endpoint constraints, so the result is deterministic and traceable.")

@@ -22,7 +22,7 @@ score=70 (risk:ModerateRisk, risk:ModerateSeverity) clause C4
 
 mitigation for clause C4: Add a permission allowing data export (or remove the prohibition) to support portability.  
 
-## Reason why  
+## Reason  
 The agreement policy is scanned for permissions and prohibitions that conflict with the consumer profile needs.  
 Each triggered rule derives a risk row with a normalized score, a source clause, and one or more mitigation measures.  
 Rows are sorted by descending score so the highest-risk clauses are reviewed first.  

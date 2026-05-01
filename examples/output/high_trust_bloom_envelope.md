@@ -8,7 +8,7 @@ expected extra exact lookups upper : 83.540 per 50000 negative lookups
 maybe-positive policy : ConfirmAgainstCanonicalGraph  
 definite-negative policy : ReturnAbsent  
 
-## Reason why  
+## Reason  
 The canonical graph and the SPO index have the same triple count, so exact membership remains grounded in the graph snapshot.  
 The Bloom prefilter has n=1200 triples, m=16384 bits, and k=7 hash functions, giving lambda 0.5126953125.  
 Instead of asking the engine to know exp(-k*n/m) exactly, the input carries a decimal interval certificate for exp(-lambda).  

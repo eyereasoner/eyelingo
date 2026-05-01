@@ -645,7 +645,7 @@ func renderRankedReport(data Dataset, risks []Risk) {
 
 func renderReason(data Dataset, risks []Risk) {
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The agreement policy is scanned for permissions and prohibitions that conflict with the consumer profile needs.")
 	fmt.Println("Each triggered rule derives a risk row with a normalized score, a source clause, and one or more mitigation measures.")
 	fmt.Println("Rows are sorted by descending score so the highest-risk clauses are reviewed first.")

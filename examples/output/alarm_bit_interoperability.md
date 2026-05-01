@@ -7,7 +7,7 @@ copy task : opticalBeacon -> relayRegister for AlarmBit
 copy task : relayRegister -> opticalBeacon for AlarmBit  
 blocked tasks : UniversalClone, UnrestrictedStateFanOut  
 
-## Reason why  
+## Reason  
 The optical beacon and relay register are unlike physical media, but both encode the same abstract AlarmBit variable.  
 Because the variable is classical in both media, local permutation and copying in both directed media transfers are possible.  
 The quantumToken is treated as a superinformation medium with states Horizontal, Vertical, Diagonal, AntiDiagonal.  

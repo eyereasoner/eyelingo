@@ -7,7 +7,7 @@ prepared witness : nursePager prepares CodeBreach
 serial witness : doorBeacon -> containmentPLC -> incidentBoard  
 possible prepare tasks : 8  
 
-## Reason why  
+## Reason  
 The breach token is an ordinary classical information variable carried by four unlike media in the lab workflow.  
 Since each medium carries BreachBit, the example derives preparation, reversible permutation, copying, and measurement tasks.  
 Copy and measurement compose into an incident-board audit path, and copy pairs compose into a parallel notification witness.  

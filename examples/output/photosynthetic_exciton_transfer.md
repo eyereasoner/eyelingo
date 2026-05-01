@@ -4,7 +4,7 @@
 YES for the tuned antenna complex.  
 NO for the detuned, strongly decohered contrast complex.  
 
-## Reason why  
+## Reason  
 The tuned complex combines strong excitonic coupling, delocalization, a tuned vibronic bridge, moderate dephasing, short-lived coherence, and a downhill route to the reaction center.  
 The detuned contrast complex has weak coupling, absent delocalization, no vibronic bridge, strong dephasing, and a trapping mismatch, so the same efficient delivery task is blocked.  
 

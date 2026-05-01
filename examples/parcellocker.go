@@ -374,7 +374,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	token := ds.Authorization
 	fmt.Printf("token : delegate=%s parcel=%s locker=%s action=%s purpose=%s state=%s reuse=%s\n", token.Delegate, token.Parcel, token.Locker, token.Action, token.Purpose, token.State, token.Reuse)
 	fmt.Printf("privacy : billingAccess=%s redirectAllowed=%s\n", token.BillingAccess, token.RedirectAllowed)

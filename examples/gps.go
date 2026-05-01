@@ -390,7 +390,7 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	fmt.Printf("Recommended route: %s\n", directLabel)
 
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("From Gent to Oostende, the planner found two routes in this small map.")
 	fmt.Printf(
 		"The direct route (%s) takes %s seconds at cost %s, with belief %s and comfort %s. ",

@@ -375,7 +375,7 @@ func renderArcOutput(data Input, result InferenceResult) {
 	fmt.Printf("disturbance2 measurement10 = %.6f (%s branch)\n", result.Disturb2M10.Value, result.Disturb2M10.Branch)
 	fmt.Println()
 
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The backward measurement10 rules first normalize measurement1 pairs into scalar measurement10 values.")
 	fmt.Printf("For input1, %.0f < %.0f, so sqrt(%.0f - %.0f) = %.6f.\n",
 		data.Input1.Measurement1[0], data.Input1.Measurement1[1],

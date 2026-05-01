@@ -6,7 +6,7 @@ blocked contrast lineages : analogLine, fragileLine, coatlessLine, staticLine
 mainLine CAN : genome-copy, protected-dormancy, germination, propagule-production, accurate-self-reproduction, lineage-closure, adaptive-persistence  
 mainLine CAN'T : none of the modeled blockers apply  
 
-## Reason why  
+## Reason  
 The main lineage satisfies the constructor-theory style CAN side: digital heredity under no-design laws, repair support, a protected dormant seed stage, germination resources, propagule production, and heritable variation.  
 The contrast lineages are deliberately near misses so the CAN'T side is explicit.  
 analogLine lacks a digital hereditary medium, fragileLine lacks repair, coatlessLine lacks the protected dormant compartment, and staticLine lacks heritable variation.  

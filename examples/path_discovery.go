@@ -426,7 +426,7 @@ func main() {
 	}
 
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The N3 source defines a recursive :route relation over nepo:hasOutboundRouteTo facts. A route can use a direct edge when the current length is within the maximum, or extend through a non-visited intermediate airport and recurse with length+1. The final log:collectAllIn query collects the labels of each airport in every route from the source to the destination.")
 	fmt.Printf("source N3 airport labels : %d\n", sourceGraphAirportLabels)
 	fmt.Printf("source N3 outbound-route facts : %d\n", sourceGraphOutboundFacts)

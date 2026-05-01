@@ -595,7 +595,7 @@ func printReport(report Report, puzzleName string) {
 		fmt.Print(report.SolutionText)
 		fmt.Println()
 
-		fmt.Println("## Reason why")
+		fmt.Println("## Reason")
 		if report.Unique {
 			fmt.Printf("The solver starts from %d clues and fills the remaining %d cells by combining constraint propagation with depth-first search. At each step it chooses the empty cell with the fewest legal digits, places forced singles immediately, and only guesses when more than one candidate remains. Across the search it made %d forced placements and tried %d guesses, visited %d search nodes overall, and backtracked %d times before reaching the completed grid. The solver also confirmed that the solution is unique. Early steps: %s\n\n",
 				report.Givens, report.Blanks, report.ForcedMoves, report.GuessedMoves, report.RecursiveNodes, report.Backtracks, report.MoveSummary)
@@ -612,7 +612,7 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println("The supplied puzzle is not well formed and cannot be parsed as a 9×9 Sudoku.")
 		fmt.Println("case : sudoku")
 		fmt.Println()
-		fmt.Println("## Reason why")
+		fmt.Println("## Reason")
 		fmt.Println(report.Error)
 		fmt.Println()
 		return
@@ -626,7 +626,7 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println("Puzzle")
 		fmt.Print(report.PuzzleText)
 		fmt.Println()
-		fmt.Println("## Reason why")
+		fmt.Println("## Reason")
 		fmt.Println(report.Error)
 		fmt.Println()
 		return
@@ -640,7 +640,7 @@ func printReport(report Report, puzzleName string) {
 		fmt.Println("Puzzle")
 		fmt.Print(report.PuzzleText)
 		fmt.Println()
-		fmt.Println("## Reason why")
+		fmt.Println("## Reason")
 		fmt.Printf("The solver explored %d search nodes with minimum-remaining-values branching and backtracked %d times, but every branch eventually contradicted the row, column, or box constraints.\n\n", report.RecursiveNodes, report.Backtracks)
 		return
 	default:

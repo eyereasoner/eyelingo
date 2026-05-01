@@ -408,7 +408,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("Each round has three phases. Hungry philosophers first request adjacent")
 	fmt.Println("forks they do not hold. A holder sends a requested fork only when it is")
 	fmt.Println("Dirty, and the receiver gets that fork Clean. After the meal phase, all")

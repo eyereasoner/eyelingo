@@ -171,7 +171,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The optical beacon and relay register are unlike physical media, but both encode the same abstract AlarmBit variable.")
 	fmt.Println("Because the variable is classical in both media, local permutation and copying in both directed media transfers are possible.")
 	fmt.Printf("The %s is treated as a superinformation medium with states %s.\n", ds.Superinformation.Name, strings.Join(ds.Superinformation.States, ", "))

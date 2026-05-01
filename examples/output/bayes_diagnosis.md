@@ -9,7 +9,7 @@ Full posterior distribution:
   AllergicRhinitis      posterior = 0.000456  (unnormalized = 0.00000075)  
   BacterialPneumonia    posterior = 0.029131  (unnormalized = 0.00004788)  
 
-## Reason why  
+## Reason  
 Evidence: Fever=present, DryCough=present, LossOfSmell=present, Sneezing=absent, ShortBreath=present.  
 Evidence total (normalizing constant) = 0.00164363.  
 The posterior for each disease is computed as:  

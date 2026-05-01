@@ -14,7 +14,7 @@ Proof checkpoints:
 :N99999 and :N100000 present : yes  
 :A2 and success flag present : yes  
 
-## Reason why  
+## Reason  
 The N3 source is a very deep rule chain. Each taxonomy-step rule consumes the same individual in class Ni and derives the next class N(i+1), plus two side labels I(i+1) and J(i+1). Once N100000 is present, the terminal rule derives A2; once A2 is present, the success rule derives :test :is true.  
 source N3 starting fact assertions : 1  
 source N3 taxonomy-step rules : 100000  

@@ -243,7 +243,7 @@ func renderAnswer(result Result) {
 }
 
 func renderReason(result Result) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The N3 source is a very deep rule chain. Each taxonomy-step rule consumes the same individual in class Ni and derives the next class N(i+1), plus two side labels I(i+1) and J(i+1). Once N100000 is present, the terminal rule derives A2; once A2 is present, the success rule derives :test :is true.")
 	fmt.Printf("source N3 starting fact assertions : %d\n", sourceFactAssertions)
 	fmt.Printf("source N3 taxonomy-step rules : %d\n", sourceStepRules)

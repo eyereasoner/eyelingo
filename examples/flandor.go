@@ -496,7 +496,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Printf("question : %s\n", ds.Question)
 	fmt.Printf("aggregate : observedFirms=%d level=%s containsFirmNames=%s containsPayrollRows=%s\n", ds.Signals.ObservedFirms, ds.Signals.AggregationLevel, yesNo(ds.Signals.ContainsFirmNames), yesNo(ds.Signals.ContainsPayrollRows))
 	fmt.Println()

@@ -224,7 +224,7 @@ func printAnswer(r Result) {
 }
 
 func printReason(r Result) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("Alice and Bob start with |R) = |0,0) + |1,1).")
 	fmt.Println("Alice chooses one relation for the first mobit; Bob applies one joint test.")
 	fmt.Println("The N3 example keeps only answers with odd derivation count, so duplicate")

@@ -202,7 +202,7 @@ func renderArcOutput(data Dataset, canReach map[string]bool, checks Checks) {
 	fmt.Println()
 
 	// === Reason Why ===
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The original example says that every :oneway link is also a :path, and that :path is transitive. So once Angers can reach Nantes directly, longer routes can be built by chaining earlier links. Angers reaches Nantes directly. Le Mans reaches Nantes through Angers. Chartres reaches Nantes through Le Mans and Angers. Paris reaches Nantes through Chartres, Le Mans, and Angers.")
 	fmt.Println()
 

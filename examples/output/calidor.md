@@ -12,7 +12,7 @@ Payload SHA-256: 3780df1071b0f2eec8a881ffd48425c3a1a60738d11cc2ba7debdf1cea992d6
 Envelope HMAC-SHA-256: e635c7c1991742a5c36992fc0da32a7abc80b32aa5777a1142adaab55183681c  
 decision : ALLOWED  
 
-## Reason why  
+## Reason  
 question : Is the Calidor heat-response system allowed to use a narrow household support insight for heatwave response, and if so which support package should it recommend?  
 The gateway desensitizes local heat, vulnerability, and prepaid-energy stress into an expiring municipal support insight.  
 metric : active_need_count  

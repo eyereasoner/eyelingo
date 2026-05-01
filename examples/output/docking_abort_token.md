@@ -7,7 +7,7 @@ serial witness : abortLamp -> flightPLC -> auditDisplay
 parallel witness : flightPLC -> radioFrame and auditDisplay  
 possible copy tasks : 12  
 
-## Reason why  
+## Reason  
 All four classical media encode the same abstract AbortBit variable, so the model treats them as interoperable information media.  
 Local permutation and local cloning are allowed on each classical medium, while copying and measuring are allowed between media that carry the same variable.  
 Those primitive tasks compose into a serial audit path and a parallel fan-out witness.  

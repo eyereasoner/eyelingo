@@ -4,7 +4,7 @@
 YES for the mediator-only witness run.  
 NO for a purely classical mediator model under the same mediator-only conditions.  
 
-## Reason why  
+## Reason  
 The positive run assumes locality and interoperability, excludes direct coupling, and observes entanglement after interaction through the gravitational mediator alone.  
 Under those conditions the mediator-only witness supports a non-classical-mediator conclusion, while the purely classical contrast model cannot support the same witness.  
 

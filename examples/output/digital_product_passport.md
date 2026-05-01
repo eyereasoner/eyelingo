@@ -9,7 +9,7 @@ critical raw materials : Cobalt, Lithium
 circularity hint : repairFriendly  
 public endpoint : https://example.org/dpp/ACME-X1000-SN123  
 
-## Reason why  
+## Reason  
 The passport folds the explicit component list to derive total mass and recycled mass, then computes an integer recycled-content percentage.  
 Lifecycle footprint is derived by summing manufacturing, transport, and use-phase emissions.  
 The product is repair-friendly because the battery is replaceable and the public passport section exposes both repair and spare-parts documentation.  

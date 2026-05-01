@@ -312,7 +312,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The N3 source defines binary ackermann(x,y) by computing T(x,y+3,2) and subtracting 3. The ternary predicate T uses direct rules for successor, addition, multiplication, and exponentiation, then uses the recursive hyperoperation rule T(x,y,z)=T(x-1,T(x,y-1,z),z) when x>3 and y is non-zero.")
 	fmt.Printf("primitive test queries : %d\n", a.PrimitiveQueries)
 	fmt.Printf("binary reductions : %d\n", a.BinaryReductions)

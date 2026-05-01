@@ -545,7 +545,7 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 	fmt.Printf("suggested alternative: %s\n", result.SuggestedAlternative.Name)
 
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The phone desensitizes a diabetes-related household condition into a scoped low-sugar need, wraps it in an expiring Insight + Policy envelope, signs it, and the scanner consumes that envelope for shopping assistance.")
 	fmt.Printf("metric : %s\n", data.Insight.Metric)
 	fmt.Printf("threshold : %s\n", data.Insight.ThresholdDisplay)

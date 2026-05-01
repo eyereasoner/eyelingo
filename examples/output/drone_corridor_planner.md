@@ -9,7 +9,7 @@ comfort : 0.950400
 end state : location=Oostende battery=low permit=none fuelLeft=5  
 surviving plans : 17  
 
-## Reason why  
+## Reason  
 The planner treats each corridor description as a state transition over location, battery, and permit state.  
 Search is fuel-bounded to 7 steps, which keeps cycles finite while still allowing charging and permit actions.  
 For composed plans, duration and cost are summed while belief and comfort are multiplied along the path.  

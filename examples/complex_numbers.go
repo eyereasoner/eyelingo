@@ -367,7 +367,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The N3 source first converts each complex base (x,y) to polar form using r=sqrt(x^2+y^2) and quadrant-sensitive dial rules. It then applies (a+bi)^(c+di)=r^c*e^(-d*theta)*(cos(d*ln(r)+c*theta), sin(d*ln(r)+c*theta)). The asin/acos rules use the same pair of distances from 1+a and 1-a, then recover the imaginary part with ln(F+sqrt(F^2-1)).")
 	fmt.Printf("primitive test facts : %d\n", a.PrimitiveFacts)
 	fmt.Printf("polar derivations : %d\n", a.PolarDerivations)

@@ -170,7 +170,7 @@ func printBoard(board []int) {
 
 func renderReason(n int) {
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Printf("The solver places one queen per row on a %dx%d board.\n", n, n)
 	fmt.Println("At each row it uses bit masks for occupied columns and both diagonal directions to enumerate only safe candidate columns.")
 	fmt.Println("Counting continues after the printed solution limit, so the total solution count remains complete.")

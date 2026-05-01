@@ -6,7 +6,7 @@ dominant bins : k=1 magnitude=4.000000 phase=-1.570796; k=7 magnitude=4.000000 p
 time-domain energy : 4.000000  
 frequency-domain energy / 8 : 4.000000  
 
-## Reason why  
+## Reason  
 The input samples describe one sine cycle over eight equally spaced samples.  
 The DFT projects the signal onto eight complex roots of unity.  
 A real sine wave has equal magnitude at the positive and negative frequency bins.  

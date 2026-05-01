@@ -14,7 +14,7 @@ Request decisions:
   wrong-locker  : DENY  
   reuse         : DENY  
 
-## Reason why  
+## Reason  
 token : delegate=noah parcel=parcel123 locker=lockerB17 action=CollectParcel purpose=PickupOnly state=Active reuse=SingleUse  
 privacy : billingAccess=None redirectAllowed=No  
 parcel : parcel123 status=ReadyForPickup  

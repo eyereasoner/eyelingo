@@ -7,7 +7,7 @@ Superdense-coding facts that survive GF(2) parity cancellation:
   2 dqc:superdense-coding 2  
   3 dqc:superdense-coding 3  
 
-## Reason why  
+## Reason  
 Alice and Bob start with |R) = |0,0) + |1,1).  
 Alice chooses one relation for the first mobit; Bob applies one joint test.  
 The N3 example keeps only answers with odd derivation count, so duplicate  

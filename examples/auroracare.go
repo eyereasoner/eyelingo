@@ -529,7 +529,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	for _, result := range analysis.Results {
 		fmt.Printf("%s – %s\n", result.Scenario.Key, result.Scenario.Label)
 		fmt.Printf("  request : role=%s purpose=%s environment=%s categories=%s\n", result.Scenario.Role, result.Scenario.Purpose, result.Scenario.Environment, joinStrings(result.Scenario.Categories, ","))

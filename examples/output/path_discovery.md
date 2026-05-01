@@ -11,7 +11,7 @@ route 1 (2 stopovers): Ostend-Bruges International Airport -> Liège Airport -> 
 route 2 (2 stopovers): Ostend-Bruges International Airport -> Liège Airport -> Heraklion International Nikos Kazantzakis Airport -> Václav Havel Airport Prague  
 route 3 (2 stopovers): Ostend-Bruges International Airport -> Liège Airport -> Palma De Mallorca Airport -> Václav Havel Airport Prague  
 
-## Reason why  
+## Reason  
 The N3 source defines a recursive :route relation over nepo:hasOutboundRouteTo facts. A route can use a direct edge when the current length is within the maximum, or extend through a non-visited intermediate airport and recurse with length+1. The final log:collectAllIn query collects the labels of each airport in every route from the source to the destination.  
 source N3 airport labels : 7698  
 source N3 outbound-route facts : 37505  

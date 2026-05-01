@@ -102,7 +102,7 @@ func printReport(ds Dataset, r Result) {
 	fmt.Printf("A_stable : spectral radius %.0f -> %s\n", r.Radii["A_stable"], r.Classes["A_stable"])
 	fmt.Printf("A_damped : spectral radius %.0f -> %s\n", r.Radii["A_damped"], r.Classes["A_damped"])
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("For a discrete-time linear system x_{k+1} = A x_k, the eigenvalues of A govern the modal behaviour.")
 	fmt.Println("Because the matrices are diagonal, the eigenvalues are the diagonal entries; the largest modulus gives the spectral radius and therefore the stability class.")
 	fmt.Println()

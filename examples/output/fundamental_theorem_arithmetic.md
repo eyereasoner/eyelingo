@@ -16,7 +16,7 @@ Sample factorizations:
   9876543210 = 2 * 3^2 * 5 * 17^2 * 379721  
   9999999967 = 9999999967  
 
-## Reason why  
+## Reason  
 Existence comes from repeated smallest-divisor decomposition.  
 At each step, the first divisor found is prime because no smaller  
 positive divisor can divide the current number.  

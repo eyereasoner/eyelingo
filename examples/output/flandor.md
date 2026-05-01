@@ -14,7 +14,7 @@ Payload SHA-256: 718f5b17d07ab6a95503bc04a1000ddb132409f600659c03d21def81914b780
 Envelope HMAC-SHA-256: 955968ca99a191783bc00cba068128ccb9ff40a5e6114fda13a52c74ee27329e  
 decision : ALLOWED  
 
-## Reason why  
+## Reason  
 question : Is the Flemish Economic Resilience Board allowed to use a neutral macro-economic insight for regional stabilization, and if so which package should it activate for Flanders?  
 aggregate : observedFirms=217 level=regional_cluster containsFirmNames=no containsPayrollRows=no  
 

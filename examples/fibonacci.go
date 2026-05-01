@@ -184,7 +184,7 @@ func renderArcOutput(target int, seq []*big.Int, cks Checks) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The Fibonacci sequence is defined by F(0)=0, F(1)=1,")
 	fmt.Println("and F(n)=F(n-1)+F(n-2) for n>=2.")
 	fmt.Println("Arbitrary‑precision arithmetic (math/big) is used to")

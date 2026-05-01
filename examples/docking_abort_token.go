@@ -104,7 +104,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Println("parallel witness : flightPLC -> radioFrame and auditDisplay")
 	fmt.Printf("possible copy tasks : %d\n", a.CopyTasks)
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("All four classical media encode the same abstract AbortBit variable, so the model treats them as interoperable information media.")
 	fmt.Println("Local permutation and local cloning are allowed on each classical medium, while copying and measuring are allowed between media that carry the same variable.")
 	fmt.Println("Those primitive tasks compose into a serial audit path and a parallel fan-out witness.")

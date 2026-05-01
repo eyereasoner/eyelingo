@@ -162,7 +162,7 @@ func printAnswer(ds Dataset, analysis Analysis) {
 }
 
 func printReason(ds Dataset, analysis Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("The model keeps an interval for motor temperature excess over ambient instead of pretending to know the transcendental cooling factor exactly.")
 	fmt.Printf("For each %.0f second sample, the lower and upper excess envelopes are propagated with the certified cooling interval and the mode-specific heat injection.\n", ds.SamplePeriodSec)
 	fmt.Printf("Turbo pushes the upper envelope to %.4f C, then Tour, Eco, and Coast allow the envelope to decrease.\n", analysis.MaxUpperC)

@@ -16,7 +16,7 @@ Therapy utility scores:
   Antibiotic            expectedSuccess = 0.110953  adverse = 0.07  utility = 0.899526  
   SupportiveCare        expectedSuccess = 0.291512  adverse = 0.01  utility = 2.885120  
 
-## Reason why  
+## Reason  
 Evidence: Fever=present, DryCough=present, LossOfSmell=absent, Sneezing=absent, ShortBreath=absent.  
 Evidence total (normalizing constant) = 0.01918233.  
 

@@ -253,7 +253,7 @@ func printAnswer(a Analysis) {
 }
 
 func printReason(a Analysis) {
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("Each start is read as four digits, so 1 is treated as 0001.")
 	fmt.Println("The digits are sorted once, then the optimized identity computes the")
 	fmt.Println("same result as descending-number minus ascending-number.")

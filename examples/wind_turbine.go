@@ -140,7 +140,7 @@ func printReport(ds Dataset, a Analysis) {
 	fmt.Printf("usable intervals : %d\n", countState(a.Intervals, "partial")+countState(a.Intervals, "rated"))
 	fmt.Printf("total energy : %.3f MWh\n", a.TotalMWh)
 	fmt.Println()
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Println("Wind below cut-in and at or above cut-out is stopped for production and safety.")
 	fmt.Println("Wind between cut-in and rated speed follows a cubic power curve normalized to the rated point.")
 	fmt.Println("Wind between rated speed and cut-out is capped at rated power.")

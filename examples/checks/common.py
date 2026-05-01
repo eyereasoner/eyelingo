@@ -37,7 +37,7 @@ class CheckContext:
 
     @property
     def reason(self) -> str:
-        return self.section("Reason why")
+        return self.section("Reason")
 
 
 def check_line(ok: bool, index: int, description: str) -> str:

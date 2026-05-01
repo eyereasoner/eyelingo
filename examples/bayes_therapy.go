@@ -416,7 +416,7 @@ func renderArcOutput(data Dataset, result InferenceResult, checks Checks) {
 	fmt.Println()
 
 	// --- Reason Why ---
-	fmt.Println("## Reason why")
+	fmt.Println("## Reason")
 	fmt.Printf("Evidence: %s.\n", formatEvidence(data.Evidence))
 	fmt.Printf("Evidence total (normalizing constant) = %.8f.\n", result.EvidenceTotal)
 	fmt.Println()

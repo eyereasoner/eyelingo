@@ -6,7 +6,7 @@ actuator2 control1 = 26.080000
 input1 measurement10 = 2.236068 (lessThan branch)  
 disturbance2 measurement10 = 45.000000 (notLessThan branch)  
 
-## Reason why  
+## Reason  
 The backward measurement10 rules first normalize measurement1 pairs into scalar measurement10 values.  
 For input1, 6 < 11, so sqrt(11 - 6) = 2.236068.  
 The first forward rule computes feedforward control from input1 measurement10, the input2 boolean guard, and disturbance1 compensation.  

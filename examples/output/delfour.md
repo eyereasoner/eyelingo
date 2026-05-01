@@ -7,7 +7,7 @@ decision : Allowed
 scanned product : Classic Tea Biscuits  
 suggested alternative: Low-Sugar Tea Biscuits  
 
-## Reason why  
+## Reason  
 The phone desensitizes a diabetes-related household condition into a scoped low-sugar need, wraps it in an expiring Insight + Policy envelope, signs it, and the scanner consumes that envelope for shopping assistance.  
 metric : sugar_g_per_serving  
 threshold : 10.0  

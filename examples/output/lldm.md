@@ -11,7 +11,7 @@ Key computed values:
   d64 = 23.457134 cm  
   dCm = -1.908234 cm  
 
-## Reason why  
+## Reason  
 The measurement points p1-p4 define two parallel lines L1 and L3/L4.  
 L1 is defined by p1 and p2; L3 passes through p3; L4 passes through p4.  
 L3 and L4 are perpendicular to L1.  Intersection points p5 (L1∩L3)  
