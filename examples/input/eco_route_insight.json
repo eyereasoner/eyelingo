@@ -1,0 +1,51 @@
+{
+  "caseName": "Eco Route Insight",
+  "scenario": {
+    "driver": "Jamal",
+    "depot": "Depot X",
+    "allowedUse": "ui.eco.banner",
+    "issuedAt": "2025-01-01T09:00:00Z",
+    "ttlHours": 2
+  },
+  "shipment": {
+    "id": "shipment-1",
+    "payloadKg": 2500
+  },
+  "currentRoute": {
+    "id": "current-route",
+    "label": "Current urban route",
+    "distanceKm": 42.0,
+    "gradientFactor": 1.15,
+    "etaMinutes": 64
+  },
+  "alternativeRoutes": [
+    {
+      "id": "alt-low-fuel",
+      "label": "Lower-fuel route",
+      "distanceKm": 38.0,
+      "gradientFactor": 1.05,
+      "etaMinutes": 66
+    },
+    {
+      "id": "alt-hilly-shortcut",
+      "label": "Shorter hilly shortcut",
+      "distanceKm": 35.0,
+      "gradientFactor": 1.42,
+      "etaMinutes": 63
+    }
+  ],
+  "policy": {
+    "fuelIndexThreshold": 120.0,
+    "maxEtaDelayMinutes": 5,
+    "requireAlternativeBelowThreshold": true,
+    "allowedUse": "ui.eco.banner",
+    "signatureAlgorithm": "HMAC-SHA256"
+  },
+  "dataMinimization": {
+    "forbiddenEnvelopeTerms": ["payloadKg", "gpsTrace", "driverBehavior", "rawRouteTelemetry"]
+  },
+  "signing": {
+    "keyId": "local-demo-key",
+    "secret": "eyelingo-demo-secret"
+  }
+}
