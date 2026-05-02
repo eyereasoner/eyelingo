@@ -22,4 +22,6 @@ Input JSON: [../input/superdense_coding.json](../input/superdense_coding.json)
 
 Go implementation: [../superdense_coding.go](../superdense_coding.go)
 
+Python check: [../checks/superdense_coding.py](../checks/superdense_coding.py)
+
 Expected Markdown output: [../output/superdense_coding.md](../output/superdense_coding.md)

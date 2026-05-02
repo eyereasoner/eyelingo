@@ -22,4 +22,6 @@ Input JSON: [../input/sudoku.json](../input/sudoku.json)
 
 Go implementation: [../sudoku.go](../sudoku.go)
 
+Python check: [../checks/sudoku.py](../checks/sudoku.py)
+
 Expected Markdown output: [../output/sudoku.md](../output/sudoku.md)

@@ -22,4 +22,6 @@ Input JSON: [../input/calidor.json](../input/calidor.json)
 
 Go implementation: [../calidor.go](../calidor.go)
 
+Python check: [../checks/calidor.py](../checks/calidor.py)
+
 Expected Markdown output: [../output/calidor.md](../output/calidor.md)

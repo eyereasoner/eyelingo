@@ -22,4 +22,6 @@ Input JSON: [../input/rc_discharge_envelope.json](../input/rc_discharge_envelope
 
 Go implementation: [../rc_discharge_envelope.go](../rc_discharge_envelope.go)
 
+Python check: [../checks/rc_discharge_envelope.py](../checks/rc_discharge_envelope.py)
+
 Expected Markdown output: [../output/rc_discharge_envelope.md](../output/rc_discharge_envelope.md)

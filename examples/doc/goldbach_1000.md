@@ -22,4 +22,6 @@ Input JSON: [../input/goldbach_1000.json](../input/goldbach_1000.json)
 
 Go implementation: [../goldbach_1000.go](../goldbach_1000.go)
 
+Python check: [../checks/goldbach_1000.py](../checks/goldbach_1000.py)
+
 Expected Markdown output: [../output/goldbach_1000.md](../output/goldbach_1000.md)

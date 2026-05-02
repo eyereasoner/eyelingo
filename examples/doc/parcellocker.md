@@ -22,4 +22,6 @@ Input JSON: [../input/parcellocker.json](../input/parcellocker.json)
 
 Go implementation: [../parcellocker.go](../parcellocker.go)
 
+Python check: [../checks/parcellocker.py](../checks/parcellocker.py)
+
 Expected Markdown output: [../output/parcellocker.md](../output/parcellocker.md)

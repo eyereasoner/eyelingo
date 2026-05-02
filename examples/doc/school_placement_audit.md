@@ -27,4 +27,6 @@ Input JSON: [../input/school_placement_audit.json](../input/school_placement_aud
 
 Go implementation: [../school_placement_audit.go](../school_placement_audit.go)
 
+Python check: [../checks/school_placement_audit.py](../checks/school_placement_audit.py)
+
 Expected Markdown output: [../output/school_placement_audit.md](../output/school_placement_audit.md)

@@ -29,4 +29,6 @@ Input JSON: [../input/eco_route_insight.json](../input/eco_route_insight.json)
 
 Go implementation: [../eco_route_insight.go](../eco_route_insight.go)
 
+Python check: [../checks/eco_route_insight.py](../checks/eco_route_insight.py)
+
 Expected Markdown output: [../output/eco_route_insight.md](../output/eco_route_insight.md)

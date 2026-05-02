@@ -22,4 +22,6 @@ Input JSON: [../input/flandor.json](../input/flandor.json)
 
 Go implementation: [../flandor.go](../flandor.go)
 
+Python check: [../checks/flandor.py](../checks/flandor.py)
+
 Expected Markdown output: [../output/flandor.md](../output/flandor.md)

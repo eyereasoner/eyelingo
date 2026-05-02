@@ -22,4 +22,6 @@ Input JSON: [../input/gps.json](../input/gps.json)
 
 Go implementation: [../gps.go](../gps.go)
 
+Python check: [../checks/gps.py](../checks/gps.py)
+
 Expected Markdown output: [../output/gps.md](../output/gps.md)

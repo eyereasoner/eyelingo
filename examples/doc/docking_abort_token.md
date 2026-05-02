@@ -22,4 +22,6 @@ Input JSON: [../input/docking_abort_token.json](../input/docking_abort_token.jso
 
 Go implementation: [../docking_abort_token.go](../docking_abort_token.go)
 
+Python check: [../checks/docking_abort_token.py](../checks/docking_abort_token.py)
+
 Expected Markdown output: [../output/docking_abort_token.md](../output/docking_abort_token.md)

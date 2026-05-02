@@ -22,4 +22,6 @@ Input JSON: [../input/path_discovery.json](../input/path_discovery.json)
 
 Go implementation: [../path_discovery.go](../path_discovery.go)
 
+Python check: [../checks/path_discovery.py](../checks/path_discovery.py)
+
 Expected Markdown output: [../output/path_discovery.md](../output/path_discovery.md)

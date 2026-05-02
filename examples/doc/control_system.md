@@ -22,4 +22,6 @@ Input JSON: [../input/control_system.json](../input/control_system.json)
 
 Go implementation: [../control_system.go](../control_system.go)
 
+Python check: [../checks/control_system.py](../checks/control_system.py)
+
 Expected Markdown output: [../output/control_system.md](../output/control_system.md)

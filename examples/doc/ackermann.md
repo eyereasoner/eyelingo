@@ -22,4 +22,6 @@ Input JSON: [../input/ackermann.json](../input/ackermann.json)
 
 Go implementation: [../ackermann.go](../ackermann.go)
 
+Python check: [../checks/ackermann.py](../checks/ackermann.py)
+
 Expected Markdown output: [../output/ackermann.md](../output/ackermann.md)

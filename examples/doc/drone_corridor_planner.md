@@ -22,4 +22,6 @@ Input JSON: [../input/drone_corridor_planner.json](../input/drone_corridor_plann
 
 Go implementation: [../drone_corridor_planner.go](../drone_corridor_planner.go)
 
+Python check: [../checks/drone_corridor_planner.py](../checks/drone_corridor_planner.py)
+
 Expected Markdown output: [../output/drone_corridor_planner.md](../output/drone_corridor_planner.md)

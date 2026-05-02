@@ -22,4 +22,6 @@ Input JSON: [../input/fft8_numeric.json](../input/fft8_numeric.json)
 
 Go implementation: [../fft8_numeric.go](../fft8_numeric.go)
 
+Python check: [../checks/fft8_numeric.py](../checks/fft8_numeric.py)
+
 Expected Markdown output: [../output/fft8_numeric.md](../output/fft8_numeric.md)

@@ -22,4 +22,6 @@ Input JSON: [../input/ebike_motor_thermal_envelope.json](../input/ebike_motor_th
 
 Go implementation: [../ebike_motor_thermal_envelope.go](../ebike_motor_thermal_envelope.go)
 
+Python check: [../checks/ebike_motor_thermal_envelope.py](../checks/ebike_motor_thermal_envelope.py)
+
 Expected Markdown output: [../output/ebike_motor_thermal_envelope.md](../output/ebike_motor_thermal_envelope.md)

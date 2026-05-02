@@ -22,4 +22,6 @@ Input JSON: [../input/photosynthetic_exciton_transfer.json](../input/photosynthe
 
 Go implementation: [../photosynthetic_exciton_transfer.go](../photosynthetic_exciton_transfer.go)
 
+Python check: [../checks/photosynthetic_exciton_transfer.py](../checks/photosynthetic_exciton_transfer.py)
+
 Expected Markdown output: [../output/photosynthetic_exciton_transfer.md](../output/photosynthetic_exciton_transfer.md)

@@ -22,4 +22,6 @@ Input JSON: [../input/isolation_breach_token.json](../input/isolation_breach_tok
 
 Go implementation: [../isolation_breach_token.go](../isolation_breach_token.go)
 
+Python check: [../checks/isolation_breach_token.py](../checks/isolation_breach_token.py)
+
 Expected Markdown output: [../output/isolation_breach_token.md](../output/isolation_breach_token.md)

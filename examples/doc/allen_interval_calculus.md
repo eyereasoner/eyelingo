@@ -22,4 +22,6 @@ Input JSON: [../input/allen_interval_calculus.json](../input/allen_interval_calc
 
 Go implementation: [../allen_interval_calculus.go](../allen_interval_calculus.go)
 
+Python check: [../checks/allen_interval_calculus.py](../checks/allen_interval_calculus.py)
+
 Expected Markdown output: [../output/allen_interval_calculus.md](../output/allen_interval_calculus.md)

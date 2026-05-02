@@ -22,4 +22,6 @@ Input JSON: [../input/barley_seed_lineage.json](../input/barley_seed_lineage.jso
 
 Go implementation: [../barley_seed_lineage.go](../barley_seed_lineage.go)
 
+Python check: [../checks/barley_seed_lineage.py](../checks/barley_seed_lineage.py)
+
 Expected Markdown output: [../output/barley_seed_lineage.md](../output/barley_seed_lineage.md)

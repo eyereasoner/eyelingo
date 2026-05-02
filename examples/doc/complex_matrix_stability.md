@@ -22,4 +22,6 @@ Input JSON: [../input/complex_matrix_stability.json](../input/complex_matrix_sta
 
 Go implementation: [../complex_matrix_stability.go](../complex_matrix_stability.go)
 
+Python check: [../checks/complex_matrix_stability.py](../checks/complex_matrix_stability.py)
+
 Expected Markdown output: [../output/complex_matrix_stability.md](../output/complex_matrix_stability.md)
