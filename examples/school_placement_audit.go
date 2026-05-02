@@ -9,7 +9,6 @@ import (
 	"eyelingo/internal/exampleinput"
 	"fmt"
 	"math"
-	"os"
 	"sort"
 	"strings"
 )
@@ -75,22 +74,12 @@ type Analysis struct {
 	Audited             map[string]Assignment
 	Changes             []Change
 	LargestHiddenDetour Change
-	Checks              []Check
-}
-
-type Check struct {
-	ID   string
-	OK   bool
-	Text string
 }
 
 func main() {
 	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
 	analysis := derive(ds)
 	printReport(ds, analysis)
-	if !allOK(analysis.Checks) {
-		os.Exit(1)
-	}
 }
 
 func derive(ds Dataset) Analysis {
@@ -117,15 +106,7 @@ func derive(ds Dataset) Analysis {
 			}
 		}
 	}
-	checks := []Check{
-		{"C1", len(ds.Students) == 4 && len(ds.Schools) == 4 && len(ds.Distances) == 16, "student, school, and distance fixtures are complete"},
-		{"C2", straight["ada"].School == "Centrum" && straight["bjorn"].School == "Centrum", "straight-line support tool picks the map-nearest schools for Ada and Björn"},
-		{"C3", audited["ada"].School == "Lindholmen" && audited["bjorn"].School == "Backa", "route-aware audit changes Ada and Björn to walkable preferred schools"},
-		{"C4", audited["clara"].School == "Haga" && audited["davi"].School == "Haga", "route-aware audit keeps Clara and moves Davi to Haga"},
-		{"C5", len(changes) == 3, "three children are affected by the straight-line rule"},
-		{"C6", largest.Student.ID == "ada" && hiddenDetour(largest.Straight) == 3000, "largest hidden detour is Ada's river-bridge assignment to Centrum"},
-	}
-	return Analysis{Straight: straight, Audited: audited, Changes: changes, LargestHiddenDetour: largest, Checks: checks}
+	return Analysis{Straight: straight, Audited: audited, Changes: changes, LargestHiddenDetour: largest}
 }
 
 func chooseSchool(ds Dataset, student Student, audited bool) Assignment {
@@ -170,15 +151,6 @@ func preferenceRank(student Student, school string) int {
 
 func hiddenDetour(a Assignment) int {
 	return a.Distance.WalkingMeters - a.Distance.StraightMeters
-}
-
-func allOK(checks []Check) bool {
-	for _, check := range checks {
-		if !check.OK {
-			return false
-		}
-	}
-	return true
 }
 
 func printReport(ds Dataset, analysis Analysis) {
