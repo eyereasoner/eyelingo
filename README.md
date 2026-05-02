@@ -8,6 +8,17 @@ Reason
 Check
 ```
 
+Open any example and look for the split:
+
+```text
+Go:     Answer + Reason
+Python: Check
+```
+
+The code that explains an answer is not the code that verifies it. Go turns structured input into a readable derivation; during testing, Python independently checks the result and appends the visible `## Check` section. If the two disagree, the test fails.
+
+That is the small aha of Eyelingo: reasoning examples should be easy to read, easy to run, and auditable.
+
 ## Quick start
 
 Run the full regression suite:
