@@ -86,6 +86,8 @@ Go title + Answer + Reason
 
 Following a design suggestion by Prof. Ruben Verborgh, the `Check` section is deliberately not produced by Go. Go computes and explains the answer; Python independently verifies it and appends the visible `## Check` section during testing.
 
+Eyelingo makes reasoning auditable: not by trusting the explanation, but by checking it independently. When Go and Python disagree, the test fails. Eyelingo does not assume either side is automatically correct; the disagreement points to a bug in the Go implementation, the Python verifier, the stored snapshot, or the example specification. The independent check is not a second source of truth by itself; it is a deliberately separate witness that makes disagreements visible and reviewable.
+
 This separation prevents the checks from calling Go helper functions or reusing Go intermediate state from the answer path. Shared Python helper code lives in `examples/checks/common.py`; substantive checks are implemented in the per-example modules.
 
 The visible output no longer includes Go audit details. Implementation diagnostics stay out of the report so the Markdown focuses on the domain answer, explanation, and independent verification.
