@@ -1,0 +1,65 @@
+{
+  "caseName": "School Placement Route Audit",
+  "context": {
+    "city": "Gothenburg-inspired",
+    "decisionSupportLabel": "support tool",
+    "issue": "straight-line distance can hide river, highway, and preference effects"
+  },
+  "policy": {
+    "maxWalkingMeters": 2500,
+    "preferencePenaltyMeters": 600
+  },
+  "students": [
+    {
+      "id": "ada",
+      "name": "Ada",
+      "homeArea": "Norra Älvstranden",
+      "preferences": ["Lindholmen", "Haga", "Centrum", "Backa"]
+    },
+    {
+      "id": "bjorn",
+      "name": "Björn",
+      "homeArea": "Kortedala",
+      "preferences": ["Backa", "Centrum", "Haga", "Lindholmen"]
+    },
+    {
+      "id": "clara",
+      "name": "Clara",
+      "homeArea": "Masthugget",
+      "preferences": ["Haga", "Centrum", "Lindholmen", "Backa"]
+    },
+    {
+      "id": "davi",
+      "name": "Davi",
+      "homeArea": "Majorna",
+      "preferences": ["Haga", "Lindholmen", "Centrum", "Backa"]
+    }
+  ],
+  "schools": [
+    {"id": "lindholmen", "name": "Lindholmen"},
+    {"id": "haga", "name": "Haga"},
+    {"id": "centrum", "name": "Centrum"},
+    {"id": "backa", "name": "Backa"}
+  ],
+  "distances": [
+    {"student": "ada", "school": "Lindholmen", "straightMeters": 700, "walkingMeters": 850, "barrier": "local"},
+    {"student": "ada", "school": "Haga", "straightMeters": 1800, "walkingMeters": 4200, "barrier": "river"},
+    {"student": "ada", "school": "Centrum", "straightMeters": 600, "walkingMeters": 3600, "barrier": "river-bridge"},
+    {"student": "ada", "school": "Backa", "straightMeters": 2400, "walkingMeters": 3500, "barrier": "highway"},
+
+    {"student": "bjorn", "school": "Lindholmen", "straightMeters": 3500, "walkingMeters": 5300, "barrier": "river"},
+    {"student": "bjorn", "school": "Haga", "straightMeters": 2100, "walkingMeters": 3600, "barrier": "traffic"},
+    {"student": "bjorn", "school": "Centrum", "straightMeters": 1100, "walkingMeters": 3100, "barrier": "rail-highway"},
+    {"student": "bjorn", "school": "Backa", "straightMeters": 1400, "walkingMeters": 1700, "barrier": "local"},
+
+    {"student": "clara", "school": "Lindholmen", "straightMeters": 1600, "walkingMeters": 2800, "barrier": "river"},
+    {"student": "clara", "school": "Haga", "straightMeters": 650, "walkingMeters": 800, "barrier": "local"},
+    {"student": "clara", "school": "Centrum", "straightMeters": 900, "walkingMeters": 1000, "barrier": "local"},
+    {"student": "clara", "school": "Backa", "straightMeters": 3000, "walkingMeters": 4300, "barrier": "highway"},
+
+    {"student": "davi", "school": "Lindholmen", "straightMeters": 950, "walkingMeters": 1800, "barrier": "river-bridge"},
+    {"student": "davi", "school": "Haga", "straightMeters": 1200, "walkingMeters": 1300, "barrier": "local"},
+    {"student": "davi", "school": "Centrum", "straightMeters": 1000, "walkingMeters": 2800, "barrier": "traffic"},
+    {"student": "davi", "school": "Backa", "straightMeters": 3100, "walkingMeters": 4500, "barrier": "highway"}
+  ]
+}
