@@ -22,6 +22,6 @@ Input JSON: [../input/deep_taxonomy_100000.json](../input/deep_taxonomy_100000.j
 
 Go implementation: [../deep_taxonomy_100000.go](../deep_taxonomy_100000.go)
 
-Python check: [../checks/deep_taxonomy_100000.py](../checks/deep_taxonomy_100000.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/deep_taxonomy_100000.md](../output/deep_taxonomy_100000.md)

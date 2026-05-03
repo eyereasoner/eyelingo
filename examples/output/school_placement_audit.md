@@ -19,7 +19,7 @@ C1 OK - the fixture has four students, four schools, and a complete 4 × 4 dista
 C2 OK - every student preference list covers every school exactly once  
 C3 OK - the independent straight-line rule assigns Ada and Björn to Centrum  
 C4 OK - the independent route-aware rule computes walking distance plus preference penalty  
-C5 OK - the reported recommended assignments match the Python audit  
+C5 OK - the reported recommended assignments match the Go audit  
 C6 OK - the reported affected children are exactly those whose provisional placement is flagged  
 C7 OK - the reported largest hidden detour matches the flawed straight-line placement  
 C8 OK - the failure result follows from at least one over-limit walking route and changed assignment  

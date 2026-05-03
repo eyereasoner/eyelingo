@@ -22,6 +22,6 @@ Input JSON: [../input/fibonacci.json](../input/fibonacci.json)
 
 Go implementation: [../fibonacci.go](../fibonacci.go)
 
-Python check: [../checks/fibonacci.py](../checks/fibonacci.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/fibonacci.md](../output/fibonacci.md)

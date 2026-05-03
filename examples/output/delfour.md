@@ -21,7 +21,7 @@ audit entries : 1
 bus files written : 6  
 
 ## Check  
-C1 OK - the scanner request satisfies the ODRL permission independently from Go  
+C1 OK - the scanner request satisfies the ODRL permission independently  
 C2 OK - the policy prohibition independently blocks marketing distribution  
 C3 OK - the delete duty is tied to the insight expiry and is still before expiry  
 C4 OK - the minimized serialized insight omits the sensitive medical condition  

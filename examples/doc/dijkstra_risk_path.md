@@ -22,6 +22,6 @@ Input JSON: [../input/dijkstra_risk_path.json](../input/dijkstra_risk_path.json)
 
 Go implementation: [../dijkstra_risk_path.go](../dijkstra_risk_path.go)
 
-Python check: [../checks/dijkstra_risk_path.py](../checks/dijkstra_risk_path.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/dijkstra_risk_path.md](../output/dijkstra_risk_path.md)

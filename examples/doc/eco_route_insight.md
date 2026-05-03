@@ -21,7 +21,7 @@ The Go implementation loads one shipment, one current route, two route alternati
 - the best eligible lower-fuel alternative;
 - a compact envelope containing only the audience, allowed use, expiry, route suggestion, fuel indices, saving, and signature metadata.
 
-The Go example does not emit a `## Check` section. During testing, the Python check independently recomputes the fuel indices, route choice, envelope expiry, canonical payload digest, and HMAC signature.
+The Go example does not emit a `## Check` section. During testing, the isolated Go check independently recomputes the fuel indices, route choice, envelope expiry, canonical payload digest, and HMAC signature.
 
 ## Files
 
@@ -29,6 +29,6 @@ Input JSON: [../input/eco_route_insight.json](../input/eco_route_insight.json)
 
 Go implementation: [../eco_route_insight.go](../eco_route_insight.go)
 
-Python check: [../checks/eco_route_insight.py](../checks/eco_route_insight.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/eco_route_insight.md](../output/eco_route_insight.md)

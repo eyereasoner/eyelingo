@@ -22,6 +22,6 @@ Input JSON: [../input/odrl_dpv_risk_ranked.json](../input/odrl_dpv_risk_ranked.j
 
 Go implementation: [../odrl_dpv_risk_ranked.go](../odrl_dpv_risk_ranked.go)
 
-Python check: [../checks/odrl_dpv_risk_ranked.py](../checks/odrl_dpv_risk_ranked.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/odrl_dpv_risk_ranked.md](../output/odrl_dpv_risk_ranked.md)

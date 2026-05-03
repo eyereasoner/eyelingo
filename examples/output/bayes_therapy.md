@@ -30,13 +30,12 @@ and utility = benefitWeight × expectedSuccess − harmWeight × adverse.
 The recommended therapy is the one with the highest utility.  
 
 ## Check  
-C1 OK - all priors are valid probabilities and the model has nonzero prior mass  
-C2 OK - all evidence symptoms are available for every disease and absent evidence uses complement factors  
-C3 OK - the Bayesian normalizing constant is recomputed independently  
-C4 OK - the reported posterior table contains one row for each disease  
-C5 OK - each reported unnormalized disease likelihood matches the Python recomputation  
-C6 OK - each reported posterior equals likelihood divided by the evidence total  
-C7 OK - therapy success vectors align with diseases and all therapy probabilities are in [0, 1]  
-C8 OK - each expected therapy success is recomputed as posterior-weighted disease success  
-C9 OK - each therapy utility applies benefitWeight × expectedSuccess − harmWeight × adverse  
-C10 OK - the reported recommendation is the maximum-utility therapy  
+C1 OK - all disease priors are probabilities and the model is deliberately incomplete  
+C2 OK - every conditional probability is in [0, 1]  
+C3 OK - the evidence normalizing constant is recomputed independently  
+C4 OK - reported posteriors and unnormalized likelihoods match recomputation  
+C5 OK - reported posteriors sum to one after rounding  
+C6 OK - all therapy rows are reported  
+C7 OK - expected success and adverse-risk inputs match independent utility computation  
+C8 OK - each reported utility is benefit-weighted success minus harm-weighted adverse risk  
+C9 OK - the recommended therapy is independently selected as maximum utility  

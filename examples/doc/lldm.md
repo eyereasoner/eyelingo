@@ -22,6 +22,6 @@ Input JSON: [../input/lldm.json](../input/lldm.json)
 
 Go implementation: [../lldm.go](../lldm.go)
 
-Python check: [../checks/lldm.py](../checks/lldm.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/lldm.md](../output/lldm.md)

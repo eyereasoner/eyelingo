@@ -16,7 +16,7 @@ The run stops at 101000000101 because every one-bit neighbor is no better under 
 
 ## Check  
 C1 OK - the input has one item per genome bit and a valid binary start genome  
-C2 OK - Python independently simulates the deterministic single-bit local search to the reported final genome  
+C2 OK - the checker independently simulates the deterministic single-bit local search to the reported final genome  
 C3 OK - reported selected items are exactly the one-bits in the final genome  
 C4 OK - reported weight, value, and fitness match independent genome evaluation  
 C5 OK - the final candidate is feasible and matches the expected fixture totals  

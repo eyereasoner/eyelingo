@@ -1,7 +1,7 @@
 // eco_route_insight.go
 //
 // A compact insight-economy example: Go computes a local fuel-saving route
-// suggestion and emits a small signed envelope, while Python independently
+// suggestion and emits a small signed envelope, while the isolated Go checker independently
 // checks the derivation during testing.
 package main
 

@@ -22,6 +22,6 @@ Input JSON: [../input/wind_turbine.json](../input/wind_turbine.json)
 
 Go implementation: [../wind_turbine.go](../wind_turbine.go)
 
-Python check: [../checks/wind_turbine.py](../checks/wind_turbine.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/wind_turbine.md](../output/wind_turbine.md)

@@ -22,6 +22,6 @@ Input JSON: [../input/bmi.json](../input/bmi.json)
 
 Go implementation: [../bmi.go](../bmi.go)
 
-Python check: [../checks/bmi.py](../checks/bmi.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/bmi.md](../output/bmi.md)

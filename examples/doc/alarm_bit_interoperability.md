@@ -22,6 +22,6 @@ Input JSON: [../input/alarm_bit_interoperability.json](../input/alarm_bit_intero
 
 Go implementation: [../alarm_bit_interoperability.go](../alarm_bit_interoperability.go)
 
-Python check: [../checks/alarm_bit_interoperability.py](../checks/alarm_bit_interoperability.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/alarm_bit_interoperability.md](../output/alarm_bit_interoperability.md)

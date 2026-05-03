@@ -22,6 +22,6 @@ Input JSON: [../input/doctor_advice_work_conflict.json](../input/doctor_advice_w
 
 Go implementation: [../doctor_advice_work_conflict.go](../doctor_advice_work_conflict.go)
 
-Python check: [../checks/doctor_advice_work_conflict.py](../checks/doctor_advice_work_conflict.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/doctor_advice_work_conflict.md](../output/doctor_advice_work_conflict.md)

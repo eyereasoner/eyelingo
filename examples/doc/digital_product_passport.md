@@ -22,6 +22,6 @@ Input JSON: [../input/digital_product_passport.json](../input/digital_product_pa
 
 Go implementation: [../digital_product_passport.go](../digital_product_passport.go)
 
-Python check: [../checks/digital_product_passport.py](../checks/digital_product_passport.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/digital_product_passport.md](../output/digital_product_passport.md)

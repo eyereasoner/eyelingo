@@ -22,6 +22,6 @@ Input JSON: [../input/fundamental_theorem_arithmetic.json](../input/fundamental_
 
 Go implementation: [../fundamental_theorem_arithmetic.go](../fundamental_theorem_arithmetic.go)
 
-Python check: [../checks/fundamental_theorem_arithmetic.py](../checks/fundamental_theorem_arithmetic.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/fundamental_theorem_arithmetic.md](../output/fundamental_theorem_arithmetic.md)

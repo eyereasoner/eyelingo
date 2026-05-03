@@ -22,6 +22,6 @@ Input JSON: [../input/euler_identity_certificate.json](../input/euler_identity_c
 
 Go implementation: [../euler_identity_certificate.go](../euler_identity_certificate.go)
 
-Python check: [../checks/euler_identity_certificate.py](../checks/euler_identity_certificate.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/euler_identity_certificate.md](../output/euler_identity_certificate.md)

@@ -11,7 +11,7 @@ No counterexample is found in the bounded range, so the bounded Goldbach conditi
 ## Check  
 C1 OK - the configured upper bound is parsed from JSON as 1000  
 C2 OK - there are exactly 499 even integers from 4 through 1000  
-C3 OK - Python trial division independently finds 168 primes at or below 1000  
+C3 OK - trial division independently finds 168 primes at or below 1000  
 C4 OK - every checked even integer has a prime-pair witness  
 C5 OK - each requested sample even has the first witness found by the independent search  
 C6 OK - every reported witness uses two primes whose sum is the reported even integer  

@@ -23,11 +23,11 @@ At each row it uses bit masks for occupied columns and both diagonal directions 
 Counting continues after the printed solution limit, so the total solution count remains complete.  
 
 ## Check  
-C1 OK - the Python checker loaded the normalized 8-Queens input  
+C1 OK - the checker loaded the normalized 8-Queens input  
 C2 OK - the printed solution gives one column for each row  
 C3 OK - all printed columns are within the board  
 C4 OK - the printed solution uses each column exactly once  
 C5 OK - no pair of printed queens shares a diagonal  
 C6 OK - the rendered board contains exactly eight rows and eight queens  
-C7 OK - an independent Python bit-mask search counts 92 total solutions  
-C8 OK - the reported total matches the independent Python solution count  
+C7 OK - an independent bit-mask search counts 92 total solutions  
+C8 OK - the reported total matches the independent solution count  

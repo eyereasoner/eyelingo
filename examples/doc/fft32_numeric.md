@@ -22,6 +22,6 @@ Input JSON: [../input/fft32_numeric.json](../input/fft32_numeric.json)
 
 Go implementation: [../fft32_numeric.go](../fft32_numeric.go)
 
-Python check: [../checks/fft32_numeric.py](../checks/fft32_numeric.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/fft32_numeric.md](../output/fft32_numeric.md)

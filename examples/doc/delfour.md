@@ -22,6 +22,6 @@ Input JSON: [../input/delfour.json](../input/delfour.json)
 
 Go implementation: [../delfour.go](../delfour.go)
 
-Python check: [../checks/delfour.py](../checks/delfour.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/delfour.md](../output/delfour.md)

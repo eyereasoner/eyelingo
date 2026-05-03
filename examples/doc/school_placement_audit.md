@@ -19,7 +19,7 @@ The Go implementation loads four students, four schools, ranked preferences, and
 
 It then flags students whose provisional assignment differs from the audited assignment or exceeds the walking-distance limit.
 
-The Python check independently recomputes both assignment models, parses the reported affected children and recommended assignments, verifies the largest hidden detour, and checks that the report requests an inspectable explanation.
+The isolated Go check independently recomputes both assignment models, parses the reported affected children and recommended assignments, verifies the largest hidden detour, and checks that the report requests an inspectable explanation.
 
 ## Files
 
@@ -27,6 +27,6 @@ Input JSON: [../input/school_placement_audit.json](../input/school_placement_aud
 
 Go implementation: [../school_placement_audit.go](../school_placement_audit.go)
 
-Python check: [../checks/school_placement_audit.py](../checks/school_placement_audit.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/school_placement_audit.md](../output/school_placement_audit.md)

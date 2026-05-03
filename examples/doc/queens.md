@@ -22,6 +22,6 @@ Input JSON: [../input/queens.json](../input/queens.json)
 
 Go implementation: [../queens.go](../queens.go)
 
-Python check: [../checks/queens.py](../checks/queens.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/queens.md](../output/queens.md)

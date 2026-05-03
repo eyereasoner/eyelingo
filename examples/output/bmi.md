@@ -15,8 +15,7 @@ C1 OK - input units are normalized to positive SI kg and m
 C2 OK - height squared is recomputed independently from the normalized height  
 C3 OK - reported BMI matches independent kg/m² computation rounded to one decimal  
 C4 OK - the unrounded BMI independently rounds to the expected two-decimal value  
-C5 OK - reported category is the independent WHO category for the computed BMI  
-C6 OK - WHO category boundaries are half-open at 18.5, 25, 30, 35, and 40  
-C7 OK - reported healthy-weight lower bound equals BMI 18.5 at the same height  
-C8 OK - reported healthy-weight upper bound equals BMI 24.9 at the same height  
-C9 OK - the explanation mentions the same formula that the Python check recomputed  
+C5 OK - reported BMI category follows the adult threshold table  
+C6 OK - healthy-weight lower bound is recomputed from BMI 18.5  
+C7 OK - healthy-weight upper bound is recomputed from BMI 24.9  
+C8 OK - category boundary ordering covers all adult BMI classes  

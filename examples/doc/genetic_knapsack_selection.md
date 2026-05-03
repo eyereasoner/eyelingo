@@ -22,6 +22,6 @@ Input JSON: [../input/genetic_knapsack_selection.json](../input/genetic_knapsack
 
 Go implementation: [../genetic_knapsack_selection.go](../genetic_knapsack_selection.go)
 
-Python check: [../checks/genetic_knapsack_selection.py](../checks/genetic_knapsack_selection.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/genetic_knapsack_selection.md](../output/genetic_knapsack_selection.md)

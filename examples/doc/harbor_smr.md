@@ -22,6 +22,6 @@ Input JSON: [../input/harbor_smr.json](../input/harbor_smr.json)
 
 Go implementation: [../harbor_smr.go](../harbor_smr.go)
 
-Python check: [../checks/harbor_smr.py](../checks/harbor_smr.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/harbor_smr.md](../output/harbor_smr.md)

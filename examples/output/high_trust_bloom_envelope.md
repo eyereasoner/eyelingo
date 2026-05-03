@@ -19,7 +19,7 @@ Correctness never depends on the Bloom filter alone: maybe-positive answers must
 C1 OK - numeric Bloom parameters are positive  
 C2 OK - canonical graph and SPO index triple counts agree  
 C3 OK - lambda recomputes as k*n/m  
-C4 OK - the exp(-lambda) decimal certificate brackets the exact Python value  
+C4 OK - the exp(-lambda) decimal certificate brackets the exact value  
 C5 OK - false-positive envelope is recomputed from the certificate  
 C6 OK - false-positive upper bound stays below the policy budget  
 C7 OK - expected extra exact lookups stay below budget  

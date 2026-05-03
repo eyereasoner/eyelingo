@@ -45,15 +45,18 @@ if ! command -v go >/dev/null 2>&1; then
   exit 127
 fi
 
-PYTHON=${PYTHON:-python3}
-if ! command -v "$PYTHON" >/dev/null 2>&1; then
-  printf '%s python3 not found\n' "$(fail)" >&2
-  exit 127
-fi
-
 mkdir -p "$OUTPUT_DIR"
 TMPDIR=$(mktemp -d "${TMPDIR:-/tmp}/see-test.XXXXXX")
 trap 'rm -rf "$TMPDIR"' EXIT
+
+if ! go build -o "$TMPDIR/see-build-output" "$ROOT/tools/build_output.go"; then
+  printf '%s could not build Go output combiner\n' "$(fail)" >&2
+  exit 1
+fi
+if ! (cd "$ROOT/examples/checks" && go build -o "$TMPDIR/see-checks" .); then
+  printf '%s could not build isolated Go checker\n' "$(fail)" >&2
+  exit 1
+fi
 
 # Return milliseconds since epoch. Nanosecond precision is used where available;
 # otherwise seconds are enough for a portable timing display.
@@ -105,8 +108,8 @@ run_example() {
   start=$(now_ms)
   phase="go"
   if (cd "$ROOT" && go run "./examples/$file") > "$raw" 2>&1; then
-    phase="python"
-    if (cd "$ROOT" && "$PYTHON" "$ROOT/tools/build_output.py" "$name" "$raw") > "$actual" 2>&1; then
+    phase="go-check"
+    if SEE_CHECKER="$TMPDIR/see-checks" "$TMPDIR/see-build-output" "$name" "$raw" > "$actual" 2>&1; then
       status=0
     else
       status=$?
@@ -119,8 +122,8 @@ run_example() {
   elapsed_ms=$(( end - start ))
   total_ms=$(( total_ms + elapsed_ms ))
 
-  if [ $status -ne 0 ] && [ "$phase" = "python" ]; then
-    printf '%s %-*s %6sms Python Check failed\n' "$(fail)" "$name_width" "$name" "$elapsed_ms"
+  if [ $status -ne 0 ] && [ "$phase" = "go-check" ]; then
+    printf '%s %-*s %6sms Go Check failed\n' "$(fail)" "$name_width" "$name" "$elapsed_ms"
     sed 's/^/  /' "$actual"
     return 1
   fi

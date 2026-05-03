@@ -22,6 +22,6 @@ Input JSON: [../input/gray_code_counter.json](../input/gray_code_counter.json)
 
 Go implementation: [../gray_code_counter.go](../gray_code_counter.go)
 
-Python check: [../checks/gray_code_counter.py](../checks/gray_code_counter.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/gray_code_counter.md](../output/gray_code_counter.md)

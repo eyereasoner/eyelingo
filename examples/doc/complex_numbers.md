@@ -22,6 +22,6 @@ Input JSON: [../input/complex_numbers.json](../input/complex_numbers.json)
 
 Go implementation: [../complex_numbers.go](../complex_numbers.go)
 
-Python check: [../checks/complex_numbers.py](../checks/complex_numbers.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/complex_numbers.md](../output/complex_numbers.md)

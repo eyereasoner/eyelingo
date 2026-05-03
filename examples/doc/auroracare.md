@@ -22,6 +22,6 @@ Input JSON: [../input/auroracare.json](../input/auroracare.json)
 
 Go implementation: [../auroracare.go](../auroracare.go)
 
-Python check: [../checks/auroracare.py](../checks/auroracare.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/auroracare.md](../output/auroracare.md)

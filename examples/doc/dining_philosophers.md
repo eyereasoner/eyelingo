@@ -22,6 +22,6 @@ Input JSON: [../input/dining_philosophers.json](../input/dining_philosophers.jso
 
 Go implementation: [../dining_philosophers.go](../dining_philosophers.go)
 
-Python check: [../checks/dining_philosophers.py](../checks/dining_philosophers.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/dining_philosophers.md](../output/dining_philosophers.md)

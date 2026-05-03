@@ -22,6 +22,6 @@ Input JSON: [../input/bayes_diagnosis.json](../input/bayes_diagnosis.json)
 
 Go implementation: [../bayes_diagnosis.go](../bayes_diagnosis.go)
 
-Python check: [../checks/bayes_diagnosis.py](../checks/bayes_diagnosis.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/bayes_diagnosis.md](../output/bayes_diagnosis.md)

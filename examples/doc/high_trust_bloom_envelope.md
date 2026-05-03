@@ -22,6 +22,6 @@ Input JSON: [../input/high_trust_bloom_envelope.json](../input/high_trust_bloom_
 
 Go implementation: [../high_trust_bloom_envelope.go](../high_trust_bloom_envelope.go)
 
-Python check: [../checks/high_trust_bloom_envelope.py](../checks/high_trust_bloom_envelope.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/high_trust_bloom_envelope.md](../output/high_trust_bloom_envelope.md)

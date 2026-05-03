@@ -22,6 +22,6 @@ Input JSON: [../input/kaprekar_6174.json](../input/kaprekar_6174.json)
 
 Go implementation: [../kaprekar_6174.go](../kaprekar_6174.go)
 
-Python check: [../checks/kaprekar_6174.py](../checks/kaprekar_6174.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/kaprekar_6174.md](../output/kaprekar_6174.md)

@@ -22,6 +22,6 @@ Input JSON: [../input/ev_roundtrip_planner.json](../input/ev_roundtrip_planner.j
 
 Go implementation: [../ev_roundtrip_planner.go](../ev_roundtrip_planner.go)
 
-Python check: [../checks/ev_roundtrip_planner.py](../checks/ev_roundtrip_planner.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/ev_roundtrip_planner.md](../output/ev_roundtrip_planner.md)

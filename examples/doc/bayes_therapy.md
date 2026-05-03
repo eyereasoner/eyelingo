@@ -22,6 +22,6 @@ Input JSON: [../input/bayes_therapy.json](../input/bayes_therapy.json)
 
 Go implementation: [../bayes_therapy.go](../bayes_therapy.go)
 
-Python check: [../checks/bayes_therapy.py](../checks/bayes_therapy.py)
+Go check: [../../checks/main.go](../../checks/main.go)
 
 Expected Markdown output: [../output/bayes_therapy.md](../output/bayes_therapy.md)
