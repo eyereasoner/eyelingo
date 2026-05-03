@@ -27,18 +27,36 @@ Run the full regression suite:
 ./test
 ```
 
+Run one example through the regression path:
+
+```sh
+./test bmi
+```
+
+Print one complete ARC report, including the isolated `## Check` section:
+
+```sh
+./test --arc bmi
+```
+
 Run one Go example directly:
 
 ```sh
 go run examples/bmi.go
 ```
 
-That command prints only the report prefix: title, `## Answer`, and `## Reason`. The `## Check` section is appended by the isolated Go checker in the test/update pipeline.
+That direct command prints only the report prefix: title, `## Answer`, and `## Reason`. The `## Check` section is appended by the isolated Go checker in the test/update pipeline.
 
 Regenerate expected Markdown outputs after an intentional change:
 
 ```sh
 ./test --update
+```
+
+Regenerate just one expected Markdown output:
+
+```sh
+./test --update bmi
 ```
 
 ## What is in this repository
@@ -68,7 +86,7 @@ go.mod                      local module so examples can share input loading
 internal/exampleinput/      shared JSON input loader
 tools/build_output.go       append isolated Go Check output to a Go report prefix
 examples/checks/            separate Go module used only for Check
-test                        run examples and compare with expected Markdown output
+test                        run all examples, one example, or one complete ARC print
 ```
 
 Most Go examples load their domain fixture from `examples/input/<name>.json` through `internal/exampleinput`. A few examples still keep complex relation structures directly in Go; those still have matching JSON input files that document the corresponding data or parameters.
@@ -79,7 +97,7 @@ Expected Markdown outputs use plain lines rather than Markdown list markers. Non
 
 The checks deliberately live in a separate Go module from the answer implementation.
 
-During `./test`:
+During `./test` and `./test <name>`:
 
 1. The test runner builds `tools/build_output.go` and the isolated checker binary from `examples/checks/`.
 2. The test runner executes `go run examples/<name>.go` and captures the Go report prefix.
@@ -87,6 +105,8 @@ During `./test`:
 4. The checker module in `examples/checks/` reconstructs the relevant facts from JSON and/or parses the captured report prefix.
 5. The isolated checker emits the visible `## Check` section.
 6. The combined report is compared with `examples/output/<name>.md`.
+
+Use `./test --arc <name>` to print that combined report directly instead of comparing it with a snapshot.
 
 The snapshot under test is therefore:
 
