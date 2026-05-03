@@ -27,13 +27,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"sort"
 	"strings"
 )
 
-const eyelingoExampleName = "path_discovery"
+const seeExampleName = "path_discovery"
 
 const (
 	sourceGraphAirportLabels = 7698
@@ -407,7 +407,7 @@ func status(ok bool) string {
 }
 
 func main() {
-	data := exampleinput.Load(eyelingoExampleName, Dataset{})
+	data := exampleinput.Load(seeExampleName, Dataset{})
 	result := infer(data)
 
 	fmt.Println("# Path Discovery")

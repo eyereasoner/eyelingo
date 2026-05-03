@@ -19,13 +19,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 	"sort"
 )
 
-const eyelingoExampleName = "odrl_dpv_risk_ranked"
+const seeExampleName = "odrl_dpv_risk_ranked"
 
 const (
 	// Action names are kept as vocabulary-like strings to mirror the N3 source.
@@ -795,7 +795,7 @@ func yesNo(value bool) string {
 }
 
 func main() {
-	data := exampleinput.Load(eyelingoExampleName, dataset())
+	data := exampleinput.Load(seeExampleName, dataset())
 	risks, err := infer(data)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "ODRL/DPV risk inference failed: %v\n", err)

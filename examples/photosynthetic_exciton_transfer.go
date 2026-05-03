@@ -4,12 +4,12 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 )
 
-const eyelingoExampleName = "photosynthetic_exciton_transfer"
+const seeExampleName = "photosynthetic_exciton_transfer"
 
 type Complex struct {
 	Name                        string `json:"name"`
@@ -46,7 +46,7 @@ type Result struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	r := derive(ds)
 	printReport(ds, r)
 	if !allOK(r.Checks) {

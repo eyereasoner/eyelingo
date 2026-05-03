@@ -17,7 +17,7 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 	"sort"
@@ -25,7 +25,7 @@ import (
 	"time"
 )
 
-const eyelingoExampleName = "harbor_smr"
+const seeExampleName = "harbor_smr"
 
 // Dataset is the complete concrete fixture: case context, the narrow insight,
 // the aggregate safety facts, the policy, and the dispatch request.
@@ -124,7 +124,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	analysis := derive(ds)
 	printAnswer(ds, analysis)
 	printReason(ds, analysis)

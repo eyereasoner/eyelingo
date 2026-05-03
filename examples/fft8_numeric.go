@@ -6,7 +6,7 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math"
 	"math/cmplx"
@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-const eyelingoExampleName = "fft8_numeric"
+const seeExampleName = "fft8_numeric"
 
 type Dataset struct {
 	CaseName string    `json:"caseName"`
@@ -48,7 +48,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	a := derive(ds)
 	printReport(ds, a)
 	if !allOK(a.Checks) {

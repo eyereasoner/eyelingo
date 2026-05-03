@@ -22,14 +22,14 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"sort"
 	"strings"
 	"sync"
 )
 
-const eyelingoExampleName = "dining_philosophers"
+const seeExampleName = "dining_philosophers"
 
 const sourceFile = "dining-philosophers.n3"
 
@@ -148,7 +148,7 @@ var schedule = []Round{
 }
 
 func main() {
-	schedule = exampleinput.Load(eyelingoExampleName, schedule)
+	schedule = exampleinput.Load(seeExampleName, schedule)
 	analysis := derive()
 	printAnswer(analysis)
 	printReason(analysis)

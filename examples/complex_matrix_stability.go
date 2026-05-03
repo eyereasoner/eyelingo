@@ -4,13 +4,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math"
 	"os"
 )
 
-const eyelingoExampleName = "complex_matrix_stability"
+const seeExampleName = "complex_matrix_stability"
 
 type Complex struct {
 	Re float64 `json:"re"`
@@ -51,7 +51,7 @@ type Result struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	r := derive(ds)
 	printReport(ds, r)
 	if !allOK(r.Checks) {

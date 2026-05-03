@@ -19,13 +19,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math"
 	"os"
 )
 
-const eyelingoExampleName = "bmi"
+const seeExampleName = "bmi"
 
 // ---------- types ----------
 
@@ -355,7 +355,7 @@ func yesNo(value bool) string {
 // ---------- main ----------
 
 func main() {
-	data := exampleinput.Load(eyelingoExampleName, inputData())
+	data := exampleinput.Load(seeExampleName, inputData())
 	result, err := infer(data)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "BMI inference failed: %v\n", err)

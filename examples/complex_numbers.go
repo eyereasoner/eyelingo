@@ -21,13 +21,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math"
 	"strings"
 )
 
-const eyelingoExampleName = "complex_numbers"
+const seeExampleName = "complex_numbers"
 
 const (
 	epsilon = 1e-9
@@ -178,7 +178,7 @@ func derive() Analysis {
 		},
 	}
 
-	input := exampleinput.Load(eyelingoExampleName, defaults)
+	input := exampleinput.Load(seeExampleName, defaults)
 	question := input.Question
 	expInputs := input.Exponents
 

@@ -1,3 +1,3 @@
-module eyelingo
+module see
 
 go 1.22

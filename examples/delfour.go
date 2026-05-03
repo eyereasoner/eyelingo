@@ -22,13 +22,13 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 	"strings"
 )
 
-const eyelingoExampleName = "delfour"
+const seeExampleName = "delfour"
 
 const (
 	insightID              = "https://example.org/insight/delfour"
@@ -571,7 +571,7 @@ func yesNo(value bool) string {
 }
 
 func main() {
-	data := exampleinput.Load(eyelingoExampleName, dataset())
+	data := exampleinput.Load(seeExampleName, dataset())
 	result, err := infer(data)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Delfour inference failed: %s\n", err)

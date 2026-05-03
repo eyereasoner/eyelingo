@@ -7,13 +7,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math/cmplx"
 	"os"
 )
 
-const eyelingoExampleName = "euler_identity_certificate"
+const seeExampleName = "euler_identity_certificate"
 
 type Dataset struct {
 	CaseName  string  `json:"caseName"`
@@ -37,7 +37,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	a := derive(ds)
 	printReport(ds, a)
 	if !allOK(a.Checks) {

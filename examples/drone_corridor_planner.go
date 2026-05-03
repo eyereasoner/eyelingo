@@ -13,13 +13,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"sort"
 	"strings"
 )
 
-const eyelingoExampleName = "drone_corridor_planner"
+const seeExampleName = "drone_corridor_planner"
 
 type Dataset struct {
 	CaseName     string
@@ -81,7 +81,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	analysis := derive(ds)
 	printAnswer(ds, analysis)
 	printReason(ds, analysis)

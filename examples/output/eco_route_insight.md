@@ -14,7 +14,7 @@ raw data exported : no
 signature algorithm : HMAC-SHA256  
 payload digest : 00e19becd91e81d6881749655d23d43002d9ea714bba61e855eafbc8ef9a5135  
 signature key : local-demo-key  
-signature : 7fFGBN8fyI7xrmRz5VreeAUSf3LC_ywbj32NGk2ovUs  
+signature : WTEm_te0_wdkUnJRacxXgMov1ytX9Yr8nDgjWvvizhg  
 
 ## Reason  
 The current route uses fuel index = distanceKm × (payloadKg / 1000) × gradientFactor.  

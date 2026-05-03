@@ -16,14 +16,14 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math/big"
 	"os"
 	"sort" // needed for stable output ordering
 )
 
-const eyelingoExampleName = "fibonacci"
+const seeExampleName = "fibonacci"
 
 // ---------- expected values ----------
 // These are the exact decimal representations of F(n) for selected n,
@@ -205,7 +205,7 @@ func yesNo(value bool) string {
 // ---------- main ----------
 
 func main() {
-	inputExpected := exampleinput.Load(eyelingoExampleName, expected)
+	inputExpected := exampleinput.Load(seeExampleName, expected)
 	expected = inputExpected
 
 	// Use the maximum index from the expected set to compute everything needed.

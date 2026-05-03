@@ -20,14 +20,14 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math/bits"
 	"os"
 	"strconv"
 )
 
-const eyelingoExampleName = "queens"
+const seeExampleName = "queens"
 
 // SolveStats records implementation-level counters from the backtracking run.
 // These values are not needed to solve the puzzle, but they make the Go output
@@ -238,7 +238,7 @@ func yesNo(value bool) string {
 }
 
 func main() {
-	cfg := exampleinput.Load(eyelingoExampleName, struct {
+	cfg := exampleinput.Load(seeExampleName, struct {
 		N        int
 		MaxPrint int
 	}{N: 8, MaxPrint: 1})

@@ -19,13 +19,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math"
 	"os"
 )
 
-const eyelingoExampleName = "control_system"
+const seeExampleName = "control_system"
 
 // ---------- types ----------
 
@@ -397,7 +397,7 @@ func yesNo(value bool) string {
 // ---------- main ----------
 
 func main() {
-	data := exampleinput.Load(eyelingoExampleName, inputData())
+	data := exampleinput.Load(seeExampleName, inputData())
 	result, err := infer(data)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "control-system inference failed: %v\n", err)

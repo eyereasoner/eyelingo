@@ -7,14 +7,14 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
 )
 
-const eyelingoExampleName = "dijkstra_risk_path"
+const seeExampleName = "dijkstra_risk_path"
 
 type Dataset struct {
 	CaseName   string  `json:"caseName"`
@@ -52,7 +52,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	a := derive(ds)
 	printReport(ds, a)
 	if !allOK(a.Checks) {

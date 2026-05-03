@@ -52,7 +52,7 @@ if ! command -v "$PYTHON" >/dev/null 2>&1; then
 fi
 
 mkdir -p "$OUTPUT_DIR"
-TMPDIR=$(mktemp -d "${TMPDIR:-/tmp}/eyelingo-test.XXXXXX")
+TMPDIR=$(mktemp -d "${TMPDIR:-/tmp}/see-test.XXXXXX")
 trap 'rm -rf "$TMPDIR"' EXIT
 
 # Return milliseconds since epoch. Nanosecond precision is used where available;

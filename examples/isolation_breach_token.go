@@ -7,12 +7,12 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 )
 
-const eyelingoExampleName = "isolation_breach_token"
+const seeExampleName = "isolation_breach_token"
 
 type Dataset struct {
 	CaseName               string   `json:"caseName"`
@@ -45,7 +45,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	a := derive(ds)
 	printReport(ds, a)
 	if !allOK(a.Checks) {

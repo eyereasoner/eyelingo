@@ -21,13 +21,13 @@ package main
 
 import (
 	"errors"
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 	"strings"
 )
 
-const eyelingoExampleName = "gps"
+const seeExampleName = "gps"
 
 const (
 	locationGent       = "Gent"
@@ -438,7 +438,7 @@ func formatDecimal(value float64, decimals int) string {
 }
 
 func main() {
-	data := exampleinput.Load(eyelingoExampleName, dataset())
+	data := exampleinput.Load(seeExampleName, dataset())
 	result, err := infer(data)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "GPS inference failed: %v\n", err)

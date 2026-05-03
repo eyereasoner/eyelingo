@@ -27,7 +27,7 @@ import (
 	"strings"
 )
 
-const eyelingoExampleName = "superdense_coding"
+const seeExampleName = "superdense_coding"
 
 type Bit bool
 

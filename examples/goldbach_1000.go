@@ -4,12 +4,12 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 )
 
-const eyelingoExampleName = "goldbach_1000"
+const seeExampleName = "goldbach_1000"
 
 type Dataset struct {
 	CaseName    string `json:"caseName"`
@@ -40,7 +40,7 @@ type Result struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	r := derive(ds)
 	printReport(ds, r)
 	if !allOK(r.Checks) {

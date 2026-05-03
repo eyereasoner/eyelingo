@@ -11,14 +11,14 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math"
 	"sort"
 	"time"
 )
 
-const eyelingoExampleName = "eco_route_insight"
+const seeExampleName = "eco_route_insight"
 
 type Dataset struct {
 	CaseName          string           `json:"caseName"`
@@ -108,7 +108,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	analysis := derive(ds)
 	printReport(ds, analysis)
 }

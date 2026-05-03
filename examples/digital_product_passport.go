@@ -14,7 +14,7 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"os"
 	"sort"
@@ -22,7 +22,7 @@ import (
 	"time"
 )
 
-const eyelingoExampleName = "digital_product_passport"
+const seeExampleName = "digital_product_passport"
 
 // Dataset contains the concrete DPP fixture: passport metadata, product facts,
 // components, materials, documents, lifecycle events, and expected indicators.
@@ -155,7 +155,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, Dataset{})
+	ds := exampleinput.Load(seeExampleName, Dataset{})
 	analysis := derive(ds)
 	printAnswer(ds, analysis)
 	printReason(ds, analysis)

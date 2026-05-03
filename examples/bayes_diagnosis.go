@@ -20,14 +20,14 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math"
 	"os"
 	"strings"
 )
 
-const eyelingoExampleName = "bayes_diagnosis"
+const seeExampleName = "bayes_diagnosis"
 
 // ---------- types ----------
 
@@ -286,7 +286,7 @@ func yesNo(value bool) string {
 // ---------- main ----------
 
 func main() {
-	data := exampleinput.Load(eyelingoExampleName, dataset())
+	data := exampleinput.Load(seeExampleName, dataset())
 
 	result := infer(data)
 

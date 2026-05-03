@@ -20,14 +20,14 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"sort"
 	"strings"
 	"time"
 )
 
-const eyelingoExampleName = "flandor"
+const seeExampleName = "flandor"
 
 const sourceFile = "flandor.n3"
 
@@ -189,7 +189,7 @@ type Analysis struct {
 }
 
 func main() {
-	ds := exampleinput.Load(eyelingoExampleName, fixture())
+	ds := exampleinput.Load(seeExampleName, fixture())
 	analysis := derive(ds)
 	printAnswer(ds, analysis)
 	printReason(ds, analysis)

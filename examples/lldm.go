@@ -22,12 +22,12 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math"
 )
 
-const eyelingoExampleName = "lldm"
+const seeExampleName = "lldm"
 
 // ---------- types ----------
 
@@ -279,7 +279,7 @@ func yesNo(value bool) string {
 // ---------- main ----------
 
 func main() {
-	input := exampleinput.Load(eyelingoExampleName, inputMeasurement())
+	input := exampleinput.Load(seeExampleName, inputMeasurement())
 	result := infer(input)
 	checks := performChecks(result.Input, result.D)
 	renderArcOutput(result, checks)

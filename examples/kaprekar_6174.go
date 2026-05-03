@@ -23,13 +23,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"sort"
 	"strings"
 )
 
-const eyelingoExampleName = "kaprekar_6174"
+const seeExampleName = "kaprekar_6174"
 
 var (
 	startCount       = 10000
@@ -76,7 +76,7 @@ func main() {
 }
 
 func derive() Analysis {
-	cfg := exampleinput.Load(eyelingoExampleName, struct {
+	cfg := exampleinput.Load(seeExampleName, struct {
 		StartCount       int
 		TargetConstant   int
 		ZeroBasin        int

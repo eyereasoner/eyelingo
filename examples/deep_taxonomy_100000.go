@@ -25,13 +25,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math/bits"
 	"os"
 )
 
-const eyelingoExampleName = "deep_taxonomy_100000"
+const seeExampleName = "deep_taxonomy_100000"
 
 const (
 	taxonomyDepth = 100000
@@ -297,7 +297,7 @@ func yesNo(value bool) string {
 }
 
 func main() {
-	cfg := exampleinput.Load(eyelingoExampleName, struct {
+	cfg := exampleinput.Load(seeExampleName, struct {
 		TaxonomyDepth int
 	}{TaxonomyDepth: taxonomyDepth})
 	result := runForwardChain(cfg.TaxonomyDepth)

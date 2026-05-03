@@ -23,13 +23,13 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"sort"
 	"strings"
 )
 
-const eyelingoExampleName = "fundamental_theorem_arithmetic"
+const seeExampleName = "fundamental_theorem_arithmetic"
 
 const sourceFile = "fundamental-theorem-arithmetic.n3"
 
@@ -107,7 +107,7 @@ func main() {
 }
 
 func derive() Analysis {
-	inputSamples := exampleinput.Load(eyelingoExampleName, sampleNumbers)
+	inputSamples := exampleinput.Load(seeExampleName, sampleNumbers)
 	sampleNumbers = inputSamples
 	stats := Stats{}
 	cases := make([]CaseAnalysis, 0, len(sampleNumbers))

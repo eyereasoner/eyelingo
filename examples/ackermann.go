@@ -26,12 +26,12 @@ package main
 import (
 	"crypto/sha256"
 	"encoding/hex"
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"fmt"
 	"math/big"
 )
 
-const eyelingoExampleName = "ackermann"
+const seeExampleName = "ackermann"
 
 const (
 	baseZ          = 2
@@ -105,7 +105,7 @@ func main() {
 }
 
 func derive() Analysis {
-	queries := exampleinput.Load(eyelingoExampleName, []Query{
+	queries := exampleinput.Load(seeExampleName, []Query{
 		{ID: "A0", X: 0, Y: 0},
 		{ID: "A1", X: 0, Y: 6},
 		{ID: "A2", X: 1, Y: 2},

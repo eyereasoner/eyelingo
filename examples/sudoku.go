@@ -16,7 +16,7 @@
 package main
 
 import (
-	"eyelingo/internal/exampleinput"
+	"see/internal/exampleinput"
 	"flag"
 	"fmt"
 	"math/bits"
@@ -25,7 +25,7 @@ import (
 	"unicode"
 )
 
-const eyelingoExampleName = "sudoku"
+const seeExampleName = "sudoku"
 
 const (
 	allDigitsMask = 0x1ff // bits 0..8 represent digits 1..9
@@ -650,7 +650,7 @@ func printReport(report Report, puzzleName string) {
 }
 
 func main() {
-	cfg := exampleinput.Load(eyelingoExampleName, struct {
+	cfg := exampleinput.Load(seeExampleName, struct {
 		Puzzle string
 		Name   string
 	}{Puzzle: defaultPuzzle, Name: "classic"})
