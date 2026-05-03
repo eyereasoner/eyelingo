@@ -10,12 +10,12 @@ The direct route (Gent → Brugge → Oostende) takes 2400.0 seconds at cost 0.0
 So the direct route is faster, cheaper, more reliable, and slightly more comfortable.  
 
 ## Check  
-C1 OK - the direct Gent-Brugge-Oostende route is derived from edges  
-C2 OK - the Kortrijk alternative route is derived from edges  
-C3 OK - exactly two simple routes connect the traveller to the destination  
-C4 OK - route duration and cost are additive over edges  
-C5 OK - route belief and comfort are multiplicative over edges  
-C6 OK - the recommended route is faster than the alternative  
-C7 OK - the recommended route is cheaper than the alternative  
-C8 OK - the recommended route has higher belief and comfort scores  
-C9 OK - the answer names the independently chosen direct route  
+C1 OK - the named direct route is derived from map edges  
+C2 OK - the named Kortrijk alternative route is derived from map edges  
+C3 OK - all simple routes connect the traveller to the destination  
+C4 OK - route duration and cost are recomputed additively from edges  
+C5 OK - route belief and comfort are recomputed multiplicatively from edges  
+C6 OK - the independently chosen route is faster than its comparator  
+C7 OK - the independently chosen route is cheaper than its comparator  
+C8 OK - the independently chosen route has higher belief and comfort scores  
+C9 OK - the answer names the independently chosen route  

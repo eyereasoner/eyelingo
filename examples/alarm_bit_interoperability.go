@@ -12,8 +12,8 @@
 package main
 
 import (
-	"see/internal/exampleinput"
 	"fmt"
+	"see/internal/exampleinput"
 	"strings"
 )
 
@@ -85,16 +85,10 @@ func derive(ds Dataset) Analysis {
 			}
 		}
 	}
-	impossible := []string{"CloneAllStates"}
-	cannot := []string{"UniversalClone", "UnrestrictedStateFanOut"}
-	canDecision := "NO"
-	if len(copyTasks) == ds.ExpectedCopyTasks && len(permutations) == len(ds.ClassicalMedia) {
-		canDecision = ds.ExpectedCanDecision
-	}
-	cantDecision := "NO"
-	if containsAll(cannot, ds.ExpectedImpossible) {
-		cantDecision = ds.ExpectedCantDecision
-	}
+	impossible := impossibleTasks(ds.Superinformation)
+	cannot := cannotTasks(impossible)
+	canDecision := canClassicalAlarmBitInteroperate(ds.ClassicalMedia, copyTasks, permutations)
+	cantDecision := canUniversallyCloneSuperinformation(cannot)
 	checks := []Check{
 		{ID: "C1", OK: len(ds.ClassicalMedia) == 2, Text: "two unlike classical media are present"},
 		{ID: "C2", OK: sameVariable(ds.ClassicalMedia), Text: fmt.Sprintf("classical media encode the same variable %s", ds.ClassicalMedia[0].Variable)},
@@ -105,6 +99,38 @@ func derive(ds Dataset) Analysis {
 		{ID: "C7", OK: canDecision == ds.ExpectedCanDecision && cantDecision == ds.ExpectedCantDecision, Text: fmt.Sprintf("CAN=%s and CANNOT=%s decisions are both derived", canDecision, cantDecision)},
 	}
 	return Analysis{LocalPermutations: permutations, CopyTasks: copyTasks, ImpossibleTasks: impossible, CannotStates: cannot, CanDecision: canDecision, CantDecision: cantDecision, Checks: checks}
+}
+
+func impossibleTasks(medium SuperinformationMedium) []string {
+	if medium.Name == "" || medium.Variable == "" {
+		return nil
+	}
+	return []string{"CloneAllStates"}
+}
+
+func cannotTasks(impossible []string) []string {
+	cannot := []string{}
+	if contains(impossible, "CloneAllStates") {
+		cannot = append(cannot, "UniversalClone", "UnrestrictedStateFanOut")
+	}
+	return cannot
+}
+
+func canClassicalAlarmBitInteroperate(media []InformationMedium, copyTasks []CopyTask, permutations []string) string {
+	if len(media) < 2 || !sameVariable(media) {
+		return "NO"
+	}
+	if len(copyTasks) != len(media)*(len(media)-1) || len(permutations) != len(media) {
+		return "NO"
+	}
+	return "YES"
+}
+
+func canUniversallyCloneSuperinformation(cannot []string) string {
+	if contains(cannot, "UniversalClone") && contains(cannot, "UnrestrictedStateFanOut") {
+		return "NO"
+	}
+	return "YES"
 }
 
 func sameVariable(media []InformationMedium) bool {

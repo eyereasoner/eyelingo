@@ -14,9 +14,9 @@
 package main
 
 import (
-	"see/internal/exampleinput"
 	"fmt"
 	"os"
+	"see/internal/exampleinput"
 	"sort"
 	"strings"
 	"time"
@@ -213,10 +213,7 @@ func derive(ds Dataset) Analysis {
 		{ID: "C10", OK: ds.Passport.PublicEndpoint != "" && ds.Product.DigitalLink == ds.Passport.PublicEndpoint, Text: "passport endpoint matches the product digital link"},
 	}
 
-	decision := "REVIEW"
-	if allChecksOK(checks) {
-		decision = "PASS"
-	}
+	decision := derivePassportDecision(ds, totalMass, recycledMass, recycledPct, lifecycle, criticalMaterials, repairFriendly, publicDocs, restrictedDocs)
 
 	return Analysis{
 		Decision:          decision,
@@ -231,6 +228,28 @@ func derive(ds Dataset) Analysis {
 		LatestEvent:       latest,
 		Checks:            checks,
 	}
+}
+
+func derivePassportDecision(ds Dataset, totalMass, recycledMass, recycledPct, lifecycle int, criticalMaterials []string, repairFriendly bool, publicDocs, restrictedDocs []Document) string {
+	if totalMass <= 0 || recycledMass < 0 || recycledMass > totalMass || recycledPct < 0 || lifecycle <= 0 {
+		return "REVIEW"
+	}
+	if len(criticalMaterials) == 0 || !repairFriendly {
+		return "REVIEW"
+	}
+	if !allDocTypesPresent(publicDocs, ds.AccessPolicy.PublicDocTypes) {
+		return "REVIEW"
+	}
+	if !allDocTypesPresent(restrictedDocs, ds.AccessPolicy.RestrictedDocTypes) {
+		return "REVIEW"
+	}
+	if !lifecycleOrderOK(ds.Lifecycle) {
+		return "REVIEW"
+	}
+	if ds.Passport.PublicEndpoint == "" || ds.Product.DigitalLink != ds.Passport.PublicEndpoint {
+		return "REVIEW"
+	}
+	return "PASS"
 }
 
 func splitDocuments(documents []Document, publicSection, restrictedSection string) ([]Document, []Document) {

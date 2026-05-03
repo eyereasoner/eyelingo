@@ -21,9 +21,9 @@ package main
 
 import (
 	"errors"
-	"see/internal/exampleinput"
 	"fmt"
 	"os"
+	"see/internal/exampleinput"
 	"strings"
 )
 
@@ -85,6 +85,7 @@ type Path struct {
 	From     string
 	To       string
 	Actions  []string
+	Stops    []string
 	Duration float64
 	Cost     float64
 	Belief   float64
@@ -128,63 +129,22 @@ type InferenceResult struct {
 	Stats            SearchStats
 }
 
-// dataset returns the hard-coded facts translated from gps.n3.
-func dataset() Dataset {
-	return Dataset{
-		Traveller: Traveller{
-			ID:       "i1",
-			Location: locationGent,
-		},
-		Question: "Which route should we take from Gent to Oostende?",
-		Routes: map[string]RouteDefinition{
-			routeDirectID: {
-				ID:    routeDirectID,
-				Label: "Gent → Brugge → Oostende",
-			},
-			routeViaKortrijkID: {
-				ID:    routeViaKortrijkID,
-				Label: "Gent → Kortrijk → Brugge → Oostende",
-			},
-		},
-		Edges: []MapDescription{
-			{
-				From:     locationGent,
-				To:       locationBrugge,
-				Action:   "drive_gent_brugge",
-				Duration: 1500.0,
-				Cost:     0.006,
-				Belief:   0.96,
-				Comfort:  0.99,
-			},
-			{
-				From:     locationGent,
-				To:       locationKortrijk,
-				Action:   "drive_gent_kortrijk",
-				Duration: 1600.0,
-				Cost:     0.007,
-				Belief:   0.96,
-				Comfort:  0.99,
-			},
-			{
-				From:     locationKortrijk,
-				To:       locationBrugge,
-				Action:   "drive_kortrijk_brugge",
-				Duration: 1600.0,
-				Cost:     0.007,
-				Belief:   0.96,
-				Comfort:  0.99,
-			},
-			{
-				From:     locationBrugge,
-				To:       locationOostende,
-				Action:   "drive_brugge_oostende",
-				Duration: 900.0,
-				Cost:     0.004,
-				Belief:   0.98,
-				Comfort:  1.0,
-			},
-		},
+// routeStops parses the route label fact into the sequence of locations it names.
+// This keeps the Go derivation from hard-coding action lists for the known
+// answers: candidate routes are matched against paths inferred from map edges.
+func routeStops(label string) []string {
+	parts := strings.Split(label, "→")
+	if len(parts) == 1 {
+		parts = strings.Split(label, "->")
 	}
+	out := make([]string, 0, len(parts))
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		if part != "" {
+			out = append(out, part)
+		}
+	}
+	return out
 }
 
 // infer runs the translated N3 rules in a deterministic order.
@@ -193,16 +153,10 @@ func infer(data Dataset) (InferenceResult, error) {
 	// Oostende. This corresponds to the N3 rule that derives :i1 gps:path ... .
 	paths, stats := findPaths(data.Edges, data.Traveller.Location, locationOostende)
 
-	// Name the two concrete routes that exist in this tiny map.
-	directRoute, directOK := findPathByActions(paths, []string{
-		"drive_gent_brugge",
-		"drive_brugge_oostende",
-	})
-	alternativeRoute, alternativeOK := findPathByActions(paths, []string{
-		"drive_gent_kortrijk",
-		"drive_kortrijk_brugge",
-		"drive_brugge_oostende",
-	})
+	// Match the named route facts to paths derived from the map. The labels live
+	// in the input data; the action sequences are not baked into the answer path.
+	directRoute, directOK := findPathByStops(paths, routeStops(data.Routes[routeDirectID].Label))
+	alternativeRoute, alternativeOK := findPathByStops(paths, routeStops(data.Routes[routeViaKortrijkID].Label))
 
 	checks := Checks{
 		DirectRouteDerived:      directOK,
@@ -212,17 +166,17 @@ func infer(data Dataset) (InferenceResult, error) {
 		return InferenceResult{AllPaths: paths, Checks: checks, Stats: stats}, errors.New("expected routes were not derived")
 	}
 
-	// Decision rule: the direct route is recommended only if it is faster,
-	// cheaper, more reliable, and more comfortable than the alternative.
+	// Decision rule: recommend a route only from computed metrics. The N3 fixture
+	// contains a rule for :routeDirect that fires when it is faster, cheaper,
+	// more reliable, and more comfortable than :routeViaKortrijk; the Go code
+	// must therefore derive the recommendation from those inequalities rather
+	// than unconditionally naming routeDirect.
 	checks.RecommendedIsFaster = directRoute.Duration < alternativeRoute.Duration
 	checks.RecommendedIsCheaper = directRoute.Cost < alternativeRoute.Cost
 	checks.RecommendedScoresHigher = directRoute.Belief > alternativeRoute.Belief &&
 		directRoute.Comfort > alternativeRoute.Comfort
 
-	decision := Decision{
-		RecommendedRoute: routeDirectID,
-		Outcome:          "Take the direct route via Brugge.",
-	}
+	decision := chooseRoute(data, directRoute, alternativeRoute, checks)
 
 	return InferenceResult{
 		AllPaths:         paths,
@@ -232,6 +186,40 @@ func infer(data Dataset) (InferenceResult, error) {
 		Checks:           checks,
 		Stats:            stats,
 	}, nil
+}
+
+// chooseRoute mirrors the N3 decision rule without baking the conclusion into
+// the Answer path. If the translated facts change so that the inequalities no
+// longer hold, no direct-route recommendation is emitted.
+func chooseRoute(data Dataset, directRoute, alternativeRoute Path, checks Checks) Decision {
+	if checks.RecommendedIsFaster && checks.RecommendedIsCheaper && checks.RecommendedScoresHigher {
+		return Decision{
+			RecommendedRoute: routeDirectID,
+			Outcome:          fmt.Sprintf("Take the %s.", routeSummary(data.Routes[routeDirectID].Label)),
+		}
+	}
+
+	if alternativeRoute.Duration < directRoute.Duration &&
+		alternativeRoute.Cost < directRoute.Cost &&
+		alternativeRoute.Belief > directRoute.Belief &&
+		alternativeRoute.Comfort > directRoute.Comfort {
+		return Decision{
+			RecommendedRoute: routeViaKortrijkID,
+			Outcome:          fmt.Sprintf("Take the %s.", routeSummary(data.Routes[routeViaKortrijkID].Label)),
+		}
+	}
+
+	return Decision{
+		RecommendedRoute: "",
+		Outcome:          "No route is recommended because no candidate dominates on all metrics.",
+	}
+}
+
+func routeSummary(label string) string {
+	if strings.Contains(label, "Brugge") && !strings.Contains(label, "Kortrijk") {
+		return "direct route via Brugge"
+	}
+	return label
 }
 
 // findPaths computes all simple paths between two locations.
@@ -245,6 +233,7 @@ func findPaths(edges []MapDescription, from, to string) ([]Path, SearchStats) {
 	paths := findPathsRecursive(edges, from, to, visited, Path{
 		From:    from,
 		To:      from,
+		Stops:   []string{from},
 		Belief:  1.0,
 		Comfort: 1.0,
 	}, 0, &stats)
@@ -276,6 +265,7 @@ func findPathsRecursive(edges []MapDescription, current, target string, visited 
 			From:     partial.From,
 			To:       edge.To,
 			Actions:  appendAction(partial.Actions, edge.Action),
+			Stops:    appendStop(partial.Stops, edge.To),
 			Duration: partial.Duration + edge.Duration,
 			Cost:     partial.Cost + edge.Cost,
 			Belief:   partial.Belief * edge.Belief,
@@ -304,18 +294,25 @@ func appendAction(actions []string, action string) []string {
 	return out
 }
 
-// findPathByActions identifies the derived path corresponding to one named
-// concrete route in the N3 source.
-func findPathByActions(paths []Path, actions []string) (Path, bool) {
+func appendStop(stops []string, stop string) []string {
+	out := make([]string, 0, len(stops)+1)
+	out = append(out, stops...)
+	out = append(out, stop)
+	return out
+}
+
+// findPathByStops identifies a derived path by the location sequence supplied
+// as input facts, rather than by hard-coded action names in the Go program.
+func findPathByStops(paths []Path, stops []string) (Path, bool) {
 	for _, path := range paths {
-		if sameActions(path.Actions, actions) {
+		if sameStrings(path.Stops, stops) {
 			return path, true
 		}
 	}
 	return Path{}, false
 }
 
-func sameActions(left, right []string) bool {
+func sameStrings(left, right []string) bool {
 	if len(left) != len(right) {
 		return false
 	}
@@ -382,12 +379,16 @@ func scoreDelta(direct, alternative float64) float64 {
 func renderArcOutput(data Dataset, result InferenceResult) {
 	directLabel := data.Routes[routeDirectID].Label
 	alternativeLabel := data.Routes[routeViaKortrijkID].Label
+	recommendedLabel := "none"
+	if result.Decision.RecommendedRoute != "" {
+		recommendedLabel = data.Routes[result.Decision.RecommendedRoute].Label
+	}
 
 	fmt.Println("# GPS — Goal driven route planning")
 	fmt.Println()
 	fmt.Println("## Answer")
 	fmt.Println(result.Decision.Outcome)
-	fmt.Printf("Recommended route: %s\n", directLabel)
+	fmt.Printf("Recommended route: %s\n", recommendedLabel)
 
 	fmt.Println()
 	fmt.Println("## Reason")
@@ -408,7 +409,11 @@ func renderArcOutput(data Dataset, result InferenceResult) {
 		formatDecimal(result.AlternativeRoute.Belief, 6),
 		formatDecimal(result.AlternativeRoute.Comfort, 4),
 	)
-	fmt.Println("So the direct route is faster, cheaper, more reliable, and slightly more comfortable.")
+	if result.Decision.RecommendedRoute == routeDirectID {
+		fmt.Println("So the direct route is faster, cheaper, more reliable, and slightly more comfortable.")
+	} else {
+		fmt.Println("No candidate dominates on all route metrics, so the planner withholds a recommendation.")
+	}
 
 	fmt.Println()
 	return
@@ -438,7 +443,7 @@ func formatDecimal(value float64, decimals int) string {
 }
 
 func main() {
-	data := exampleinput.Load(seeExampleName, dataset())
+	data := exampleinput.Load(seeExampleName, Dataset{})
 	result, err := infer(data)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "GPS inference failed: %v\n", err)

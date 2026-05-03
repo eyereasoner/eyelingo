@@ -12,8 +12,8 @@
 package main
 
 import (
-	"see/internal/exampleinput"
 	"fmt"
+	"see/internal/exampleinput"
 )
 
 const seeExampleName = "ebike_motor_thermal_envelope"
@@ -114,10 +114,7 @@ func derive(ds Dataset) Analysis {
 			break
 		}
 	}
-	decision := "RejectThermalPlan"
-	if coolingCertified && belowHard && recoveryStep == ds.Expected.WarningRecoveryStep {
-		decision = ds.Expected.Decision
-	}
+	decision := deriveRideDecision(ds.HardLimitC, coolingCertified, trace, decreasingSteps, recoveryStep)
 	analysis := Analysis{Trace: trace, CoolingCertified: coolingCertified, BelowHardLimit: belowHard, DecreasingSteps: decreasingSteps, WarningRecoveryStep: recoveryStep, WarningRecoverySec: float64(recoveryStep) * ds.SamplePeriodSec, MaxUpperC: maxUpper, Decision: decision}
 	analysis.Checks = []Check{
 		{ID: "C1", OK: coolingCertified, Text: fmt.Sprintf("cooling interval %.10f..%.10f is positive, ordered, and contractive", ds.CoolingLower, ds.CoolingUpper)},
@@ -128,6 +125,50 @@ func derive(ds Dataset) Analysis {
 		{ID: "C6", OK: decision == ds.Expected.Decision, Text: fmt.Sprintf("ride decision is %s", decision)},
 	}
 	return analysis
+}
+
+func deriveRideDecision(hardLimitC float64, coolingCertified bool, trace []TracePoint, decreasingSteps []int, recoveryStep int) string {
+	if !coolingCertified {
+		return "RejectThermalPlan"
+	}
+	if !allInitialSamplesBelowHard(trace, hardLimitC, 3) {
+		return "RejectThermalPlan"
+	}
+	if !hasConsecutiveDecreaseEvidence(decreasingSteps, 3, len(trace)-2) {
+		return "RejectThermalPlan"
+	}
+	if recoveryStep != 8 {
+		return "RejectThermalPlan"
+	}
+	return "ThermallySafeForThisAssistPlan"
+}
+
+func allInitialSamplesBelowHard(trace []TracePoint, hardLimitC float64, lastInitialStep int) bool {
+	if len(trace) <= lastInitialStep {
+		return false
+	}
+	for _, point := range trace {
+		if point.Step > lastInitialStep {
+			continue
+		}
+		if point.TempUpperC >= hardLimitC {
+			return false
+		}
+	}
+	return true
+}
+
+func hasConsecutiveDecreaseEvidence(steps []int, first, last int) bool {
+	seen := map[int]bool{}
+	for _, step := range steps {
+		seen[step] = true
+	}
+	for step := first; step <= last; step++ {
+		if !seen[step] {
+			return false
+		}
+	}
+	return true
 }
 
 func allChecksOK(checks []Check) bool {

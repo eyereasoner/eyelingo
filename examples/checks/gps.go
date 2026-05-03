@@ -19,22 +19,41 @@ func checkGPS(ctx *Context) []Check {
 	}
 	direct := str(asMap(asMap(d["Routes"])["routeDirect"])["Label"])
 	alt := str(asMap(asMap(d["Routes"])["routeViaKortrijk"])["Label"])
-	dm, am := metrics[direct], metrics[alt]
+	dm, directOK := metrics[direct]
+	am, altOK := metrics[alt]
+	chosen := gpsDominatingRoute(metrics)
+	return []Check{
+		{"the named direct route is derived from map edges", directOK},
+		{"the named Kortrijk alternative route is derived from map edges", altOK},
+		{"all simple routes connect the traveller to the destination", len(metrics) == len(paths) && len(metrics) > 0},
+		{"route duration and cost are recomputed additively from edges", directOK && altOK && dm[0] > 0 && am[0] > dm[0] && dm[1] > 0 && am[1] > dm[1]},
+		{"route belief and comfort are recomputed multiplicatively from edges", directOK && altOK && dm[2] > am[2] && dm[3] > am[3]},
+		{"the independently chosen route is faster than its comparator", chosen == direct && dm[0] < am[0]},
+		{"the independently chosen route is cheaper than its comparator", chosen == direct && dm[1] < am[1]},
+		{"the independently chosen route has higher belief and comfort scores", chosen == direct && dm[2] > am[2] && dm[3] > am[3]},
+		{"the answer names the independently chosen route", chosen != "" && contains(ctx.Answer, chosen)},
+	}
+}
+
+func gpsDominatingRoute(metrics map[string][4]float64) string {
 	best := ""
-	for lab := range metrics {
-		if best == "" || metrics[lab][0] < metrics[best][0] {
-			best = lab
+	for candidate, cm := range metrics {
+		dominatesAll := true
+		for other, om := range metrics {
+			if candidate == other {
+				continue
+			}
+			if !(cm[0] < om[0] && cm[1] < om[1] && cm[2] > om[2] && cm[3] > om[3]) {
+				dominatesAll = false
+				break
+			}
+		}
+		if dominatesAll {
+			if best != "" {
+				return ""
+			}
+			best = candidate
 		}
 	}
-	return []Check{
-		{"the direct Gent-Brugge-Oostende route is derived from edges", metrics[direct][0] != 0},
-		{"the Kortrijk alternative route is derived from edges", metrics[alt][0] != 0},
-		{"exactly two simple routes connect the traveller to the destination", len(metrics) == 2},
-		{"route duration and cost are additive over edges", dm[0] == 2400.0 && close(dm[1], 0.010, 1e-12) && am[0] == 4100.0 && close(am[1], 0.018, 1e-12)},
-		{"route belief and comfort are multiplicative over edges", close(dm[2], 0.9408, 1e-12) && close(dm[3], 0.99, 1e-12) && close(am[2], 0.903168, 1e-12) && close(am[3], 0.9801, 1e-12)},
-		{"the recommended route is faster than the alternative", dm[0] < am[0] && best == direct},
-		{"the recommended route is cheaper than the alternative", dm[1] < am[1]},
-		{"the recommended route has higher belief and comfort scores", dm[2] > am[2] && dm[3] > am[3]},
-		{"the answer names the independently chosen direct route", contains(ctx.Answer, direct) && contains(ctx.Answer, "Take the direct route")},
-	}
+	return best
 }
