@@ -1,9 +1,33 @@
 # Fibonacci Example (Big)
 
-This SEE example is a JavaScript executable specification: plain input data, small rule functions, and an explicit trust gate that must succeed before `## Insight` and `## Explanation` are emitted.
+## What this example is about
+
+This example computes a very large Fibonacci number exactly. The target index is 10000, which is far too large for ordinary fixed-size integer arithmetic.
+
+## How it works, in plain language
+
+The Fibonacci sequence starts with `F(0)=0` and `F(1)=1`. Every later value is the sum of the two previous values. The program repeats that rule up to the target index.
+
+The important implementation detail is arbitrary-precision integer arithmetic. In JavaScript, that means using `BigInt`, so the result does not overflow into an approximate floating-point number.
+
+## What to notice in the output
+
+The output prints the exact value of `F(10000)`. The number is long, but the example is intentionally simple: it demonstrates that a small trusted derivation can still produce a large exact result.
+
+## What the trust gate checks
+
+The trust gate verifies known Fibonacci values and the final target value. These checks protect against off-by-one errors, use of approximate numbers, or accidental truncation.
+
+## Run it
+
+From the repository root:
+
+```sh
+node examples/fibonacci.js
+```
 
 ## Files
 
-- [Example](../fibonacci.js)
-- [Input](../input/fibonacci.json)
+- [JavaScript example](../fibonacci.js)
+- [Input data](../input/fibonacci.json)
 - [Expected output](../output/fibonacci.md)
