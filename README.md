@@ -1,20 +1,28 @@
-# see
+# SEE
 
-**see** is a small collection of executable reasoning examples built around one repeatable shape:
+**Structured Evidence Explanation**
+
+SEE turns plain input data into an insight and an explanation, but only after the code has checked the facts that make the output justified.
 
 ```text
-plain data + small rules + a trust gate -> insight + explanation
+input facts -> small rules -> trust gate -> insight + explanation
 ```
 
-Each example is ordinary Node.js JavaScript. It loads plain JSON from `examples/input/`, computes with small named functions, verifies the assumptions that make the result safe to emit, and then prints only the user-facing Markdown sections `## Insight` and `## Explanation`.
+Every example is an ordinary Node.js program. It reads JSON from `examples/input/`, computes with small named functions, checks the obligations in code, and emits only the user-facing Markdown sections `## Insight` and `## Explanation`.
 
-The point is not to turn JavaScript into an oracle. The point is to make reasoning examples inspectable: the data, calculations, trust checks, and emitted explanation all live in files that can be read, run, and diffed.
+There is no hidden engine. The data, rules, checks, and expected output all live in files that can be read, run, changed, and compared.
 
-## Why this project exists
+## Why SEE exists
 
-Many reasoning demos are persuasive after they print an answer, but vague about what was checked before the answer appeared. **see** keeps every example compact enough to review while making the obligations explicit in code.
+Explanations are easy to print after an answer has been produced. The harder question is what had to be true before the answer was allowed to appear.
 
-The project pattern is:
+SEE makes that question explicit. Each example has a trust gate: a small set of executable checks that must pass before the insight and explanation are emitted. The gate may check input shape, units, tolerances, permissions, route constraints, conservation rules, snapshot expectations, or domain-specific invariants.
+
+The trust gate is executable verification, not magic truth. It does not prove that a model understands the world. It shows, for this input and this rule set, which facts were checked before the explanation was released.
+
+SEE was largely inspired by Prof. Ruben Verborgh's essay [Inside the Insight Economy](https://ruben.verborgh.org/blog/2025/08/12/inside-the-insight-economy/), especially the idea that systems can create value by deriving timely, context-specific insights instead of exposing or exchanging raw data.
+
+## How an example runs
 
 ```text
 JSON input
@@ -27,9 +35,7 @@ trustedDerivation(...)
 ## Explanation
 ```
 
-The trust gate is executable verification, not magic truth. It collects the facts that must hold before an insight and explanation is emitted: input shape, unit conversions, tolerance bounds, authorization checks, route constraints, conservation checks, snapshot expectations, or domain-specific invariants. Human review still matters, but reviewers get concrete code and fixtures instead of a black-box answer.
-
-See was largely inspired by Prof. Ruben Verborgh's essay [Inside the Insight Economy](https://ruben.verborgh.org/blog/2025/08/12/inside-the-insight-economy/), especially the idea that systems can create value by deriving timely, context-specific insights instead of exposing or exchanging raw data.
+The result is intentionally small: a Markdown insight and a Markdown explanation. If a required fact is missing, the program fails instead of producing a polished but unsupported explanation.
 
 ## Quick start
 
@@ -45,14 +51,14 @@ Run one example directly:
 node examples/delfour.js
 ```
 
-Manually compare one generated output:
+Compare one generated output by hand:
 
 ```sh
 node examples/bmi.js > /tmp/bmi.md
 diff -u examples/output/bmi.md /tmp/bmi.md
 ```
 
-The test script prints green `OK`, red `FAIL`, light gray per-example timings, and a final total with the number of examples run and elapsed time.
+The test script prints `OK` or `FAIL` for each example, shows the per-example runtime, and ends with the total number of examples run.
 
 ## Repository layout
 
@@ -62,14 +68,14 @@ examples/
   _see.js               shared helper for loading JSON, failing checks, and emitting Markdown
   input/<name>.json     structured input data
   output/<name>.md      expected insight + explanation snapshot
-  doc/<name>.md         short per-example note and file index
+  doc/<name>.md         short per-example guide and file index
 ```
 
 ## Current examples
 
-The examples below are runnable files in `examples/`. Each row links to the short note, executable JavaScript, input fixture, and expected Markdown output.
+Each row links to the guide, executable JavaScript, input fixture, and expected Markdown output.
 
-| Example | What it demonstrates | Files |
+| Example | What it shows | Files |
 |---|---|---|
 | Bayes Diagnosis | Posterior probabilities are recomputed from priors, likelihoods, and present/absent evidence. | [doc](examples/doc/bayes_diagnosis.md), [js](examples/bayes_diagnosis.js), [input](examples/input/bayes_diagnosis.json), [output](examples/output/bayes_diagnosis.md) |
 | Bayes Therapy Decision Support | Bayesian posteriors feed a small expected-utility therapy ranking. | [doc](examples/doc/bayes_therapy.md), [js](examples/bayes_therapy.js), [input](examples/input/bayes_therapy.json), [output](examples/output/bayes_therapy.md) |
@@ -97,16 +103,23 @@ The examples below are runnable files in `examples/`. Each row links to the shor
 | Sudoku | A completed Sudoku grid is emitted only after clue preservation and row, column, and box constraints hold. | [doc](examples/doc/sudoku.md), [js](examples/sudoku.js), [input](examples/input/sudoku.json), [output](examples/output/sudoku.md) |
 | Wind Turbine Envelope | Wind-speed intervals are classified against turbine thresholds and accumulated into energy. | [doc](examples/doc/wind_turbine.md), [js](examples/wind_turbine.js), [input](examples/input/wind_turbine.json), [output](examples/output/wind_turbine.md) |
 
-## Example design pattern
+## Writing a SEE example
 
-Each example should follow this shape:
+A SEE example is a small, reviewable set of files:
 
-1. Load only its JSON input.
+```text
+examples/<name>.js
+examples/input/<name>.json
+examples/output/<name>.md
+examples/doc/<name>.md
+```
+
+The JavaScript file should do four things:
+
+1. Load only its matching JSON input.
 2. Compute the insight with small, named functions.
-3. Define a `trustedDerivation(...)` function that checks the obligations that make the explanation safe to emit.
-4. Print only `## Insight` and `## Explanation`.
-5. Keep expected output in `examples/output/<name>.md`.
-6. Add a short note in `examples/doc/<name>.md`.
+3. Check the obligations in a `trustedDerivation(...)` function.
+4. Emit only `## Insight` and `## Explanation`.
 
 A typical trust gate looks like this:
 
@@ -120,20 +133,10 @@ const obligations = {
 const failed = Object.entries(obligations)
   .filter(([, ok]) => !ok)
   .map(([name]) => name);
+
 if (failed.length) {
   throw new Error("derivation failed: " + failed.join(", "));
 }
 ```
 
-## Adding an example
-
-To add a new example, create the matching files as a set:
-
-```text
-examples/<name>.js
-examples/input/<name>.json
-examples/output/<name>.md
-examples/doc/<name>.md
-```
-
-Then run `npm test`. The test runner discovers every top-level `examples/*.js` file except `_see.js`, so no separate registration step is needed.
+After adding the files, run `npm test`. The runner discovers every top-level `examples/*.js` file except `_see.js`, so there is no registration step.
