@@ -18,7 +18,7 @@ The printed board is one valid arrangement. The final line reports 92 total solu
 
 ## What the trust gate checks
 
-The trust gate verifies board size, the first solution, the printed-solution limit, and the known total count of 92. These checks catch mistakes in diagonal handling, counting, or early termination.
+The trust gate verifies that at least one solution is found, the reported total matches the enumerated solutions, every solution is valid, and the solution list contains no duplicates. These checks catch mistakes in diagonal handling, counting, or early termination.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/queens.js
 
 - [JavaScript example](../queens.js)
 - [Input data](../input/queens.json)
-- [Expected output](../output/queens.md)
+- [Reference output](../output/queens.md)

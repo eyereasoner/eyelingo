@@ -18,7 +18,7 @@ The output shows that the computed real part is effectively `-1`, the imaginary 
 
 ## What the trust gate checks
 
-The trust gate verifies the configured term count, that the residual is below tolerance, and that the real and imaginary parts remain stable at the chosen precision. This keeps the example honest about numerical approximation.
+The trust gate verifies the configured term count, that the residual is below tolerance, and that the real and imaginary parts are close to their expected mathematical values at the chosen precision. This keeps the example honest about numerical approximation.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/euler_identity_certificate.js
 
 - [JavaScript example](../euler_identity_certificate.js)
 - [Input data](../input/euler_identity_certificate.json)
-- [Expected output](../output/euler_identity_certificate.md)
+- [Reference output](../output/euler_identity_certificate.md)

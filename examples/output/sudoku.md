@@ -1,7 +1,7 @@
 # Sudoku  
 
 ## Insight  
-The puzzle is solved, and the completed grid is a valid Sudoku solution.  
+The puzzle is solved by search, and the completed grid is a valid unique Sudoku solution.  
 case : sudoku  
 default puzzle : classic  
 
@@ -33,5 +33,6 @@ Completed grid
 
 ## Explanation  
 The input contains 23 given clues and 58 empty cells.  
-The trust gate checks that every clue is preserved, each row contains digits 1 through 9, each column contains digits 1 through 9, and each 3×3 box contains digits 1 through 9.  
+The solver fills empty cells with backtracking search, choosing the open cell with the fewest legal candidates first. The search visited 2232 node(s).  
+The trust gate checks that the original clues do not conflict, exactly one solution is found, every clue is preserved, and every row, column, and 3×3 box contains digits 1 through 9.  
 Only after those constraints hold does the example emit the completed grid.  

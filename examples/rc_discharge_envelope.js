@@ -18,7 +18,6 @@ function trustedDerivation(data) {
   const step = firstSettled(data);
   fail('RC discharge derivation failed', {
     'interval is positive and contracting': 0 < data.decayLower && data.decayLower <= data.decayUpper && data.decayUpper < 1,
-    'step matches expected': step === data.expected.firstSettledStep,
     'previous step is not settled': upperVoltage(data, step - 1) >= data.tolerance,
     'settled step is below tolerance': upperVoltage(data, step) < data.tolerance,
     'witness occurs before max step': step <= data.maxStep,

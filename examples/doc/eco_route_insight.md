@@ -16,7 +16,7 @@ The output shows an issued eco insight, the current and suggested fuel indices, 
 
 ## What the trust gate checks
 
-The trust gate verifies that the current route crosses the fuel threshold, the selected alternative is eligible, the ETA delay is acceptable, the saving is stable, forbidden raw-data terms are absent from the envelope, and the digest and signature match expected values.
+The trust gate verifies that the current route crosses the fuel threshold, the selected alternative is eligible, the ETA delay is acceptable, no other eligible alternative saves more fuel, forbidden raw-data terms are absent from the envelope, and the digest and signature match the canonical envelope.
 
 ## Run it
 
@@ -30,4 +30,4 @@ node examples/eco_route_insight.js
 
 - [JavaScript example](../eco_route_insight.js)
 - [Input data](../input/eco_route_insight.json)
-- [Expected output](../output/eco_route_insight.md)
+- [Reference output](../output/eco_route_insight.md)

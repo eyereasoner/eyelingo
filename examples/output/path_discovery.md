@@ -21,14 +21,14 @@ airport terms appearing in outbound facts : 3334
 frontier airports expanded : 9  
 bounded search outbound facts touched : 338  
 source outbound candidates : 1  
-Liège outbound candidates : 7  
+Liège Airport outbound candidates : 7  
 direct routes : 0  
 one-stop routes : 0  
 two-stopover routes : 3  
 search recursive calls : 333  
 search edge tests : 338  
 search depth-limit leaves : 321  
-Second-hop candidates from Liège:  
+Second-hop candidates from Liège Airport:  
 Ajaccio-Napoléon Bonaparte Airport (res:AIRPORT_1324)  
 Al Massira Airport (res:AIRPORT_1064)  
 Bastia-Poretta Airport (res:AIRPORT_1321)  

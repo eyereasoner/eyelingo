@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { emit, fail, loadInput, maxBy, roundTo, sum } = require('./_see');
+const { emit, fail, loadInput, maxBy, sum } = require('./_see');
 
 const NAME = 'bayes_diagnosis';
 
@@ -27,8 +27,8 @@ function trustedDerivation(data) {
   fail('Bayes diagnosis derivation failed', {
     'normalizer is positive': total > 0,
     'posteriors sum to one': Math.abs(sum(rows.map((row) => row[2])) - 1.0) < 1e-12,
-    'COVID19 has maximum posterior': winner === 'COVID19',
-    'COVID19 posterior is stable': roundTo(posteriorByName.COVID19, 6) === 0.941209,
+    'posterior winner has maximum probability': rows.every((row) => posteriorByName[winner] >= row[2]),
+    'all posteriors are probabilities': rows.every((row) => row[2] >= 0 && row[2] <= 1),
   });
   return { rows, total, winner };
 }

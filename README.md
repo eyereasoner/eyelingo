@@ -12,7 +12,7 @@ Each example is a small Node.js program:
 
 - `examples/input/<name>.json` contains the input facts.
 - `examples/<name>.js` derives the insight and checks the trust gate.
-- `examples/output/<name>.md` is the expected Markdown output.
+- `examples/output/<name>.md` is the reference Markdown output used by `npm test`.
 - `examples/doc/<name>.md` explains the example.
 
 The trust gate is executable verification. If a required fact is missing, the program fails instead of emitting an unsupported insight.
@@ -47,7 +47,7 @@ examples/
   <name>.js             executable example
   _see.js               shared helper
   input/<name>.json     input facts
-  output/<name>.md      expected insight and explanation
+  output/<name>.md      reference insight and explanation
   doc/<name>.md         guide
 ```
 
@@ -68,7 +68,7 @@ examples/
 | FFT8 numeric | dominant frequency bins in eight samples | [doc](examples/doc/fft8_numeric.md), [js](examples/fft8_numeric.js), [input](examples/input/fft8_numeric.json), [output](examples/output/fft8_numeric.md) |
 | Fibonacci | exact big-integer Fibonacci computation | [doc](examples/doc/fibonacci.md), [js](examples/fibonacci.js), [input](examples/input/fibonacci.json), [output](examples/output/fibonacci.md) |
 | Fundamental theorem arithmetic | prime factors checked by reconstruction | [doc](examples/doc/fundamental_theorem_arithmetic.md), [js](examples/fundamental_theorem_arithmetic.js), [input](examples/input/fundamental_theorem_arithmetic.json), [output](examples/output/fundamental_theorem_arithmetic.md) |
-| Genetic knapsack selection | deterministic one-bit mutation search for a feasible knapsack | [doc](examples/doc/genetic_knapsack_selection.md), [js](examples/genetic_knapsack_selection.js), [input](examples/input/genetic_knapsack_selection.json), [output](examples/output/genetic_knapsack_selection.md) |
+| Genetic knapsack selection | deterministic one-bit mutation search, with local result and exhaustive optimum shown | [doc](examples/doc/genetic_knapsack_selection.md), [js](examples/genetic_knapsack_selection.js), [input](examples/input/genetic_knapsack_selection.json), [output](examples/output/genetic_knapsack_selection.md) |
 | Goldbach 1000 | prime-sum witnesses for even numbers up to 1000 | [doc](examples/doc/goldbach_1000.md), [js](examples/goldbach_1000.js), [input](examples/input/goldbach_1000.json), [output](examples/output/goldbach_1000.md) |
 | GPS route planning | route choice from duration, cost, belief, and comfort | [doc](examples/doc/gps.md), [js](examples/gps.js), [input](examples/input/gps.json), [output](examples/output/gps.md) |
 | Gray code counter | 4-bit cycle with one-bit transitions | [doc](examples/doc/gray_code_counter.md), [js](examples/gray_code_counter.js), [input](examples/input/gray_code_counter.json), [output](examples/output/gray_code_counter.md) |
@@ -78,5 +78,5 @@ examples/
 | 8-Queens | one board plus the count of all 92 solutions | [doc](examples/doc/queens.md), [js](examples/queens.js), [input](examples/input/queens.json), [output](examples/output/queens.md) |
 | RC discharge envelope | decay interval checked against a voltage tolerance | [doc](examples/doc/rc_discharge_envelope.md), [js](examples/rc_discharge_envelope.js), [input](examples/input/rc_discharge_envelope.json), [output](examples/output/rc_discharge_envelope.md) |
 | School placement audit | assignment checked against route barriers and preferences | [doc](examples/doc/school_placement_audit.md), [js](examples/school_placement_audit.js), [input](examples/input/school_placement_audit.json), [output](examples/output/school_placement_audit.md) |
-| Sudoku | grid emitted after row, column, box, and clue checks | [doc](examples/doc/sudoku.md), [js](examples/sudoku.js), [input](examples/input/sudoku.json), [output](examples/output/sudoku.md) |
+| Sudoku | puzzle solved by search, then checked against row, column, box, clue, and uniqueness constraints | [doc](examples/doc/sudoku.md), [js](examples/sudoku.js), [input](examples/input/sudoku.json), [output](examples/output/sudoku.md) |
 | Wind turbine envelope | wind-speed intervals classified into energy output | [doc](examples/doc/wind_turbine.md), [js](examples/wind_turbine.js), [input](examples/input/wind_turbine.json), [output](examples/output/wind_turbine.md) |

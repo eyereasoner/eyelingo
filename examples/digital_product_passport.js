@@ -37,14 +37,17 @@ function repairFriendly(data) {
 }
 
 function trustedDerivation(data) {
-  const expected = data.Expected;
   const restrictedTypes = new Set(data.AccessPolicy.RestrictedDocTypes);
+  const componentMass = totalMass(data);
+  const componentRecycledMass = recycledMass(data);
+  const publicDocs = new Set(data.Documents.filter((d) => d.Section === data.AccessPolicy.PublicSection).map((d) => d.DocType));
   fail('Digital product passport derivation failed', {
-    'component mass matches expected': totalMass(data) === expected.TotalMassG,
-    'recycled mass matches expected': recycledMass(data) === expected.RecycledMassG,
-    'recycled percentage matches expected': recycledPct(data) === expected.RecycledContentPct,
-    'footprint sum matches expected': lifecycleFootprint(data) === expected.LifecycleGCO2e,
-    'critical materials are exposed': JSON.stringify(criticalMaterials(data)) === JSON.stringify(['Cobalt', 'Lithium']),
+    'component mass is positive': componentMass > 0,
+    'recycled mass does not exceed total mass': componentRecycledMass <= componentMass,
+    'recycled percentage is derived from masses': recycledPct(data) === Math.floor((componentRecycledMass * 100) / componentMass),
+    'footprint sum is derived from phases': lifecycleFootprint(data) === ['ManufacturingGCO2e', 'TransportGCO2e', 'UsePhaseGCO2e'].reduce((acc, key) => acc + Number.parseInt(data.Footprint[key], 10), 0),
+    'critical materials used in components are exposed': criticalMaterials(data).every((material) => data.Components.some((component) => component.ContainsMaterial.includes(material))),
+    'all required public document types are present': data.AccessPolicy.PublicDocTypes.every((docType) => publicDocs.has(docType)),
     'repair-friendly conditions hold': repairFriendly(data),
     'restricted docs stay restricted': data.Documents.filter((d) => restrictedTypes.has(d.DocType)).every((d) => d.Section === data.AccessPolicy.RestrictedSection),
     'digital link equals endpoint': data.Product.DigitalLink === data.Passport.PublicEndpoint,

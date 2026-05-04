@@ -53,14 +53,5 @@
       "cost": 7.0,
       "risk": 0.15
     }
-  ],
-  "expected": {
-    "path": [
-      "ClinicA",
-      "DepotB",
-      "LabD",
-      "HubZ"
-    ],
-    "score": 11.1
-  }
+  ]
 }

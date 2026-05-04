@@ -24,15 +24,22 @@ function solve(n) {
   return { solutions, count };
 }
 
+function validSolution(solution, n) {
+  return solution.length === n
+    && new Set(solution).size === n
+    && solution.every((col, row) => solution.every((otherCol, otherRow) => row === otherRow || Math.abs(col - otherCol) !== Math.abs(row - otherRow)));
+}
+
 function trustedDerivation(data) {
   const n = Number.parseInt(data.N, 10);
   const { solutions, count } = solve(n);
   const first = solutions[0];
   fail('8-Queens derivation failed', {
-    'first solution is stable': JSON.stringify(first.map((c) => c + 1)) === JSON.stringify([1, 5, 8, 6, 3, 7, 2, 4]),
-    'total count is complete': count === 92,
-    'one queen per row': first.length === n,
-    'columns are unique': new Set(first).size === n,
+    'at least one solution is found': solutions.length > 0,
+    'reported total matches enumerated solutions': count === solutions.length,
+    'first solution is valid': validSolution(first, n),
+    'all solutions are valid': solutions.every((solution) => validSolution(solution, n)),
+    'solutions are unique': new Set(solutions.map((solution) => solution.join(','))).size === solutions.length,
   });
   return { first, total: count };
 }

@@ -18,7 +18,7 @@ The output lists every interval with speed, status, and power. It also reports f
 
 ## What the trust gate checks
 
-The trust gate verifies the expected counts of usable, rated, and stopped intervals, and checks that total energy is stable after rounding. This catches threshold-boundary and duration-conversion errors.
+The trust gate verifies that every wind sample receives one classification, the interval counts partition the samples, generated power is non-negative, and generated power never exceeds rated power. This catches threshold-boundary and power-curve errors.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/wind_turbine.js
 
 - [JavaScript example](../wind_turbine.js)
 - [Input data](../input/wind_turbine.json)
-- [Expected output](../output/wind_turbine.md)
+- [Reference output](../output/wind_turbine.md)

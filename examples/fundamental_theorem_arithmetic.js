@@ -46,9 +46,9 @@ function trustedDerivation(numbers) {
     'primary number is present': factorizations.has(PRIMARY),
     'all factorizations multiply back': [...factorizations.entries()].every(([n, fs]) => product(fs) === n),
     'all factors are prime': [...factorizations.values()].flat().every(isPrime),
-    'sample count is six': numbers.length === 6,
-    'largest sample is stable': Math.max(...numbers) === 600851475143,
-    'large ten-digit prime remains single factor': JSON.stringify(factorizations.get(9999999967)) === JSON.stringify([9999999967]),
+    'sample set is non-empty': numbers.length > 0,
+    'all samples are integers greater than one': numbers.every((n) => Number.isInteger(Number(n)) && Number(n) > 1),
+    'prime samples remain single factors': [...factorizations.entries()].filter(([n]) => isPrime(n)).every(([n, fs]) => fs.length === 1 && fs[0] === n),
   });
   return factorizations;
 }

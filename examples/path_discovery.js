@@ -5,9 +5,6 @@ const NAME = 'path_discovery';
 const SOURCE_GRAPH_AIRPORT_LABELS = 7698;
 const SOURCE_GRAPH_OUTBOUND_FACTS = 37505;
 const DEFAULT_MAX_STOPOVERS = 2;
-const FIXTURE_SOURCE_ID = 'res:AIRPORT_310';
-const FIXTURE_DESTINATION_ID = 'res:AIRPORT_1587';
-const FIXTURE_FIRST_HOP = 'res:AIRPORT_309';
 
 function label(data, term) { return data.Labels[term] ?? term; }
 
@@ -96,35 +93,21 @@ function array2SetPairs(edges) {
   return new Set(edges.map((e) => `${e.From}\u0000${e.To}`));
 }
 
-function sortedRoutes(routes) {
-  return [...routes].map((r) => r.join('\u0000')).sort();
-}
-
-function isFixtureQuery(sourceID, destinationID, maxStopovers) {
-  return sourceID === FIXTURE_SOURCE_ID && destinationID === FIXTURE_DESTINATION_ID && maxStopovers === DEFAULT_MAX_STOPOVERS;
-}
-
-function strictFixtureChecks(data, adj, routes, stats) {
+function trustRouteDiscovery(data, routes, stats, sourceID, destinationID, maxStopovers) {
   const edgeSet = array2SetPairs(data.Edges);
-  const firstHopOut = [...(adj.get(FIXTURE_FIRST_HOP) ?? [])].sort((a, b) => label(data, a).localeCompare(label(data, b)) || a.localeCompare(b));
-  const expectedRoutes = [
-    [FIXTURE_SOURCE_ID, FIXTURE_FIRST_HOP, 'res:AIRPORT_1472', FIXTURE_DESTINATION_ID],
-    [FIXTURE_SOURCE_ID, FIXTURE_FIRST_HOP, 'res:AIRPORT_1452', FIXTURE_DESTINATION_ID],
-    [FIXTURE_SOURCE_ID, FIXTURE_FIRST_HOP, 'res:AIRPORT_3998', FIXTURE_DESTINATION_ID],
-  ];
   const dist = routeDistribution(routes);
   fail('Path discovery derivation failed', {
-    'source and destination labels are known': label(data, FIXTURE_SOURCE_ID) !== FIXTURE_SOURCE_ID && label(data, FIXTURE_DESTINATION_ID) !== FIXTURE_DESTINATION_ID,
-    'source has fixture first hop': JSON.stringify(adj.get(FIXTURE_SOURCE_ID)) === JSON.stringify([FIXTURE_FIRST_HOP]),
-    'route set matches bounded query': JSON.stringify(sortedRoutes(routes)) === JSON.stringify(sortedRoutes(expectedRoutes)),
-    'no direct or one-stop route exists': dist[0] === 0 && dist[1] === 0,
+    'source and destination labels are known': label(data, sourceID) !== sourceID && label(data, destinationID) !== destinationID,
+    'route distribution matches route count': dist.reduce((acc, x) => acc + x, 0) === routes.length,
+    'all routes start at source': routes.every((route) => route[0] === sourceID),
+    'all routes end at destination': routes.every((route) => route[route.length - 1] === destinationID),
+    'all routes respect stopover bound': routes.every((route) => stopovers(route) <= maxStopovers),
     'all hops are graph facts': routes.every((route) => route.slice(0, -1).every((_, i) => edgeSet.has(`${route[i]}\u0000${route[i + 1]}`))),
     'routes do not revisit airports': routes.every((route) => route.length === new Set(route).size),
     'full source graph is loaded': Object.keys(data.Labels).length === SOURCE_GRAPH_AIRPORT_LABELS && data.Edges.length === SOURCE_GRAPH_OUTBOUND_FACTS,
-    'search statistics are stable': stats.edge_tests === 338 && stats.recursive_calls === 333 && stats.depth_limit_leaves === 321,
-    'second-hop candidate count is stable': firstHopOut.length === 7,
+    'search touched graph facts': stats.edge_tests > 0,
+    'search depth respects bound': stats.max_depth <= maxStopovers + 1,
   });
-  return firstHopOut;
 }
 
 function parseCli(data) {
@@ -145,8 +128,9 @@ function main() {
   const { sourceID, destinationID, maxStopovers } = parseCli(data);
   const adj = buildAdjacency(data);
   const { routes, stats } = dfs(data, adj, sourceID, destinationID, maxStopovers);
-  const fixture = isFixtureQuery(sourceID, destinationID, maxStopovers);
-  const firstHopOut = fixture ? strictFixtureChecks(data, adj, routes, stats) : [];
+  trustRouteDiscovery(data, routes, stats, sourceID, destinationID, maxStopovers);
+  const secondHopBase = routes[0]?.[1];
+  const firstHopOut = secondHopBase ? [...(adj.get(secondHopBase) ?? [])].sort((a, b) => label(data, a).localeCompare(label(data, b)) || a.localeCompare(b)) : [];
   const [direct, oneStop, twoStop] = routeDistribution(routes);
   const endpointAirports = new Set(data.Edges.flatMap((edge) => [edge.From, edge.To])).size;
   const expanded = expandedAirports(data, adj, sourceID);
@@ -172,15 +156,15 @@ function main() {
   emit(`frontier airports expanded : ${expanded.length}`);
   emit(`bounded search outbound facts touched : ${stats.edge_tests}`);
   emit(`source outbound candidates : ${(adj.get(sourceID) ?? []).length}`);
-  if (fixture) emit(`Liège outbound candidates : ${firstHopOut.length}`);
+  if (secondHopBase) emit(`${label(data, secondHopBase)} outbound candidates : ${firstHopOut.length}`);
   emit(`direct routes : ${direct}`);
   emit(`one-stop routes : ${oneStop}`);
   emit(`two-stopover routes : ${twoStop}`);
   emit(`search recursive calls : ${stats.recursive_calls}`);
   emit(`search edge tests : ${stats.edge_tests}`);
   emit(`search depth-limit leaves : ${stats.depth_limit_leaves}`);
-  if (fixture) {
-    emit('Second-hop candidates from Liège:');
+  if (secondHopBase) {
+    emit(`Second-hop candidates from ${label(data, secondHopBase)}:`);
     for (const airport of firstHopOut) emit(`${label(data, airport)} (${airport})`);
   }
 }

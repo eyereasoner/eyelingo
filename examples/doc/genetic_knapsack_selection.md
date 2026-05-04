@@ -14,11 +14,11 @@ Feasible candidates are better when they have higher value. Overweight candidate
 
 ## What to notice in the output
 
-The final genome fills the capacity exactly: weight 50 out of 50, with value 101. The word “fitness” may look backwards because this example treats lower fitness numbers as better; feasible candidates use `1000000 - value`.
+The final genome fills the capacity exactly: weight 50 out of 50, with value 101. The output also prints an exhaustive optimum value of 104, making clear that the mutation search found a local result, not the global best. The word “fitness” may look backwards because this example treats lower fitness numbers as better; feasible candidates use `1000000 - value`.
 
 ## What the trust gate checks
 
-The trust gate verifies the final genome, selected items, weight, value, generation count, capacity rule, and local-optimum condition: every one-bit neighbor is no better than the final genome.
+The trust gate verifies that the genomes align with the item list, each history step is a one-bit move, the final candidate is feasible, no one-bit neighbor improves fitness, and the exhaustive comparison is feasible.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/genetic_knapsack_selection.js
 
 - [JavaScript example](../genetic_knapsack_selection.js)
 - [Input data](../input/genetic_knapsack_selection.json)
-- [Expected output](../output/genetic_knapsack_selection.md)
+- [Reference output](../output/genetic_knapsack_selection.md)

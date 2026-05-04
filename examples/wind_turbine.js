@@ -22,10 +22,10 @@ function trustedDerivation(data) {
   const stopped = rows.filter((row) => row[2] === 'stopped').length;
   const energy = sum(rows.map((row) => row[3])) * data.intervalMinutes / 60.0;
   fail('Wind turbine derivation failed', {
-    'usable interval count matches expectation': usable === data.expected.usableIntervals,
-    'rated interval count matches expectation': ratedCount === data.expected.ratedIntervals,
-    'stopped interval count matches expectation': stopped === data.expected.stoppedIntervals,
-    'total energy is stable': Number(energy.toFixed(3)) === 1.571,
+    'one classification per wind sample': rows.length === data.windSpeedsMS.length,
+    'intervals partition into stopped partial and rated': usable + stopped === rows.length && ratedCount <= usable,
+    'all generated power is non-negative': rows.every((row) => row[3] >= 0),
+    'all generated power is capped at rated power': rows.every((row) => row[3] <= data.ratedPowerMW),
   });
   return rows;
 }

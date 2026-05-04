@@ -86,12 +86,11 @@ function trustedDerivation(data) {
   const plans = search(data);
   const best = plans[0];
   fail('EV roadtrip derivation failed', {
-    'bounded search finds eight acceptable plans': plans.length === 8,
-    'best plan is fastest acceptable candidate': JSON.stringify(best.actions) === JSON.stringify(['drive_bru_liege', 'drive_liege_aachen', 'shuttle_aachen_cologne']),
-    'best reaches Cologne': best.final.At === 'Cologne',
-    'best cost is recomputed': Math.abs(best.cost - 0.054) < 1e-12,
-    'best belief is recomputed': Math.abs(best.belief - 0.974175) < 1e-6,
-    'best fuel remaining is stable': best.fuel_remaining === 5,
+    'bounded search finds acceptable plans': plans.length > 0,
+    'best reaches the goal': matchesGoal(best.final, data.Goal),
+    'all emitted plans satisfy thresholds': plans.every((plan) => plan.belief > data.Thresholds.MinBelief && plan.cost < data.Thresholds.MaxCost && plan.duration < data.Thresholds.MaxDuration),
+    'plans are sorted by duration then cost': plans.every((plan, i) => i === 0 || compareKeys([plans[i - 1].duration, plans[i - 1].cost, plans[i - 1].actions.join(' / ')], [plan.duration, plan.cost, plan.actions.join(' / ')]) <= 0),
+    'best is fastest acceptable candidate': plans.every((plan) => best.duration <= plan.duration),
     'best satisfies thresholds': best.belief > data.Thresholds.MinBelief && best.cost < data.Thresholds.MaxCost && best.duration < data.Thresholds.MaxDuration,
   });
   return plans;

@@ -35,39 +35,50 @@ function enumerateRoutes(data, start, goal) {
   return routes.sort((a, b) => compareKeys([a.duration, a.cost, a.path.join('\u0000')], [b.duration, b.cost, b.path.join('\u0000')]));
 }
 
+function routeLabel(data, route) {
+  const pathLabel = route.path.join(' → ');
+  const match = Object.values(data.Routes).find((candidate) => candidate.Label === pathLabel);
+  return match ? match.Label : pathLabel;
+}
+
 function trustedDerivation(data) {
   const start = data.Traveller.Location;
-  const goal = 'Oostende';
+  const goal = data.Goal;
   const routes = enumerateRoutes(data, start, goal);
-  const direct = routes.find((route) => JSON.stringify(route.path) === JSON.stringify(['Gent', 'Brugge', 'Oostende']));
-  const alternative = routes.find((route) => JSON.stringify(route.path) === JSON.stringify(['Gent', 'Kortrijk', 'Brugge', 'Oostende']));
+  const best = routes[0];
+  const alternative = routes[1];
   fail('GPS derivation failed', {
-    'exactly two simple routes connect Gent to Oostende': routes.length === 2,
-    'direct route duration is additive': direct.duration === 2400.0,
-    'alternative route duration is additive': alternative.duration === 4100.0,
-    'direct route is cheaper': direct.cost < alternative.cost,
-    'direct route is more reliable': direct.belief > alternative.belief,
-    'direct route is more comfortable': direct.comfort > alternative.comfort,
+    'goal is configured': typeof goal === 'string' && goal.length > 0,
+    'at least one simple route connects start to goal': routes.length > 0,
+    'every route starts at traveller location': routes.every((route) => route.path[0] === start),
+    'every route ends at goal': routes.every((route) => route.path[route.path.length - 1] === goal),
+    'routes are simple': routes.every((route) => route.path.length === new Set(route.path).size),
+    'edge metrics are non-negative probabilities or costs': data.Edges.every((edge) => edge.Duration >= 0 && edge.Cost >= 0 && edge.Belief >= 0 && edge.Belief <= 1 && edge.Comfort >= 0 && edge.Comfort <= 1),
+    'best route is fastest after sorting': routes.every((route) => best.duration <= route.duration),
   });
-  return { direct, alternative };
+  return { best, alternative, routes };
 }
 
 function main() {
   const data = loadInput(NAME);
-  const { direct, alternative } = trustedDerivation(data);
-  const directLabel = data.Routes.routeDirect.Label;
-  const altLabel = data.Routes.routeViaKortrijk.Label;
+  const { best, alternative, routes } = trustedDerivation(data);
+  const bestLabel = routeLabel(data, best);
 
   emit('# GPS — Goal driven route planning');
   emit();
   emit('## Insight');
-  emit('Take the direct route via Brugge.');
-  emit(`Recommended route: ${directLabel}`);
+  emit('Take the fastest route found.');
+  emit(`Recommended route: ${bestLabel}`);
   emit();
   emit('## Explanation');
-  emit('From Gent to Oostende, the planner found two routes in this small map.');
-  emit(`The direct route (${directLabel}) takes ${direct.duration.toFixed(1)} seconds at cost ${direct.cost.toFixed(2)}, with belief ${direct.belief.toFixed(4)} and comfort ${direct.comfort.toFixed(2)}. The alternative (${altLabel}) takes ${alternative.duration.toFixed(1)} seconds at cost ${alternative.cost.toFixed(3)}, with belief ${alternative.belief.toFixed(6)} and comfort ${alternative.comfort.toFixed(4)}.`);
-  emit('So the direct route is faster, cheaper, more reliable, and slightly more comfortable.');
+  emit(`From ${data.Traveller.Location} to ${data.Goal}, the planner found ${routes.length} route(s) in this small map.`);
+  if (alternative) {
+    const alternativeLabel = routeLabel(data, alternative);
+    emit(`The recommended route (${bestLabel}) takes ${best.duration.toFixed(1)} seconds at cost ${best.cost.toFixed(2)}, with belief ${best.belief.toFixed(4)} and comfort ${best.comfort.toFixed(2)}. The alternative (${alternativeLabel}) takes ${alternative.duration.toFixed(1)} seconds at cost ${alternative.cost.toFixed(3)}, with belief ${alternative.belief.toFixed(6)} and comfort ${alternative.comfort.toFixed(4)}.`);
+    emit('So the recommended route is faster for this input, and the trust gate checks that no enumerated route is faster.');
+  } else {
+    emit(`The recommended route takes ${best.duration.toFixed(1)} seconds at cost ${best.cost.toFixed(2)}, with belief ${best.belief.toFixed(4)} and comfort ${best.comfort.toFixed(2)}.`);
+  }
 }
 
 if (require.main === module) main();

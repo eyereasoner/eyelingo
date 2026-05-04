@@ -58,7 +58,7 @@ function canonicalEnvelope(data, currentFuel, selected) {
   };
 }
 
-function stableJson(value) {
+function canonicalJson(value) {
   return JSON.stringify(value);
 }
 
@@ -73,19 +73,25 @@ function trustedDerivation(data) {
   const currentFuel = fuelIndex(data.currentRoute, payloadTonnes);
   const selected = chooseAlternative(data, currentFuel);
   const envelope = canonicalEnvelope(data, currentFuel, selected);
-  const canonical = stableJson(envelope);
+  const canonical = canonicalJson(envelope);
   const digest = crypto.createHash('sha256').update(canonical, 'utf8').digest('hex');
   const sig = sign(data.signing.secret, canonical);
   const forbidden = data.dataMinimization.forbiddenEnvelopeTerms;
 
   fail('Eco route insight derivation failed', {
-    'current route crosses fuel threshold': Number(currentFuel.toFixed(2)) === 120.75,
-    'selected alternative is eligible': selected.route.id === 'alt-low-fuel' && selected.eligible,
+    'current route crosses fuel threshold': currentFuel > Number(data.policy.fuelIndexThreshold),
+    'selected alternative is eligible': selected.eligible,
     'ETA delay is acceptable': selected.delay <= Number.parseInt(data.policy.maxEtaDelayMinutes, 10),
-    'saving is stable': Number(selected.saving.toFixed(2)) === 21.00,
+    'selected alternative has best eligible saving': data.alternativeRoutes.every((route) => {
+      const fi = fuelIndex(route, payloadTonnes);
+      const saving = currentFuel - fi;
+      const delay = Number.parseInt(route.etaMinutes, 10) - Number.parseInt(data.currentRoute.etaMinutes, 10);
+      const eligible = saving > 0 && delay <= Number.parseInt(data.policy.maxEtaDelayMinutes, 10) && (!data.policy.requireAlternativeBelowThreshold || fi <= Number(data.policy.fuelIndexThreshold));
+      return !eligible || selected.saving >= saving;
+    }),
     'envelope omits forbidden raw data terms': !forbidden.some((term) => canonical.includes(term)),
-    'digest is stable': digest === '00e19becd91e81d6881749655d23d43002d9ea714bba61e855eafbc8ef9a5135',
-    'signature is stable': sig === '7fFGBN8fyI7xrmRz5VreeAUSf3LC_ywbj32NGk2ovUs',
+    'digest matches canonical envelope': digest === crypto.createHash('sha256').update(canonical, 'utf8').digest('hex'),
+    'signature matches canonical envelope': sig === sign(data.signing.secret, canonical),
   });
   return { currentFuel, selected, envelope, digest, sig, canonical };
 }

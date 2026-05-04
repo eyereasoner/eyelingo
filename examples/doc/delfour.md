@@ -8,7 +8,7 @@ The scenario begins with a household need related to diabetes. Instead of sendin
 
 ## How it works, in plain language
 
-The scanner sees the current product and a signed insight envelope. The envelope says what the scanner may do, what it must not do, when the insight expires, and what metric matters. In this fixture, the scanned biscuits exceed the sugar threshold, so the program selects a lower-sugar alternative.
+The scanner sees the current product and a signed insight envelope. The envelope says what the scanner may do, what it must not do, when the insight expires, and what metric matters. The scanned biscuits exceed the sugar threshold, so the program selects a lower-sugar alternative.
 
 The important design idea is data minimization. The scanner receives just enough information to help the shopper. It does not receive the original medical condition as raw data.
 
@@ -18,7 +18,7 @@ The output says the scanner is allowed to show a neutral shopping insight, ident
 
 ## What the trust gate checks
 
-Before emitting the explanation, the trust gate verifies authorization, marketing prohibition, delete-duty timing, payload minimization, payload hash, signature metadata, existence of a lower-sugar alternative, that a banner is warranted, and that audit/bus counts match the fixture.
+Before emitting the explanation, the trust gate verifies authorization, marketing prohibition, delete-duty timing, payload minimization, payload hash, signature metadata, HMAC signature verification, existence of a lower-sugar alternative, that a banner is warranted, and that audit/bus counts are consistent.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/delfour.js
 
 - [JavaScript example](../delfour.js)
 - [Input data](../input/delfour.json)
-- [Expected output](../output/delfour.md)
+- [Reference output](../output/delfour.md)

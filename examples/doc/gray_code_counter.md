@@ -32,4 +32,4 @@ node examples/gray_code_counter.js
 
 - [JavaScript example](../gray_code_counter.js)
 - [Input data](../input/gray_code_counter.json)
-- [Expected output](../output/gray_code_counter.md)
+- [Reference output](../output/gray_code_counter.md)

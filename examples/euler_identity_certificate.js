@@ -25,7 +25,7 @@ function trustedDerivation(data) {
   const residual = cabs(cadd(value, { re: 1.0, im: 0.0 }));
   fail('Euler identity derivation failed', {
     'terms count is positive': data.terms > 0,
-    'residual satisfies expectation': (residual < data.tolerance) === data.expected.residualBelowTolerance,
+    'residual is below tolerance': residual < data.tolerance,
     'real part is near minus one': Math.abs(value.re + 1) < data.tolerance,
     'imaginary part is near zero': Math.abs(value.im) < data.tolerance,
   });

@@ -18,7 +18,7 @@ The audit fails and names Ada, Björn, and Davi as affected. Ada has the largest
 
 ## What the trust gate checks
 
-The trust gate verifies that the distance matrix is complete, the expected affected students are flagged, Clara remains at Haga, and Ada has the largest hidden detour. These checks protect the audit logic and the interpretation of the policy thresholds.
+The trust gate verifies that the distance matrix is complete, every student has a distance to every school, policy limits are positive, the affected flag follows the audit rule, recommended assignments are known schools, and the largest hidden detour is truly maximal.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/school_placement_audit.js
 
 - [JavaScript example](../school_placement_audit.js)
 - [Input data](../input/school_placement_audit.json)
-- [Expected output](../output/school_placement_audit.md)
+- [Reference output](../output/school_placement_audit.md)

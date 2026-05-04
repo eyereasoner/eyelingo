@@ -32,4 +32,4 @@ node examples/digital_product_passport.js
 
 - [JavaScript example](../digital_product_passport.js)
 - [Input data](../input/digital_product_passport.json)
-- [Expected output](../output/digital_product_passport.md)
+- [Reference output](../output/digital_product_passport.md)

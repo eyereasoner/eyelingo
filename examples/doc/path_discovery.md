@@ -20,7 +20,7 @@ The diagnostic counts show how a large graph can still produce an inspectable bo
 
 ## What the trust gate checks
 
-The trust gate verifies the expected number of routes, source and destination, stopover bound, route simplicity, and diagnostic search counts. This catches errors in recursion, depth limits, cycle prevention, or graph translation.
+The trust gate verifies source and destination labels, route-count consistency, route starts and ends, stopover bounds, graph-fact hops, route simplicity, that the translated source graph is loaded, and that the search respects the configured depth bound.
 
 ## Run it
 
@@ -34,4 +34,4 @@ node examples/path_discovery.js
 
 - [JavaScript example](../path_discovery.js)
 - [Input data](../input/path_discovery.json)
-- [Expected output](../output/path_discovery.md)
+- [Reference output](../output/path_discovery.md)

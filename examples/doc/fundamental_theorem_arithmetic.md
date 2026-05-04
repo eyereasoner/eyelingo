@@ -16,7 +16,7 @@ The primary sample `202692987` factors into `3 * 3 * 7 * 829 * 3881`. The output
 
 ## What the trust gate checks
 
-The trust gate verifies that the primary number is present, every factorization multiplies back to the original number, every factor is prime, the sample count and largest sample are stable, and the large ten-digit prime remains a single factor.
+The trust gate verifies that the primary number is present, every factorization multiplies back to the original number, every factor is prime, the sample set is non-empty, all samples are integers greater than one, and prime samples remain single factors.
 
 ## Run it
 
@@ -30,4 +30,4 @@ node examples/fundamental_theorem_arithmetic.js
 
 - [JavaScript example](../fundamental_theorem_arithmetic.js)
 - [Input data](../input/fundamental_theorem_arithmetic.json)
-- [Expected output](../output/fundamental_theorem_arithmetic.md)
+- [Reference output](../output/fundamental_theorem_arithmetic.md)

@@ -18,7 +18,7 @@ The output identifies step 13 as the first below-tolerance witness. It also prin
 
 ## What the trust gate checks
 
-The trust gate verifies that the decay interval contracts, that the first below-tolerance step is stable, that the upper voltage at that step is below the threshold, and that the result occurs before the configured maximum step.
+The trust gate verifies that the decay interval contracts, the previous step is not yet below tolerance, the settled step is below the threshold, and the witness occurs before the configured maximum step.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/rc_discharge_envelope.js
 
 - [JavaScript example](../rc_discharge_envelope.js)
 - [Input data](../input/rc_discharge_envelope.json)
-- [Expected output](../output/rc_discharge_envelope.md)
+- [Reference output](../output/rc_discharge_envelope.md)

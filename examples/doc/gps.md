@@ -16,7 +16,7 @@ The direct route is faster, cheaper, more reliable, and slightly more comfortabl
 
 ## What the trust gate checks
 
-The trust gate verifies that both expected routes are found and that the direct route has the expected duration, cost, belief, comfort, and recommendation. This catches mistakes in route enumeration and score aggregation.
+The trust gate verifies that the goal is configured, at least one simple route connects the start and goal, every route starts and ends correctly, routes do not revisit nodes, edge metrics are valid, and the emitted route is the fastest route after enumeration.
 
 ## Run it
 
@@ -30,4 +30,4 @@ node examples/gps.js
 
 - [JavaScript example](../gps.js)
 - [Input data](../input/gps.json)
-- [Expected output](../output/gps.md)
+- [Reference output](../output/gps.md)

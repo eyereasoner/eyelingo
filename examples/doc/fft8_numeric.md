@@ -18,7 +18,7 @@ The output prints the sample vector, the dominant bins, and an energy check. The
 
 ## What the trust gate checks
 
-The trust gate verifies that the expected bins dominate, non-dominant bins are close to zero within tolerance, and the energy check is stable. These checks catch mistakes in complex arithmetic, bin indexing, or normalization.
+The trust gate verifies that the dominant bins really have maximum magnitude, the DC component cancels within tolerance, the sine bins have the expected magnitude for this transform, Parseval energy is preserved, and the real signal gives conjugate symmetry. These checks catch mistakes in complex arithmetic, bin indexing, or normalization.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/fft8_numeric.js
 
 - [JavaScript example](../fft8_numeric.js)
 - [Input data](../input/fft8_numeric.json)
-- [Expected output](../output/fft8_numeric.md)
+- [Reference output](../output/fft8_numeric.md)

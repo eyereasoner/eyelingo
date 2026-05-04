@@ -30,4 +30,4 @@ node examples/kaprekar_6174.js
 
 - [JavaScript example](../kaprekar_6174.js)
 - [Input data](../input/kaprekar_6174.json)
-- [Expected output](../output/kaprekar_6174.md)
+- [Reference output](../output/kaprekar_6174.md)

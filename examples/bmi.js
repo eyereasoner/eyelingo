@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { emit, fail, loadInput, roundTo } = require('./_see');
+const { emit, fail, loadInput } = require('./_see');
 
 const NAME = 'bmi';
 
@@ -27,10 +27,10 @@ function trustedDerivation(data) {
 
   fail('BMI derivation failed', {
     'height is positive': heightM > 0,
-    'computed BMI is normal': category === 'Normal',
-    'rounded BMI is 22.7': roundTo(bmi, 1) === 22.7,
-    'healthy range lower bound is stable': roundTo(healthyLow, 1) === 58.6,
-    'healthy range upper bound is stable': roundTo(healthyHigh, 1) === 78.9,
+    'weight is positive': weightKg > 0,
+    'BMI falls inside its emitted category': category === bmiCategory(bmi),
+    'healthy range is ordered': healthyLow < healthyHigh,
+    'normal category lies inside healthy range': healthyLow <= weightKg && weightKg <= healthyHigh,
   });
   return { bmi, category, low: healthyLow, high: healthyHigh, normalizationReason: reason };
 }

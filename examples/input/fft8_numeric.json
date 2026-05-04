@@ -1,9 +1,15 @@
 {
   "caseName": "fft8-numeric",
   "question": "Compute the dominant DFT bins for an 8-sample sine wave.",
-  "samples": [0.0, 0.7071067811865475, 1.0, 0.7071067811865476, 0.0, -0.7071067811865475, -1.0, -0.7071067811865477],
-  "expected": {
-    "dominantBins": [1, 7],
-    "tolerance": 1e-9
-  }
+  "samples": [
+    0.0,
+    0.7071067811865475,
+    1.0,
+    0.7071067811865476,
+    0.0,
+    -0.7071067811865475,
+    -1.0,
+    -0.7071067811865477
+  ],
+  "tolerance": 1e-09
 }

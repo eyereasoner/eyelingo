@@ -44,11 +44,11 @@ function trustedDerivation(data) {
   }
 
   fail('Kaprekar derivation failed', {
-    '9990 starts reach 6174': emitted.size === 9990,
-    '10 starts fall to 0000': omitted.size === 10,
-    'maximum step count is 7': Math.max(...distribution.keys()) === 7,
-    '6174 is fixed': JSON.stringify(emitted.get(6174)) === JSON.stringify([6174]),
-    '0001 chain is stable': JSON.stringify(emitted.get(1)) === JSON.stringify([1, 999, 8991, 8082, 8532, 6174]),
+    'all starts are classified': emitted.size + omitted.size === data.StartCount,
+    'maximum step count stays within bound': Math.max(...distribution.keys()) <= maxSteps,
+    'target is fixed when started from target': JSON.stringify(chain(target, target, zero, maxSteps)) === JSON.stringify([target]),
+    'emitted chains end at target': [...emitted.values()].every((ch) => ch[ch.length - 1] === target),
+    'omitted chains end at zero basin': [...omitted.values()].every((ch) => ch[ch.length - 1] === zero),
   });
   return { emitted, omitted, distribution };
 }

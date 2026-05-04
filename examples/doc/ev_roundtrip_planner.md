@@ -16,7 +16,7 @@ The selected route uses a shuttle from Aachen to Cologne. That avoids an extra c
 
 ## What the trust gate checks
 
-The trust gate checks that the planner finds the expected fastest acceptable plan, that the selected final state is Cologne with low battery and no pass, that the number of acceptable plans is stable, and that key score values match the fixture.
+The trust gate checks that the planner finds acceptable plans, the selected plan reaches the configured goal, every emitted plan satisfies the thresholds, the plans are sorted by duration and cost, and the selected plan is the fastest acceptable candidate.
 
 ## Run it
 
@@ -30,4 +30,4 @@ node examples/ev_roundtrip_planner.js
 
 - [JavaScript example](../ev_roundtrip_planner.js)
 - [Input data](../input/ev_roundtrip_planner.json)
-- [Expected output](../output/ev_roundtrip_planner.md)
+- [Reference output](../output/ev_roundtrip_planner.md)

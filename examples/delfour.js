@@ -128,17 +128,25 @@ function canonicalPayload(data) {
 }
 
 function payloadHashMatches(data) {
-  const escapedPayload = canonicalPayload(data).replace(/"/g, '\\"');
-  const digest = crypto.createHash('sha256').update(escapedPayload, 'utf8').digest('hex');
+  const digest = crypto.createHash('sha256').update(canonicalPayload(data), 'utf8').digest('hex');
   return digest === data.Signature.PayloadHashSHA256;
+}
+
+function hmacSignatureMatches(data) {
+  const signature = crypto.createHmac('sha256', Buffer.from(data.Signature.Secret, 'utf8'))
+    .update(Buffer.from(canonicalPayload(data), 'utf8'))
+    .digest('hex');
+  return signature === data.Signature.SignatureHMAC;
 }
 
 function signatureMetadataValid(data) {
   const signature = data.Signature;
   return (
     signature.Alg === 'HMAC-SHA256' &&
-    signature.HMACVerificationMode === 'trusted-precomputed-input' &&
-    signature.SignatureHMAC.length === 64
+    signature.HMACVerificationMode === 'verified-with-demo-secret' &&
+    signature.SignatureHMAC.length === 64 &&
+    typeof signature.Secret === 'string' &&
+    signature.Secret.length > 0
   );
 }
 
@@ -166,6 +174,7 @@ function trustedDerivation(data) {
     'insight is minimized': minimized(data),
     'payload SHA-256 matches': payloadHashMatches(data),
     'signature metadata is valid': signatureMetadataValid(data),
+    'HMAC signature matches payload': hmacSignatureMatches(data),
     'lower-sugar alternative exists': selectedAlternative(data) !== undefined,
     'banner is warranted': bannerWarranted(data),
     'bus and audit counts match': countsMatch(data),
@@ -190,7 +199,7 @@ function report(data) {
   emit(`suggested alternative: ${alternative.Name}`);
   emit();
   emit('## Explanation');
-  emit('The phone desensitizes a diabetes-related household condition into a scoped low-sugar need, wraps it in an expiring Insight + Policy envelope, signs it, and the scanner consumes that envelope for shopping assistance.');
+  emit('The phone desensitizes a diabetes-related household condition into a scoped low-sugar need, wraps it in an expiring Insight + Policy envelope, signs it with the demo key, and the scanner consumes that envelope for shopping assistance.');
   emit(`metric : ${insight.Metric}`);
   emit(`threshold : ${insight.ThresholdDisplay}`);
   emit(`scope : ${insight.ScopeDevice} @ ${insight.ScopeEvent}`);

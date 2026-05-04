@@ -18,7 +18,7 @@ The output shows COVID19 with the largest posterior probability. It also prints 
 
 ## What the trust gate checks
 
-Before printing the explanation, the example verifies that the normalizing total is positive, the posterior probabilities sum to one, COVID19 is the highest-probability disease for this fixture, and the rounded posterior remains stable. These checks make the output reproducible and easier to review.
+Before printing the explanation, the example verifies that the normalizing total is positive, the posterior probabilities sum to one, the emitted winner really has the maximum posterior probability, and all posteriors are valid probabilities. These checks support the result without relying on a stored answer.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/bayes_diagnosis.js
 
 - [JavaScript example](../bayes_diagnosis.js)
 - [Input data](../input/bayes_diagnosis.json)
-- [Expected output](../output/bayes_diagnosis.md)
+- [Reference output](../output/bayes_diagnosis.md)

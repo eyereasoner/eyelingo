@@ -5,22 +5,65 @@
   "MaxGenerations": 64,
   "StartGenome": "000000000000",
   "Items": [
-    {"Name": "item01", "Weight": 12, "Value": 24},
-    {"Name": "item02", "Weight": 7, "Value": 13},
-    {"Name": "item03", "Weight": 11, "Value": 23},
-    {"Name": "item04", "Weight": 8, "Value": 15},
-    {"Name": "item05", "Weight": 9, "Value": 16},
-    {"Name": "item06", "Weight": 6, "Value": 12},
-    {"Name": "item07", "Weight": 10, "Value": 21},
-    {"Name": "item08", "Weight": 4, "Value": 9},
-    {"Name": "item09", "Weight": 5, "Value": 11},
-    {"Name": "item10", "Weight": 14, "Value": 28},
-    {"Name": "item11", "Weight": 3, "Value": 7},
-    {"Name": "item12", "Weight": 13, "Value": 26}
-  ],
-  "Expected": {
-    "FinalGenome": "101000000101",
-    "FinalWeight": 50,
-    "FinalValue": 101
-  }
+    {
+      "Name": "item01",
+      "Weight": 12,
+      "Value": 24
+    },
+    {
+      "Name": "item02",
+      "Weight": 7,
+      "Value": 13
+    },
+    {
+      "Name": "item03",
+      "Weight": 11,
+      "Value": 23
+    },
+    {
+      "Name": "item04",
+      "Weight": 8,
+      "Value": 15
+    },
+    {
+      "Name": "item05",
+      "Weight": 9,
+      "Value": 16
+    },
+    {
+      "Name": "item06",
+      "Weight": 6,
+      "Value": 12
+    },
+    {
+      "Name": "item07",
+      "Weight": 10,
+      "Value": 21
+    },
+    {
+      "Name": "item08",
+      "Weight": 4,
+      "Value": 9
+    },
+    {
+      "Name": "item09",
+      "Weight": 5,
+      "Value": 11
+    },
+    {
+      "Name": "item10",
+      "Weight": 14,
+      "Value": 28
+    },
+    {
+      "Name": "item11",
+      "Weight": 3,
+      "Value": 7
+    },
+    {
+      "Name": "item12",
+      "Weight": 13,
+      "Value": 26
+    }
+  ]
 }

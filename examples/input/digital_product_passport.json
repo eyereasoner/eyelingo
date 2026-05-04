@@ -188,13 +188,5 @@
     "ManufacturingGCO2e": 32000,
     "TransportGCO2e": 2500,
     "UsePhaseGCO2e": 18000
-  },
-  "Expected": {
-    "TotalMassG": 105,
-    "RecycledMassG": 14,
-    "RecycledContentPct": 13,
-    "LifecycleGCO2e": 52500,
-    "CircularityHint": "repairFriendly",
-    "CriticalRawMaterial": true
   }
 }

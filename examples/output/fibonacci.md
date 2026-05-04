@@ -7,6 +7,6 @@ The Fibonacci number for index 10000 is:
 ## Explanation  
 The Fibonacci sequence is defined by F(0)=0, F(1)=1,  
 and F(n)=F(n-1)+F(n-2) for n>=2.  
-Arbitrary‑precision arithmetic (math/big) is used to  
+Arbitrary‑precision arithmetic (BigInt) is used to  
 compute the exact value without overflow, even for  
 indices as large as 10000.  

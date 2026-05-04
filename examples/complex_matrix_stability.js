@@ -27,10 +27,9 @@ function trustedDerivation(data) {
   const w = data.sampleProduct.w;
   const productSq = (z.re * w.re - z.im * w.im) ** 2 + (z.re * w.im + z.im * w.re) ** 2;
   fail('Complex matrix stability derivation failed', {
-    'three matrices are classified': rows.length === 3,
-    'unstable case has radius two': JSON.stringify(rows[0]) === JSON.stringify(['A_unstable', 2.0, 'unstable']),
-    'stable case has radius one': JSON.stringify(rows[1]) === JSON.stringify(['A_stable', 1.0, 'marginally stable']),
-    'damped case has radius zero': JSON.stringify(rows[2]) === JSON.stringify(['A_damped', 0.0, 'damped']),
+    'every matrix is classified': rows.length === data.matrices.length,
+    'each radius is derived from a diagonal entry': rows.every(([name, radius]) => radius === Math.max(...data.matrices.find((m) => m.name === name).diagonal.map(modulus))),
+    'each classification follows its radius': rows.every(([, radius, cls]) => cls === classify(radius)),
     'complex product modulus squares multiply': Math.abs(productSq - (modulus(z) ** 2) * (modulus(w) ** 2)) < 1e-12,
   });
   return rows;

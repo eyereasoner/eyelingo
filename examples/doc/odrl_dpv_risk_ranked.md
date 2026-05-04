@@ -29,7 +29,7 @@ Each risk line includes the score, risk level, severity, clause ID, plain-langua
 
 ## What the trust gate checks
 
-The trust gate verifies that all expected risky clauses are found, scores are correctly capped, risk levels match the configured thresholds, mitigation counts match expectations, the highest risk appears first, every risk keeps its link back to a human-readable clause, every risk has consequences and impacts, and the final ranking is in descending score order.
+The trust gate verifies that at least one risk is derived, every risk keeps its link back to a human-readable clause, every risk links to a consumer need, consequences and impacts are present, mitigation advice is present, scores are capped, levels and severities follow the configured thresholds, and the final ranking is in descending score order.
 
 ## Run it
 
@@ -43,4 +43,4 @@ node examples/odrl_dpv_risk_ranked.js
 
 - [JavaScript example](../odrl_dpv_risk_ranked.js)
 - [Input data](../input/odrl_dpv_risk_ranked.json)
-- [Expected output](../output/odrl_dpv_risk_ranked.md)
+- [Reference output](../output/odrl_dpv_risk_ranked.md)

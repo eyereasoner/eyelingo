@@ -88,9 +88,10 @@
     "Alg": "HMAC-SHA256",
     "KeyID": "demo-shared-secret",
     "Created": "2025-10-05T20:33:48.907163+00:00",
-    "PayloadHashSHA256": "34ad35638dfd7c67d031eeca8abb235ec24280740f863f3f31cd9d7b6517f098",
-    "SignatureHMAC": "b21d0072d90112a9f820aced0286889f4b6ef92b145e6fdef1011f3bfa4608c2",
-    "HMACVerificationMode": "trusted-precomputed-input"
+    "PayloadHashSHA256": "e1ad69852c98ca7697a164dbc6f0ca28f873508a6676865dba37b81faa66ebcb",
+    "SignatureHMAC": "cf21e7e820feca6c09cd182c505bd0a18e433d023beda303268be2dbe1917029",
+    "HMACVerificationMode": "verified-with-demo-secret",
+    "Secret": "demo-shared-secret"
   },
   "ReasonText": "Household requires low-sugar guidance (diabetes in POD). A neutral Insight is scoped to device 'self-scanner', event 'pick_up_scanner', retailer 'Delfour', and expires soon; the policy confines use to shopping assistance.\n"
 }

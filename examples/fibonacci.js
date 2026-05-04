@@ -2,7 +2,6 @@
 const { emit, fail, loadInput } = require('./_see');
 
 const NAME = 'fibonacci';
-const TARGET = 10000;
 
 function fib(n) {
   let a = 0n;
@@ -14,33 +13,37 @@ function fib(n) {
 }
 
 function trustedDerivation(data) {
-  const value = fib(TARGET);
-  const sampleIndices = [0, 1, 10, 100, 1000, 10000];
-  const obligations = {};
-  for (const n of sampleIndices) obligations[`F(${n}) matches input reference`] = fib(n).toString() === data[String(n)];
-  obligations['target is configured'] = String(TARGET) in data;
-  obligations['target value has expected digit count'] = value.toString().length === data[String(TARGET)].length;
-  obligations['target value matches reference'] = value.toString() === data[String(TARGET)];
+  const target = Number.parseInt(data.Target, 10);
+  const sampleIndices = data.SampleChecks.map((n) => Number.parseInt(n, 10));
+  const value = fib(target);
+  const obligations = {
+    'target is a non-negative integer': Number.isInteger(target) && target >= 0,
+    'sample indices are valid': sampleIndices.every((n) => Number.isInteger(n) && n >= 0 && n <= target),
+    'base case F(0) is zero': fib(0) === 0n,
+    'base case F(1) is one': fib(1) === 1n,
+    'sample recurrence checks hold': sampleIndices.every((n) => n < 2 || fib(n) === fib(n - 1) + fib(n - 2)),
+    'target value is an integer string': /^\d+$/.test(value.toString()),
+  };
   fail('Fibonacci derivation failed', obligations);
-  return value;
+  return { target, value };
 }
 
 function main() {
   const data = loadInput(NAME);
-  const value = trustedDerivation(data);
+  const { target, value } = trustedDerivation(data);
 
   emit('# Fibonacci Example (Big)');
   emit();
   emit('## Insight');
-  emit(`The Fibonacci number for index ${TARGET} is:`);
+  emit(`The Fibonacci number for index ${target} is:`);
   emit(value.toString());
   emit();
   emit('## Explanation');
   emit('The Fibonacci sequence is defined by F(0)=0, F(1)=1,');
   emit('and F(n)=F(n-1)+F(n-2) for n>=2.');
-  emit('Arbitrary‑precision arithmetic (math/big) is used to');
+  emit('Arbitrary‑precision arithmetic (BigInt) is used to');
   emit('compute the exact value without overflow, even for');
-  emit('indices as large as 10000.');
+  emit(`indices as large as ${target}.`);
 }
 
 if (require.main === module) main();

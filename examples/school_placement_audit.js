@@ -51,11 +51,12 @@ function trustedDerivation(data) {
   const recommended = Object.fromEntries(rows.map((row) => [row.student.name, row.audited.school]));
   const largest = maxBy(rows, (row) => row.hidden_detour);
   fail('School placement audit derivation failed', {
-    'complete 4x4 distance matrix': data.students.length === 4 && data.schools.length === 4 && data.distances.length === 16,
-    'Ada and Björn are affected': affected.includes('Ada') && affected.includes('Björn'),
-    'Davi is affected by preference-aware audit': affected.includes('Davi'),
-    'Clara remains at Haga': recommended.Clara === 'Haga',
-    'Ada has largest hidden detour': largest.student.name === 'Ada' && largest.hidden_detour === 3000,
+    'distance matrix is complete': data.distances.length === data.students.length * data.schools.length,
+    'every student has a distance to every school': data.students.every((student) => data.schools.every((school) => data.distances.some((row) => row.student === student.id && row.school === school.name))),
+    'policy limits are positive': result.max_walk > 0 && result.penalty >= 0,
+    'affected flag follows audit rule': rows.every((row) => row.affected === (row.straight.school !== row.audited.school || Number.parseInt(row.straight.walkingMeters, 10) > result.max_walk)),
+    'recommended assignments are known schools': Object.values(recommended).every((school) => data.schools.some((candidate) => candidate.name === school)),
+    'largest detour is maximal': rows.every((row) => largest.hidden_detour >= row.hidden_detour),
   });
   return result;
 }

@@ -16,7 +16,7 @@ The output says all 499 even integers in the range have witnesses and prints a f
 
 ## What the trust gate checks
 
-The trust gate verifies that the expected count of even numbers is checked, that every even number has a valid prime-pair witness, and that the configured upper bound is stable.
+The trust gate verifies that the configured even numbers are covered, every witness sums to its even number, every witness consists of primes, and the sample witnesses are drawn from the computed witness table.
 
 ## Run it
 
@@ -30,4 +30,4 @@ node examples/goldbach_1000.js
 
 - [JavaScript example](../goldbach_1000.js)
 - [Input data](../input/goldbach_1000.json)
-- [Expected output](../output/goldbach_1000.md)
+- [Reference output](../output/goldbach_1000.md)

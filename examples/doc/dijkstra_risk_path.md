@@ -16,7 +16,7 @@ The selected route goes through DepotB and LabD. A route through DepotC looks ch
 
 ## What the trust gate checks
 
-The trust gate verifies that the selected path and final score match the expected fixture. This catches changes in edge scoring, queue ordering, or path reconstruction.
+The trust gate verifies that edge costs and risks are non-negative, at least one path reaches the goal, the selected path starts and ends correctly, the path appears in the enumerated simple paths, and no enumerated simple path has a lower risk-adjusted score.
 
 ## Run it
 
@@ -30,4 +30,4 @@ node examples/dijkstra_risk_path.js
 
 - [JavaScript example](../dijkstra_risk_path.js)
 - [Input data](../input/dijkstra_risk_path.json)
-- [Expected output](../output/dijkstra_risk_path.md)
+- [Reference output](../output/dijkstra_risk_path.md)

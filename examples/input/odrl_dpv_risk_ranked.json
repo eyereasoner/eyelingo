@@ -105,27 +105,5 @@
     "MaximumScore": 100,
     "HighAtLeast": 80,
     "ModerateAtLeast": 50
-  },
-  "Expected": {
-    "RankedClauses": ["C1", "C3", "C2", "C4"],
-    "TopClause": "C1",
-    "ScoresByClause": {
-      "C1": 100,
-      "C3": 97,
-      "C2": 85,
-      "C4": 70
-    },
-    "LevelsByClause": {
-      "C1": "HighRisk",
-      "C3": "HighRisk",
-      "C2": "HighRisk",
-      "C4": "ModerateRisk"
-    },
-    "MitigationCountsByClause": {
-      "C1": 2,
-      "C3": 1,
-      "C2": 1,
-      "C4": 1
-    }
   }
 }

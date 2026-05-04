@@ -19,8 +19,8 @@ function trustedDerivation(data) {
   const distances = range(steps).map((i) => hamming(sequence[i], sequence[(i + 1) % steps]));
   fail('Gray-code derivation failed', {
     'sequence length matches configured steps': sequence.length === steps,
-    'sequence covers every state once': new Set(sequence).size === data.expected.uniqueStates,
-    'wrap distance is one': distances[distances.length - 1] === data.expected.wrapHammingDistance,
+    'sequence covers every configured state once': new Set(sequence).size === steps && steps === 2 ** width,
+    'wrap distance is one': distances[distances.length - 1] === 1,
     'maximum adjacent Hamming distance is one': Math.max(...distances) === 1,
   });
   return sequence;

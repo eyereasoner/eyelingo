@@ -8,7 +8,7 @@ scanned product : Classic Tea Biscuits
 suggested alternative: Low-Sugar Tea Biscuits  
 
 ## Explanation  
-The phone desensitizes a diabetes-related household condition into a scoped low-sugar need, wraps it in an expiring Insight + Policy envelope, signs it, and the scanner consumes that envelope for shopping assistance.  
+The phone desensitizes a diabetes-related household condition into a scoped low-sugar need, wraps it in an expiring Insight + Policy envelope, signs it with the demo key, and the scanner consumes that envelope for shopping assistance.  
 metric : sugar_g_per_serving  
 threshold : 10.0  
 scope : self-scanner @ pick_up_scanner  

@@ -42,7 +42,7 @@ function trustedDerivation(data) {
     'posteriors sum to one': Math.abs(sum(posteriors.map((row) => row[2])) - 1.0) < 1e-12,
     'evidence available for all diseases': data.Diseases.every((d) => [...symptoms].every((s) => s in data.ProbGiven[d.Name])),
     'therapy vectors align': data.Therapies.every((t) => t.SuccessByDisease.length === data.Diseases.length),
-    'winner is stable': winner[0] === 'Paxlovid',
+    'winner has maximum utility': scores.every((row) => winner[3] >= row[3]),
   });
   return { posteriors, scores, winner };
 }

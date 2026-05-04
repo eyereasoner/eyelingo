@@ -20,7 +20,7 @@ The output prints both the disease posteriors and the therapy scores. That lets 
 
 ## What the trust gate checks
 
-The trust gate verifies that priors look like probabilities, the Bayesian normalizer is positive, posteriors sum to one, every disease has evidence likelihoods for every symptom, therapy vectors align with the disease list, and the winning therapy remains stable for this input.
+The trust gate verifies that priors look like probabilities, the Bayesian normalizer is positive, posteriors sum to one, every disease has evidence likelihoods for every symptom, therapy vectors align with the disease list, and the emitted therapy has the maximum computed utility.
 
 ## Run it
 
@@ -34,4 +34,4 @@ node examples/bayes_therapy.js
 
 - [JavaScript example](../bayes_therapy.js)
 - [Input data](../input/bayes_therapy.json)
-- [Expected output](../output/bayes_therapy.md)
+- [Reference output](../output/bayes_therapy.md)

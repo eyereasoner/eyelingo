@@ -14,11 +14,11 @@ The largest modulus is called the spectral radius. A radius greater than 1 means
 
 ## What to notice in the output
 
-The output labels the three fixtures as unstable, marginally stable, and damped. This makes the stability boundary visible: the difference between radius 1 and radius 2 is not just numerical; it changes the long-term behavior.
+The output labels the three matrices as unstable, marginally stable, and damped. This makes the stability boundary visible: the difference between radius 1 and radius 2 is not just numerical; it changes the long-term behavior.
 
 ## What the trust gate checks
 
-The trust gate verifies that all three matrices are classified, that the expected radius/class pairs are stable, and that a basic complex-number identity about product moduli holds. That last check protects the small complex arithmetic helper used by the example.
+The trust gate verifies that every matrix is classified, every radius is derived from the matrix diagonal, every class follows from its radius, and a basic complex-number identity about product moduli holds. That last check protects the small complex arithmetic helper used by the example.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/complex_matrix_stability.js
 
 - [JavaScript example](../complex_matrix_stability.js)
 - [Input data](../input/complex_matrix_stability.json)
-- [Expected output](../output/complex_matrix_stability.md)
+- [Reference output](../output/complex_matrix_stability.md)

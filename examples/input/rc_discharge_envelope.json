@@ -8,8 +8,5 @@
   "decayUpper": 0.7788007831,
   "initialVoltage": 24.0,
   "tolerance": 1.0,
-  "maxStep": 18,
-  "expected": {
-    "firstSettledStep": 13
-  }
+  "maxStep": 18
 }

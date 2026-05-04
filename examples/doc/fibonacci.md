@@ -16,7 +16,7 @@ The output prints the exact value of `F(10000)`. The number is long, but the exa
 
 ## What the trust gate checks
 
-The trust gate verifies known Fibonacci values and the final target value. These checks protect against off-by-one errors, use of approximate numbers, or accidental truncation.
+The trust gate verifies the configured target, sample recurrence checks, the two base cases, and that the computed target value is emitted as an integer string. The input no longer carries the final Fibonacci answer; the program derives it.
 
 ## Run it
 
@@ -30,4 +30,4 @@ node examples/fibonacci.js
 
 - [JavaScript example](../fibonacci.js)
 - [Input data](../input/fibonacci.json)
-- [Expected output](../output/fibonacci.md)
+- [Reference output](../output/fibonacci.md)

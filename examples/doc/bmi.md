@@ -18,7 +18,7 @@ The output does more than print a BMI number. It also shows the category and a h
 
 ## What the trust gate checks
 
-The trust gate verifies that height is positive, the computed category is normal for this input, the rounded BMI is stable, and the lower and upper weight-range bounds are stable. This catches mistakes in unit conversion, rounding, or threshold handling.
+The trust gate verifies that height and weight are positive, the emitted category follows from the computed BMI, the healthy-weight range is ordered, and the input weight falls inside that range for the normal category. This catches mistakes in unit conversion or threshold handling.
 
 ## Run it
 
@@ -32,4 +32,4 @@ node examples/bmi.js
 
 - [JavaScript example](../bmi.js)
 - [Input data](../input/bmi.json)
-- [Expected output](../output/bmi.md)
+- [Reference output](../output/bmi.md)
