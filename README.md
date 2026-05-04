@@ -81,20 +81,6 @@ examples/
 | Sudoku | grid emitted after row, column, box, and clue checks | [doc](examples/doc/sudoku.md), [js](examples/sudoku.js), [input](examples/input/sudoku.json), [output](examples/output/sudoku.md) |
 | Wind turbine envelope | wind-speed intervals classified into energy output | [doc](examples/doc/wind_turbine.md), [js](examples/wind_turbine.js), [input](examples/input/wind_turbine.json), [output](examples/output/wind_turbine.md) |
 
-## Add an example
-
-Create these files:
-
-```text
-examples/<name>.js
-examples/input/<name>.json
-examples/output/<name>.md
-examples/doc/<name>.md
-```
-
-The JavaScript file should load the JSON, derive the insight, check the trust gate, and emit only:
-
-```md
 ## Insight
 
 ...
