@@ -29,6 +29,8 @@ trustedDerivation(...)
 
 The trust gate is executable verification, not magic truth. It collects the facts that must hold before an insight and explanation is emitted: input shape, unit conversions, tolerance bounds, authorization checks, route constraints, conservation checks, snapshot expectations, or domain-specific invariants. Human review still matters, but reviewers get concrete code and fixtures instead of a black-box answer.
 
+See was largely inspired by Prof. Ruben Verborgh's essay [Inside the Insight Economy](https://ruben.verborgh.org/blog/2025/08/12/inside-the-insight-economy/), especially the idea that systems can create value by deriving timely, context-specific insights instead of exposing or exchanging raw data.
+
 ## Quick start
 
 Run every example and compare each generated Markdown result with its snapshot:
