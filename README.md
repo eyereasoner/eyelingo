@@ -1,199 +1,122 @@
-# SEE — STEM, Explained and Examined
+# see
 
-SEE is a collection of small, runnable Go translations of selected EyeReasoner/Eyeling N3 examples. Each example keeps the ARC-style report shape:
-
-```text
-Answer
-Reason
-Check
-```
-
-Open any example and look for the split:
+See is an experiment in a simpler style of checkable reasoning example:
 
 ```text
-examples/<name>.go   Go Answer + Reason
-examples/checks/     isolated Go Check module
+plain data + small rules + a trust gate -> Answer + Reason
 ```
 
-The code that explains an answer is not the code that verifies it. One Go program turns structured input into a readable derivation; during testing, a separate Go module independently checks the result and appends the visible `## Check` section. If the two disagree, the test fails.
+Each example is written in ordinary JavaScript for Node.js. The input is plain JSON. The code is intentionally shaped like an executable specification: facts are loaded from `examples/input/`, rules are small functions, and a `trustedDerivation(...)` gate must succeed before the program emits the visible explanation.
 
-That is the small aha of SEE: reasoning examples should be easy to read, easy to run, and auditable.
+The goal is not to claim that one JavaScript program is a perfect oracle. The goal is to make the assumptions, calculations, and emitted explanation inspectable in one widely familiar language.
 
-## Quick start
+## Why this project exists
 
-Run the full regression suite:
+Many reasoning examples are easy to print but harder to trust. See keeps the example small enough to read while making the obligations explicit in code.
 
-```sh
-./test
-```
-
-Run one example through the regression path:
-
-```sh
-./test bmi
-```
-
-Print one complete ARC report, including the isolated `## Check` section:
-
-```sh
-./test --arc bmi
-```
-
-Run one Go example directly:
-
-```sh
-go run examples/bmi.go
-```
-
-That direct command prints only the report prefix: title, `## Answer`, and `## Reason`. The `## Check` section is appended by the isolated Go checker in the test/update pipeline.
-
-Regenerate expected Markdown outputs after an intentional change:
-
-```sh
-./test --update
-```
-
-Regenerate just one expected Markdown output:
-
-```sh
-./test --update bmi
-```
-
-## What is in this repository
-
-This project is a translation laboratory. Facts from the original examples become typed input data, rules become explicit Go functions, and derived conclusions become reproducible Markdown reports.
-
-The main inspiration is Prof. Ruben Verborgh's [Inside the Insight Economy](https://ruben.verborgh.org/blog/2025/08/12/inside-the-insight-economy/). In that spirit, many examples are small insight derivations: structured inputs are transformed into answers, decisions, rankings, or certificates, then checked independently rather than trusted because the report reads well.
-
-The examples focus on STEM reasoning: scientific measurement, technical interoperability, engineered systems, and mathematics. They cover exact arithmetic, graph search, certificates, constraints, policy checks, safety envelopes, Bayesian reasoning, scheduling, routing, and optimization.
-
-## Repository guide
-
-The repository is organized around one stem per example. For an example named `<name>`, the main files are:
+The compact shape is:
 
 ```text
-examples/<name>.go          Go translation that computes Answer and Reason
-examples/input/<name>.json  example-specific facts, data, or parameters
-examples/checks/main.go     isolated Go checker harness
-examples/output/<name>.md   expected combined Markdown report
-examples/doc/<name>.md      short explanatory note
+JSON input
+   ↓
+JavaScript rules
+   ↓
+trustedDerivation(...)
+   ↓
+## Insight
+## Explanation
 ```
 
-Supporting code and tools live alongside those example files:
+The trust gate is executable scrutiny, not magic truth. It makes assumptions and failure points visible before the explanation is emitted. Human review still matters, but the example gives the reviewer something concrete to inspect.
+
+## Run
+
+Run all examples:
+
+```sh
+npm test
+```
+
+Run one example:
+
+```sh
+node examples/delfour.js
+```
+
+Compare manually:
+
+```sh
+node examples/bmi.js > /tmp/bmi.md
+diff -u examples/output/bmi.md /tmp/bmi.md
+```
+
+The test script prints green `OK`, red `FAIL`, light gray per-example timings, and a final total with the number of examples run and elapsed time.
+
+## Repository layout
 
 ```text
-go.mod                      local module so examples can share input loading
-internal/exampleinput/      shared JSON input loader
-tools/build_output.go       append isolated Go Check output to a Go report prefix
-examples/checks/            separate Go module used only for Check
-test                        run all examples, one example, or one complete ARC print
+examples/
+  <name>.js             executable example
+  _see.js               tiny shared helper for loading JSON and emitting Markdown
+  input/<name>.json     structured input data
+  output/<name>.md      expected Answer + Reason snapshot
+  doc/<name>.md         short per-example note
 ```
 
-Most Go examples load their domain fixture from `examples/input/<name>.json` through `internal/exampleinput`. A few examples still keep complex relation structures directly in Go; those still have matching JSON input files that document the corresponding data or parameters.
+## Current examples
 
-Expected Markdown outputs use plain lines rather than Markdown list markers. Non-empty output lines end with two spaces so rendered Markdown preserves the same line breaks as stdout.
+See contains the following runnable examples:
 
-## Isolated Go checks
+| Example | What it demonstrates | Files |
+|---|---|---|
+| [Bayes Diagnosis](examples/doc/bayes_diagnosis.md) | Posterior probabilities are recomputed from priors, likelihoods, and present/absent evidence. | [js](examples/bayes_diagnosis.js), [input](examples/input/bayes_diagnosis.json), [output](examples/output/bayes_diagnosis.md) |
+| [Bayes Therapy Decision Support](examples/doc/bayes_therapy.md) | Bayesian posteriors feed a small expected-utility therapy ranking. | [js](examples/bayes_therapy.js), [input](examples/input/bayes_therapy.json), [output](examples/output/bayes_therapy.md) |
+| [BMI — Body Mass Index example](examples/doc/bmi.md) | Unit normalization, BMI calculation, category boundaries, and healthy-weight range. | [js](examples/bmi.js), [input](examples/input/bmi.json), [output](examples/output/bmi.md) |
+| [Complex Matrix Stability](examples/doc/complex_matrix_stability.md) | Diagonal complex matrices are classified by spectral radius for discrete-time stability. | [js](examples/complex_matrix_stability.js), [input](examples/input/complex_matrix_stability.json), [output](examples/output/complex_matrix_stability.md) |
+| [Delfour](examples/doc/delfour.md) | A shopping insight is emitted only if authorization, minimization, payload hash, signature metadata, duty timing, and product choice all hold. | [js](examples/delfour.js), [input](examples/input/delfour.json), [output](examples/output/delfour.md) |
+| [Digital Product Passport](examples/doc/digital_product_passport.md) | Component, material, document, lifecycle, and footprint facts are folded into a public passport decision. | [js](examples/digital_product_passport.js), [input](examples/input/digital_product_passport.json), [output](examples/output/digital_product_passport.md) |
+| [Dijkstra Risk Path](examples/doc/dijkstra_risk_path.md) | A weighted shortest path balances route cost and risk penalty. | [js](examples/dijkstra_risk_path.js), [input](examples/input/dijkstra_risk_path.json), [output](examples/output/dijkstra_risk_path.md) |
+| [Eco Route Insight](examples/doc/eco_route_insight.md) | A local route insight signs a minimal envelope instead of exporting raw logistics data. | [js](examples/eco_route_insight.js), [input](examples/input/eco_route_insight.json), [output](examples/output/eco_route_insight.md) |
+| [Euler Identity Certificate](examples/doc/euler_identity_certificate.md) | A finite Taylor-series calculation gives a numerical certificate for exp(iπ)+1. | [js](examples/euler_identity_certificate.js), [input](examples/input/euler_identity_certificate.json), [output](examples/output/euler_identity_certificate.md) |
+| [EV Roadtrip Planner](examples/doc/ev_roundtrip_planner.md) | A bounded EV planner composes route actions and selects the fastest candidate that satisfies reliability, cost, and duration thresholds. | [js](examples/ev_roundtrip_planner.js), [input](examples/input/ev_roundtrip_planner.json), [output](examples/output/ev_roundtrip_planner.md) |
+| [FFT8 Numeric](examples/doc/fft8_numeric.md) | A discrete Fourier transform identifies the dominant frequency bins of an eight-sample sine wave. | [js](examples/fft8_numeric.js), [input](examples/input/fft8_numeric.json), [output](examples/output/fft8_numeric.md) |
+| [Fibonacci Example (Big)](examples/doc/fibonacci.md) | Exact arbitrary-precision Fibonacci computation for index 10000. | [js](examples/fibonacci.js), [input](examples/input/fibonacci.json), [output](examples/output/fibonacci.md) |
+| [Fundamental Theorem Arithmetic](examples/doc/fundamental_theorem_arithmetic.md) | Trial division factors several integers and checks multiplicative reconstruction and prime powers. | [js](examples/fundamental_theorem_arithmetic.js), [input](examples/input/fundamental_theorem_arithmetic.json), [output](examples/output/fundamental_theorem_arithmetic.md) |
+| [Genetic Knapsack Selection](examples/doc/genetic_knapsack_selection.md) | A deterministic one-bit mutation search reaches a feasible local optimum for a knapsack genome. | [js](examples/genetic_knapsack_selection.js), [input](examples/input/genetic_knapsack_selection.json), [output](examples/output/genetic_knapsack_selection.md) |
+| [Goldbach 1000](examples/doc/goldbach_1000.md) | Every even integer from 4 through 1000 is given a prime-sum witness. | [js](examples/goldbach_1000.js), [input](examples/input/goldbach_1000.json), [output](examples/output/goldbach_1000.md) |
+| [GPS — Goal driven route planning](examples/doc/gps.md) | A small route planner compares duration, cost, belief, and comfort for two Gent-to-Oostende routes. | [js](examples/gps.js), [input](examples/input/gps.json), [output](examples/output/gps.md) |
+| [Gray Code Counter](examples/doc/gray_code_counter.md) | A cyclic 4-bit Gray counter visits all states while flipping one bit per transition. | [js](examples/gray_code_counter.js), [input](examples/input/gray_code_counter.json), [output](examples/output/gray_code_counter.md) |
+| [Kaprekar 6174](examples/doc/kaprekar_6174.md) | Four-digit Kaprekar chains are generated, counted, and checked against the 6174 attractor. | [js](examples/kaprekar_6174.js), [input](examples/input/kaprekar_6174.json), [output](examples/output/kaprekar_6174.md) |
+| [Path Discovery](examples/doc/path_discovery.md) | A bounded airport-graph query finds all simple routes with at most two stopovers. | [js](examples/path_discovery.js), [input](examples/input/path_discovery.json), [output](examples/output/path_discovery.md) |
+| [8-Queens](examples/doc/queens.md) | Bit-mask search prints one board while still counting all 92 solutions. | [js](examples/queens.js), [input](examples/input/queens.json), [output](examples/output/queens.md) |
+| [RC Discharge Envelope](examples/doc/rc_discharge_envelope.md) | A finite decay interval certifies when an RC capacitor envelope falls below tolerance. | [js](examples/rc_discharge_envelope.js), [input](examples/input/rc_discharge_envelope.json), [output](examples/output/rc_discharge_envelope.md) |
+| [School Placement Route Audit](examples/doc/school_placement_audit.md) | A straight-line assignment rule is audited against walking routes, barriers, and preferences. | [js](examples/school_placement_audit.js), [input](examples/input/school_placement_audit.json), [output](examples/output/school_placement_audit.md) |
+| [Sudoku](examples/doc/sudoku.md) | A completed Sudoku grid is emitted only after clue preservation and row, column, and box constraints hold. | [js](examples/sudoku.js), [input](examples/input/sudoku.json), [output](examples/output/sudoku.md) |
+| [Wind Turbine Envelope](examples/doc/wind_turbine.md) | Wind-speed intervals are classified against turbine thresholds and accumulated into energy. | [js](examples/wind_turbine.js), [input](examples/input/wind_turbine.json), [output](examples/output/wind_turbine.md) |
 
-The checks deliberately live in a separate Go module from the answer implementation.
+## Example design pattern
 
-During `./test` and `./test <name>`:
+Each example should follow this shape:
 
-1. The test runner builds `tools/build_output.go` and the isolated checker binary from `examples/checks/`.
-2. The test runner executes `go run examples/<name>.go` and captures the Go report prefix.
-3. `tools/build_output.go` strips any stale `## Check` tail and calls the isolated checker binary for the same example.
-4. The checker module in `examples/checks/` reconstructs the relevant facts from JSON and/or parses the captured report prefix.
-5. The isolated checker emits the visible `## Check` section.
-6. The combined report is compared with `examples/output/<name>.md`.
+1. Load only its JSON input.
+2. Compute the answer with small, named functions.
+3. Define a `trustedDerivation(...)` function that checks the obligations that make the explanation safe to emit.
+4. Print only `## Insight` and `## Explanation`.
+5. Keep expected output in `examples/output/<name>.md`.
 
-Use `./test --arc <name>` to print that combined report directly instead of comparing it with a snapshot.
+A typical trust gate looks like this:
 
-The snapshot under test is therefore:
+```javascript
+const obligations = {
+  "normalizer is positive": total > 0,
+  "posteriors sum to one": Math.abs(sum(posteriors) - 1.0) < 1e-12,
+  "winner is stable": winner === "COVID19",
+};
 
-```text
-Go title + Answer + Reason
-+ isolated-Go-generated Check
+const failed = Object.entries(obligations)
+  .filter(([, ok]) => !ok)
+  .map(([name]) => name);
+if (failed.length) {
+  throw new Error("derivation failed: " + failed.join(", "));
+}
 ```
-
-The `Check` section is deliberately not produced by the Answer/Reason program. Go still computes and explains the answer, but a separate Go module verifies it and appends the visible `## Check` section during testing.
-
-SEE makes reasoning auditable: not by trusting the explanation, but by checking it independently. When the answer program and checker disagree, the test fails. SEE does not assume either side is automatically correct; the disagreement points to a bug in the answer implementation, the checker, the stored snapshot, or the example specification. The independent check is not a second source of truth by itself; it is a deliberately separate witness that makes disagreements visible and reviewable.
-
-The separation is enforced by build structure. `examples/checks/go.mod` declares `module see-checks`, has no dependency on the root `see` module, and the test runner passes the checker only the example name plus a prefix file. That prevents checks from importing example helper functions or reusing intermediate state from the answer path.
-
-All 48 examples now have registered domain-specific Go checker routines. The checker fails closed for an unregistered example, so a new case cannot silently pass with only structural checks.
-
-The visible output no longer includes Go audit details. Implementation diagnostics stay out of the report so the Markdown focuses on the domain answer, explanation, and independent verification.
-
-## Example catalog
-
-Each row links to the example-specific JSON input, Go translation, isolated Go checks, expected Markdown output, and companion documentation. The example name is also a stable row permalink, so links such as `#school_placement_audit` can point directly to one example.
-
-### Science
-
-| Example | Description | Input | Go | Checks | Output | Doc |
-|---|---|---|---|---|---|---|
-| <a name="auroracare"></a>[AuroraCare](#auroracare) | Health-data permit/deny scenarios across care, quality improvement, and research. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/auroracare.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/auroracare.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/auroracare.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/auroracare.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/auroracare.md) |
-| <a name="barley_seed_lineage"></a>[Barley Seed Lineage](#barley_seed_lineage) | Seed-lineage CAN/CAN'T reasoning for reproduction, dormancy, variation, and persistence. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/barley_seed_lineage.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/barley_seed_lineage.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/barley_seed_lineage.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/barley_seed_lineage.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/barley_seed_lineage.md) |
-| <a name="bayes_diagnosis"></a>[Bayes Diagnosis](#bayes_diagnosis) | Bayesian posterior ranking of possible diseases from symptoms and test evidence. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/bayes_diagnosis.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/bayes_diagnosis.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/bayes_diagnosis.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/bayes_diagnosis.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/bayes_diagnosis.md) |
-| <a name="bayes_therapy"></a>[Bayes Therapy Decision Support](#bayes_therapy) | Posterior-weighted utility selection of the best therapy. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/bayes_therapy.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/bayes_therapy.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/bayes_therapy.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/bayes_therapy.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/bayes_therapy.md) |
-| <a name="bmi"></a>[BMI — Body Mass Index](#bmi) | Adult BMI calculation, category assignment, and healthy-weight interval. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/bmi.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/bmi.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/bmi.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/bmi.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/bmi.md) |
-| <a name="digital_product_passport"></a>[Digital Product Passport](#digital_product_passport) | Component roll-up for recycled content, carbon footprint, repairability, and critical materials. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/digital_product_passport.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/digital_product_passport.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/digital_product_passport.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/digital_product_passport.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/digital_product_passport.md) |
-| <a name="ebike_motor_thermal_envelope"></a>[E-Bike Motor Thermal Envelope](#ebike_motor_thermal_envelope) | Certified e-bike motor-temperature envelope for an assist plan. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/ebike_motor_thermal_envelope.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/ebike_motor_thermal_envelope.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/ebike_motor_thermal_envelope.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/ebike_motor_thermal_envelope.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/ebike_motor_thermal_envelope.md) |
-| <a name="eco_route_insight"></a>[Eco Route Insight](#eco_route_insight) | Local fuel-saving route insight with a signed, purpose-bound envelope. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/eco_route_insight.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/eco_route_insight.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/eco_route_insight.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/eco_route_insight.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/eco_route_insight.md) |
-| <a name="lldm"></a>[LLD — Leg Length Discrepancy Measurement](#lldm) | Leg-length discrepancy measurement and alarm thresholding. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/lldm.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/lldm.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/lldm.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/lldm.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/lldm.md) |
-| <a name="photosynthetic_exciton_transfer"></a>[Photosynthetic Exciton Transfer](#photosynthetic_exciton_transfer) | CAN/CAN'T reasoning for tuned versus detuned exciton delivery to a reaction center. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/photosynthetic_exciton_transfer.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/photosynthetic_exciton_transfer.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/photosynthetic_exciton_transfer.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/photosynthetic_exciton_transfer.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/photosynthetic_exciton_transfer.md) |
-| <a name="rc_discharge_envelope"></a>[RC Discharge Envelope](#rc_discharge_envelope) | Certified exponential decay envelope for an RC discharge. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/rc_discharge_envelope.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/rc_discharge_envelope.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/rc_discharge_envelope.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/rc_discharge_envelope.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/rc_discharge_envelope.md) |
-| <a name="superdense_coding"></a>[Superdense Coding](#superdense_coding) | Quantum-information parity facts for superdense coding. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/superdense_coding.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/superdense_coding.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/superdense_coding.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/superdense_coding.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/superdense_coding.md) |
-
-### Technology
-
-| Example | Description | Input | Go | Checks | Output | Doc |
-|---|---|---|---|---|---|---|
-| <a name="alarm_bit_interoperability"></a>[Alarm Bit Interoperability](#alarm_bit_interoperability) | Classical alarm-bit copy and relay tasks contrasted with forbidden universal cloning. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/alarm_bit_interoperability.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/alarm_bit_interoperability.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/alarm_bit_interoperability.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/alarm_bit_interoperability.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/alarm_bit_interoperability.md) |
-| <a name="deep_taxonomy_100000"></a>[Deep Taxonomy 100000](#deep_taxonomy_100000) | Large taxonomy materialization benchmark through a very deep class chain. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/deep_taxonomy_100000.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/deep_taxonomy_100000.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/deep_taxonomy_100000.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/deep_taxonomy_100000.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/deep_taxonomy_100000.md) |
-| <a name="delfour"></a>[Delfour](#delfour) | Privacy-preserving retail insight and recommendation policy. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/delfour.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/delfour.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/delfour.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/delfour.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/delfour.md) |
-| <a name="doctor_advice_work_conflict"></a>[Doctor Advice Work Conflict](#doctor_advice_work_conflict) | Policy conflict resolution for remote-work and office-work advice. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/doctor_advice_work_conflict.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/doctor_advice_work_conflict.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/doctor_advice_work_conflict.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/doctor_advice_work_conflict.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/doctor_advice_work_conflict.md) |
-| <a name="fft8_numeric"></a>[FFT8 Numeric](#fft8_numeric) | Eight-point Fourier transform over a sampled sine wave with conjugate-bin and energy checks. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/fft8_numeric.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/fft8_numeric.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/fft8_numeric.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/fft8_numeric.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/fft8_numeric.md) |
-| <a name="fft32_numeric"></a>[FFT32 Numeric](#fft32_numeric) | Thirty-two-point Fourier transform over several sampled waveforms with spectral invariant checks. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/fft32_numeric.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/fft32_numeric.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/fft32_numeric.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/fft32_numeric.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/fft32_numeric.md) |
-| <a name="school_placement_audit"></a>[School Placement Route Audit](#school_placement_audit) | Route-aware audit of a straight-line school-placement support tool. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/school_placement_audit.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/school_placement_audit.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/school_placement_audit.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/school_placement_audit.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/school_placement_audit.md) |
-| <a name="gray_code_counter"></a>[Gray Code Counter](#gray_code_counter) | n-bit Gray-code sequence with one-bit transition checks. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/gray_code_counter.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/gray_code_counter.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/gray_code_counter.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/gray_code_counter.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/gray_code_counter.md) |
-| <a name="high_trust_bloom_envelope"></a>[High Trust RDF Bloom Envelope](#high_trust_bloom_envelope) | Bloom-envelope acceptance using canonical graph, index, and false-positive checks. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/high_trust_bloom_envelope.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/high_trust_bloom_envelope.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/high_trust_bloom_envelope.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/high_trust_bloom_envelope.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/high_trust_bloom_envelope.md) |
-| <a name="parcellocker"></a>[Parcel Locker](#parcellocker) | Delegated parcel pickup-token authorization. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/parcellocker.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/parcellocker.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/parcellocker.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/parcellocker.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/parcellocker.md) |
-| <a name="path_discovery"></a>[Path Discovery](#path_discovery) | Airport path discovery with stopover and routing constraints. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/path_discovery.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/path_discovery.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/path_discovery.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/path_discovery.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/path_discovery.md) |
-| <a name="odrl_dpv_risk_ranked"></a>[Ranked DPV Risk Report](#odrl_dpv_risk_ranked) | ODRL/DPV clause risk ranking by severity and risk class. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/odrl_dpv_risk_ranked.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/odrl_dpv_risk_ranked.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/odrl_dpv_risk_ranked.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/odrl_dpv_risk_ranked.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/odrl_dpv_risk_ranked.md) |
-
-### Engineering
-
-| Example | Description | Input | Go | Checks | Output | Doc |
-|---|---|---|---|---|---|---|
-| <a name="calidor"></a>[Calidor](#calidor) | Municipal cooling intervention bundle chosen from active needs and budget constraints. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/calidor.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/calidor.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/calidor.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/calidor.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/calidor.md) |
-| <a name="complex_matrix_stability"></a>[Complex Matrix Stability](#complex_matrix_stability) | Discrete-time stability classification using spectral radii of diagonal complex matrices. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/complex_matrix_stability.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/complex_matrix_stability.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/complex_matrix_stability.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/complex_matrix_stability.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/complex_matrix_stability.md) |
-| <a name="control_system"></a>[Control System](#control_system) | Translated measurement and control rules for actuators, inputs, and disturbances. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/control_system.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/control_system.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/control_system.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/control_system.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/control_system.md) |
-| <a name="dijkstra_risk_path"></a>[Dijkstra Risk Path](#dijkstra_risk_path) | Risk-adjusted path selection using weighted network edges. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/dijkstra_risk_path.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/dijkstra_risk_path.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/dijkstra_risk_path.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/dijkstra_risk_path.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/dijkstra_risk_path.md) |
-| <a name="docking_abort_token"></a>[Docking Abort Token](#docking_abort_token) | Docking abort audit-token flow and safety-system copy restrictions. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/docking_abort_token.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/docking_abort_token.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/docking_abort_token.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/docking_abort_token.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/docking_abort_token.md) |
-| <a name="drone_corridor_planner"></a>[Drone Corridor Planner](#drone_corridor_planner) | Constrained drone route planning through corridors and restricted zones. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/drone_corridor_planner.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/drone_corridor_planner.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/drone_corridor_planner.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/drone_corridor_planner.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/drone_corridor_planner.md) |
-| <a name="ev_roundtrip_planner"></a>[EV Roadtrip Planner](#ev_roundtrip_planner) | EV route planning with battery, duration, cost, and comfort constraints. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/ev_roundtrip_planner.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/ev_roundtrip_planner.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/ev_roundtrip_planner.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/ev_roundtrip_planner.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/ev_roundtrip_planner.md) |
-| <a name="flandor"></a>[Flandor](#flandor) | Regional retooling priority calculation for a Flanders scenario. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/flandor.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/flandor.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/flandor.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/flandor.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/flandor.md) |
-| <a name="gps"></a>[GPS — Goal driven route planning](#gps) | Goal-driven route planning over a small road network. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/gps.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/gps.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/gps.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/gps.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/gps.md) |
-| <a name="harbor_smr"></a>[HarborSMR Insight Dispatch](#harbor_smr) | Port electrolysis dispatch decision with safety margin and policy checks. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/harbor_smr.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/harbor_smr.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/harbor_smr.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/harbor_smr.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/harbor_smr.md) |
-| <a name="isolation_breach_token"></a>[Isolation Breach Token](#isolation_breach_token) | Isolation-breach audit-token flow with cloning and fan-out restrictions. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/isolation_breach_token.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/isolation_breach_token.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/isolation_breach_token.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/isolation_breach_token.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/isolation_breach_token.md) |
-| <a name="wind_turbine"></a>[Wind Turbine Envelope](#wind_turbine) | Wind-speed envelope classification with cubic power curve and interval energy audit. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/wind_turbine.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/wind_turbine.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/wind_turbine.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/wind_turbine.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/wind_turbine.md) |
-
-### Mathematics
-
-| Example | Description | Input | Go | Checks | Output | Doc |
-|---|---|---|---|---|---|---|
-| <a name="queens"></a>[8-Queens](#queens) | 8-Queens constraint satisfaction with a valid board solution. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/queens.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/queens.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/queens.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/queens.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/queens.md) |
-| <a name="ackermann"></a>[Ackermann](#ackermann) | Exact Ackermann and hyperoperation facts, including very large integer results. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/ackermann.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/ackermann.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/ackermann.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/ackermann.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/ackermann.md) |
-| <a name="allen_interval_calculus"></a>[Allen Interval Calculus](#allen_interval_calculus) | Allen temporal interval relation closure over completed and explicit intervals. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/allen_interval_calculus.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/allen_interval_calculus.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/allen_interval_calculus.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/allen_interval_calculus.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/allen_interval_calculus.md) |
-| <a name="complex_numbers"></a>[Complex Numbers](#complex_numbers) | Complex arithmetic and transcendental identity checks. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/complex_numbers.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/complex_numbers.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/complex_numbers.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/complex_numbers.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/complex_numbers.md) |
-| <a name="dining_philosophers"></a>[Dining Philosophers](#dining_philosophers) | Chandy-Misra dining-philosophers trace with concurrency conflict checks. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/dining_philosophers.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/dining_philosophers.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/dining_philosophers.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/dining_philosophers.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/dining_philosophers.md) |
-| <a name="euler_identity_certificate"></a>[Euler Identity Certificate](#euler_identity_certificate) | High-precision certificate for the identity exp(iπ) + 1 = 0. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/euler_identity_certificate.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/euler_identity_certificate.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/euler_identity_certificate.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/euler_identity_certificate.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/euler_identity_certificate.md) |
-| <a name="fibonacci"></a>[Fibonacci Example (Big)](#fibonacci) | Exact computation of a large Fibonacci number. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/fibonacci.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/fibonacci.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/fibonacci.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/fibonacci.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/fibonacci.md) |
-| <a name="fundamental_theorem_arithmetic"></a>[Fundamental Theorem Arithmetic](#fundamental_theorem_arithmetic) | Prime factorization and prime-power representation. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/fundamental_theorem_arithmetic.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/fundamental_theorem_arithmetic.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/fundamental_theorem_arithmetic.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/fundamental_theorem_arithmetic.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/fundamental_theorem_arithmetic.md) |
-| <a name="genetic_knapsack_selection"></a>[Genetic Knapsack Selection](#genetic_knapsack_selection) | Deterministic genetic selection for a bounded knapsack. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/genetic_knapsack_selection.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/genetic_knapsack_selection.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/genetic_knapsack_selection.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/genetic_knapsack_selection.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/genetic_knapsack_selection.md) |
-| <a name="goldbach_1000"></a>[Goldbach 1000](#goldbach_1000) | Bounded strong-Goldbach checker for every even integer from 4 through 1000. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/goldbach_1000.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/goldbach_1000.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/goldbach_1000.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/goldbach_1000.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/goldbach_1000.md) |
-| <a name="kaprekar_6174"></a>[Kaprekar 6174](#kaprekar_6174) | Kaprekar chains and basin facts ending at 6174. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/kaprekar_6174.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/kaprekar_6174.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/kaprekar_6174.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/kaprekar_6174.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/kaprekar_6174.md) |
-| <a name="sudoku"></a>[Sudoku](#sudoku) | Sudoku constraint solving with a unique completed grid. | [json](https://github.com/eyereasoner/see/blob/main/examples/input/sudoku.json) | [go](https://github.com/eyereasoner/see/blob/main/examples/sudoku.go) | [go](https://github.com/eyereasoner/see/blob/main/examples/checks/sudoku.go) | [md](https://github.com/eyereasoner/see/blob/main/examples/output/sudoku.md) | [md](https://github.com/eyereasoner/see/blob/main/examples/doc/sudoku.md) |
-

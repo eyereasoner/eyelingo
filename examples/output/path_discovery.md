@@ -1,6 +1,6 @@
 # Path Discovery  
 
-## Answer  
+## Insight  
 The path discovery query finds 3 air routes with at most 2 stopovers.  
 from : Ostend-Bruges International Airport  
 to : Václav Havel Airport Prague  
@@ -11,7 +11,7 @@ route 1 (2 stopovers): Ostend-Bruges International Airport -> Liège Airport -> 
 route 2 (2 stopovers): Ostend-Bruges International Airport -> Liège Airport -> Heraklion International Nikos Kazantzakis Airport -> Václav Havel Airport Prague  
 route 3 (2 stopovers): Ostend-Bruges International Airport -> Liège Airport -> Palma De Mallorca Airport -> Václav Havel Airport Prague  
 
-## Reason  
+## Explanation  
 The N3 source defines a recursive :route relation over nepo:hasOutboundRouteTo facts. A route can use a direct edge when the current length is within the maximum, or extend through a non-visited intermediate airport and recurse with length+1. The final log:collectAllIn query collects the labels of each airport in every route from the source to the destination.  
 source N3 airport labels : 7698  
 source N3 outbound-route facts : 37505  
@@ -36,15 +36,3 @@ Diagoras Airport (res:AIRPORT_1472)
 Heraklion International Nikos Kazantzakis Airport (res:AIRPORT_1452)  
 Lille-Lesquin Airport (res:AIRPORT_1399)  
 Palma De Mallorca Airport (res:AIRPORT_3998)  
-
-## Check  
-C1 OK - source and destination airport labels are known  
-C2 OK - Ostend-Bruges has one outbound route in the full graph, to Liège Airport  
-C3 OK - bounded DFS independently finds exactly three two-stopover routes  
-C4 OK - reported route labels match the independently discovered route set  
-C5 OK - no direct or one-stop route exists under the same bound  
-C6 OK - every discovered hop is backed by an outbound-route fact  
-C7 OK - no discovered route revisits an airport  
-C8 OK - the translated graph size matches the full source counts  
-C9 OK - the second-hop candidates from Liège are independently recovered  
-C10 OK - route output is sorted deterministically by airport labels  

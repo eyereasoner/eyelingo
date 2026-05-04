@@ -1,0 +1,12 @@
+{
+  "name": "see-js",
+  "version": "1.0.0",
+  "description": "JavaScript translation of SEE — STEM Examples, Explained",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,6 +1,6 @@
 # Fundamental Theorem Arithmetic  
 
-## Answer  
+## Insight  
 Primary N3 case: n = 202692987 has prime factors 3 * 3 * 7 * 829 * 3881.  
 primary prime-power form : 3^2 * 7 * 829 * 3881  
 sample count : 6  
@@ -16,7 +16,7 @@ Sample factorizations:
   9876543210 = 2 * 3^2 * 5 * 17^2 * 379721  
   9999999967 = 9999999967  
 
-## Reason  
+## Explanation  
 Existence comes from repeated smallest-divisor decomposition.  
 At each step, the first divisor found is prime because no smaller  
 positive divisor can divide the current number.  
@@ -37,15 +37,3 @@ prime factors, even when the factors were discovered in the opposite order.
 
 The additional samples cover repeated small factors, special products,  
 large composites, and a larger prime that has no smaller divisor.  
-
-## Check  
-C1 OK - the primary source number is factored independently  
-C2 OK - the reported primary prime-power form matches grouped exponents  
-C3 OK - multiplying every factor list reconstructs its source integer  
-C4 OK - every distinct factor found by trial division is prime  
-C5 OK - the report includes one sample factorization row for every JSON number  
-C6 OK - every reported sample row matches the independently formatted factorization  
-C7 OK - smallest-first and largest-first traversals sort to the same primary multiset  
-C8 OK - reported sample count and largest sample match JSON  
-C9 OK - reported total factor multiplicity and distinct-prime count match recomputation  
-C10 OK - the ten-digit prime remains unfactored after trial division  

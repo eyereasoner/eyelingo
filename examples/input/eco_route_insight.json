@@ -46,6 +46,6 @@
   },
   "signing": {
     "keyId": "local-demo-key",
-    "secret": "see-demo-secret"
+    "secret": "eyelingo-demo-secret"
   }
 }
