@@ -27,7 +27,7 @@ trustedDerivation(...)
 ## Explanation
 ```
 
-The trust gate is executable scrutiny, not magic truth. It collects the facts that must hold before an explanation is emitted: input shape, unit conversions, tolerance bounds, authorization checks, route constraints, conservation checks, snapshot expectations, or domain-specific invariants. Human review still matters, but reviewers get concrete code and fixtures instead of a black-box answer.
+The trust gate is executable checking, not magic truth. It collects the facts that must hold before an insight and explanation is emitted: input shape, unit conversions, tolerance bounds, authorization checks, route constraints, conservation checks, snapshot expectations, or domain-specific invariants. Human review still matters, but reviewers get concrete code and fixtures instead of a black-box answer.
 
 ## Quick start
 
