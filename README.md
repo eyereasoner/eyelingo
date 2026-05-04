@@ -80,18 +80,3 @@ examples/
 | School placement audit | assignment checked against route barriers and preferences | [doc](examples/doc/school_placement_audit.md), [js](examples/school_placement_audit.js), [input](examples/input/school_placement_audit.json), [output](examples/output/school_placement_audit.md) |
 | Sudoku | grid emitted after row, column, box, and clue checks | [doc](examples/doc/sudoku.md), [js](examples/sudoku.js), [input](examples/input/sudoku.json), [output](examples/output/sudoku.md) |
 | Wind turbine envelope | wind-speed intervals classified into energy output | [doc](examples/doc/wind_turbine.md), [js](examples/wind_turbine.js), [input](examples/input/wind_turbine.json), [output](examples/output/wind_turbine.md) |
-
-## Insight
-
-...
-
-## Explanation
-
-...
-```
-
-Then run:
-
-```sh
-npm test
-```
