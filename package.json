@@ -1,7 +1,7 @@
 {
-  "name": "see-js",
+  "name": "see",
   "version": "1.0.0",
-  "description": "JavaScript translation of SEE — STEM Examples, Explained",
+  "description": "See to get insights and explanations",
   "type": "commonjs",
   "scripts": {
     "test": "node test.js"

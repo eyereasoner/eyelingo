@@ -3,7 +3,7 @@
 See is an experiment in a simpler style of checkable reasoning example:
 
 ```text
-plain data + small rules + a trust gate -> Answer + Reason
+plain data + small rules + a trust gate -> insight + explanation
 ```
 
 Each example is written in ordinary JavaScript for Node.js. The input is plain JSON. The code is intentionally shaped like an executable specification: facts are loaded from `examples/input/`, rules are small functions, and a `trustedDerivation(...)` gate must succeed before the program emits the visible explanation.
@@ -59,7 +59,7 @@ examples/
   <name>.js             executable example
   _see.js               tiny shared helper for loading JSON and emitting Markdown
   input/<name>.json     structured input data
-  output/<name>.md      expected Answer + Reason snapshot
+  output/<name>.md      expected insight + explanation snapshot
   doc/<name>.md         short per-example note
 ```
 
@@ -99,7 +99,7 @@ See contains the following runnable examples:
 Each example should follow this shape:
 
 1. Load only its JSON input.
-2. Compute the answer with small, named functions.
+2. Compute the insight with small, named functions.
 3. Define a `trustedDerivation(...)` function that checks the obligations that make the explanation safe to emit.
 4. Print only `## Insight` and `## Explanation`.
 5. Keep expected output in `examples/output/<name>.md`.
