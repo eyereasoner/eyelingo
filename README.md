@@ -27,7 +27,7 @@ trustedDerivation(...)
 ## Explanation
 ```
 
-The trust gate is executable checking, not magic truth. It collects the facts that must hold before an insight and explanation is emitted: input shape, unit conversions, tolerance bounds, authorization checks, route constraints, conservation checks, snapshot expectations, or domain-specific invariants. Human review still matters, but reviewers get concrete code and fixtures instead of a black-box answer.
+The trust gate is executable verification, not magic truth. It collects the facts that must hold before an insight and explanation is emitted: input shape, unit conversions, tolerance bounds, authorization checks, route constraints, conservation checks, snapshot expectations, or domain-specific invariants. Human review still matters, but reviewers get concrete code and fixtures instead of a black-box answer.
 
 ## Quick start
 
@@ -87,6 +87,7 @@ The examples below are runnable files in `examples/`. Each row links to the shor
 | GPS — Goal driven route planning | A small route planner compares duration, cost, belief, and comfort for two Gent-to-Oostende routes. | [doc](examples/doc/gps.md), [js](examples/gps.js), [input](examples/input/gps.json), [output](examples/output/gps.md) |
 | Gray Code Counter | A cyclic 4-bit Gray counter visits all states while flipping one bit per transition. | [doc](examples/doc/gray_code_counter.md), [js](examples/gray_code_counter.js), [input](examples/input/gray_code_counter.json), [output](examples/output/gray_code_counter.md) |
 | Kaprekar 6174 | Four-digit Kaprekar chains are generated, counted, and checked against the 6174 attractor. | [doc](examples/doc/kaprekar_6174.md), [js](examples/kaprekar_6174.js), [input](examples/input/kaprekar_6174.json), [output](examples/output/kaprekar_6174.md) |
+| ODRL + DPV Risk Ranking | ODRL-style policy clauses are checked against consumer needs and emitted as a ranked DPV risk report with mitigation advice. | [doc](examples/doc/odrl_dpv_risk_ranked.md), [js](examples/odrl_dpv_risk_ranked.js), [input](examples/input/odrl_dpv_risk_ranked.json), [output](examples/output/odrl_dpv_risk_ranked.md) |
 | Path Discovery | A bounded airport-graph query finds all simple routes with at most two stopovers. | [doc](examples/doc/path_discovery.md), [js](examples/path_discovery.js), [input](examples/input/path_discovery.json), [output](examples/output/path_discovery.md) |
 | 8-Queens | Bit-mask search prints one board while still counting all 92 solutions. | [doc](examples/doc/queens.md), [js](examples/queens.js), [input](examples/input/queens.json), [output](examples/output/queens.md) |
 | RC Discharge Envelope | A finite decay interval certifies when an RC capacitor envelope falls below tolerance. | [doc](examples/doc/rc_discharge_envelope.md), [js](examples/rc_discharge_envelope.js), [input](examples/input/rc_discharge_envelope.json), [output](examples/output/rc_discharge_envelope.md) |

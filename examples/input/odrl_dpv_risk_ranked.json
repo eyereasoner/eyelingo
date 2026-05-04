@@ -1,0 +1,131 @@
+{
+  "ConsumerProfile": {
+    "ID": "ConsumerExample",
+    "Title": "Example consumer profile",
+    "Needs": [
+      {
+        "ID": "Need_DataCannotBeRemoved",
+        "Description": "Provider must not remove the consumer account/data.",
+        "Importance": 20
+      },
+      {
+        "ID": "Need_ChangeOnlyWithPriorNotice",
+        "Description": "Agreement may change only with prior notice of at least 14 days.",
+        "Importance": 15,
+        "MinNoticeDays": 14
+      },
+      {
+        "ID": "Need_NoSharingWithoutConsent",
+        "Description": "No data sharing without explicit consent.",
+        "Importance": 12
+      },
+      {
+        "ID": "Need_DataPortability",
+        "Description": "Consumer must be able to export their data.",
+        "Importance": 10
+      }
+    ]
+  },
+  "Agreement": {
+    "ID": "Agreement1",
+    "Title": "Example Agreement",
+    "Clauses": [
+      {
+        "ID": "ClauseC1",
+        "ClauseId": "C1",
+        "Text": "Provider may remove the user account (and associated data) at its discretion."
+      },
+      {
+        "ID": "ClauseC2",
+        "ClauseId": "C2",
+        "Text": "Provider may change terms by informing users at least 3 days in advance."
+      },
+      {
+        "ID": "ClauseC3",
+        "ClauseId": "C3",
+        "Text": "Provider may share user data with partners for business purposes."
+      },
+      {
+        "ID": "ClauseC4",
+        "ClauseId": "C4",
+        "Text": "Users are not permitted to export their data."
+      }
+    ],
+    "Rules": [
+      {
+        "ID": "PermDeleteAccount",
+        "Type": "Permission",
+        "Action": "removeAccount",
+        "Target": "UserAccount",
+        "Clause": "ClauseC1",
+        "Duties": [],
+        "Constraints": []
+      },
+      {
+        "ID": "PermChangeTerms",
+        "Type": "Permission",
+        "Action": "changeTerms",
+        "Target": "AgreementText",
+        "Clause": "ClauseC2",
+        "Duties": [
+          {
+            "Action": "inform",
+            "Constraints": [
+              {
+                "LeftOperand": "noticeDays",
+                "Operator": "gteq",
+                "RightOperand": 3
+              }
+            ]
+          }
+        ],
+        "Constraints": []
+      },
+      {
+        "ID": "PermShareData",
+        "Type": "Permission",
+        "Action": "shareData",
+        "Target": "UserData",
+        "Clause": "ClauseC3",
+        "Duties": [],
+        "Constraints": []
+      },
+      {
+        "ID": "ProhibitExportData",
+        "Type": "Prohibition",
+        "Action": "exportData",
+        "Target": "UserData",
+        "Clause": "ClauseC4",
+        "Duties": [],
+        "Constraints": []
+      }
+    ]
+  },
+  "Scoring": {
+    "MaximumScore": 100,
+    "HighAtLeast": 80,
+    "ModerateAtLeast": 50
+  },
+  "Expected": {
+    "RankedClauses": ["C1", "C3", "C2", "C4"],
+    "TopClause": "C1",
+    "ScoresByClause": {
+      "C1": 100,
+      "C3": 97,
+      "C2": 85,
+      "C4": 70
+    },
+    "LevelsByClause": {
+      "C1": "HighRisk",
+      "C3": "HighRisk",
+      "C2": "HighRisk",
+      "C4": "ModerateRisk"
+    },
+    "MitigationCountsByClause": {
+      "C1": 2,
+      "C3": 1,
+      "C2": 1,
+      "C4": 1
+    }
+  }
+}
